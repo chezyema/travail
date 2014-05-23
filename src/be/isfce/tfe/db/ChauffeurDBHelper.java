@@ -41,7 +41,7 @@ public class ChauffeurDBHelper {
             preparedStatement.setString(11, chauffeur.getNumpermis());
           
             preparedStatement.executeUpdate();
-            Connexion.getInstance().getConn().commit();
+            
 
             return true;
         } catch (Exception e) {
@@ -107,7 +107,7 @@ public class ChauffeurDBHelper {
             preparedStatement.setString(10, chauffeur.getNumpermis());
             preparedStatement.setString(11, chauffeur.getId());
             preparedStatement.execute();
-            Connexion.getInstance().getConn().commit();
+            
             return true;
         } catch (SQLException e) {
             return false;

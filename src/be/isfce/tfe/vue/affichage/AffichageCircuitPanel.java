@@ -32,6 +32,8 @@ public class AffichageCircuitPanel extends AffichagePanel {
     
      public AffichageCircuitPanel(CircuitControleur circuitControleur) {
        super(circuitControleur);
+       circuits = circuitControleur.getModele().getTousLesElements();
+        displayData();
     }
      public void setCircuit(List<Circuit> circuits) {
         this.circuits = circuits;

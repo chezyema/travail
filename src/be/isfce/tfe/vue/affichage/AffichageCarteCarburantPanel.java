@@ -27,11 +27,14 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
     public AffichageCarteCarburantPanel(CarteCarburantControleur cartecarburantControleur) {
         super(cartecarburantControleur);
+        cartecarburant= cartecarburantControleur.getModele().getTousLesElements();
+        displayData();
     }
 
     
     public void setCarteCarburant(List<CarteCarburant> cartecarburant) {
         this.cartecarburant = cartecarburant;
+        displayData();
     }
 
     public AffichageCarteCarburantPanel(CarteCarburantControleur cartecarburantControleur, List<CarteCarburant> cartecarburant) {

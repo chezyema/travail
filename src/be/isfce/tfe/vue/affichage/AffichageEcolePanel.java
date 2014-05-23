@@ -32,6 +32,8 @@ public class AffichageEcolePanel  extends AffichagePanel{
     
      public AffichageEcolePanel(EcoleControlleur ecoleControleur) {
         super(ecoleControleur);
+        ecoles = ecoleControleur.getModele().getTousLesElements();
+         displayData();
     }
      
      

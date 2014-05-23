@@ -4,9 +4,24 @@
  */
 package be.isfce.tfe.vue.frame;
 
+import be.isfce.tfe.controleur.ArretControleur;
+import be.isfce.tfe.controleur.CarteCarburantControleur;
 import be.isfce.tfe.controleur.ChauffeurControleur;
+import be.isfce.tfe.controleur.CircuitControleur;
+import be.isfce.tfe.controleur.EcoleControlleur;
+import be.isfce.tfe.controleur.MaterielRoulantControleur;
+import be.isfce.tfe.modele.ArretModele;
+import be.isfce.tfe.modele.CarteCarburantModele;
 import be.isfce.tfe.modele.ChauffeurModele;
+import be.isfce.tfe.modele.CircuitModele;
+import be.isfce.tfe.modele.EcoleModele;
+import be.isfce.tfe.modele.MaterielRoulantModele;
+import be.isfce.tfe.vue.affichage.AffichageArretPanel;
+import be.isfce.tfe.vue.affichage.AffichageCarteCarburantPanel;
 import be.isfce.tfe.vue.affichage.AffichageChauffeurPanel;
+import be.isfce.tfe.vue.affichage.AffichageCircuitPanel;
+import be.isfce.tfe.vue.affichage.AffichageEcolePanel;
+import be.isfce.tfe.vue.affichage.AffichageMaterielRoulantPanel;
 import java.awt.Dimension;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -29,8 +44,18 @@ public class MainFrame extends javax.swing.JFrame {
         AffichageChauffeurPanel affichageChauffeurPanel = new AffichageChauffeurPanel(new ChauffeurControleur(ChauffeurModele.getInstance()));
         jTabbedPane1.addTab("Chauffeurs", affichageChauffeurPanel);
         
+        AffichageCircuitPanel affichageCircuitPanel = new AffichageCircuitPanel(new CircuitControleur (CircuitModele.getInstance()));
+        jTabbedPane1.addTab("Circuits",affichageCircuitPanel);
         
-
+         AffichageMaterielRoulantPanel affichagematerielroulantPanel = new AffichageMaterielRoulantPanel(new MaterielRoulantControleur (MaterielRoulantModele.getInstance()));
+        jTabbedPane1.addTab("Vehicules",affichagematerielroulantPanel);
+        
+         AffichageEcolePanel affichageecolePanel = new AffichageEcolePanel(new EcoleControlleur (EcoleModele.getInstance()));
+        jTabbedPane1.addTab("Etablissement",affichagematerielroulantPanel);
+        
+         AffichageCarteCarburantPanel affichagecartePanel = new AffichageCarteCarburantPanel(new CarteCarburantControleur (CarteCarburantModele.getInstance()));
+        jTabbedPane1.addTab("Carte carburant",affichagecartePanel);
+        
     }
 
     private void afficheDialog(JPanel jpanel) {
