@@ -4,7 +4,7 @@
  */
 package be.isfce.tfe.controleur;
 
-import be.isfce.tfe.modele.AbstractModel;
+import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.validation.EmailValidation;
 import be.isfce.tfe.validation.StringValidation;
@@ -16,10 +16,6 @@ import java.util.Calendar;
  */
 public class ChauffeurControleur extends AbstractControleur<Chauffeur> {
 
-    public ChauffeurControleur(AbstractModel<Chauffeur> modele) {
-        super(modele);
-    }
-    
     @Override
     public void controleEtAjoute(Chauffeur chauffeur) throws ValidationException {
 
@@ -37,7 +33,6 @@ public class ChauffeurControleur extends AbstractControleur<Chauffeur> {
         auj.add(Calendar.YEAR, -21);
         if (chauffeur.getDateNaissance() == null || chauffeur.getDateNaissance().after(auj.getTime())) {
             throw new ValidationException("Le chauffeur doit avoir plus de 21 ans");
-            //ajouter argument
         }
         if (chauffeur.getVille() == null || !StringValidation.VerifString(chauffeur.getVille())) {
             throw new ValidationException("La ville n'est pas valide");
@@ -53,25 +48,29 @@ public class ChauffeurControleur extends AbstractControleur<Chauffeur> {
         if (chauffeur.getNumTelephone() == null) {
             throw new ValidationException("Le numero de telephone n'est pas valide");
         }
-        
-        
-
-      
-
         if (chauffeur.getId() == null) {
             throw new ValidationException("Le registre national n'est pas valide");
         }
+        if (ChauffeurDao.addChauffeur(chauffeur)) {
+            setChanged();
+            notifyObservers();
+        }
 
-        modele.cree(chauffeur);
     }
 
     @Override
     public void controleEtSupprime(Chauffeur object) throws ValidationException {
-        modele.supprime(object);
+        if (ChauffeurDao.deleteChauffeur(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     @Override
     public void controleEtModifie(Chauffeur object) throws ValidationException {
-        modele.modifie(object);
+        if (ChauffeurDao.updateChauffeur(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 }

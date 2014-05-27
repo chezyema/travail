@@ -5,19 +5,33 @@
 package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.ChauffeurControleur;
+import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
+import be.isfce.tfe.controleur.TrajetsControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.db.ChauffeurDBHelper;
+import be.isfce.tfe.db.MaterielRoulantDao;
+import be.isfce.tfe.db.TrajetDao;
 import be.isfce.tfe.metier.Chauffeur;
-import be.isfce.tfe.modele.ChauffeurModele;
+import be.isfce.tfe.metier.MaterielRoulant;
+import be.isfce.tfe.metier.Trajet;
+import be.isfce.tfe.vue.ajout.AjoutTrajetsJPanel;
+import be.isfce.tfe.vue.ajout.DialogUtils;
+import be.isfce.tfe.vue.encodage.EncodageArretJPanel;
+import be.isfce.tfe.vue.encodage.EncodageTrajetsJPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JDialog;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -28,13 +42,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
 
     List<Chauffeur> chauffeurs;
 
-    String[] columnsNames = {"Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Email","numcartesis","numpermis"};
-
-    public AffichageChauffeurPanel(ChauffeurControleur chauffeurControleur) {
-        super(chauffeurControleur);
-        chauffeurs = chauffeurControleur.getModele().getTousLesElements();
-        displayData();
-    }
+    String[] columnsNames = {"Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Email", "numcartesis", "numpermis"};
 
     public void setChauffeurs(List<Chauffeur> chauffeurs) {
         this.chauffeurs = chauffeurs;
@@ -42,7 +50,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
     }
 
     public AffichageChauffeurPanel(ChauffeurControleur chauffeurControleur, List<Chauffeur> chauffeurs) {
-        this(chauffeurControleur);
+        super(chauffeurControleur);
         this.chauffeurs = chauffeurs;
         displayData();
     }
@@ -62,7 +70,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                     ex.getMessage(),
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
-           }
+        }
     }
 
     @Override
@@ -111,7 +119,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                         return chauffeur.getNumcartesis();
                     case 8:
                         return chauffeur.getNumpermis();
-                    
+
                     default:
                         return null;
                 }
@@ -120,73 +128,79 @@ public class AffichageChauffeurPanel extends AffichagePanel {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        setChauffeurs(ChauffeurModele.getInstance().getTousLesElements());
-    }
-
-    @Override
     protected void supprimeElement(int index) {
         try {
             abstractControleur.controleEtSupprime(chauffeurs.get(index));
-                JOptionPane jop1;
-            jop1 = new JOptionPane();
-            jop1.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
+            JOptionPane.showMessageDialog(this, "Suppression exécutée", "Information", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidationException ex) {
-            
-            JOptionPane.showMessageDialog(this,
-                    ex.getMessage(),
-                    "Erreur",
-                    JOptionPane.ERROR_MESSAGE);
-           }
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem attribuerBus = new JMenuItem("Assigner un véhicule");
-        attribuerBus.addActionListener(new ActionListener() {
+        JMenu attribuerBus = new JMenu("Assigner un véhicule");
+        List<MaterielRoulant> tousLesVehicules = MaterielRoulantDao.getTousLesVehicules();
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
-            }
-        });
+        ButtonGroup group = new ButtonGroup();
+        for (MaterielRoulant materielRoulant : tousLesVehicules) {
+            JMenuItem vehicule = new JRadioButtonMenuItem(materielRoulant.getMarque() + " [" + materielRoulant.getNumImmatr() + "]");
+            group.add(vehicule);
+            vehicule.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //TODO On verra plus tard 
+                }
+            });
+            attribuerBus.add(vehicule);
+        }
         menuItems.add(attribuerBus);
-        
-        return menuItems;
-    }
-    
-     protected List<JMenuItem> getMenuItemsheure() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
+
         //TODO Ajouter les menu items et leurs actions
         JMenuItem encoderHeure = new JMenuItem("Encoder heure de travail");
         encoderHeure.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO On verra plus tard
+                final EncodageTrajetsJPanel encodageTrajetsJPanel = new EncodageTrajetsJPanel();
+                JDialog afficheDialog = DialogUtils.afficheDialog(null, encodageTrajetsJPanel);
+                afficheDialog.addWindowListener(new WindowAdapter() {
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        Trajet trajetFromFields = encodageTrajetsJPanel.getTrajetFromFields();
+                        Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
+                        trajetFromFields.setLeschauffeurs(chauffeur);
+                        try {
+                            new TrajetsControleur().controleEtAjoute(trajetFromFields);
+                        } catch (ValidationException ex) {
+                            //JOptionPane.show
+                        }
+                    }
+
+                });
             }
         });
         menuItems.add(encoderHeure);
-        
-        return menuItems;
-    }
-     
-      protected List<JMenuItem> getMenuItemsDocument() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherDocument = new JMenuItem("afficher documents");
+
+        JMenuItem afficherDocument = new JMenuItem("Afficher documents");
         afficherDocument.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO On verra plus tard
+                Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
+                AffichageDocumentsPanel affichageDocumentsPanel = new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), chauffeur.getLesdocuments());
+                DialogUtils.afficheDialog(null, affichageDocumentsPanel);
             }
         });
         menuItems.add(afficherDocument);
-        
         return menuItems;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

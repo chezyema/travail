@@ -4,7 +4,7 @@
  */
 package be.isfce.tfe.controleur;
 
-import be.isfce.tfe.modele.AbstractModel;
+import be.isfce.tfe.db.DocumentAdministratifDao;
 import be.isfce.tfe.metier.DocumentAdministratif;
 import be.isfce.tfe.validation.StringValidation;
 import java.util.Calendar;
@@ -14,10 +14,6 @@ import java.util.Calendar;
  * @author yema
  */
 public class DocumentsAdministratifsControleur extends AbstractControleur<DocumentAdministratif> {
-
-    public DocumentsAdministratifsControleur(AbstractModel<DocumentAdministratif> modele) {
-        super(modele);
-    }
 
     @Override
     public void controleEtAjoute(DocumentAdministratif documents) throws ValidationException {
@@ -34,17 +30,27 @@ public class DocumentsAdministratifsControleur extends AbstractControleur<Docume
         if (documents.getDateValiditer() == null || documents.getDateValiditer().after(joura.getTime())) {
             throw new ValidationException("Le date n'est pas valide");
         }
-       modele.cree(documents);
+        if (DocumentAdministratifDao.addDocumentsAdministratifs(documents)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     @Override
     public void controleEtSupprime(DocumentAdministratif object) throws ValidationException {
-       modele.supprime(object);
+        DocumentAdministratifDao.deleteDocumentsAdministratifs(object);
+        if (DocumentAdministratifDao.deleteDocumentsAdministratifs(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     @Override
     public void controleEtModifie(DocumentAdministratif object) throws ValidationException {
-       modele.modifie(object);  
+        if (DocumentAdministratifDao.updateDocuments(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
 }

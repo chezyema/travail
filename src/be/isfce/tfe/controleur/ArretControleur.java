@@ -4,7 +4,7 @@
  */
 package be.isfce.tfe.controleur;
 
-import be.isfce.tfe.modele.AbstractModel;
+import be.isfce.tfe.db.ArretDao;
 import be.isfce.tfe.metier.Arret;
 import be.isfce.tfe.validation.StringValidation;
 
@@ -12,28 +12,33 @@ import be.isfce.tfe.validation.StringValidation;
  *
  * @author yema
  */
-public class ArretControleur extends AbstractControleur<Arret>{
+public class ArretControleur extends AbstractControleur<Arret> {
 
-    public ArretControleur(AbstractModel<Arret> modele) {
-        super(modele);
-    }
-    
     @Override
-    public void controleEtAjoute(Arret arret) throws ValidationException{
-        if(!(arret != null && arret.getAdresse() != null && StringValidation.VerifString(arret.getAdresse()))){
-            throw new ValidationException(" erreur L'adresse n'est pas valide");
+    public void controleEtAjoute(Arret arret) throws ValidationException {
+        if (!(arret != null && arret.getAdresse() != null && StringValidation.VerifString(arret.getAdresse()))) {
+            throw new ValidationException("L'adresse n'est pas valide");
         }
-        modele.cree(arret); 
+        if (ArretDao.addArret(arret)) {
+            setChanged();
+            notifyObservers();
+        }
     }
-    
 
-   
+    @Override
     public void controleEtSupprime(Arret object) throws ValidationException {
-        modele.supprime(object);
+        if (ArretDao.deleteArret(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
-   
+    @Override
     public void controleEtModifie(Arret object) throws ValidationException {
-        modele.modifie(object);
+        if (ArretDao.updateArret(object)) {
+            setChanged();
+            notifyObservers();
+        }
+
     }
 }

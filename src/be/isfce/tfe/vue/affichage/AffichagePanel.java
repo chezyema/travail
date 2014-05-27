@@ -10,10 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -21,8 +23,6 @@ import javax.swing.table.AbstractTableModel;
  * @author yema
  */
 public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Observer {
-
-    private JPopupMenu popupMenu;
 
     protected AbstractControleur<T> abstractControleur;
 
@@ -34,15 +34,15 @@ public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Ob
     public AffichagePanel(AbstractControleur<T> abstractControleur) {
         initComponents();
         this.abstractControleur = abstractControleur;
-        this.abstractControleur.getModele().addObserver(this);
+        abstractControleur.addObserver(this);
         setBorder(javax.swing.BorderFactory.createTitledBorder(getTitrePanel()));
-        popupMenu = new JPopupMenu();
+        final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem deleteItem = new JMenuItem("Supprimer");
         deleteItem.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                supprimeElement(jTable1.getSelectedRow());
+                supprimeElement(jTable1.getSelectedRow());                
             }
 
         });
@@ -54,15 +54,15 @@ public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Ob
         jTable1.addMouseListener(new MouseAdapter() {
 
             public void mouseReleased(MouseEvent e) {
-                int row = jTable1.rowAtPoint(e.getPoint());
-                int column = jTable1.columnAtPoint(e.getPoint());
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    int row = jTable1.rowAtPoint(e.getPoint());
+                    int column = jTable1.columnAtPoint(e.getPoint());
 
-                if (!jTable1.isRowSelected(row)) {
-                    jTable1.changeSelection(row, column, false, false);
+                    if (!jTable1.isRowSelected(row)) {
+                        jTable1.changeSelection(row, column, false, false);
+                    }
+                    popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
-
-                popupMenu.show(e.getComponent(), e.getX(), e.getY());
-
             }
         });
     }
@@ -77,7 +77,11 @@ public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Ob
 
     protected abstract void supprimeElement(int index);
 
-    protected abstract List<JMenuItem> getMenuItems();
+    protected List<JMenuItem> getMenuItems() {
+        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
+        return menuItems;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

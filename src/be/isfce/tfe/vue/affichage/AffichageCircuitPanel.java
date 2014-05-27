@@ -4,13 +4,12 @@
  */
 package be.isfce.tfe.vue.affichage;
 
-
+import be.isfce.tfe.controleur.ArretControleur;
 import be.isfce.tfe.controleur.CircuitControleur;
+import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.db.CircuitDBHelper;
 import be.isfce.tfe.metier.Circuit;
-import be.isfce.tfe.modele.CarteCarburantModele;
-import be.isfce.tfe.modele.CircuitModele;
+import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -25,49 +24,37 @@ import javax.swing.table.AbstractTableModel;
  * @author yema
  */
 public class AffichageCircuitPanel extends AffichagePanel {
-    
+
     List<Circuit> circuits;
-    
-    String[] columnsNames = {"Nom circuit","Temps prevu","Kilometre de depart","kilometre de fin"};
-    
-     public AffichageCircuitPanel(CircuitControleur circuitControleur) {
-       super(circuitControleur);
-       circuits = circuitControleur.getModele().getTousLesElements();
+
+    String[] columnsNames = {"Nom circuit", "Temps prevu", "Kilometre de depart", "kilometre de fin"};
+
+    public void setCircuit(List<Circuit> circuits) {
+        this.circuits = circuits;
         displayData();
     }
-     public void setCircuit(List<Circuit> circuits) {
-        this.circuits = circuits;
-         displayData();
-    }
-    
+
     public AffichageCircuitPanel(CircuitControleur circuitControleur, List<Circuit> circuit) {
-        this(circuitControleur);
+        super(circuitControleur);
         this.circuits = circuit;
         displayData();
     }
 
-    
     @Override
     public String getTitrePanel() {
         return "Les Circuits";
     }
-    
-     public void supprimeCircuitsSelectionnes() throws ValidationException{
+
+    public void supprimeCircuitsSelectionnes() throws ValidationException {
         int selectedRow = jTable1.getSelectedRow();
-        try{
-         abstractControleur.controleEtSupprime(circuits.get(selectedRow));
-            JOptionPane jop1;
-            jop1 = new JOptionPane();
-            jop1.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
-           }
-          catch (NumberFormatException ex) {
-            
-            JOptionPane jop3;
-            jop3 = new JOptionPane();
-            jop3.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
-            
-           }
+        try {
+            abstractControleur.controleEtSupprime(circuits.get(selectedRow));
+            JOptionPane.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
     }
 
     @Override
@@ -76,8 +63,9 @@ public class AffichageCircuitPanel extends AffichagePanel {
 
             @Override
             public String getColumnName(int col) {
-                return columnsNames[col].toString();
+                return columnsNames[col];
             }
+
             @Override
             public int getRowCount() {
                 return circuits.size();
@@ -93,13 +81,12 @@ public class AffichageCircuitPanel extends AffichagePanel {
                 return true;
             }
 
-             
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 Circuit trajet = circuits.get(rowIndex);
-                switch(columnIndex){
-               
-                    case 0: 
+                switch (columnIndex) {
+
+                    case 0:
                         return trajet.getNomCircuit();
                     case 1:
                         return trajet.getTempsPrevu();
@@ -107,33 +94,26 @@ public class AffichageCircuitPanel extends AffichagePanel {
                         return trajet.getKmDepart();
                     case 3:
                         return trajet.getKmFin();
-                    
-                    
-                    default :
+
+                    default:
                         return null;
                 }
             }
         };
     }
-        @Override
+
+    @Override
     protected void supprimeElement(int index) {
-       try {
+        try {
             abstractControleur.controleEtSupprime(circuits.get(index));
         } catch (ValidationException ex) {
-                  JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
-           }
-}
-    
-  
-
-    @Override
-    public void update(Observable o, Object arg) {
-        setCircuit(CircuitModele.getInstance().getTousLesElements());
+        }
     }
-      
+
     @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
@@ -147,39 +127,36 @@ public class AffichageCircuitPanel extends AffichagePanel {
             }
         });
         menuItems.add(attribuerCircuit);
-        
-        return menuItems;
-    }
-    
-     protected List<JMenuItem> getMenuItemsArret() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherArret = new JMenuItem("afficher  arrets ");
+
+        JMenuItem afficherArret = new JMenuItem("Afficher Arrets ");
         afficherArret.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
+                Circuit circuit = circuits.get(jTable1.getSelectedRow());
+                AffichageArretPanel affichageArretPanel = new AffichageArretPanel(new ArretControleur(), circuit.getLesarrets());
+                DialogUtils.afficheDialog(null, affichageArretPanel);
             }
         });
         menuItems.add(afficherArret);
-        
-        return menuItems;
-    }
-     
-        protected List<JMenuItem> getMenuItemsEleve() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherEleve = new JMenuItem("afficher eleves");
+
+        JMenuItem afficherEleve = new JMenuItem("Afficher élèves");
         afficherEleve.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
+                Circuit circuit = circuits.get(jTable1.getSelectedRow());
+                AffichageElevePanel affichageElevePanel = new AffichageElevePanel(new EleveControleur(), circuit.getLeseleves());
+                DialogUtils.afficheDialog(null, affichageElevePanel);
             }
         });
         menuItems.add(afficherEleve);
-        
         return menuItems;
     }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

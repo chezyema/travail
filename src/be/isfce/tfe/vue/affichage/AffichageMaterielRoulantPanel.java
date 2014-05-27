@@ -4,12 +4,11 @@
  */
 package be.isfce.tfe.vue.affichage;
 
-
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
+import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.db.MaterielRoulantDBHelper;
 import be.isfce.tfe.metier.MaterielRoulant;
-import be.isfce.tfe.modele.MaterielRoulantModele;
+import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,24 +22,19 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author yema
  */
-public class AffichageMaterielRoulantPanel extends AffichagePanel{
+public class AffichageMaterielRoulantPanel extends AffichagePanel {
 
-      List<MaterielRoulant> vehicules;
-    
-    String[] columnsNames = {"Numero de chassis","Marque","Type","Annee de construction","Carburant","Plaque","Nombre de place","Kilometre actuel"};
-    
-    
-    public AffichageMaterielRoulantPanel(MaterielRoulantControleur vehiculeControleur) {
-        super(vehiculeControleur);
-    }
+    List<MaterielRoulant> vehicules;
+
+    String[] columnsNames = {"Numero de chassis", "Marque", "Type", "Annee de construction", "Carburant", "Plaque", "Nombre de place", "Kilometre actuel"};
 
     public void setVehicules(List<MaterielRoulant> vehicules) {
         this.vehicules = vehicules;
-         displayData();
+        displayData();
     }
-    
+
     public AffichageMaterielRoulantPanel(MaterielRoulantControleur vehiculeControleur, List<MaterielRoulant> vehicule) {
-        this(vehiculeControleur);
+        super(vehiculeControleur);
         this.vehicules = vehicule;
         displayData();
     }
@@ -50,35 +44,26 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel{
         return "Les vehicules";
     }
 
-     public void supprimeVehiculesSelectionnes() throws ValidationException{
+    public void supprimeVehiculesSelectionnes() throws ValidationException {
         int selectedRow = jTable1.getSelectedRow();
-        try{
-        abstractControleur.controleEtSupprime(vehicules.get(selectedRow));
-        
-            JOptionPane jop1;
-            jop1 = new JOptionPane();
-            jop1.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
-           }
-          catch (NumberFormatException ex) {
-            
-            JOptionPane jop3;
-            jop3 = new JOptionPane();
-            jop3.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
-            
-           }
+        try {
+            abstractControleur.controleEtSupprime(vehicules.get(selectedRow));
+            JOptionPane.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
     }
-    
-    
-    
+
     @Override
     public AbstractTableModel getTableModel() {
         return new AbstractTableModel() {
 
             @Override
             public String getColumnName(int col) {
-                return columnsNames[col].toString();
+                return columnsNames[col];
             }
+
             @Override
             public int getRowCount() {
                 return vehicules.size();
@@ -94,60 +79,52 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel{
                 return true;
             }
 
-             
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 MaterielRoulant vehicule = vehicules.get(rowIndex);
-                switch(columnIndex){
-                    case 0: 
+                switch (columnIndex) {
+                    case 0:
                         return vehicule.getId();
-                    case 1: 
+                    case 1:
                         return vehicule.getMarque();
-                    case 2: 
+                    case 2:
                         return vehicule.getType();
-                    case 3: 
+                    case 3:
                         return vehicule.getAnneedeconstruction();
-                    case 4: 
+                    case 4:
                         return vehicule.getCarburant();
-                    case 5: 
+                    case 5:
                         return vehicule.getNumImmatr();
-                    case 6: 
+                    case 6:
                         return vehicule.getNbdeplaces();
-                    case 7: 
+                    case 7:
                         return vehicule.getKmactuel();
-                        
-                    default :
+
+                    default:
                         return null;
                 }
             }
         };
     }
-        @Override
+
+    @Override
     protected void supprimeElement(int index) {
         try {
             abstractControleur.controleEtSupprime(vehicules.get(index));
-                JOptionPane jop1;
+            JOptionPane jop1;
             jop1 = new JOptionPane();
             jop1.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
+
         } catch (ValidationException ex) {
-            
+
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
-           }
+        }
     }
-    
-  
 
     @Override
-    public void update(Observable o, Object arg) {
-         setVehicules(MaterielRoulantModele.getInstance().getTousLesElements());
-    }
-    
-    
-      @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         //TODO Ajouter les menu items et leurs actions
@@ -160,45 +137,25 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel{
             }
         });
         menuItems.add(afficherEntretien);
-        
+
         return menuItems;
     }
-    
-     protected List<JMenuItem> getMenuItemsCarburant() {
+
+    protected List<JMenuItem> getMenuItemsCarburant() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherCarburant = new JMenuItem("consommation carburant");
+        JMenuItem afficherCarburant = new JMenuItem("Consommation carburant");
         afficherCarburant.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
+                MaterielRoulant materielRoulant = vehicules.get(jTable1.getSelectedRow());
+                //TODO Utilisation Carte
+                AffichageUtilisationCarteJPanel affichageUtilisationCarteJPanel = new AffichageUtilisationCarteJPanel(new UtilisationCarteControleur(), materielRoulant.getLesmemos());
+                DialogUtils.afficheDialog(null, affichageUtilisationCarteJPanel);
             }
         });
         menuItems.add(afficherCarburant);
-        
-        return menuItems;
-    }
-     
-      protected List<JMenuItem> getMenuItemsDocument() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherDocument = new JMenuItem("afficher documents");
-        afficherDocument.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
-            }
-        });
-        menuItems.add(afficherDocument);
-        
-        return menuItems;
-    }
-    
-        protected List<JMenuItem> getMenuItemsUtlisationCarte() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
         JMenuItem afficherUtilisation = new JMenuItem("Utilisatin Carte Carburant");
         afficherUtilisation.addActionListener(new ActionListener() {
 
@@ -208,7 +165,24 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel{
             }
         });
         menuItems.add(afficherUtilisation);
-        
+
+        JMenuItem afficherDocument = new JMenuItem("Afficher documents");
+        afficherDocument.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MaterielRoulant materielRoulant = vehicules.get(jTable1.getSelectedRow());
+                //TODO Pas de documents !
+                //AffichageDocumentsPanel affichageDocumentsPanel = new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), materielRoulant.get);
+                //DialogUtils.afficheDialog(null, affichageDocumentsPanel);
+            }
+        });
+        menuItems.add(afficherDocument);
         return menuItems;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

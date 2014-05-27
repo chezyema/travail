@@ -4,27 +4,27 @@
  */
 package be.isfce.tfe.vue.frame;
 
-import be.isfce.tfe.controleur.ArretControleur;
 import be.isfce.tfe.controleur.CarteCarburantControleur;
 import be.isfce.tfe.controleur.ChauffeurControleur;
 import be.isfce.tfe.controleur.CircuitControleur;
 import be.isfce.tfe.controleur.EcoleControlleur;
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
-import be.isfce.tfe.modele.ArretModele;
-import be.isfce.tfe.modele.CarteCarburantModele;
-import be.isfce.tfe.modele.ChauffeurModele;
-import be.isfce.tfe.modele.CircuitModele;
-import be.isfce.tfe.modele.EcoleModele;
-import be.isfce.tfe.modele.MaterielRoulantModele;
-import be.isfce.tfe.vue.affichage.AffichageArretPanel;
+import be.isfce.tfe.db.CarteCarburantDao;
+import be.isfce.tfe.db.ChauffeurDao;
+import be.isfce.tfe.db.CircuitDao;
+import be.isfce.tfe.db.DocumentAdministratifDao;
+import be.isfce.tfe.db.EcoleDao;
+import be.isfce.tfe.db.MaterielRoulantDao;
+import be.isfce.tfe.metier.DocumentAdministratif;
 import be.isfce.tfe.vue.affichage.AffichageCarteCarburantPanel;
 import be.isfce.tfe.vue.affichage.AffichageChauffeurPanel;
 import be.isfce.tfe.vue.affichage.AffichageCircuitPanel;
 import be.isfce.tfe.vue.affichage.AffichageEcolePanel;
 import be.isfce.tfe.vue.affichage.AffichageMaterielRoulantPanel;
-import java.awt.Dimension;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
+import java.util.Calendar;
+import java.util.List;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -37,32 +37,51 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        initAlerts();
         addPanels();
     }
 
     private void addPanels() {
-        AffichageChauffeurPanel affichageChauffeurPanel = new AffichageChauffeurPanel(new ChauffeurControleur(ChauffeurModele.getInstance()));
-        jTabbedPane1.addTab("Chauffeurs", affichageChauffeurPanel);
-        
-        AffichageCircuitPanel affichageCircuitPanel = new AffichageCircuitPanel(new CircuitControleur (CircuitModele.getInstance()));
-        jTabbedPane1.addTab("Circuits",affichageCircuitPanel);
-        
-         AffichageMaterielRoulantPanel affichagematerielroulantPanel = new AffichageMaterielRoulantPanel(new MaterielRoulantControleur (MaterielRoulantModele.getInstance()));
-        jTabbedPane1.addTab("Vehicules",affichagematerielroulantPanel);
-        
-         AffichageEcolePanel affichageecolePanel = new AffichageEcolePanel(new EcoleControlleur (EcoleModele.getInstance()));
-        jTabbedPane1.addTab("Etablissement",affichagematerielroulantPanel);
-        
-         AffichageCarteCarburantPanel affichagecartePanel = new AffichageCarteCarburantPanel(new CarteCarburantControleur (CarteCarburantModele.getInstance()));
-        jTabbedPane1.addTab("Carte carburant",affichagecartePanel);
-        
+        AffichageChauffeurPanel affichageChauffeurPanel = new AffichageChauffeurPanel(new ChauffeurControleur(), ChauffeurDao.getTousLesChauffeurs());
+        jTabbedPane.addTab("Chauffeurs", affichageChauffeurPanel);
+
+        AffichageCircuitPanel affichageCircuitPanel = new AffichageCircuitPanel(new CircuitControleur(), CircuitDao.getTousLesCircuits());
+        jTabbedPane.addTab("Circuits", affichageCircuitPanel);
+
+        AffichageMaterielRoulantPanel affichagematerielroulantPanel = new AffichageMaterielRoulantPanel(new MaterielRoulantControleur(), MaterielRoulantDao.getTousLesVehicules());
+        jTabbedPane.addTab("Vehicules", affichagematerielroulantPanel);
+
+        AffichageEcolePanel affichageecolePanel = new AffichageEcolePanel(new EcoleControlleur(), EcoleDao.getTousLesEcoles());
+        jTabbedPane.addTab("Etablissement", affichageecolePanel);
+
+        AffichageCarteCarburantPanel affichagecartePanel = new AffichageCarteCarburantPanel(new CarteCarburantControleur(), CarteCarburantDao.getTousLesCartesCarburant());
+        jTabbedPane.addTab("Carte carburant", affichagecartePanel);
+
+        jTabbedPane.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int index = jTabbedPane.getSelectedIndex();
+                //TODO Rafraichir les panels quand ils sont sélectionnés.
+                switch (index) {
+                    case 0:
+                        initAlerts();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
-    private void afficheDialog(JPanel jpanel) {
-        JDialog jDialog = new JDialog(this);
-        jDialog.add(jpanel);
-        jDialog.pack();
-        jDialog.setVisible(true);
+    private void initAlerts() {
+        nbEntretienAEffectuerUrgentLabel.setText("" + MaterielRoulantDao.getNbEntretiensAEffectuer());
+        nbVehiculeEnOrdreLabel.setText("" + MaterielRoulantDao.getNbEntretiensEnOrdre());
+        nbEntretienAEffectuerUrgentLabel.setText("" + MaterielRoulantDao.getNbEntretiensABientotEffectuer());
+
+        nbDocumentARenouvelerLabel.setText("" + DocumentAdministratifDao.getNbDocumentsARenouveler());
+        nbDocumentEnOrdreLabel.setText("" + DocumentAdministratifDao.getNbDocumentsEnOrdre());
+
     }
 
     /**
@@ -75,7 +94,20 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        jPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        nbEntretiensAEffectuerLabel = new javax.swing.JLabel();
+        nbEntretienAEffectuerUrgentLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        nbVehiculeEnOrdreLabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        nbDocumentEnOrdreLabel = new javax.swing.JLabel();
+        nbDocumentARenouvelerLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,16 +121,134 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 500));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Entretiens"));
+
+        jLabel1.setText("Entretiens à effectuer bientôt :");
+
+        jLabel2.setText("Entretiens à effectuer d'urgence :");
+
+        nbEntretiensAEffectuerLabel.setText("0");
+
+        nbEntretienAEffectuerUrgentLabel.setText("0");
+
+        jLabel5.setText("Véhicules en ordre :");
+
+        nbVehiculeEnOrdreLabel.setText("0");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nbEntretienAEffectuerUrgentLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nbEntretiensAEffectuerLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nbVehiculeEnOrdreLabel)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nbEntretienAEffectuerUrgentLabel)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(nbEntretiensAEffectuerLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nbVehiculeEnOrdreLabel)
+                    .addComponent(jLabel5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Documents"));
+
+        jLabel9.setText("Documents à renouveler :");
+
+        nbDocumentEnOrdreLabel.setText("0");
+
+        nbDocumentARenouvelerLabel.setText("0");
+
+        jLabel7.setText("Documents en ordre :");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nbDocumentARenouvelerLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nbDocumentEnOrdreLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(17, 17, 17))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nbDocumentARenouvelerLabel)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(nbDocumentEnOrdreLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane.addTab("Messages", jPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jTabbedPane)
         );
 
         pack();
@@ -115,7 +265,7 @@ public class MainFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -139,7 +289,20 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JLabel nbDocumentARenouvelerLabel;
+    private javax.swing.JLabel nbDocumentEnOrdreLabel;
+    private javax.swing.JLabel nbEntretienAEffectuerUrgentLabel;
+    private javax.swing.JLabel nbEntretiensAEffectuerLabel;
+    private javax.swing.JLabel nbVehiculeEnOrdreLabel;
     // End of variables declaration//GEN-END:variables
 }

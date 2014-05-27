@@ -4,12 +4,13 @@
  */
 package be.isfce.tfe.vue.affichage;
 
-
+import be.isfce.tfe.controleur.CircuitControleur;
 import be.isfce.tfe.controleur.EcoleControlleur;
+import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.db.EcoleDBHelper;
+import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.Ecole;
-import be.isfce.tfe.modele.EcoleModele;
+import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,55 +24,37 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author yema
  */
-public class AffichageEcolePanel  extends AffichagePanel{
+public class AffichageEcolePanel extends AffichagePanel {
 
+    List<Ecole> ecoles;
 
-     List<Ecole> ecoles;
-    
-    String[] columnsNames = {"Nom ecole","Adresse ecole","Code postal","Ville"," Telephone","email","Nom du directeur"};
-    
-     public AffichageEcolePanel(EcoleControlleur ecoleControleur) {
-        super(ecoleControleur);
-        ecoles = ecoleControleur.getModele().getTousLesElements();
-         displayData();
-    }
-     
-     
-     public void setEcole(List<Ecole> ecoles) {
+    String[] columnsNames = {"Nom ecole", "Adresse ecole", "Code postal", "Ville", " Telephone", "email", "Nom du directeur"};
+
+    public void setEcole(List<Ecole> ecoles) {
         this.ecoles = ecoles;
-         displayData();
+        displayData();
     }
-    
+
     public AffichageEcolePanel(EcoleControlleur ecoleControleur, List<Ecole> ecole) {
-        this(ecoleControleur);
+        super(ecoleControleur);
         this.ecoles = ecole;
         displayData();
     }
 
-    
     @Override
     public String getTitrePanel() {
         return "les Etablissements";
     }
-    
-     public void supprimeEcolesSelectionnes() throws ValidationException{
+
+    public void supprimeEcolesSelectionnes() throws ValidationException {
         int selectedRow = jTable1.getSelectedRow();
-        try{
-        abstractControleur.controleEtSupprime(ecoles.get(selectedRow));
-            JOptionPane jop1;
-            jop1 = new JOptionPane();
-            jop1.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
-            
-        
-            }
-          catch (NumberFormatException ex) {
-            
-            JOptionPane jop3;
-            jop3 = new JOptionPane();
-            jop3.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
-            
-           }
+        try {
+            abstractControleur.controleEtSupprime(ecoles.get(selectedRow));
+            JOptionPane.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+        }
     }
 
     @Override
@@ -80,8 +63,9 @@ public class AffichageEcolePanel  extends AffichagePanel{
 
             @Override
             public String getColumnName(int col) {
-                return columnsNames[col].toString();
+                return columnsNames[col];
             }
+
             @Override
             public int getRowCount() {
                 return ecoles.size();
@@ -97,13 +81,12 @@ public class AffichageEcolePanel  extends AffichagePanel{
                 return true;
             }
 
-             
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 Ecole ecole = ecoles.get(rowIndex);
-                switch(columnIndex){
-               
-                    case 0: 
+                switch (columnIndex) {
+
+                    case 0:
                         return ecole.getNomecole();
                     case 1:
                         return ecole.getAdresseecole();
@@ -117,67 +100,59 @@ public class AffichageEcolePanel  extends AffichagePanel{
                         return ecole.getEmailecole();
                     case 6:
                         return ecole.getNomdirecteur();
-                    
-                            
-                    
-                    default :
+
+                    default:
                         return null;
                 }
             }
         };
     }
-        @Override
+
+    @Override
     protected void supprimeElement(int index) {
-          try {
+        try {
             abstractControleur.controleEtSupprime(ecoles.get(index));
         } catch (ValidationException ex) {
-                  JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
-           }
-}
-    
-   
+        }
+    }
 
     @Override
-    public void update(Observable o, Object arg) {
-        setEcole(EcoleModele.getInstance().getTousLesElements());
-    }
-    
-    
-       @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherEleve = new JMenuItem("Les Eleves");
+        JMenuItem afficherEleve = new JMenuItem("Afficher les élèves");
         afficherEleve.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
+                Ecole ecole = ecoles.get(jTable1.getSelectedRow());
+                AffichageElevePanel affichageElevePanel = new AffichageElevePanel(new EleveControleur(), ecole.getLeseleves());
+                DialogUtils.afficheDialog(null, affichageElevePanel);
             }
         });
         menuItems.add(afficherEleve);
-        
-        return menuItems;
-    }
-    
-     protected List<JMenuItem> getMenuItemsCircuit() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherCircuit = new JMenuItem("Les Circuits");
+
+        JMenuItem afficherCircuit = new JMenuItem("Afficher les circuits");
         afficherCircuit.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
+                Ecole ecole = ecoles.get(jTable1.getSelectedRow());
+                AffichageCircuitPanel affichageCircuitPanel = new AffichageCircuitPanel(new CircuitControleur(), ecole.getLescircuits());
+                DialogUtils.afficheDialog(null, affichageCircuitPanel);
             }
         });
         menuItems.add(afficherCircuit);
-        
         return menuItems;
     }
-     
-    
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

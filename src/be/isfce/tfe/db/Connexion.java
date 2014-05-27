@@ -8,25 +8,24 @@ package be.isfce.tfe.db;
  *
  * @author yema
  */
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Connexion {
 
     private Connection conn; //objet de connexion à la BDD
     private Statement stat;//objet permettant d'effectuer des requêtes simples
     private boolean connected;//variable permettant de savoir si on est connecté à une BDD
-    private static be.isfce.tfe.db.Connexion uniqueInstance = new be.isfce.tfe.db.Connexion();
+    private static final be.isfce.tfe.db.Connexion uniqueInstance = new be.isfce.tfe.db.Connexion();
 
     /* Constructeur : ouvre la connexion */
     private Connexion() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException classe) {
-            System.out.println(classe.toString());
-        }
         connected = false;
-
-        String url = "jdbc:mysql://localhost/tfe"; //en local
+        //String url = "jdbc:mysql://localhost/tfe"; //en local
         //String url = "jdbc:mysql://sql.info.iepscf-uccle.be/grosapp8"; //à l'école
         try {
             /* setup the properties: si les accents ne sont pas Unicode ds la BDD
@@ -34,18 +33,31 @@ public class Connexion {
              prop.put("charSet", "ISO-8859-15");
              prop.put("user", username);
              prop.put("password", password);*/
-
+            Properties prop = new Properties();
+            InputStream inputStream = Connexion.class.getClassLoader().getResourceAsStream("db.properties");
+            prop.load(inputStream);
+            
+            String driver = prop.getProperty("driver");
+            String url = prop.getProperty("url");
+            String user = prop.getProperty("user");
+            String password = prop.getProperty("password");
+            
+            Class.forName(driver);
             // Connect to the database
-            conn = DriverManager.getConnection(url, "root", ""); //en local
+            conn = DriverManager.getConnection(url, user, password); //en local
             //conn=DriverManager.getConnection(url, "grosapp8","grosapp8"); // à l'école
-
             stat = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            //on peut parcourir le résultat dans les 2 sens, insensible aux chgmts d'autrui
-            //on peut modifier ce résultat pour ensuite reporter ces modifs ds la table (updateRow)
             conn.setAutoCommit(true);
             connected = true;
         } catch (SQLException e) {
             System.out.println(e.toString());
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.toString());
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+            ex.printStackTrace();
         }
     }
 

@@ -17,10 +17,6 @@ public class Chauffeur {
     public Chauffeur() {
     }
 
-  
-
-   
-
     public void setLesCircuits(List<Circuit> LesCircuits) {
         this.lescircuits = LesCircuits;
     }
@@ -40,9 +36,6 @@ public class Chauffeur {
     public String getId() {
         return id;
     }
-    
-
-    
 
     public String getNomChauffeur() {
         return nomchauffeur;
@@ -72,25 +65,18 @@ public class Chauffeur {
         this.ville = ville;
     }
 
-   
     public int getCodepostale() {
         return codepostale;
-        
+
     }
 
     public String getVille() {
         return ville;
     }
 
-  
-
     public String getEmail() {
         return email;
     }
-
-   
-
-    
 
     public void setId(String id) {
         this.id = id;
@@ -136,14 +122,6 @@ public class Chauffeur {
         this.numpermis = numpermis;
     }
 
- 
-
-  
-
-   
-
-   
-    
     private String id;
     private String nomchauffeur;
     private String prenomchauffeur;
@@ -181,12 +159,4 @@ public class Chauffeur {
         return "Chauffeur{" + "id=" + id + ", nomchauffeur=" + nomchauffeur + ", prenomchauffeur=" + prenomchauffeur + ", datedenaissance=" + datedenaissance + ", adresse=" + adresse + ", codepostale=" + codepostale + ", ville=" + ville + ", numtelephone=" + numtelephone + ", email=" + email + ", numcartesis=" + numcartesis + ", numpermis=" + numpermis + ", lescircuits=" + lescircuits + ", lesheures=" + lesheures + ", lesvehicules=" + lesvehicules + ", lesdocuments=" + lesdocuments + '}';
     }
 
-    
-   
-
-   
-
-  
-    
-    
 }

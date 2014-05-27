@@ -4,23 +4,18 @@
  */
 package be.isfce.tfe.controleur;
 
-import be.isfce.tfe.modele.AbstractModel;
+import be.isfce.tfe.db.MaterielRoulantDao;
 import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.validation.NumeroChassisValidation;
 import be.isfce.tfe.validation.StringValidation;
 import be.isfce.tfe.validation.ValidationPlaque;
 import java.util.Calendar;
 
-
 /**
  *
  * @author yema
  */
 public class MaterielRoulantControleur extends AbstractControleur<MaterielRoulant> {
-
-    public MaterielRoulantControleur(AbstractModel<MaterielRoulant> modele) {
-        super(modele);
-    }
 
     @Override
     public void controleEtAjoute(MaterielRoulant vehicule) throws ValidationException {
@@ -62,17 +57,25 @@ public class MaterielRoulantControleur extends AbstractControleur<MaterielRoulan
         if (vehicule.getId() == null || !NumeroChassisValidation.checkChassis(vehicule.getId())) {
             throw new ValidationException("Le numero de telephone n'est pas valide");
         }
-        modele.cree(vehicule);
+        if(MaterielRoulantDao.addMaterielRoulant(vehicule)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     @Override
     public void controleEtSupprime(MaterielRoulant object) throws ValidationException {
-        modele.supprime(object);
+        if(MaterielRoulantDao.deleteMaterielRoulant(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     @Override
     public void controleEtModifie(MaterielRoulant object) throws ValidationException {
-        modele.modifie(object);
+        if(MaterielRoulantDao.updateMaterielRoulant(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
-    }
-  
+}

@@ -7,7 +7,6 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.CarteCarburantControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.CarteCarburant;
-import be.isfce.tfe.modele.CarteCarburantModele;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -25,20 +24,13 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
     String[] columnsNames = {"kilometre utilisation", "Litre de carburant"};
 
-    public AffichageCarteCarburantPanel(CarteCarburantControleur cartecarburantControleur) {
-        super(cartecarburantControleur);
-        cartecarburant= cartecarburantControleur.getModele().getTousLesElements();
-        displayData();
-    }
-
-    
     public void setCarteCarburant(List<CarteCarburant> cartecarburant) {
         this.cartecarburant = cartecarburant;
         displayData();
     }
 
     public AffichageCarteCarburantPanel(CarteCarburantControleur cartecarburantControleur, List<CarteCarburant> cartecarburant) {
-        this(cartecarburantControleur);
+        super(cartecarburantControleur);
         this.cartecarburant = cartecarburant;
         displayData();
     }
@@ -47,18 +39,17 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
     public String getTitrePanel() {
         return "Carte de Carburant";
     }
-    
-      public void supprimeCarteCarburantSelectionnes() throws ValidationException{
+
+    public void supprimeCarteCarburantSelectionnes() throws ValidationException {
         int selectedRow = jTable1.getSelectedRow();
-        try{
-        abstractControleur.controleEtSupprime(cartecarburant.get(selectedRow));
-           }
-       catch (NumberFormatException ex) {
+        try {
+            abstractControleur.controleEtSupprime(cartecarburant.get(selectedRow));
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
-           }
+        }
     }
 
     @Override
@@ -67,7 +58,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
             @Override
             public String getColumnName(int col) {
-                return columnsNames[col].toString();
+                return columnsNames[col];
             }
 
             @Override
@@ -103,30 +94,24 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
     }
 
     @Override
-    protected void supprimeElement(int index)  {
+    protected void supprimeElement(int index) {
         try {
             abstractControleur.controleEtSupprime(cartecarburant.get(index));
-                JOptionPane jop1;
+            JOptionPane jop1;
             jop1 = new JOptionPane();
             jop1.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
+
         } catch (ValidationException ex) {
-                  JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
-           }
-}
-
-    @Override
-    protected List<JMenuItem> getMenuItems() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-
-        return menuItems;
+        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        setCarteCarburant(CarteCarburantModele.getInstance().getTousLesElements());
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

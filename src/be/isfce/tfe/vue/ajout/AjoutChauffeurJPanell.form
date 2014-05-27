@@ -19,63 +19,15 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="emailChauffeur" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="idChauffeur" min="-2" pref="110" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="registreNationalTextField" min="-2" pref="205" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="dateChauffeur" alignment="0" pref="110" max="32767" attributes="0"/>
-                              <Component id="AdresseChauffeur" alignment="0" max="32767" attributes="0"/>
-                              <Component id="ville" alignment="0" max="32767" attributes="0"/>
-                              <Component id="codepostale" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="adresseTextField" min="-2" pref="205" max="-2" attributes="0"/>
-                              <Component id="dateChooser" min="-2" pref="105" max="-2" attributes="0"/>
-                              <Component id="codepostaleTextField" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="numTextField" alignment="0" pref="195" max="32767" attributes="0"/>
-                                  <Component id="villeTextField" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="numpermisTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="numcartesisTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="emailTextField" alignment="0" pref="194" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="prenomChauffeur" min="-2" pref="94" max="-2" attributes="0"/>
-                              <Component id="nomChauffeur" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="prenomTextField" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
-                              <Component id="nomchauffeurTextField" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="ajoutChauffeurJPanell1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="numChauffeur" alignment="0" pref="123" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="enregistrerChauffeur" min="-2" pref="108" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <Component id="retour" min="-2" pref="108" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="modification" min="-2" pref="110" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="enregistrerChauffeur" min="-2" pref="108" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -83,143 +35,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="idChauffeur" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="registreNationalTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nomChauffeur" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nomchauffeurTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="ajoutChauffeurJPanell1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="enregistrerChauffeur" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Component id="prenomChauffeur" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="prenomTextField" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="dateChooser" min="-2" max="-2" attributes="0"/>
-                  <Component id="dateChauffeur" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="AdresseChauffeur" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="adresseTextField" min="-2" pref="21" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="codepostale" alignment="3" pref="42" max="32767" attributes="0"/>
-                  <Component id="codepostaleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ville" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="villeTextField" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="numChauffeur" min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="numTextField" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="emailChauffeur" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailTextField" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="numcartesisTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="numpermisTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="retour" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="modification" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="enregistrerChauffeur" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="idChauffeur">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="registre national:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="nomChauffeur">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nom :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="prenomChauffeur">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Prenom :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AdresseChauffeur">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Adresse:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="dateChauffeur">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Date de naissance:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="numChauffeur">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Numero de telephone:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="emailChauffeur">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Email:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="registreNationalTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="nomchauffeurTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="prenomTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="adresseTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="numTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="emailTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="modification">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Modifier"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificationActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="retour">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Annuler"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="enregistrerChauffeur">
       <Properties>
         <Property name="text" type="java.lang.String" value="Enregistrer"/>
@@ -228,35 +52,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enregistrerChauffeurActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="codepostale">
+    <Component class="be.isfce.tfe.vue.encodage.EncodageChauffeurJPanell" name="ajoutChauffeurJPanell1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Code postale:"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Chauffeur"/>
+          </Border>
+        </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="codepostaleTextField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="ville">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ville:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="villeTextField">
-    </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dateChooser">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Numero carte SIS:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="numcartesisTextField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Numero de permis:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="numpermisTextField">
     </Component>
   </SubComponents>
 </Form>

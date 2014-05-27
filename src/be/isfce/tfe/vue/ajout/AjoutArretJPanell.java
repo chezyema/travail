@@ -4,15 +4,9 @@
  */
 package be.isfce.tfe.vue.ajout;
 
-import be.isfce.tfe.db.ArretDBHelper;
 import be.isfce.tfe.metier.Arret;
 import be.isfce.tfe.controleur.ArretControleur;
-import be.isfce.tfe.controleur.ChauffeurControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.modele.ArretModele;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +16,7 @@ import javax.swing.JOptionPane;
 public class AjoutArretJPanell extends javax.swing.JPanel {
 
     /**
-     * Creates new form AjoutArretJPanell
+     * Creates new form EncodageArretJPanel
      */
     public AjoutArretJPanell() {
         initComponents();
@@ -37,13 +31,10 @@ public class AjoutArretJPanell extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        adressearret = new javax.swing.JLabel();
         ajouterarret = new javax.swing.JButton();
         supprimerarret = new javax.swing.JButton();
-        adressearretTextField = new javax.swing.JTextField();
         modifierarret = new javax.swing.JButton();
-
-        adressearret.setText("Adresse Arret:");
+        ajoutArretJPanell1 = new be.isfce.tfe.vue.encodage.EncodageArretJPanel();
 
         ajouterarret.setText("Enregistrer");
         ajouterarret.addActionListener(new java.awt.event.ActionListener() {
@@ -56,67 +47,49 @@ public class AjoutArretJPanell extends javax.swing.JPanel {
 
         modifierarret.setText("Reset");
 
+        ajoutArretJPanell1.setBorder(javax.swing.BorderFactory.createTitledBorder("Arrêt"));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(adressearret, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(adressearretTextField))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(0, 53, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(supprimerarret)
-                        .addGap(55, 55, 55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(modifierarret, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(ajouterarret)))
-                .addGap(20, 20, 20))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ajouterarret))
+                    .addComponent(ajoutArretJPanell1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(adressearret, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(adressearretTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ajoutArretJPanell1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ajouterarret)
                     .addComponent(modifierarret)
                     .addComponent(supprimerarret))
-                .addGap(28, 28, 28))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void ajouterarretActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterarretActionPerformed
 
-     Arret arret = getArretFromFields();
+        Arret arret = ajoutArretJPanell1.getArretFromFields();
         try {
-            new ArretControleur(ArretModele.getInstance()).controleEtAjoute(arret);
+            new ArretControleur().controleEtAjoute(arret);
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-
-    }                                                    
-
-    private Arret getArretFromFields() {
-        Arret arret = new Arret();
-        arret.setId(0);
-        arret.setAdresse(adressearretTextField.getText());
-        return arret;
-
-    
-
     }//GEN-LAST:event_ajouterarretActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel adressearret;
-    private javax.swing.JTextField adressearretTextField;
+    private be.isfce.tfe.vue.encodage.EncodageArretJPanel ajoutArretJPanell1;
     private javax.swing.JButton ajouterarret;
     private javax.swing.JButton modifierarret;
     private javax.swing.JButton supprimerarret;

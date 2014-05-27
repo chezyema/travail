@@ -4,7 +4,7 @@
  */
 package be.isfce.tfe.controleur;
 
-import be.isfce.tfe.modele.AbstractModel;
+import be.isfce.tfe.db.UtilisationCarteDao;
 import be.isfce.tfe.metier.UtilisationCarte;
 import java.util.Calendar;
 
@@ -14,10 +14,6 @@ import java.util.Calendar;
  */
 public class UtilisationCarteControleur extends AbstractControleur<UtilisationCarte> {
 
-    public UtilisationCarteControleur(AbstractModel<UtilisationCarte> modele) {
-        super(modele);
-    }
-
     @Override
     public void controleEtAjoute(UtilisationCarte carte) throws ValidationException {
         Calendar joura = Calendar.getInstance();
@@ -26,16 +22,25 @@ public class UtilisationCarteControleur extends AbstractControleur<UtilisationCa
         if (carte.getDateUtilisation() == null || carte.getDateUtilisation().after(joura.getTime())) {
             throw new ValidationException("Le date n'est pas valide");
         }
-        modele.cree(carte);
+        if (UtilisationCarteDao.addUtilisationCarte(carte)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     @Override
     public void controleEtSupprime(UtilisationCarte object) throws ValidationException {
-        modele.supprime(object);
+        if (UtilisationCarteDao.deleteUtilisationCarte(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 
     @Override
     public void controleEtModifie(UtilisationCarte object) throws ValidationException {
-        modele.modifie(object);
+        if (UtilisationCarteDao.updateUtilisationCarte(object)) {
+            setChanged();
+            notifyObservers();
+        }
     }
 }

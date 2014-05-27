@@ -4,7 +4,7 @@
  */
 package be.isfce.tfe.metier;
 
-import be.isfce.tfe.db.DocumentAdministratifDBHelper;
+import be.isfce.tfe.db.DocumentAdministratifDao;
 import java.util.ArrayList;
 import java.util.Date;
 

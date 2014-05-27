@@ -5,30 +5,18 @@
  */
 package be.isfce.tfe.controleur;
 
-import be.isfce.tfe.modele.AbstractModel;
+import java.util.Observable;
 
 /**
  *
  * @author yacsrk
  * @param <T>
  */
-public abstract class AbstractControleur<T> {
-
-    protected AbstractModel<T> modele;
-
-    public AbstractControleur(AbstractModel<T> modele) {
-        this.modele = modele;
-    }
-
-    public AbstractModel<T> getModele() {
-        return modele;
-    }
-
-    public void setModele(AbstractModel<T> modele) {
-        this.modele = modele;
-    }
+public abstract class AbstractControleur<T> extends Observable{
 
     public abstract void controleEtAjoute(T object) throws ValidationException;
+
     public abstract void controleEtSupprime(T object) throws ValidationException;
+
     public abstract void controleEtModifie(T object) throws ValidationException;
 }

@@ -17,192 +17,30 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="registrenational" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="nom" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="prenom" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="adresse" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="nomduresponsable" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="telephoneresponsable" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ville" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cdpostale" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cdpostalTextField" min="-2" pref="93" max="-2" attributes="0"/>
-                                  <Component id="nomresponsableTextField" alignment="0" pref="203" max="32767" attributes="0"/>
-                                  <Component id="telresponsableTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="eleveDateChooser" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="prenomeleveTextField" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  <Component id="adresseTextField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="villeTextField" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="nomeleveTextField" pref="200" max="32767" attributes="0"/>
-                                  <Component id="registreNationalTextField" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="annulerdonnee" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="reset" min="-2" pref="112" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="enregistreleve" min="-2" pref="99" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="emailresponsable" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                              <Component id="emailresponsableTextField" min="-2" pref="203" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="enregistreleve" min="-2" pref="99" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ajoutEleveJPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="registrenational" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="registreNationalTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nom" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nomeleveTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="prenom" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="prenomeleveTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="eleveDateChooser" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="adresseTextField" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="adresse" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cdpostale" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cdpostalTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ajoutEleveJPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="enregistreleve" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="villeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ville" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nomresponsableTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nomduresponsable" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="telephoneresponsable" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="telresponsableTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="emailresponsable" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailresponsableTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="enregistreleve" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="annulerdonnee" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="reset" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="registrenational">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Registre National:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="nom">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nom:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="prenom">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Prenom:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="adresse">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Adresse:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="nomduresponsable">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nom du responsable:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="registreNationalTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="nomeleveTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomeleveTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="prenomeleveTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="adresseTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="nomresponsableTextField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="telephoneresponsable">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Telephone responsable:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="telresponsableTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telresponsableTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="emailresponsable">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Email responsable:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="emailresponsableTextField">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailresponsableTextFieldActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="reset">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Modifier"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="enregistreleve">
       <Properties>
         <Property name="text" type="java.lang.String" value="Enregistrer"/>
@@ -211,31 +49,14 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enregistreleveActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="annulerdonnee">
+    <Component class="be.isfce.tfe.vue.encodage.EncodageEleveJPanel" name="ajoutEleveJPanel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Annuler"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="El&#xe8;ve"/>
+          </Border>
+        </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="ville">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ville:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="villeTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="cdpostalTextField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="cdpostale">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Code postale:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Date de naissance:"/>
-      </Properties>
-    </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="eleveDateChooser">
     </Component>
   </SubComponents>
 </Form>

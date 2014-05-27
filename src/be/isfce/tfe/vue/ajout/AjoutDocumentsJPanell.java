@@ -6,12 +6,7 @@ package be.isfce.tfe.vue.ajout;
 
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.db.DocumentAdministratifDBHelper;
-import be.isfce.tfe.metier.Arret;
 import be.isfce.tfe.metier.DocumentAdministratif;
-import be.isfce.tfe.modele.DocumentAdministratifModele;
-import be.isfce.tfe.validation.StringValidation;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +16,7 @@ import javax.swing.JOptionPane;
 public class AjoutDocumentsJPanell extends javax.swing.JPanel {
 
     /**
-     * Creates new form AjoutDocumentsJPanell
+     * Creates new form EncodageDocumentsJPanell
      */
     public AjoutDocumentsJPanell() {
         initComponents();
@@ -38,13 +33,8 @@ public class AjoutDocumentsJPanell extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        libelledocument = new javax.swing.JLabel();
-        datedevaliditer = new javax.swing.JLabel();
-        libelleTextField = new javax.swing.JTextField();
         Ajouterdocument = new javax.swing.JToggleButton();
-        Modifierdocument = new javax.swing.JToggleButton();
-        supprimerdocument = new javax.swing.JToggleButton();
-        datedocument = new com.toedter.calendar.JDateChooser();
+        ajoutDocumentsJPanell1 = new be.isfce.tfe.vue.encodage.EncodageDocumentsJPanell();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -53,16 +43,6 @@ public class AjoutDocumentsJPanell extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
-        libelledocument.setText("Libelle:");
-
-        datedevaliditer.setText("Date de validiter:");
-
-        libelleTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                libelleTextFieldActionPerformed(evt);
-            }
-        });
-
         Ajouterdocument.setText("Enregistrer");
         Ajouterdocument.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,9 +50,7 @@ public class AjoutDocumentsJPanell extends javax.swing.JPanel {
             }
         });
 
-        Modifierdocument.setText("Modifier");
-
-        supprimerdocument.setText("Annuler");
+        ajoutDocumentsJPanell1.setBorder(javax.swing.BorderFactory.createTitledBorder("Document"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,86 +58,38 @@ public class AjoutDocumentsJPanell extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(supprimerdocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(35, 35, 35)
-                        .addComponent(Modifierdocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(41, 41, 41)
-                        .addComponent(Ajouterdocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(libelledocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(datedevaliditer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(datedocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(154, 154, 154))
-                            .addComponent(libelleTextField))
-                        .addGap(75, 75, 75))))
+                .addComponent(ajoutDocumentsJPanell1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Ajouterdocument, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(libelledocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(libelleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(datedevaliditer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(6, 6, 6))
-                    .addComponent(datedocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Ajouterdocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Modifierdocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(supprimerdocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                .addGap(6, 6, 6)
+                .addComponent(ajoutDocumentsJPanell1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Ajouterdocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void libelleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libelleTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_libelleTextFieldActionPerformed
-
     private void AjouterdocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterdocumentActionPerformed
         // TODO add your handling code here:
-         DocumentAdministratif document = getDocumentFromFields();
+        DocumentAdministratif document = ajoutDocumentsJPanell1.getDocumentFromFields();
         try {
-            new DocumentsAdministratifsControleur(DocumentAdministratifModele.getInstance()).controleEtAjoute(document);
+            new DocumentsAdministratifsControleur().controleEtAjoute(document);
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-
-    }                                                    
-
-    private DocumentAdministratif getDocumentFromFields() {
-        DocumentAdministratif documents = new DocumentAdministratif();
-        documents.setId(0);
-        documents.setLibelle(libelleTextField.getText());
-        documents.setDateValiditer(datedocument.getDate());
-        return documents;
-
-       
-
     }//GEN-LAST:event_AjouterdocumentActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Ajouterdocument;
-    private javax.swing.JToggleButton Modifierdocument;
-    private javax.swing.JLabel datedevaliditer;
-    private com.toedter.calendar.JDateChooser datedocument;
+    private be.isfce.tfe.vue.encodage.EncodageDocumentsJPanell ajoutDocumentsJPanell1;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField libelleTextField;
-    private javax.swing.JLabel libelledocument;
-    private javax.swing.JToggleButton supprimerdocument;
     // End of variables declaration//GEN-END:variables
 }
