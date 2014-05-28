@@ -124,28 +124,37 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         }
     }
 
+    
+    
     @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherEntretien = new JMenuItem("Les Entretiens");
-        afficherEntretien.addActionListener(new ActionListener() {
-
+        menuItems.add(getAfficherEntretienMenuItem());
+        menuItems.add( getUtilisationCarburantMenuItem());
+        menuItems.add( getAjouterEntretienMenuItem());
+        menuItems.add( getAjouterDocumentMenuItem()); 
+        
+        
+        return menuItems;
+         }
+    
+     private JMenuItem getAfficherEntretienMenuItem(){
+        JMenuItem entretien = new JMenuItem("Les Entretiens");
+        entretien.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
+                 //TODO On verra plus tard
             }
         });
-        menuItems.add(afficherEntretien);
-
-        return menuItems;
+        return entretien;
     }
-
-    protected List<JMenuItem> getMenuItemsCarburant() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherCarburant = new JMenuItem("Consommation carburant");
-        afficherCarburant.addActionListener(new ActionListener() {
+     
+     
+    
+    
+    private JMenuItem getUtilisationCarburantMenuItem(){
+        JMenuItem utilisation = new JMenuItem("Utilisation Carte Carburant");
+        utilisation.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MaterielRoulant materielRoulant = vehicules.get(jTable1.getSelectedRow());
@@ -154,31 +163,29 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                 DialogUtils.afficheDialog(null, affichageUtilisationCarteJPanel);
             }
         });
-        menuItems.add(afficherCarburant);
-
-        JMenuItem afficherUtilisation = new JMenuItem("Utilisatin Carte Carburant");
-        afficherUtilisation.addActionListener(new ActionListener() {
-
+        return utilisation;
+    }
+    
+      private JMenuItem getAjouterEntretienMenuItem(){
+        JMenuItem ajouterEntretien = new JMenuItem("Ajouter Entretiens");
+        ajouterEntretien.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
+                 //TODO On verra plus tard
             }
         });
-        menuItems.add(afficherUtilisation);
-
-        JMenuItem afficherDocument = new JMenuItem("Afficher documents");
-        afficherDocument.addActionListener(new ActionListener() {
-
+        return ajouterEntretien;
+    }
+      
+        private JMenuItem getAjouterDocumentMenuItem(){
+        JMenuItem ajouterdocument = new JMenuItem("Ajouter Documents");
+        ajouterdocument.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MaterielRoulant materielRoulant = vehicules.get(jTable1.getSelectedRow());
-                //TODO Pas de documents !
-                //AffichageDocumentsPanel affichageDocumentsPanel = new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), materielRoulant.get);
-                //DialogUtils.afficheDialog(null, affichageDocumentsPanel);
+                 //TODO On verra plus tard
             }
         });
-        menuItems.add(afficherDocument);
-        return menuItems;
+        return ajouterdocument;
     }
 
     @Override

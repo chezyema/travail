@@ -14,17 +14,24 @@ import java.util.List;
 public class CarteCarburant {
 
     private int id;
+    private String numcarte;
     private int kmutilisation;
     private int litrecarburant;
+    
     private List<UtilisationCarte> lesutilisations;
 
-    @Override
-    public String toString() {
-        return "CarteCarburant{" + "id=" + id + ", kmutilisation=" + kmutilisation + ", litrecarburant=" + litrecarburant + ", lesutilisations=" + lesutilisations + '}';
-    }
+  
 
     public List<UtilisationCarte> getLesutilisations() {
         return lesutilisations;
+    }
+
+    public String getNumcarte() {
+        return numcarte;
+    }
+
+    public void setNumcarte(String numcarte) {
+        this.numcarte = numcarte;
     }
 
     
@@ -56,4 +63,11 @@ public class CarteCarburant {
     public void setLesUtilisations(List<UtilisationCarte> LesUtilisations) {
         this.lesutilisations = LesUtilisations;
     }
+
+    @Override
+    public String toString() {
+        return "CarteCarburant{" + "id=" + id + ", numcarte=" + numcarte + ", kmutilisation=" + kmutilisation + ", litrecarburant=" + litrecarburant + ", lesutilisations=" + lesutilisations + '}';
+    }
+    
+    
 }

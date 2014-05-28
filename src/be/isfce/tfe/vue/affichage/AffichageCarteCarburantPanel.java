@@ -1,3 +1,6 @@
+
+
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -7,6 +10,8 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.CarteCarburantControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.CarteCarburant;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -22,7 +27,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
     List<CarteCarburant> cartecarburant;
 
-    String[] columnsNames = {"kilometre utilisation", "Litre de carburant"};
+    String[] columnsNames = {"kilometre utilisation", "Litre de carburant","numcarte"};
 
     public void setCarteCarburant(List<CarteCarburant> cartecarburant) {
         this.cartecarburant = cartecarburant;
@@ -85,6 +90,8 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                         return carte.getKmUtilisation();
                     case 1:
                         return carte.getLitreCarburant();
+                    case 2:
+                        return carte.getNumcarte();
 
                     default:
                         return null;
@@ -108,6 +115,35 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+      @Override
+    protected List<JMenuItem> getMenuItems() {
+        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
+        menuItems.add(getAfficherVehiculeUtilisationMenuItem());
+       
+       
+        
+        return menuItems;
+    }
+      private JMenuItem getAfficherVehiculeUtilisationMenuItem(){
+        JMenuItem afficherCarte = new JMenuItem("Afficher Utilisation véhicule");
+        afficherCarte.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                // CarteCarburant carte = carte.get(jTable1.getSelectedRow());
+               //Todo encore faire action
+            }
+
+            
+        });
+        return afficherCarte;
+    }
+      
+
+            
+   
+
 
     @Override
     public void update(Observable o, Object arg) {

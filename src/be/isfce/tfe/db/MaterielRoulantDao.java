@@ -261,6 +261,7 @@ public class MaterielRoulantDao {
         for (MaterielRoulant vehicule : tousLesVehicules) {
             Entretien dernierEntretien = getDernierEntretien(vehicule);
             if (dernierEntretien != null) {
+                //TODO Ajouter une limite a 25000
                 if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() > 20000) {
                     entretienAEffectuer++;
                 }

@@ -121,34 +121,48 @@ public class AffichageEcolePanel extends AffichagePanel {
     }
 
     @Override
-    protected List<JMenuItem> getMenuItems() {
+    
+    
+      protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem afficherEleve = new JMenuItem("Afficher les élèves");
+        menuItems.add(getAfficherEleveMenuItem());
+        menuItems.add(getAfficherCircuitMenuItem());
+       
+        
+        
+        return menuItems;
+    }
+    
+    private JMenuItem getAfficherEleveMenuItem(){
+        JMenuItem afficherEleve = new JMenuItem("Afficher Eléves");
         afficherEleve.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO On verra plus tard
                 Ecole ecole = ecoles.get(jTable1.getSelectedRow());
                 AffichageElevePanel affichageElevePanel = new AffichageElevePanel(new EleveControleur(), ecole.getLeseleves());
                 DialogUtils.afficheDialog(null, affichageElevePanel);
+                //TODO Ajouter dans la DB
             }
         });
-        menuItems.add(afficherEleve);
-
-        JMenuItem afficherCircuit = new JMenuItem("Afficher les circuits");
+        return afficherEleve;
+    }
+     
+    private JMenuItem getAfficherCircuitMenuItem(){
+        JMenuItem afficherCircuit = new JMenuItem("Afficher Circuits");
         afficherCircuit.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO On verra plus tard
                 Ecole ecole = ecoles.get(jTable1.getSelectedRow());
                 AffichageCircuitPanel affichageCircuitPanel = new AffichageCircuitPanel(new CircuitControleur(), ecole.getLescircuits());
                 DialogUtils.afficheDialog(null, affichageCircuitPanel);
+                //TODO Ajouter dans la DB
             }
         });
-        menuItems.add(afficherCircuit);
-        return menuItems;
+        return afficherCircuit;
     }
+    
 
     @Override
     public void update(Observable o, Object arg) {

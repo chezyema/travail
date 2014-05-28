@@ -20,10 +20,11 @@ public class CarteCarburantDao {
 
     public static boolean addCarteCarburant(CarteCarburant cartecarburant) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into cartecarburant (idcarte,kmutilisation,litrecarburant) values (? , ?, ?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into cartecarburant (idcarte,kmutilisation,litrecarburant,numcarte) values (? , ?, ?,?)");
             preparedStatement.setInt(1, cartecarburant.getId());
             preparedStatement.setInt(2, cartecarburant.getKmUtilisation());
             preparedStatement.setInt(3, cartecarburant.getLitreCarburant());
+            preparedStatement.setString(4,cartecarburant.getNumcarte());
 
             preparedStatement.executeUpdate();
             return true;
@@ -52,6 +53,7 @@ public class CarteCarburantDao {
                 cartecarburant.setId(resultSet.getInt("idcarte"));
                 cartecarburant.setKmUtilisation(resultSet.getInt("kmutilisation"));
                 cartecarburant.setLitreCarburant(resultSet.getInt("litrecarburant"));
+                cartecarburant.setNumcarte(resultSet.getString("numcarte"));
                 cartecarburant.setLesUtilisations(selectListeUtilisationCartePourCarteCarburant(cartecarburant.getId()));
                 allCarteCarburant.add(cartecarburant);
             }

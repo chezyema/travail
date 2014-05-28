@@ -113,8 +113,58 @@ public class AffichageCircuitPanel extends AffichagePanel {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+      @Override
+    protected List<JMenuItem> getMenuItems() {
+        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
+        menuItems.add(getAfficherArretMenuItem());
+        menuItems.add(getAfficherEleveMenuItem());
+       
+        menuItems.add(getAssignerVehiculeMenuItem());
+        
+        return menuItems;
+    }
+      private JMenuItem getAfficherArretMenuItem(){
+        JMenuItem afficherArret = new JMenuItem("Afficher Arrêts");
+        afficherArret.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Circuit circuit = circuits.get(jTable1.getSelectedRow());
+                AffichageArretPanel affichageArretPanel = new AffichageArretPanel(new ArretControleur(), circuit.getLesarrets());
+                DialogUtils.afficheDialog(null, affichageArretPanel);
+            }
+        });
+        return afficherArret;
+    }
+      
+      private JMenuItem getAfficherEleveMenuItem(){
+        JMenuItem afficherEleve = new JMenuItem("Afficher Eleves");
+        afficherEleve.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Circuit circuit = circuits.get(jTable1.getSelectedRow());
+                AffichageElevePanel affichageElevePanel = new AffichageElevePanel(new EleveControleur(), circuit.getLeseleves());
+                DialogUtils.afficheDialog(null, affichageElevePanel);
+            }
+        });
+        return afficherEleve;
+    }
+       
+     
+         private JMenuItem getAssignerVehiculeMenuItem(){
+        JMenuItem assignerVehicule = new JMenuItem("Assigner Vehicule");
+        assignerVehicule.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Circuit circuit = circuits.get(jTable1.getSelectedRow());
+               //TODO à faire action
+            }
+        });
+        return assignerVehicule;
+    }
+       
 
-    @Override
+  /*  @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         //TODO Ajouter les menu items et leurs actions
@@ -151,12 +201,59 @@ public class AffichageCircuitPanel extends AffichagePanel {
             }
         });
         menuItems.add(afficherEleve);
+        
+         
+         JMenuItem ajouterCircuit = new JMenuItem("Ajouter Circuit");
+        ajouterCircuit.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               Circuit circuit = circuits.get(jTable1.getSelectedRow());
+                //TODO action à ajouter
+                
+            }
+        });
+        menuItems.add(ajouterCircuit);
+        
+        
+          
+         JMenuItem ajouterArret = new JMenuItem("Ajouter Arret");
+        ajouterArret.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               Circuit circuit = circuits.get(jTable1.getSelectedRow());
+                //TODO action à ajouter
+                
+            }
+        });
+        menuItems.add(ajouterArret);
+        
+          
+         JMenuItem ajouterEleve = new JMenuItem("Ajouter Eleve");
+        ajouterCircuit.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               Circuit circuit = circuits.get(jTable1.getSelectedRow());
+                //TODO action à ajouter
+                
+            }
+        });
+        menuItems.add(ajouterEleve);
+
+        
         return menuItems;
     }
 
     @Override
     public void update(Observable o, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
