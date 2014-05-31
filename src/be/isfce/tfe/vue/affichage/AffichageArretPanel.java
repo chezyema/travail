@@ -94,6 +94,11 @@ public class AffichageArretPanel extends AffichagePanel {
                     case 0:
                         arret.setAdresse((String) aValue);
                 }
+                  try {
+                    abstractControleur.controleEtModifie(arret);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
             }
 
         };
@@ -113,6 +118,7 @@ public class AffichageArretPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
+        setArret(arrets);
 
     }
 }

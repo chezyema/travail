@@ -92,6 +92,28 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                         return null;
                 }
             }
+             @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                CarteCarburant carte = cartecarburant.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         carte.setNumcarte((String) aValue);
+                         break;
+                    case 1:
+                        carte.setKmUtilisation((Integer) aValue);
+                        break;
+                    case 2:
+                        carte.setLitreCarburant((Integer) aValue);
+                        break;
+                  
+                }
+                try {
+                    abstractControleur.controleEtModifie(carte);
+                } catch (ValidationException ex) {
+                 // TODO message
+                }
+            }
         };
     }
 
@@ -135,7 +157,6 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       setCarteCarburant(cartecarburant);
     }
-
 }

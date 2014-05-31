@@ -12,6 +12,7 @@ import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JMenuItem;
@@ -104,6 +105,45 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                         return null;
                 }
             }
+            
+             @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                MaterielRoulant vehicule = vehicules.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         vehicule.setId((String) aValue);
+                         break;
+                    case 1:
+                        vehicule.setMarque((String) aValue);
+                        break;
+                    case 2:
+                        vehicule.setType((String) aValue);
+                        break;
+                    case 3:
+                        //TODO
+                        vehicule.setAnneedeconstruction(new Date());
+                        break;
+                    case 4:
+                        vehicule.setCarburant((String) aValue);
+                        break;
+                    case 5:
+                        vehicule.setNumImmatr((String) aValue);
+                        break;
+                    case 6:
+                        vehicule.setNbDePlaces((Integer) aValue);
+                        break;
+                    case 7:
+                        vehicule.setKmactuel((Integer) aValue);
+                        break;
+                 
+                }
+                try {
+                    abstractControleur.controleEtModifie(vehicule);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -190,6 +230,6 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    setVehicules(vehicules);
     }
 }

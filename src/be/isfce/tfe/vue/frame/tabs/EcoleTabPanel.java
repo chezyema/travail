@@ -8,7 +8,10 @@ package be.isfce.tfe.vue.frame.tabs;
 import be.isfce.tfe.controleur.EcoleControlleur;
 import be.isfce.tfe.db.EcoleDao;
 import be.isfce.tfe.vue.affichage.AffichageEcolePanel;
+import be.isfce.tfe.vue.ajout.AjoutEcoleJPanel;
+import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.BorderLayout;
+import javax.swing.JDialog;
 
 /**
  *
@@ -21,8 +24,8 @@ public class EcoleTabPanel extends javax.swing.JPanel {
      */
     public EcoleTabPanel() {
         initComponents();
-        AffichageEcolePanel affichageecolePanel = new AffichageEcolePanel(new EcoleControlleur(), EcoleDao.getTousLesEcoles());
-        jPanel1.add(affichageecolePanel, BorderLayout.CENTER);
+        affichageEcolePanel  = new AffichageEcolePanel(new EcoleControlleur(), EcoleDao.getTousLesEcoles());
+        jPanel1.add(affichageEcolePanel, BorderLayout.CENTER);
     }
 
     /**
@@ -38,6 +41,11 @@ public class EcoleTabPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
 
         jButton1.setText("Ajouter une école");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -65,6 +73,22 @@ public class EcoleTabPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AjoutEcoleJPanel ajoutecolePanell = new AjoutEcoleJPanel();
+        ajoutecolePanell.setDialogInterface(new DialogUtils.DialogInterface() {
+
+            @Override
+            public void onButtonSavePressed() {
+                if (jDialog != null) {
+                    jDialog.dispose();
+                    affichageEcolePanel.setEcole(EcoleDao.getTousLesEcoles());
+                }
+            }
+        });
+        jDialog = DialogUtils.afficheDialog(null, ajoutecolePanell);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private JDialog jDialog;
+    private final AffichageEcolePanel affichageEcolePanel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

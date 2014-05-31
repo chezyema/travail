@@ -27,8 +27,8 @@ public class CarteCarburantTabPanel extends javax.swing.JPanel {
      */
     public CarteCarburantTabPanel() {
         initComponents();
-        AffichageCarteCarburantPanel affichagecartePanel = new AffichageCarteCarburantPanel(new CarteCarburantControleur(), CarteCarburantDao.getTousLesCartesCarburant());
-        jPanel1.add(affichagecartePanel, BorderLayout.CENTER);
+        affichageCarteCarburantPanel = new AffichageCarteCarburantPanel(new CarteCarburantControleur(), CarteCarburantDao.getTousLesCartesCarburant());
+        jPanel1.add(affichageCarteCarburantPanel, BorderLayout.CENTER);
     }
 
     /**
@@ -77,11 +77,22 @@ public class CarteCarburantTabPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AjoutCarteCarburantJPanell ajoutCarteCarburantJPanell = new AjoutCarteCarburantJPanell();
-        DialogUtils.afficheDialog(null, ajoutCarteCarburantJPanell);
+       AjoutCarteCarburantJPanell ajoutCarteJPanell = new AjoutCarteCarburantJPanell();
+        ajoutCarteJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
+
+            @Override
+            public void onButtonSavePressed() {
+                if (jDialog != null) {
+                    jDialog.dispose();
+                    affichageCarteCarburantPanel.setCarteCarburant(CarteCarburantDao.getTousLesCartesCarburant());
+                }
+            }
+        });
+        jDialog = DialogUtils.afficheDialog(null, ajoutCarteJPanell);  
     }//GEN-LAST:event_jButton1ActionPerformed
 
-
+ private JDialog jDialog;
+    private final AffichageCarteCarburantPanel affichageCarteCarburantPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;

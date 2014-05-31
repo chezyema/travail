@@ -7,6 +7,7 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Entretien;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
@@ -95,6 +96,29 @@ public class AffichageEntretienPanel extends AffichagePanel {
                         return null;
                 }
             }
+            
+             @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                Entretien entretien = entretiens.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         entretien.setDescription((String) aValue);
+                         break;
+                    case 1:
+                        entretien.setKmEntretienFait((Integer) aValue);
+                        break;
+                    case 2:
+                        entretien.setDateEntretien(new Date());
+                        break;
+                  
+                }
+                try {
+                    abstractControleur.controleEtModifie(entretien);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -112,7 +136,7 @@ public class AffichageEntretienPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       setEntretien(entretiens);
     }
 
 }

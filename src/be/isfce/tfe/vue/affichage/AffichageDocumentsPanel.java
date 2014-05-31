@@ -7,6 +7,7 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.DocumentAdministratif;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
@@ -88,6 +89,28 @@ public class AffichageDocumentsPanel extends AffichagePanel {
                         return null;
                 }
             }
+                @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                DocumentAdministratif document = documents.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         document.setLibelle((String) aValue);
+                         break;
+                    case 1:
+                        document.setDateValiditer(new Date());
+                        //Todo encore à faire
+                        break;
+                    
+                   
+                   
+                }
+                try {
+                    abstractControleur.controleEtModifie(document);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -105,7 +128,7 @@ public class AffichageDocumentsPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setDocuments(documents);
     }
 
 

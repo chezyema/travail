@@ -7,6 +7,7 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Eleve;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
@@ -107,6 +108,50 @@ public class AffichageElevePanel extends AffichagePanel {
                         return null;
                 }
             }
+            
+             @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                Eleve eleve = eleves.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         eleve.setId((String) aValue);
+                         break;
+                    case 1:
+                        eleve.setNomEleve((String) aValue);
+                        break;
+                    case 2:
+                        eleve.setPrenomEleve((String) aValue);
+                        break;
+                    case 3:
+                        //TODO
+                        eleve.setDatedenaissance(new Date());
+                        break;
+                    case 4:
+                        eleve.setAdresseEleve((String) aValue);
+                        break;
+                    case 5:
+                        eleve.setCdpostal((Integer) aValue);
+                        break;
+                    case 6:
+                        eleve.setVil((String) aValue);
+                        break;
+                    case 7:
+                        eleve.setNomResponsable((String) aValue);
+                        break;
+                    case 8:
+                        eleve.setTelResponsable((String) aValue);
+                        break;
+                    case 9:
+                        eleve.setEmailResponsable((String) aValue);
+                        break;
+                }
+                try {
+                    abstractControleur.controleEtModifie(eleve);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -124,7 +169,7 @@ public class AffichageElevePanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setEleve(eleves);
     }
 
 

@@ -4,22 +4,8 @@
  */
 package be.isfce.tfe.vue.frame;
 
-import be.isfce.tfe.controleur.CarteCarburantControleur;
-import be.isfce.tfe.controleur.ChauffeurControleur;
-import be.isfce.tfe.controleur.CircuitControleur;
-import be.isfce.tfe.controleur.EcoleControlleur;
-import be.isfce.tfe.controleur.MaterielRoulantControleur;
-import be.isfce.tfe.db.CarteCarburantDao;
-import be.isfce.tfe.db.ChauffeurDao;
-import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.DocumentAdministratifDao;
-import be.isfce.tfe.db.EcoleDao;
 import be.isfce.tfe.db.MaterielRoulantDao;
-import be.isfce.tfe.vue.affichage.AffichageCarteCarburantPanel;
-import be.isfce.tfe.vue.affichage.AffichageChauffeurPanel;
-import be.isfce.tfe.vue.affichage.AffichageCircuitPanel;
-import be.isfce.tfe.vue.affichage.AffichageEcolePanel;
-import be.isfce.tfe.vue.affichage.AffichageMaterielRoulantPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 

@@ -105,6 +105,42 @@ public class AffichageEcolePanel extends AffichagePanel {
                         return null;
                 }
             }
+            
+             @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                Ecole ecole = ecoles.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         ecole.setNomecole((String) aValue);
+                         break;
+                    case 1:
+                        ecole.setAdresseecole((String) aValue);
+                        break;
+                    case 2:
+                        ecole.setCdpostal((Integer) aValue);
+                        break;
+                    case 3:
+                        //TODO
+                        ecole.setVil((String)aValue);
+                        break;
+                    case 4:
+                        ecole.setTelecole((String) aValue);
+                        break;
+                    case 5:
+                        ecole.setEmailecole((String) aValue);
+                        break;
+                    case 6:
+                        ecole.setNomdirecteur((String) aValue);
+                        break;
+                  
+                }
+                try {
+                    abstractControleur.controleEtModifie(ecole);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -127,6 +163,7 @@ public class AffichageEcolePanel extends AffichagePanel {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherEleveMenuItem());
         menuItems.add(getAfficherCircuitMenuItem());
+        menuItems.add(getAjouterElevesMenuItem());
        
         
         
@@ -163,10 +200,24 @@ public class AffichageEcolePanel extends AffichagePanel {
         return afficherCircuit;
     }
     
+       private JMenuItem getAjouterElevesMenuItem(){
+        JMenuItem ajouterEleves = new JMenuItem("Ajouter Eleves");
+        ajouterEleves.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO On verra plus tard
+                Ecole ecole = ecoles.get(jTable1.getSelectedRow());
+                AffichageCircuitPanel affichageCircuitPanel = new AffichageCircuitPanel(new CircuitControleur(), ecole.getLescircuits());
+                DialogUtils.afficheDialog(null, affichageCircuitPanel);
+                //TODO Ajouter dans la DB
+            }
+        });
+        return ajouterEleves;
+    }
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     setEcole(ecoles);
     }
 
 }

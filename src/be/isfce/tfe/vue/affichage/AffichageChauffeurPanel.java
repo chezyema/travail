@@ -32,7 +32,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
 
     List<Chauffeur> chauffeurs;
 
-    String[] columnsNames = {"Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Email", "numcartesis", "numpermis"};
+    String[] columnsNames = {"Registre national","Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Email", "numcartesis", "numpermis"};
 
     public void setChauffeurs(List<Chauffeur> chauffeurs) {
         this.chauffeurs = chauffeurs;
@@ -93,22 +93,25 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                 Chauffeur chauffeur = chauffeurs.get(rowIndex);
                 switch (columnIndex) {
                     case 0:
-                        return chauffeur.getNomChauffeur();
+                        return chauffeur.getId();
+                    
                     case 1:
-                        return chauffeur.getPrenomChauffeur();
+                        return chauffeur.getNomChauffeur();
                     case 2:
-                        return chauffeur.getDateNaissance();
+                        return chauffeur.getPrenomChauffeur();
                     case 3:
-                        return chauffeur.getAdresse();
+                        return chauffeur.getDateNaissance();
                     case 4:
-                        return chauffeur.getCodepostale();
+                        return chauffeur.getAdresse();
                     case 5:
-                        return chauffeur.getVille();
+                        return chauffeur.getCodepostale();
                     case 6:
-                        return chauffeur.getEmail();
+                        return chauffeur.getVille();
                     case 7:
-                        return chauffeur.getNumcartesis();
+                        return chauffeur.getEmail();
                     case 8:
+                        return chauffeur.getNumcartesis();
+                    case 9:
                         return chauffeur.getNumpermis();
 
                     default:
@@ -120,32 +123,36 @@ public class AffichageChauffeurPanel extends AffichagePanel {
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 Chauffeur chauffeur = chauffeurs.get(rowIndex);
                 switch (columnIndex) {
-                    case 0:
+                    
+                     case 0:
+                         chauffeur.setId((String) aValue);
+                         break;
+                    case 1:
                         chauffeur.setNomChauffeur((String) aValue);
                         break;
-                    case 1:
+                    case 2:
                         chauffeur.setPrenomChauffeur((String) aValue);
                         break;
-                    case 2:
+                    case 3:
                         //TODO
                         chauffeur.setDateNaissance(new Date());
                         break;
-                    case 3:
+                    case 4:
                         chauffeur.setAdresse((String) aValue);
                         break;
-                    case 4:
+                    case 5:
                         chauffeur.setCodepostale((Integer) aValue);
                         break;
-                    case 5:
+                    case 6:
                         chauffeur.setVille((String) aValue);
                         break;
-                    case 6:
+                    case 7:
                         chauffeur.setEmail((String) aValue);
                         break;
-                    case 7:
+                    case 8:
                         chauffeur.setNumcartesis((String) aValue);
                         break;
-                    case 8:
+                    case 9:
                         chauffeur.setNumpermis((String) aValue);
                         break;
                 }

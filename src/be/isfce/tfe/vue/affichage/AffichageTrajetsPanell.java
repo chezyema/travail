@@ -7,6 +7,7 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.TrajetsControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Trajet;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
@@ -94,6 +95,29 @@ public class AffichageTrajetsPanell extends AffichagePanel {
                         return null;
                 }
             }
+            
+             @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                Trajet trajet = trajets.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         trajet.setHeureDeDebut((String) aValue);
+                         break;
+                    case 1:
+                        trajet.setHeureDeFin((String) aValue);
+                        break;
+                    case 2:
+                        trajet.setDateTravail(new Date());
+                        break;
+                    
+                }
+                try {
+                    abstractControleur.controleEtModifie(trajet);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -111,7 +135,7 @@ public class AffichageTrajetsPanell extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setTrajet(trajets);
     }
 
 }

@@ -99,6 +99,32 @@ public class AffichageCircuitPanel extends AffichagePanel {
                         return null;
                 }
             }
+                @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                Circuit circuit = circuits.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         circuit.setNomCircuit((String) aValue);
+                         break;
+                    case 1:
+                        circuit.setTempsPrevu((String) aValue);
+                        break;
+                    case 2:
+                        circuit.setKmDepart((Integer) aValue);
+                        break;
+                    case 3:
+                         circuit.setKmFin((Integer) aValue);
+                        
+                        break;
+                   
+                }
+                try {
+                    abstractControleur.controleEtModifie(circuit);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -119,6 +145,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherArretMenuItem());
         menuItems.add(getAfficherEleveMenuItem());
+        menuItems.add(getAjouterArretMenuItem());
        
         menuItems.add(getAssignerVehiculeMenuItem());
         
@@ -163,6 +190,17 @@ public class AffichageCircuitPanel extends AffichagePanel {
         return assignerVehicule;
     }
        
+           private JMenuItem getAjouterArretMenuItem(){
+        JMenuItem ajouterArret = new JMenuItem("Ajouter Arret");
+        ajouterArret.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Circuit circuit = circuits.get(jTable1.getSelectedRow());
+               //TODO à faire action
+            }
+        });
+        return ajouterArret;
+    }
 
   /*  @Override
     protected List<JMenuItem> getMenuItems() {
@@ -253,7 +291,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        setCircuit(circuits);
     }
 
 }

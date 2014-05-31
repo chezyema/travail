@@ -11,7 +11,10 @@ import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.db.MaterielRoulantDao;
 import be.isfce.tfe.vue.affichage.AffichageChauffeurPanel;
 import be.isfce.tfe.vue.affichage.AffichageMaterielRoulantPanel;
+import be.isfce.tfe.vue.ajout.AjoutMaterielRoulantJPanell;
+import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.BorderLayout;
+import javax.swing.JDialog;
 
 /**
  *
@@ -24,8 +27,8 @@ public class VehiculeTabPanel extends javax.swing.JPanel {
      */
     public VehiculeTabPanel() {
         initComponents();
-        AffichageMaterielRoulantPanel affichagematerielroulantPanel = new AffichageMaterielRoulantPanel(new MaterielRoulantControleur(), MaterielRoulantDao.getTousLesVehicules());
-        jPanel1.add(affichagematerielroulantPanel, BorderLayout.CENTER);
+        affichageVehiculePanel = new AffichageMaterielRoulantPanel(new MaterielRoulantControleur(), MaterielRoulantDao.getTousLesVehicules());
+        jPanel1.add(affichageVehiculePanel, BorderLayout.CENTER);
     }
 
     /**
@@ -41,6 +44,11 @@ public class VehiculeTabPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
 
         jButton1.setText("Ajouter un véhicule");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -68,7 +76,23 @@ public class VehiculeTabPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         AjoutMaterielRoulantJPanell ajoutVehiculeJPanell = new AjoutMaterielRoulantJPanell();
+        ajoutVehiculeJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
 
+            @Override
+            public void onButtonSavePressed() {
+                if (jDialog != null) {
+                    jDialog.dispose();
+                    affichageVehiculePanel.setVehicules(MaterielRoulantDao.getTousLesVehicules());
+                }
+            }
+        });
+        jDialog = DialogUtils.afficheDialog(null, ajoutVehiculeJPanell);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+   private JDialog jDialog;
+    private final AffichageMaterielRoulantPanel affichageVehiculePanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;

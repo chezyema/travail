@@ -7,6 +7,7 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.UtilisationCarte;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
@@ -90,6 +91,23 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
                         return null;
                 }
             }
+            
+             @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                UtilisationCarte utilisation = utilisations.get(rowIndex);
+                switch (columnIndex) {
+                    
+                     case 0:
+                         utilisation.setDateutilisation(new Date());
+                         break;
+                 
+                }
+                try {
+                    abstractControleur.controleEtModifie(utilisation);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -107,7 +125,7 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setUtilisationCarte(utilisations);
     }
 
 }
