@@ -4,8 +4,6 @@
  */
 package be.isfce.tfe.db;
 
-import static be.isfce.tfe.db.EntretienDao.getTousLesEntretiens;
-import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.DocumentAdministratif;
 import be.isfce.tfe.metier.Entretien;
@@ -17,9 +15,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -295,5 +291,20 @@ public class MaterielRoulantDao {
             }
         }
         return dernierEntretien;
+    }
+
+    private static int getConsommationPourVehicule(MaterielRoulant vehicule, int mois, int annee) {
+        List<UtilisationCarte> tousLesUtilisationCarte = UtilisationCarteDao.getTousLesUtilisationCarte();
+        List<UtilisationCarte> utilisations = new ArrayList<UtilisationCarte>();
+        for (UtilisationCarte utilisationCarte : tousLesUtilisationCarte) {
+            if (utilisationCarte.getIdvehicule().equals(vehicule.getId()) && utilisationCarte.getDateUtilisation().getMonth() == mois && utilisationCarte.getDateUtilisation().getYear() == annee) {
+                utilisations.add(utilisationCarte);
+            }
+        }
+        //TODO Terminer la logique
+        for (UtilisationCarte utilisationCarte : utilisations) {
+        }
+
+        return 0;
     }
 }

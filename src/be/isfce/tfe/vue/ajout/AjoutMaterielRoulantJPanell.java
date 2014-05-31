@@ -7,7 +7,6 @@ package be.isfce.tfe.vue.ajout;
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.MaterielRoulant;
-import be.isfce.tfe.validation.ValidationPlaque;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,6 +14,8 @@ import javax.swing.JOptionPane;
  * @author yema
  */
 public class AjoutMaterielRoulantJPanell extends javax.swing.JPanel {
+
+    private DialogUtils.DialogInterface dialogInterface;
 
     /**
      * Creates new form AjoutMateielRoulantJPanell
@@ -66,11 +67,16 @@ public class AjoutMaterielRoulantJPanell extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void ajoutervehiculeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajoutervehiculeActionPerformed
         // TODO add your handling code here:
         MaterielRoulant materielroulant = ajoutMaterielRoulantJPanell1.getMaterielRoulantFromFields();
         try {
             new MaterielRoulantControleur().controleEtAjoute(materielroulant);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),

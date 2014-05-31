@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutChauffeurJPanell extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form EncodageChauffeurJPanell
      */
@@ -68,10 +70,15 @@ public class AjoutChauffeurJPanell extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void enregistrerChauffeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerChauffeurActionPerformed
         Chauffeur chauffeur = ajoutChauffeurJPanell1.getChauffeurFromFields();
         try {
             new ChauffeurControleur().controleEtAjoute(chauffeur);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }

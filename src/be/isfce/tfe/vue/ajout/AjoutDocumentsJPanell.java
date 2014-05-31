@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutDocumentsJPanell extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form EncodageDocumentsJPanell
      */
@@ -76,11 +78,16 @@ public class AjoutDocumentsJPanell extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void AjouterdocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterdocumentActionPerformed
         // TODO add your handling code here:
         DocumentAdministratif document = ajoutDocumentsJPanell1.getDocumentFromFields();
         try {
             new DocumentsAdministratifsControleur().controleEtAjoute(document);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }

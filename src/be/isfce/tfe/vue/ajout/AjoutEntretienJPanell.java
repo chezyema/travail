@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutEntretienJPanell extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form EncodageEntretienJPanell
      */
@@ -67,12 +69,17 @@ public class AjoutEntretienJPanell extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void ajouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterActionPerformed
         // TODO add your handling code here:
         Entretien entretien = ajoutEntretienJPanell1.getEntretienFromFields();
 
         try {
             new EntretienControleur().controleEtAjoute(entretien);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),

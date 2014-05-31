@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutEleveJPanel extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form EncodageEleveJPanel
      */
@@ -67,11 +69,16 @@ public class AjoutEleveJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void enregistreleveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistreleveActionPerformed
         // TODO add your handling code here:
         Eleve eleve = ajoutEleveJPanel1.getEleveFromFields();
         try {
             new EleveControleur().controleEtAjoute(eleve);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),

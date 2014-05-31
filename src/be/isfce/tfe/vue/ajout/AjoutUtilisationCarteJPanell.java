@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutUtilisationCarteJPanell extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form EncodageUtilisationCarteJPanell
      */
@@ -67,10 +69,15 @@ public class AjoutUtilisationCarteJPanell extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         UtilisationCarte carte = ajoutUtilisationCarteJPanell1.getUtilisationFromFields();
         try {
             new UtilisationCarteControleur().controleEtAjoute(carte);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }

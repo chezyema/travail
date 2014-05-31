@@ -5,8 +5,6 @@
  */
 package be.isfce.tfe.vue.ajout;
 
-import java.awt.Dialog;
-import java.awt.Frame;
 import java.awt.Window;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -24,4 +22,10 @@ public class DialogUtils {
         jDialog.setVisible(true);
         return jDialog;
     }
+
+    public static interface DialogInterface {
+
+        public void onButtonSavePressed();
+    }
+
 }

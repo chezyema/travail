@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutArretJPanell extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form EncodageArretJPanel
      */
@@ -32,8 +34,6 @@ public class AjoutArretJPanell extends javax.swing.JPanel {
     private void initComponents() {
 
         ajouterarret = new javax.swing.JButton();
-        supprimerarret = new javax.swing.JButton();
-        modifierarret = new javax.swing.JButton();
         ajoutArretJPanell1 = new be.isfce.tfe.vue.encodage.EncodageArretJPanel();
 
         ajouterarret.setText("Enregistrer");
@@ -43,10 +43,6 @@ public class AjoutArretJPanell extends javax.swing.JPanel {
             }
         });
 
-        supprimerarret.setText("Annuler");
-
-        modifierarret.setText("Reset");
-
         ajoutArretJPanell1.setBorder(javax.swing.BorderFactory.createTitledBorder("Arrêt"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -55,13 +51,8 @@ public class AjoutArretJPanell extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(supprimerarret)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(modifierarret, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ajouterarret))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ajouterarret, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(ajoutArretJPanell1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
@@ -71,19 +62,21 @@ public class AjoutArretJPanell extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(ajoutArretJPanell1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ajouterarret)
-                    .addComponent(modifierarret)
-                    .addComponent(supprimerarret))
+                .addComponent(ajouterarret)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
 
     private void ajouterarretActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterarretActionPerformed
 
         Arret arret = ajoutArretJPanell1.getArretFromFields();
         try {
             new ArretControleur().controleEtAjoute(arret);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
@@ -91,7 +84,5 @@ public class AjoutArretJPanell extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private be.isfce.tfe.vue.encodage.EncodageArretJPanel ajoutArretJPanell1;
     private javax.swing.JButton ajouterarret;
-    private javax.swing.JButton modifierarret;
-    private javax.swing.JButton supprimerarret;
     // End of variables declaration//GEN-END:variables
 }

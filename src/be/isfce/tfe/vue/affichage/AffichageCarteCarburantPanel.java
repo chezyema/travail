@@ -1,6 +1,3 @@
-
-
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -27,7 +24,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
     List<CarteCarburant> cartecarburant;
 
-    String[] columnsNames = {"kilometre utilisation", "Litre de carburant","numcarte"};
+    String[] columnsNames = {"Numéro de Carte", "kilometre utilisation", "Litre de carburant"};
 
     public void setCarteCarburant(List<CarteCarburant> cartecarburant) {
         this.cartecarburant = cartecarburant;
@@ -85,14 +82,12 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
             public Object getValueAt(int rowIndex, int columnIndex) {
                 CarteCarburant carte = cartecarburant.get(rowIndex);
                 switch (columnIndex) {
-
                     case 0:
-                        return carte.getKmUtilisation();
-                    case 1:
-                        return carte.getLitreCarburant();
-                    case 2:
                         return carte.getNumcarte();
-
+                    case 1:
+                        return carte.getKmUtilisation();
+                    case 2:
+                        return carte.getLitreCarburant();
                     default:
                         return null;
                 }
@@ -115,35 +110,28 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-      @Override
+
+    @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherVehiculeUtilisationMenuItem());
-       
-       
-        
+
         return menuItems;
     }
-      private JMenuItem getAfficherVehiculeUtilisationMenuItem(){
+
+    private JMenuItem getAfficherVehiculeUtilisationMenuItem() {
         JMenuItem afficherCarte = new JMenuItem("Afficher Utilisation véhicule");
         afficherCarte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 // CarteCarburant carte = carte.get(jTable1.getSelectedRow());
-               //Todo encore faire action
+                //Todo encore faire action
             }
 
-            
         });
         return afficherCarte;
     }
-      
-
-            
-   
-
 
     @Override
     public void update(Observable o, Object arg) {

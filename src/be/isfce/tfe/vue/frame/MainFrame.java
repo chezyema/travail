@@ -15,14 +15,11 @@ import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.DocumentAdministratifDao;
 import be.isfce.tfe.db.EcoleDao;
 import be.isfce.tfe.db.MaterielRoulantDao;
-import be.isfce.tfe.metier.DocumentAdministratif;
 import be.isfce.tfe.vue.affichage.AffichageCarteCarburantPanel;
 import be.isfce.tfe.vue.affichage.AffichageChauffeurPanel;
 import be.isfce.tfe.vue.affichage.AffichageCircuitPanel;
 import be.isfce.tfe.vue.affichage.AffichageEcolePanel;
 import be.isfce.tfe.vue.affichage.AffichageMaterielRoulantPanel;
-import java.util.Calendar;
-import java.util.List;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -38,27 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         initAlerts();
-        addPanels();
-    }
-
-    private void addPanels() {
-        AffichageChauffeurPanel affichageChauffeurPanel = new AffichageChauffeurPanel(new ChauffeurControleur(), ChauffeurDao.getTousLesChauffeurs());
-        jTabbedPane.addTab("Chauffeurs", affichageChauffeurPanel);
-
-        AffichageCircuitPanel affichageCircuitPanel = new AffichageCircuitPanel(new CircuitControleur(), CircuitDao.getTousLesCircuits());
-        jTabbedPane.addTab("Circuits", affichageCircuitPanel);
-
-        AffichageMaterielRoulantPanel affichagematerielroulantPanel = new AffichageMaterielRoulantPanel(new MaterielRoulantControleur(), MaterielRoulantDao.getTousLesVehicules());
-        jTabbedPane.addTab("Vehicules", affichagematerielroulantPanel);
-
-        AffichageEcolePanel affichageecolePanel = new AffichageEcolePanel(new EcoleControlleur(), EcoleDao.getTousLesEcoles());
-        jTabbedPane.addTab("Etablissement", affichageecolePanel);
-
-        AffichageCarteCarburantPanel affichagecartePanel = new AffichageCarteCarburantPanel(new CarteCarburantControleur(), CarteCarburantDao.getTousLesCartesCarburant());
-        jTabbedPane.addTab("Carte carburant", affichagecartePanel);
-
         jTabbedPane.addChangeListener(new ChangeListener() {
-
             @Override
             public void stateChanged(ChangeEvent e) {
                 int index = jTabbedPane.getSelectedIndex();
@@ -111,6 +88,11 @@ public class MainFrame extends javax.swing.JFrame {
         nbDocumentEnOrdreLabel = new javax.swing.JLabel();
         nbDocumentARenouvelerLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        chauffeurTabPanel1 = new be.isfce.tfe.vue.frame.tabs.ChauffeurTabPanel();
+        circuitTabPanel1 = new be.isfce.tfe.vue.frame.tabs.CircuitTabPanel();
+        vehiculeTabPanel1 = new be.isfce.tfe.vue.frame.tabs.VehiculeTabPanel();
+        ecoleTabPanel1 = new be.isfce.tfe.vue.frame.tabs.EcoleTabPanel();
+        carteCarburantTabPanel1 = new be.isfce.tfe.vue.frame.tabs.CarteCarburantTabPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,7 +144,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nbEntretienAEffectuerUrgentLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(nbEntretiensAEffectuerLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -210,7 +192,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nbDocumentARenouvelerLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nbDocumentEnOrdreLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -249,10 +231,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(352, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Messages", jPanel);
+        jTabbedPane.addTab("Chauffeurs", chauffeurTabPanel1);
+        jTabbedPane.addTab("Circuits", circuitTabPanel1);
+        jTabbedPane.addTab("Véhicules", vehiculeTabPanel1);
+        jTabbedPane.addTab("Etablissements", ecoleTabPanel1);
+        jTabbedPane.addTab("Carte Carburant", carteCarburantTabPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -262,7 +249,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+            .addComponent(jTabbedPane)
         );
 
         pack();
@@ -303,6 +290,10 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private be.isfce.tfe.vue.frame.tabs.CarteCarburantTabPanel carteCarburantTabPanel1;
+    private be.isfce.tfe.vue.frame.tabs.ChauffeurTabPanel chauffeurTabPanel1;
+    private be.isfce.tfe.vue.frame.tabs.CircuitTabPanel circuitTabPanel1;
+    private be.isfce.tfe.vue.frame.tabs.EcoleTabPanel ecoleTabPanel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -321,5 +312,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel nbEntretienAEffectuerUrgentLabel;
     private javax.swing.JLabel nbEntretiensAEffectuerLabel;
     private javax.swing.JLabel nbVehiculeEnOrdreLabel;
+    private be.isfce.tfe.vue.frame.tabs.VehiculeTabPanel vehiculeTabPanel1;
     // End of variables declaration//GEN-END:variables
 }

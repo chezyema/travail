@@ -86,6 +86,16 @@ public class AffichageArretPanel extends AffichagePanel {
                         return null;
                 }
             }
+
+            @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                Arret arret = arrets.get(rowIndex);
+                switch (columnIndex) {
+                    case 0:
+                        arret.setAdresse((String) aValue);
+                }
+            }
+
         };
     }
 

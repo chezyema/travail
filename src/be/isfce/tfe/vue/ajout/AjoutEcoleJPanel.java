@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutEcoleJPanel extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form EncodageEcoleJPanel
      */
@@ -67,12 +69,17 @@ public class AjoutEcoleJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void enregistrerecoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerecoleActionPerformed
         // TODO add your handling code here:
 
         Ecole ecole = ajoutEcoleJPanel1.getEcoleFromFields();
         try {
             new EcoleControlleur().controleEtAjoute(ecole);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),

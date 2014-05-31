@@ -7,22 +7,21 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.ChauffeurControleur;
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.db.MaterielRoulantDao;
+import be.isfce.tfe.metier.Arret;
 import be.isfce.tfe.metier.Chauffeur;
-import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import be.isfce.tfe.vue.encodage.EncodageTrajetsJPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
-import javax.swing.ButtonGroup;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -54,7 +53,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
     public void supprimeChauffeursSelectionnes() {
         int selectedRow = jTable1.getSelectedRow();
         try {
-        
+
             abstractControleur.controleEtSupprime(chauffeurs.get(selectedRow));
             JOptionPane.showMessageDialog(this, "Suppression exécutée", "Information", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidationException ex) {
@@ -116,6 +115,46 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                         return null;
                 }
             }
+
+            @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                Chauffeur chauffeur = chauffeurs.get(rowIndex);
+                switch (columnIndex) {
+                    case 0:
+                        chauffeur.setNomChauffeur((String) aValue);
+                        break;
+                    case 1:
+                        chauffeur.setPrenomChauffeur((String) aValue);
+                        break;
+                    case 2:
+                        //TODO
+                        chauffeur.setDateNaissance(new Date());
+                        break;
+                    case 3:
+                        chauffeur.setAdresse((String) aValue);
+                        break;
+                    case 4:
+                        chauffeur.setCodepostale((Integer) aValue);
+                        break;
+                    case 5:
+                        chauffeur.setVille((String) aValue);
+                        break;
+                    case 6:
+                        chauffeur.setEmail((String) aValue);
+                        break;
+                    case 7:
+                        chauffeur.setNumcartesis((String) aValue);
+                        break;
+                    case 8:
+                        chauffeur.setNumpermis((String) aValue);
+                        break;
+                }
+                try {
+                    abstractControleur.controleEtModifie(chauffeur);
+                } catch (ValidationException ex) {
+                    //TODO JOptionPane
+                }
+            }
         };
     }
 
@@ -134,12 +173,11 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getEncoderHeureMenuItem());
         menuItems.add(getAfficherDocumentMenuItem());
-        
-        
+
         return menuItems;
     }
-    
-    private JMenuItem getEncoderHeureMenuItem(){
+
+    private JMenuItem getEncoderHeureMenuItem() {
         JMenuItem encoderHeure = new JMenuItem("Encoder heure de travail");
         encoderHeure.addActionListener(new ActionListener() {
             @Override
@@ -152,8 +190,8 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         });
         return encoderHeure;
     }
-    
-    private JMenuItem getAfficherDocumentMenuItem(){
+
+    private JMenuItem getAfficherDocumentMenuItem() {
         JMenuItem afficherDocument = new JMenuItem("Afficher documents");
         afficherDocument.addActionListener(new ActionListener() {
 
@@ -167,15 +205,9 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         });
         return afficherDocument;
     }
-    
-   
 
-
-     
-
-    
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setChauffeurs(chauffeurs);
     }
 }

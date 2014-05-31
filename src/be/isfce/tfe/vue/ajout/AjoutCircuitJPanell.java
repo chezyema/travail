@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutCircuitJPanell extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form EncodageCircuitJPanell
      */
@@ -65,10 +67,15 @@ public class AjoutCircuitJPanell extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void enregistercircuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistercircuitActionPerformed
         Circuit circuit = ajoutCircuitJPanell1.getCircuitFromFields();
         try {
             new CircuitControleur().controleEtAjoute(circuit);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }

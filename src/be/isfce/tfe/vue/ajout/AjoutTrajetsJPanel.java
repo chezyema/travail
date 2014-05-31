@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AjoutTrajetsJPanel extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+
     /**
      * Creates new form InsertionHeuredetravailJPanel1
      */
@@ -68,11 +70,16 @@ public class AjoutTrajetsJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
+    }
+
     private void enregistrerheuredetravailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerheuredetravailActionPerformed
         // TODO add your handling code here:
         Trajet trajet = ajoutTrajetsJPanel1.getTrajetFromFields();
         try {
             new TrajetsControleur().controleEtAjoute(trajet);
+            dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
