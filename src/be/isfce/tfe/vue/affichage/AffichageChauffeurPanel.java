@@ -180,6 +180,8 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getEncoderHeureMenuItem());
         menuItems.add(getAfficherDocumentMenuItem());
+        menuItems.add(getAfficherChauffeurArchiverMenuItem());
+        menuItems.add(getAjouterDocumentMenuItem());
 
         return menuItems;
     }
@@ -211,6 +213,34 @@ public class AffichageChauffeurPanel extends AffichagePanel {
             }
         });
         return afficherDocument;
+    }
+    
+     private JMenuItem getAfficherChauffeurArchiverMenuItem() {
+        JMenuItem afficherChauffeurArchives = new JMenuItem("Chauffeurs Archives");
+        afficherChauffeurArchives.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO On verra plus tard
+                Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
+               //todo afficher chauffeur archiver
+            }
+        });
+        return  afficherChauffeurArchives;
+    }
+     
+      private JMenuItem getAjouterDocumentMenuItem() {
+        JMenuItem ajouterDocument = new JMenuItem("Ajouter documents");
+        ajouterDocument.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO On verra plus tard
+                Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
+               //todo afficher chauffeur archiver
+            }
+        });
+        return  ajouterDocument;
     }
 
     @Override
