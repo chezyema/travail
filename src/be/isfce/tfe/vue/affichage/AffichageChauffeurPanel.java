@@ -6,11 +6,15 @@ package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.ChauffeurControleur;
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
+import be.isfce.tfe.controleur.TrajetsControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.metier.Arret;
 import be.isfce.tfe.metier.Chauffeur;
+import be.isfce.tfe.metier.Trajet;
+import be.isfce.tfe.vue.ajout.AjoutDocumentsJPanell;
+import be.isfce.tfe.vue.ajout.AjoutTrajetsJPanel;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import be.isfce.tfe.vue.encodage.EncodageTrajetsJPanel;
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,9 +34,11 @@ import javax.swing.table.AbstractTableModel;
  */
 public class AffichageChauffeurPanel extends AffichagePanel {
 
-    List<Chauffeur> chauffeurs;
+    private List<Chauffeur> chauffeurs;
 
-    String[] columnsNames = {"Registre national","Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Email", "numcartesis", "numpermis"};
+    private String[] columnsNames = {"Registre national", "Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Email", "numcartesis", "numpermis"};
+
+    private Dialog dialog = null;
 
     public void setChauffeurs(List<Chauffeur> chauffeurs) {
         this.chauffeurs = chauffeurs;
@@ -94,7 +100,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                 switch (columnIndex) {
                     case 0:
                         return chauffeur.getId();
-                    
+
                     case 1:
                         return chauffeur.getNomChauffeur();
                     case 2:
@@ -123,10 +129,10 @@ public class AffichageChauffeurPanel extends AffichagePanel {
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 Chauffeur chauffeur = chauffeurs.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         chauffeur.setId((String) aValue);
-                         break;
+
+                    case 0:
+                        chauffeur.setId((String) aValue);
+                        break;
                     case 1:
                         chauffeur.setNomChauffeur((String) aValue);
                         break;
@@ -180,8 +186,8 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getEncoderHeureMenuItem());
         menuItems.add(getAfficherDocumentMenuItem());
-        menuItems.add(getAfficherChauffeurArchiverMenuItem());
         menuItems.add(getAjouterDocumentMenuItem());
+        menuItems.add(getAfficherChauffeurArchiverMenuItem());
 
         return menuItems;
     }
@@ -191,10 +197,16 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         encoderHeure.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
-                final EncodageTrajetsJPanel encodageTrajetsJPanel = new EncodageTrajetsJPanel();
-                JDialog afficheDialog = DialogUtils.afficheDialog(null, encodageTrajetsJPanel);
-                //TODO Ajouter dans la DB
+                Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
+                final AjoutTrajetsJPanel encodageTrajetsJPanel = new AjoutTrajetsJPanel(chauffeur);
+                encodageTrajetsJPanel.setDialogInterface(new DialogUtils.DialogInterface() {
+                    @Override
+                    public void onButtonSavePressed() {
+                        dialog.dispose();
+                    }
+                });
+                dialog = DialogUtils.afficheDialog(null, encodageTrajetsJPanel);
+
             }
         });
         return encoderHeure;
@@ -206,7 +218,6 @@ public class AffichageChauffeurPanel extends AffichagePanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
                 Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
                 AffichageDocumentsPanel affichageDocumentsPanel = new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), chauffeur.getLesdocuments());
                 DialogUtils.afficheDialog(null, affichageDocumentsPanel);
@@ -214,33 +225,38 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         });
         return afficherDocument;
     }
-    
-     private JMenuItem getAfficherChauffeurArchiverMenuItem() {
+
+    private JMenuItem getAfficherChauffeurArchiverMenuItem() {
         JMenuItem afficherChauffeurArchives = new JMenuItem("Chauffeurs Archives");
         afficherChauffeurArchives.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
                 Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
-               //todo afficher chauffeur archiver
+                //TODO afficher chauffeur archiver
             }
         });
-        return  afficherChauffeurArchives;
+        return afficherChauffeurArchives;
     }
-     
-      private JMenuItem getAjouterDocumentMenuItem() {
+
+    private JMenuItem getAjouterDocumentMenuItem() {
         JMenuItem ajouterDocument = new JMenuItem("Ajouter documents");
         ajouterDocument.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
                 Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
-               //todo afficher chauffeur archiver
+                AjoutDocumentsJPanell ajoutDocumentsJPanell = new AjoutDocumentsJPanell(chauffeur);
+                ajoutDocumentsJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
+                    @Override
+                    public void onButtonSavePressed() {
+                        dialog.dispose();
+                    }
+                });
+                dialog = DialogUtils.afficheDialog(null, ajoutDocumentsJPanell);
             }
         });
-        return  ajouterDocument;
+        return ajouterDocument;
     }
 
     @Override

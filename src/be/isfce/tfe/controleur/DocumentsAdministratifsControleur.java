@@ -26,8 +26,7 @@ public class DocumentsAdministratifsControleur extends AbstractControleur<Docume
         }
         Calendar joura = Calendar.getInstance();
         joura.add(Calendar.DAY_OF_MONTH, +1);
-        joura.getTime();
-        if (documents.getDateValiditer() == null || documents.getDateValiditer().after(joura.getTime())) {
+        if (documents.getDateValiditer() == null || documents.getDateValiditer().before(joura.getTime())) {
             throw new ValidationException("Le date n'est pas valide");
         }
         if (DocumentAdministratifDao.addDocumentsAdministratifs(documents)) {

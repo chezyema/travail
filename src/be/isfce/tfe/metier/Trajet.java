@@ -4,9 +4,7 @@
  */
 package be.isfce.tfe.metier;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -22,39 +20,20 @@ public class Trajet {
     private String heurededebut;
     private String heuredefin;
     private Date dateTravail;
-    private Chauffeur leschauffeurs;
-    private MaterielRoulant lesvehicules;
     private String idchauffeur;
     private String idmaterielroulant;
-    private Circuit circuit;
     private int idcircuit;
-
-    public Circuit getCircuit() {
-        return circuit;
-    }
 
     public int getIdcircuit() {
         return idcircuit;
-    }
-
-    public void setCircuit(Circuit circuit) {
-        this.circuit = circuit;
     }
 
     public void setIdcircuit(int idcircuit) {
         this.idcircuit = idcircuit;
     }
 
-    public MaterielRoulant getLesvehicules() {
-        return lesvehicules;
-    }
-
     public String getIdchauffeur() {
         return idchauffeur;
-    }
-
-    public void setLesvehicules(MaterielRoulant lesvehicules) {
-        this.lesvehicules = lesvehicules;
     }
 
     public void setIdchauffeur(String idchauffeur) {
@@ -89,14 +68,6 @@ public class Trajet {
         return heuredefin;
     }
 
-    public Chauffeur getLeschauffeurs() {
-        return leschauffeurs;
-    }
-
-    public void setLeschauffeurs(Chauffeur leschauffeurs) {
-        this.leschauffeurs = leschauffeurs;
-    }
-
     public String getIdmaterielroulant() {
         return idmaterielroulant;
     }
@@ -107,7 +78,7 @@ public class Trajet {
 
     @Override
     public String toString() {
-        return "Trajets{" + "idtrajets=" + idtrajets + ", heurededebut=" + heurededebut + ", heuredefin=" + heuredefin + ", dateTravail=" + dateTravail + ", leschauffeurs=" + leschauffeurs + ", lesvehicules=" + lesvehicules + ", idchauffeur=" + idchauffeur + ", idmaterielroulant=" + idmaterielroulant + ", circuit=" + circuit + ", idcircuit=" + idcircuit + '}';
+        return "Trajets{" + "idtrajets=" + idtrajets + ", heurededebut=" + heurededebut + ", heuredefin=" + heuredefin + ", dateTravail=" + dateTravail + ", idchauffeur=" + idchauffeur + ", idmaterielroulant=" + idmaterielroulant + ", idcircuit=" + idcircuit + '}';
     }
 
 }

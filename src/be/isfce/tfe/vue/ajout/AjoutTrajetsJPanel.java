@@ -6,6 +6,7 @@ package be.isfce.tfe.vue.ajout;
 
 import be.isfce.tfe.controleur.TrajetsControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.Trajet;
 import javax.swing.JOptionPane;
 
@@ -14,14 +15,20 @@ import javax.swing.JOptionPane;
  * @author yema
  */
 public class AjoutTrajetsJPanel extends javax.swing.JPanel {
-
+    
     private DialogUtils.DialogInterface dialogInterface;
+    private Chauffeur chauffeur;
 
     /**
      * Creates new form InsertionHeuredetravailJPanel1
      */
     public AjoutTrajetsJPanel() {
         initComponents();
+    }
+    
+    public AjoutTrajetsJPanel(Chauffeur chauffeur) {
+        initComponents();
+        this.chauffeur = chauffeur;
     }
 
     /**
@@ -78,10 +85,13 @@ public class AjoutTrajetsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         Trajet trajet = ajoutTrajetsJPanel1.getTrajetFromFields();
         try {
+            if (chauffeur != null) {
+                trajet.setIdchauffeur(chauffeur.getId());
+            }
             new TrajetsControleur().controleEtAjoute(trajet);
             dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_enregistrerheuredetravailActionPerformed
 

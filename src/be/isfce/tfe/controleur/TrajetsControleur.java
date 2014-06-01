@@ -15,18 +15,14 @@ import java.util.Calendar;
 public class TrajetsControleur extends AbstractControleur<Trajet> {
 
     @Override
-    public void controleEtAjoute(Trajet heure) throws ValidationException {
-        Calendar joura = Calendar.getInstance();
-        joura.add(Calendar.HOUR, 0);
-        joura.getTime();
-        //if( == null || heure.getHeureDeDebut(joura.getTime())){
-        throw new ValidationException("Le date n'est pas valide");
-        //TODO
-    }//encore faire la methode cree
+    public void controleEtAjoute(Trajet heuredetravail) throws ValidationException {
+        //TODO Faire la Validation
+        TrajetDao.addTrajets(heuredetravail);
+    }
 
     @Override
     public void controleEtSupprime(Trajet object) throws ValidationException {
-        if(TrajetDao.deleteTrajets(object)) {
+        if (TrajetDao.deleteTrajets(object)) {
             setChanged();
             notifyObservers();
         }
@@ -34,7 +30,7 @@ public class TrajetsControleur extends AbstractControleur<Trajet> {
 
     @Override
     public void controleEtModifie(Trajet object) throws ValidationException {
-        if(TrajetDao.updateChauffeur(object)) {
+        if (TrajetDao.updateChauffeur(object)) {
             setChanged();
             notifyObservers();
         }

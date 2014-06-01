@@ -4,8 +4,6 @@
  */
 package be.isfce.tfe.metier;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

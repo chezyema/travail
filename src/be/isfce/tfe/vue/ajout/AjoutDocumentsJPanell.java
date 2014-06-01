@@ -6,6 +6,7 @@ package be.isfce.tfe.vue.ajout;
 
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.DocumentAdministratif;
 import javax.swing.JOptionPane;
 
@@ -17,11 +18,18 @@ public class AjoutDocumentsJPanell extends javax.swing.JPanel {
 
     private DialogUtils.DialogInterface dialogInterface;
 
+    private Chauffeur chauffeur;
+
     /**
      * Creates new form EncodageDocumentsJPanell
      */
     public AjoutDocumentsJPanell() {
         initComponents();
+    }
+
+    public AjoutDocumentsJPanell(Chauffeur chauffeur) {
+        initComponents();
+        this.chauffeur = chauffeur;
     }
 
     /**
@@ -86,6 +94,9 @@ public class AjoutDocumentsJPanell extends javax.swing.JPanel {
         // TODO add your handling code here:
         DocumentAdministratif document = ajoutDocumentsJPanell1.getDocumentFromFields();
         try {
+            if (chauffeur != null) {
+                document.setIdchauffeur(chauffeur.getId());
+            }
             new DocumentsAdministratifsControleur().controleEtAjoute(document);
             dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {

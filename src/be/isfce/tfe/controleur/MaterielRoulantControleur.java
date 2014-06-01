@@ -40,22 +40,22 @@ public class MaterielRoulantControleur extends AbstractControleur<MaterielRoulan
         joura.add(Calendar.DAY_OF_MONTH, +1);
         joura.getTime();
         if (vehicule.getAnneedeconstruction() == null || vehicule.getAnneedeconstruction().after(joura.getTime())) {
-            throw new ValidationException("Le date n'est pas valide");
+            throw new ValidationException("Le date de construction n'est pas valide");
         }
         Calendar jourb = Calendar.getInstance();
         jourb.add(Calendar.DAY_OF_MONTH, +1);
         jourb.getTime();
-        if (vehicule.getDateexctincteur() == null || vehicule.getDateexctincteur().after(jourb.getTime())) {
-            throw new ValidationException("Le date n'est pas valide");
+        if (vehicule.getDateexctincteur() == null || vehicule.getDateexctincteur().before(jourb.getTime())) {
+            throw new ValidationException("Le date de validité de l'exctincteur n'est pas valide");
         }
         if (vehicule.getKmactuel() == 0) {
-            throw new ValidationException("Le kilométrage n'est pas valide");
+            throw new ValidationException("Le kilométrage actuel n'est pas valide");
         }
         if (vehicule.getNbDePlaces() == 0) {
-            throw new ValidationException("Le kilométrage n'est pas valide");
+            throw new ValidationException("Le nombre de place n'est pas valide");
         }
         if (vehicule.getId() == null || !NumeroChassisValidation.checkChassis(vehicule.getId())) {
-            throw new ValidationException("Le numero de telephone n'est pas valide");
+            throw new ValidationException("Le numero de chassis n'est pas valide");
         }
         if(MaterielRoulantDao.addMaterielRoulant(vehicule)) {
             setChanged();

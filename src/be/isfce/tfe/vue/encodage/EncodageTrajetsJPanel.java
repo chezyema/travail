@@ -4,8 +4,14 @@
  */
 package be.isfce.tfe.vue.encodage;
 
+import be.isfce.tfe.db.CircuitDao;
+import be.isfce.tfe.db.MaterielRoulantDao;
 import be.isfce.tfe.db.TrajetDao;
+import be.isfce.tfe.metier.Circuit;
+import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.metier.Trajet;
+import be.isfce.tfe.vue.ajout.DialogUtils;
+import java.util.List;
 
 /**
  *
@@ -13,28 +19,40 @@ import be.isfce.tfe.metier.Trajet;
  */
 public class EncodageTrajetsJPanel extends javax.swing.JPanel {
 
+    private DialogUtils.DialogInterface dialogInterface;
+    private List<MaterielRoulant> tousLesVehicules;
+    private List<Circuit> tousLesCircuits;
+
     /**
      * Creates new form InsertionHeuredetravailJPanel1
      */
     public EncodageTrajetsJPanel() {
         initComponents();
+        initComboboxes();
     }
 
     public Trajet getTrajetFromFields() {
         Trajet heuredetravail = new Trajet();
         heuredetravail.setIdtrajets(0);
-
         int heureDebut = heureDebutSpinField.getValue();
         int minuteDebut = minuteDebutSpinField.getValue();
-
         int heureFin = heuredefinSpinField.getValue();
         int minuteFin = minutefinSpinField.getValue();
-        //TODO utiliser les heures !
         heuredetravail.setDateTravail(datetrajets.getDate());
-        TrajetDao.addTrajets(heuredetravail);
+        heuredetravail.setHeureDeDebut(String.format("%02dH%02d", heureDebut, minuteDebut));
+        heuredetravail.setHeureDeFin(String.format("%02dH%02d", heureFin, minuteFin));
+        heuredetravail.setIdmaterielroulant(tousLesVehicules.get(vehiculeComboBox.getSelectedIndex()).getId());
+        heuredetravail.setIdcircuit(tousLesCircuits.get(circuitComboBox.getSelectedIndex()).getId());
         return heuredetravail;
-        
-        
+
+    }
+
+    public DialogUtils.DialogInterface getDialogInterface() {
+        return dialogInterface;
+    }
+
+    public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
+        this.dialogInterface = dialogInterface;
     }
 
     /**
@@ -56,6 +74,8 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
         datetrajets = new com.toedter.calendar.JDateChooser();
         vehiculeComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        circuitComboBox = new javax.swing.JComboBox();
 
         jLabel1.setText("Heure de debut:");
 
@@ -75,9 +95,9 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
         minutefinSpinField.setMaximum(59);
         minutefinSpinField.setMinimum(0);
 
-        vehiculeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel4.setText("Vehicule utilisé :");
 
-        jLabel4.setText("Vehicule utiliser:");
+        jLabel5.setText("Parcours effectué :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -108,7 +128,11 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(heureDebutSpinField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(minuteDebutSpinField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(minuteDebutSpinField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(circuitComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -132,11 +156,16 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vehiculeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(circuitComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox circuitComboBox;
     private com.toedter.calendar.JDateChooser datetrajets;
     private com.toedter.components.JSpinField heureDebutSpinField;
     private com.toedter.components.JSpinField heuredefinSpinField;
@@ -144,8 +173,21 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private com.toedter.components.JSpinField minuteDebutSpinField;
     private com.toedter.components.JSpinField minutefinSpinField;
     private javax.swing.JComboBox vehiculeComboBox;
     // End of variables declaration//GEN-END:variables
+
+    private void initComboboxes() {
+        tousLesVehicules = MaterielRoulantDao.getTousLesVehicules();
+        for (MaterielRoulant vehicule : tousLesVehicules) {
+            vehiculeComboBox.addItem(vehicule.getMarque() + " [" + vehicule.getNumImmatr() + "]");
+        }
+
+        tousLesCircuits = CircuitDao.getTousLesCircuits();
+        for (Circuit circuit : tousLesCircuits) {
+            circuitComboBox.addItem(circuit.getNomCircuit());
+        }
+    }
 }
