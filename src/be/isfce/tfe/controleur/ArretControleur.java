@@ -16,7 +16,7 @@ public class ArretControleur extends AbstractControleur<Arret> {
 
     @Override
     public void controleEtAjoute(Arret arret) throws ValidationException {
-        if (!(arret != null && arret.getAdresse() != null && StringValidation.VerifString(arret.getAdresse()))) {
+        if (!(arret != null && arret.getAdresse() != null)) {
             throw new ValidationException("L'adresse n'est pas valide");
         }
         if (ArretDao.addArret(arret)) {

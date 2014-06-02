@@ -99,14 +99,15 @@ public class AffichageCircuitPanel extends AffichagePanel {
                         return null;
                 }
             }
-                @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 Circuit circuit = circuits.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         circuit.setNomCircuit((String) aValue);
-                         break;
+
+                    case 0:
+                        circuit.setNomCircuit((String) aValue);
+                        break;
                     case 1:
                         circuit.setTempsPrevu((String) aValue);
                         break;
@@ -114,10 +115,10 @@ public class AffichageCircuitPanel extends AffichagePanel {
                         circuit.setKmDepart((Integer) aValue);
                         break;
                     case 3:
-                         circuit.setKmFin((Integer) aValue);
-                        
+                        circuit.setKmFin((Integer) aValue);
+
                         break;
-                   
+
                 }
                 try {
                     abstractControleur.controleEtModifie(circuit);
@@ -139,19 +140,18 @@ public class AffichageCircuitPanel extends AffichagePanel {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-      @Override
+
+    @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherArretMenuItem());
         menuItems.add(getAfficherEleveMenuItem());
-        menuItems.add(getAjouterArretMenuItem());
-       
-       
-        
+        //menuItems.add(getAjouterArretMenuItem());
+
         return menuItems;
     }
-      private JMenuItem getAfficherArretMenuItem(){
+
+    private JMenuItem getAfficherArretMenuItem() {
         JMenuItem afficherArret = new JMenuItem("Afficher Arrêts");
         afficherArret.addActionListener(new ActionListener() {
             @Override
@@ -163,8 +163,8 @@ public class AffichageCircuitPanel extends AffichagePanel {
         });
         return afficherArret;
     }
-      
-      private JMenuItem getAfficherEleveMenuItem(){
+
+    private JMenuItem getAfficherEleveMenuItem() {
         JMenuItem afficherEleve = new JMenuItem("Afficher Eleves");
         afficherEleve.addActionListener(new ActionListener() {
             @Override
@@ -176,23 +176,19 @@ public class AffichageCircuitPanel extends AffichagePanel {
         });
         return afficherEleve;
     }
-       
-     
-     
-       
-           private JMenuItem getAjouterArretMenuItem(){
+
+    private JMenuItem getAjouterArretMenuItem() {
         JMenuItem ajouterArret = new JMenuItem("Ajouter Arret");
         ajouterArret.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Circuit circuit = circuits.get(jTable1.getSelectedRow());
-               //TODO à faire action
+                //TODO à faire action
             }
         });
         return ajouterArret;
     }
 
-  
     @Override
     public void update(Observable o, Object arg) {
         setCircuit(circuits);

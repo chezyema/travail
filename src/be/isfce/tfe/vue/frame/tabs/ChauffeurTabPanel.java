@@ -39,6 +39,7 @@ public class ChauffeurTabPanel extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         jButton1.setText("Ajouter un chauffeur");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -49,6 +50,13 @@ public class ChauffeurTabPanel extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
+        jCheckBox1.setText("Afficher chauffeurs archivés");
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox1ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,8 +64,9 @@ public class ChauffeurTabPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 340, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -68,7 +77,9 @@ public class ChauffeurTabPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jCheckBox1))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -87,10 +98,21 @@ public class ChauffeurTabPanel extends javax.swing.JPanel {
         });
         jDialog = DialogUtils.afficheDialog(null, ajoutChauffeurJPanell);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+        // TODO add your handling code here:
+        boolean selected = jCheckBox1.isSelected();
+        if (selected) {
+            affichageChauffeurPanel.setChauffeurs(ChauffeurDao.getTousLesChauffeursarchives());
+        } else {
+            affichageChauffeurPanel.setChauffeurs(ChauffeurDao.getTousLesChauffeurs());
+        }
+    }//GEN-LAST:event_jCheckBox1ItemStateChanged
     private JDialog jDialog;
     private final AffichageChauffeurPanel affichageChauffeurPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

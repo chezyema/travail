@@ -31,7 +31,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageChauffeurPanel extends AffichagePanel {
 
     private List<Chauffeur> chauffeurs;
-
+    private boolean afficheArchive;
     private String[] columnsNames = {"Registre national", "Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Email", "numcartesis", "numpermis"};
 
     private Dialog dialog = null;
@@ -50,6 +50,10 @@ public class AffichageChauffeurPanel extends AffichagePanel {
     @Override
     public String getTitrePanel() {
         return "Chauffeurs";
+    }
+
+    public void setAfficheArchive(boolean afficheArchive) {
+        this.afficheArchive = afficheArchive;
     }
 
     public void supprimeChauffeursSelectionnes() {
@@ -266,7 +270,11 @@ public class AffichageChauffeurPanel extends AffichagePanel {
     }
 
     private void reset() {
-        chauffeurs = ChauffeurDao.getTousLesChauffeurs();
+        if (afficheArchive) {
+            chauffeurs = ChauffeurDao.getTousLesChauffeursarchives();
+        } else {
+            chauffeurs = ChauffeurDao.getTousLesChauffeurs();
+        }
         setChauffeurs(chauffeurs);
     }
 }

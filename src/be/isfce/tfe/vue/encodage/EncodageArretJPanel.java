@@ -4,7 +4,13 @@
  */
 package be.isfce.tfe.vue.encodage;
 
+import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.metier.Arret;
+import be.isfce.tfe.metier.Circuit;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 /**
  *
@@ -12,17 +18,22 @@ import be.isfce.tfe.metier.Arret;
  */
 public class EncodageArretJPanel extends javax.swing.JPanel {
 
+    List<Circuit> tousLesCircuits;
+
     /**
      * Creates new form AjoutArretJPanell
      */
     public EncodageArretJPanel() {
         initComponents();
+        tousLesCircuits = CircuitDao.getTousLesCircuits();
+        initCircuitsList();
     }
 
     public Arret getArretFromFields() {
         Arret arret = new Arret();
         arret.setId(0);
         arret.setAdresse(adressearretTextField.getText());
+        arret.setLesCircuits(getCircuitSelectionnes());
         return arret;
     }
 
@@ -37,18 +48,26 @@ public class EncodageArretJPanel extends javax.swing.JPanel {
 
         adressearret = new javax.swing.JLabel();
         adressearretTextField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
 
         adressearret.setText("Adresse Arret :");
+
+        jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Circuits"));
+        jScrollPane1.setViewportView(jList1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(adressearret, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(adressearretTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(adressearret, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(adressearretTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -58,12 +77,33 @@ public class EncodageArretJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(adressearret, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adressearretTextField))
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adressearret;
     private javax.swing.JTextField adressearretTextField;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void initCircuitsList() {
+        DefaultListModel listModel = new DefaultListModel();
+        for (Circuit circuit : tousLesCircuits) {
+            listModel.addElement(circuit.getNomCircuit());
+        }
+        jList1.setModel(listModel);
+    }
+
+    private List<Circuit> getCircuitSelectionnes() {
+        List<Circuit> circuits = new ArrayList<Circuit>();
+        int[] selectedIndices = jList1.getSelectedIndices();
+        for (int index : selectedIndices) {
+            circuits.add(tousLesCircuits.get(index));
+        }
+        return circuits;
+    }
 }
