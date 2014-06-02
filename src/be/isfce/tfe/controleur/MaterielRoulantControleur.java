@@ -23,6 +23,7 @@ public class MaterielRoulantControleur extends AbstractControleur<MaterielRoulan
         if (vehicule == null) {
             throw new ValidationException("Le vehicule est invalide");
         }
+       
         if (vehicule.getMarque() == null || !StringValidation.VerifString(vehicule.getMarque())) {
             throw new ValidationException("La marque n'est pas valide");
         }

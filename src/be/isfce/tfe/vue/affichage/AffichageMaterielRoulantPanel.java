@@ -12,6 +12,7 @@ import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.vue.ajout.AjoutDocumentsJPanell;
 import be.isfce.tfe.vue.ajout.AjoutEntretienJPanell;
+import be.isfce.tfe.vue.ajout.AjoutUtilisationCarteJPanell;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
@@ -175,7 +176,8 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         menuItems.add(getUtilisationCarburantMenuItem());
         menuItems.add(getAjouterEntretienMenuItem());
         menuItems.add(getAjouterDocumentMenuItem());
-         menuItems.add(getAfficherDocumentMenuItem() );
+        menuItems.add(getAfficherDocumentMenuItem() );
+        menuItems.add(getAjouterUtilisationCarteMenuItem());
 
         return menuItems;
     }
@@ -227,6 +229,8 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         return ajouterEntretien;
     }
     
+    
+    
      private JMenuItem getAfficherDocumentMenuItem() {
         JMenuItem afficherDocument = new JMenuItem("Afficher documents");
         afficherDocument.addActionListener(new ActionListener() {
@@ -259,6 +263,26 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
             }
         });
         return ajouterDocument;
+    }
+  
+     private JMenuItem getAjouterUtilisationCarteMenuItem() {
+        JMenuItem ajouterUtilisation = new JMenuItem("Ajouter Utilisation carte");
+        ajouterUtilisation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MaterielRoulant materiels = vehicules.get(jTable1.getSelectedRow());
+                AjoutUtilisationCarteJPanell ajoutUtilisationJPanell = new AjoutUtilisationCarteJPanell (materiels);
+                ajoutUtilisationJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
+
+                    @Override
+                    public void onButtonSavePressed() {
+                        dialog.dispose();
+                    }
+                });
+                dialog = DialogUtils.afficheDialog(null, ajoutUtilisationJPanell);
+            }
+        });
+        return ajouterUtilisation;
     }
 
   

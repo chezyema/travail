@@ -15,7 +15,7 @@ public class NumeroChassisValidation {
             System.out.println("veuillez inserer une donnée svp");
             return false;
         }
-        if (chassis.length() != 19 ) {
+        if (chassis.length() != 17 ) {
             System.out.println("veuillez introduire le bon format");
             return false;
         }

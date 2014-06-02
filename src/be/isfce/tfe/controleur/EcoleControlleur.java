@@ -21,7 +21,7 @@ public class EcoleControlleur extends AbstractControleur<Ecole> {
             throw new ValidationException("L'ecole est invalide");
         }
 
-        if (ecole.getAdresseecole() == null || !StringValidation.VerifString(ecole.getAdresseecole())) {
+        if (ecole.getAdresseecole() == null) {
             throw new ValidationException("L'adresse n'est pas valide");
         }
 

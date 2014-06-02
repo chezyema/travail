@@ -22,7 +22,7 @@ public class EleveControleur extends AbstractControleur<Eleve> {
         if (eleve == null) {
             throw new ValidationException("Le chauffeur est invalide");
         }
-        if (eleve.getAdresseEleve() == null || !StringValidation.VerifString(eleve.getAdresseEleve())) {
+        if (eleve.getAdresseEleve() == null ) {
             throw new ValidationException("L'adresse n'est pas valide");
         }
         if (eleve.getCdpostal() == 0) {
@@ -33,7 +33,7 @@ public class EleveControleur extends AbstractControleur<Eleve> {
         Calendar auj = Calendar.getInstance();
         auj.add(Calendar.YEAR, -3);
         auj.getTime();
-        if (eleve.getDatedenaissance() == null || eleve.getDatedenaissance().before(auj.getTime())) {
+        if (eleve.getDatedenaissance() == null || eleve.getDatedenaissance().after(auj.getTime())) {
             throw new ValidationException("L'eleve doit avoir minimum 3 ans");
 
         }

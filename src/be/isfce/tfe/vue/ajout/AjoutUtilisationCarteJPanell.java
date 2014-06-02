@@ -6,6 +6,7 @@ package be.isfce.tfe.vue.ajout;
 
 import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.metier.UtilisationCarte;
 import javax.swing.JOptionPane;
 
@@ -15,13 +16,18 @@ import javax.swing.JOptionPane;
  */
 public class AjoutUtilisationCarteJPanell extends javax.swing.JPanel {
 
-    private DialogUtils.DialogInterface dialogInterface;
-
+     private DialogUtils.DialogInterface dialogInterface;
+     private MaterielRoulant materiels;
     /**
      * Creates new form EncodageUtilisationCarteJPanell
      */
     public AjoutUtilisationCarteJPanell() {
         initComponents();
+    }
+    
+     public AjoutUtilisationCarteJPanell(MaterielRoulant materiel) {
+        initComponents();
+        this.materiels = materiel;
     }
 
     /**
@@ -76,11 +82,20 @@ public class AjoutUtilisationCarteJPanell extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         UtilisationCarte carte = ajoutUtilisationCarteJPanell1.getUtilisationFromFields();
         try {
+         if (materiels != null) {
+                carte.setIdvehicule(materiels.getId());
+            }
             new UtilisationCarteControleur().controleEtAjoute(carte);
-            dialogInterface.onButtonSavePressed();
+            if (dialogInterface != null) {
+                dialogInterface.onButtonSavePressed();
+            }
         } catch (ValidationException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    ex.getMessage(),
+                    "Erreur",
+                    JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
