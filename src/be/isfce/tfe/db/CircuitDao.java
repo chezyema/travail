@@ -101,16 +101,35 @@ public class CircuitDao {
 
     public static boolean updateCircuit(Circuit circuit) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update circuit set nomcircuit = ?,tempsprevu = ?,kmdepart = ?,kmfin = ? where circuit.idcircuit = ?");
+            System.out.println(circuit.getIdecole());
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update circuit set nomcircuit = ?,tempsprevu = ?,kmdepart = ?,kmfin = ?, idecole = ?, id = ?, idchauffeur = ? where circuit.idcircuit = ?");
             preparedStatement.setString(1, circuit.getNomCircuit());
             preparedStatement.setString(2, circuit.getTempsPrevu());
             preparedStatement.setInt(3, circuit.getKmDepart());
             preparedStatement.setInt(4, circuit.getKmFin());
-            preparedStatement.setInt(5, circuit.getId());
+            if (circuit.getIdecole() != 0) {
+                System.out.println("ID ECOLE SET");
+                preparedStatement.setInt(5, circuit.getIdecole());
+            } else {
+                preparedStatement.setNull(5, Types.INTEGER);
+            }
+            if (circuit.getIdmaterielroulant() != null && !circuit.getIdmaterielroulant().isEmpty()) {
+                preparedStatement.setString(6, circuit.getIdmaterielroulant());
+            } else {
+                preparedStatement.setNull(6, Types.VARCHAR);
+            }
 
+            if (circuit.getIdchauffeur() != null && !circuit.getIdchauffeur().isEmpty()) {
+                preparedStatement.setString(7, circuit.getIdchauffeur());
+            } else {
+                preparedStatement.setNull(7, Types.VARCHAR);
+            }
+            
+            preparedStatement.setInt(8, circuit.getId());
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

@@ -8,15 +8,22 @@ import be.isfce.tfe.controleur.ArretControleur;
 import be.isfce.tfe.controleur.CircuitControleur;
 import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.EcoleDao;
 import be.isfce.tfe.metier.Circuit;
+import be.isfce.tfe.metier.Ecole;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -146,6 +153,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherArretMenuItem());
         menuItems.add(getAfficherEleveMenuItem());
+        menuItems.add(getAjouterEcoleMenuItem());
         //menuItems.add(getAjouterArretMenuItem());
 
         return menuItems;
@@ -187,6 +195,35 @@ public class AffichageCircuitPanel extends AffichagePanel {
             }
         });
         return ajouterArret;
+    }
+
+    private JMenuItem getAjouterEcoleMenuItem() {
+        JMenu ecolesMenu = new JMenu("Ajouter une école");
+        List<Ecole> tousLesEcoles = EcoleDao.getTousLesEcoles();
+        final ButtonGroup group = new ButtonGroup();
+        for (final Ecole ecole : tousLesEcoles) {
+            JMenuItem ajouterArret = new JRadioButtonMenuItem(ecole.getNomecole());
+            ajouterArret.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Click");
+                    Circuit circuit = circuits.get(jTable1.getSelectedRow());
+                    circuit.setIdecole(ecole.getId());
+                    group.clearSelection();
+                    try {
+                        System.out.println("TEST");
+                        abstractControleur.controleEtModifie(circuit);
+                        System.out.println("OK");
+                    } catch (ValidationException ex) {
+                        //TODO JOptionPane
+                        ex.printStackTrace();
+                    }
+                }
+            });
+            group.add(ajouterArret);
+            ecolesMenu.add(ajouterArret);
+        }
+        return ecolesMenu;
     }
 
     @Override
