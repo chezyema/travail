@@ -10,7 +10,10 @@ import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.Ecole;
+import be.isfce.tfe.vue.ajout.AjoutEcoleJPanel;
+import be.isfce.tfe.vue.ajout.AjoutEleveJPanel;
 import be.isfce.tfe.vue.ajout.DialogUtils;
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,7 +30,8 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageEcolePanel extends AffichagePanel {
 
     List<Ecole> ecoles;
-
+    
+    private Dialog dialog;
     String[] columnsNames = {"Nom ecole", "Adresse ecole", "Code postal", "Ville", " Telephone", "email", "Nom du directeur"};
 
     public void setEcole(List<Ecole> ecoles) {
@@ -205,11 +209,15 @@ public class AffichageEcolePanel extends AffichagePanel {
         ajouterEleves.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
-                Ecole ecole = ecoles.get(jTable1.getSelectedRow());
-                AffichageCircuitPanel affichageCircuitPanel = new AffichageCircuitPanel(new CircuitControleur(), ecole.getLescircuits());
-                DialogUtils.afficheDialog(null, affichageCircuitPanel);
-                //TODO Ajouter dans la DB
+                Ecole etablissement = ecoles.get(jTable1.getSelectedRow());
+                AjoutEleveJPanel ajoutEleveJPanell = new AjoutEleveJPanel(etablissement);
+                ajoutEleveJPanell .setDialogInterface(new DialogUtils.DialogInterface() {
+                    @Override
+                    public void onButtonSavePressed() {
+                        dialog.dispose();
+                    }
+                });
+                dialog = DialogUtils.afficheDialog(null,ajoutEleveJPanell );
             }
         });
         return ajouterEleves;

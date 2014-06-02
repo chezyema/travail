@@ -28,10 +28,11 @@ public class EntretienDao {
             preparedStatement.setString(2, entretien.getDescription());
             preparedStatement.setInt(3, entretien.getKmEntretienFait());
             preparedStatement.setDate(4, new Date(entretien.getDateEntretien().getTime()));
-            preparedStatement.setString(5, "12345678901");
+            preparedStatement.setString(5, entretien.getIdmaterielroulant());
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 
@@ -98,6 +99,4 @@ public class EntretienDao {
         }
 
     }
-
-
 }

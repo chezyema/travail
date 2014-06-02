@@ -2,6 +2,7 @@ package be.isfce.tfe.vue.ajout;
 
 import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.metier.Ecole;
 import be.isfce.tfe.metier.Eleve;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
 public class AjoutEleveJPanel extends javax.swing.JPanel {
 
     private DialogUtils.DialogInterface dialogInterface;
-
+    private Ecole ecoles;
     /**
      * Creates new form EncodageEleveJPanel
      */
@@ -24,6 +25,10 @@ public class AjoutEleveJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
+      public AjoutEleveJPanel(Ecole ecole) {
+          this.ecoles = ecole;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,11 +79,15 @@ public class AjoutEleveJPanel extends javax.swing.JPanel {
     }
 
     private void enregistreleveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistreleveActionPerformed
-        // TODO add your handling code here:
-        Eleve eleve = ajoutEleveJPanel1.getEleveFromFields();
-        try {
+         Eleve eleve = ajoutEleveJPanel1.getEleveFromFields();
+         try {
+            if (ecoles != null) {
+                eleve.setIdecole(ecoles.getId());
+            }
             new EleveControleur().controleEtAjoute(eleve);
-            dialogInterface.onButtonSavePressed();
+            if (dialogInterface != null) {
+                dialogInterface.onButtonSavePressed();
+            }
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),

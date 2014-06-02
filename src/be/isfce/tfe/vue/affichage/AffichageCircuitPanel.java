@@ -147,7 +147,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
         menuItems.add(getAfficherEleveMenuItem());
         menuItems.add(getAjouterArretMenuItem());
        
-        menuItems.add(getAssignerVehiculeMenuItem());
+       
         
         return menuItems;
     }
@@ -178,17 +178,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
     }
        
      
-         private JMenuItem getAssignerVehiculeMenuItem(){
-        JMenuItem assignerVehicule = new JMenuItem("Assigner Vehicule");
-        assignerVehicule.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Circuit circuit = circuits.get(jTable1.getSelectedRow());
-               //TODO à faire action
-            }
-        });
-        return assignerVehicule;
-    }
+     
        
            private JMenuItem getAjouterArretMenuItem(){
         JMenuItem ajouterArret = new JMenuItem("Ajouter Arret");
@@ -202,93 +192,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
         return ajouterArret;
     }
 
-  /*  @Override
-    protected List<JMenuItem> getMenuItems() {
-        List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        //TODO Ajouter les menu items et leurs actions
-        JMenuItem attribuerCircuit = new JMenuItem("Assigner un circuit");
-        attribuerCircuit.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
-            }
-        });
-        menuItems.add(attribuerCircuit);
-
-        JMenuItem afficherArret = new JMenuItem("Afficher Arrets ");
-        afficherArret.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Circuit circuit = circuits.get(jTable1.getSelectedRow());
-                AffichageArretPanel affichageArretPanel = new AffichageArretPanel(new ArretControleur(), circuit.getLesarrets());
-                DialogUtils.afficheDialog(null, affichageArretPanel);
-            }
-        });
-        menuItems.add(afficherArret);
-
-        JMenuItem afficherEleve = new JMenuItem("Afficher élèves");
-        afficherEleve.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Circuit circuit = circuits.get(jTable1.getSelectedRow());
-                AffichageElevePanel affichageElevePanel = new AffichageElevePanel(new EleveControleur(), circuit.getLeseleves());
-                DialogUtils.afficheDialog(null, affichageElevePanel);
-            }
-        });
-        menuItems.add(afficherEleve);
-        
-         
-         JMenuItem ajouterCircuit = new JMenuItem("Ajouter Circuit");
-        ajouterCircuit.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               Circuit circuit = circuits.get(jTable1.getSelectedRow());
-                //TODO action à ajouter
-                
-            }
-        });
-        menuItems.add(ajouterCircuit);
-        
-        
-          
-         JMenuItem ajouterArret = new JMenuItem("Ajouter Arret");
-        ajouterArret.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               Circuit circuit = circuits.get(jTable1.getSelectedRow());
-                //TODO action à ajouter
-                
-            }
-        });
-        menuItems.add(ajouterArret);
-        
-          
-         JMenuItem ajouterEleve = new JMenuItem("Ajouter Eleve");
-        ajouterCircuit.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               Circuit circuit = circuits.get(jTable1.getSelectedRow());
-                //TODO action à ajouter
-                
-            }
-        });
-        menuItems.add(ajouterEleve);
-
-        
-        return menuItems;
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
-
+  
     @Override
     public void update(Observable o, Object arg) {
         setCircuit(circuits);

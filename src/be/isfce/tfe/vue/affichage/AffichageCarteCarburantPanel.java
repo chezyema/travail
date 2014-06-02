@@ -5,8 +5,11 @@
 package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.CarteCarburantControleur;
+import be.isfce.tfe.controleur.MaterielRoulantControleur;
+import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.CarteCarburant;
+import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -136,24 +139,25 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
     @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-        menuItems.add(getAfficherVehiculeUtilisationMenuItem());
+      //  menuItems.add(getAfficherVehiculeUtilisationMenuItem());
 
         return menuItems;
     }
 
-    private JMenuItem getAfficherVehiculeUtilisationMenuItem() {
+   /* private JMenuItem getAfficherVehiculeUtilisationMenuItem() {
         JMenuItem afficherCarte = new JMenuItem("Afficher Utilisation véhicule");
         afficherCarte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                // CarteCarburant carte = carte.get(jTable1.getSelectedRow());
-                //Todo encore faire action
+             CarteCarburant carte = cartecarburant.get(jTable1.getSelectedRow());
+                AffichageUtilisationCarteJPanel affichageVehiculePanel = new  AffichageUtilisationCarteJPanel( new UtilisationCarteControleur(), carte.getLesutilisations());
+                DialogUtils.afficheDialog(null, affichageVehiculePanel);
             }
 
         });
         return afficherCarte;
-    }
+    }*/
 
     @Override
     public void update(Observable o, Object arg) {

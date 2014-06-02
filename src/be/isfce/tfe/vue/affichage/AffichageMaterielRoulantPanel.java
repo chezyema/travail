@@ -4,11 +4,16 @@
  */
 package be.isfce.tfe.vue.affichage;
 
+import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
+import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
 import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.MaterielRoulant;
+import be.isfce.tfe.vue.ajout.AjoutDocumentsJPanell;
+import be.isfce.tfe.vue.ajout.AjoutEntretienJPanell;
 import be.isfce.tfe.vue.ajout.DialogUtils;
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,9 +31,9 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageMaterielRoulantPanel extends AffichagePanel {
 
     List<MaterielRoulant> vehicules;
-
     String[] columnsNames = {"Numero de chassis", "Marque", "Type", "Annee de construction", "Carburant", "Plaque", "Nombre de place", "Kilometre actuel"};
 
+    private Dialog dialog;
     public void setVehicules(List<MaterielRoulant> vehicules) {
         this.vehicules = vehicules;
         displayData();
@@ -59,7 +64,6 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
     @Override
     public AbstractTableModel getTableModel() {
         return new AbstractTableModel() {
-
             @Override
             public String getColumnName(int col) {
                 return columnsNames[col];
@@ -105,15 +109,15 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                         return null;
                 }
             }
-            
-             @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 MaterielRoulant vehicule = vehicules.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         vehicule.setId((String) aValue);
-                         break;
+
+                    case 0:
+                        vehicule.setId((String) aValue);
+                        break;
                     case 1:
                         vehicule.setMarque((String) aValue);
                         break;
@@ -136,7 +140,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     case 7:
                         vehicule.setKmactuel((Integer) aValue);
                         break;
-                 
+
                 }
                 try {
                     abstractControleur.controleEtModifie(vehicule);
@@ -164,35 +168,32 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         }
     }
 
-    
-    
     @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherEntretienMenuItem());
-        menuItems.add( getUtilisationCarburantMenuItem());
-        menuItems.add( getAjouterEntretienMenuItem());
-        menuItems.add( getAjouterDocumentMenuItem()); 
-        
-        
+        menuItems.add(getUtilisationCarburantMenuItem());
+        menuItems.add(getAjouterEntretienMenuItem());
+        menuItems.add(getAjouterDocumentMenuItem());
+         menuItems.add(getAfficherDocumentMenuItem() );
+
         return menuItems;
-         }
-    
-     private JMenuItem getAfficherEntretienMenuItem(){
+    }
+
+    private JMenuItem getAfficherEntretienMenuItem() {
         JMenuItem entretien = new JMenuItem("Les Entretiens");
         entretien.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 //TODO On verra plus tard
+                MaterielRoulant materiel = vehicules.get(jTable1.getSelectedRow());
+                AffichageEntretienPanel affichageEntretienPanel = new AffichageEntretienPanel(new EntretienControleur(), materiel.getLesentretiens());
+                DialogUtils.afficheDialog(null, affichageEntretienPanel);
             }
         });
         return entretien;
     }
-     
-     
-    
-    
-    private JMenuItem getUtilisationCarburantMenuItem(){
+
+    private JMenuItem getUtilisationCarburantMenuItem() {
         JMenuItem utilisation = new JMenuItem("Utilisation Carte Carburant");
         utilisation.addActionListener(new ActionListener() {
             @Override
@@ -205,31 +206,64 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return utilisation;
     }
-    
-      private JMenuItem getAjouterEntretienMenuItem(){
+
+    private JMenuItem getAjouterEntretienMenuItem() {
         JMenuItem ajouterEntretien = new JMenuItem("Ajouter Entretiens");
         ajouterEntretien.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 //TODO On verra plus tard
+                MaterielRoulant materielRoulant = vehicules.get(jTable1.getSelectedRow());
+                AjoutEntretienJPanell ajoutEntretienJPanell = new AjoutEntretienJPanell(materielRoulant);
+                ajoutEntretienJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
+
+                    @Override
+                    public void onButtonSavePressed() {
+                        dialog.dispose();
+                    }
+                });
+                dialog = DialogUtils.afficheDialog(null, ajoutEntretienJPanell);
             }
         });
         return ajouterEntretien;
     }
-      
-        private JMenuItem getAjouterDocumentMenuItem(){
-        JMenuItem ajouterdocument = new JMenuItem("Ajouter Documents");
-        ajouterdocument.addActionListener(new ActionListener() {
+    
+     private JMenuItem getAfficherDocumentMenuItem() {
+        JMenuItem afficherDocument = new JMenuItem("Afficher documents");
+        afficherDocument.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                 //TODO On verra plus tard
+                MaterielRoulant materiel = vehicules.get(jTable1.getSelectedRow());
+                AffichageDocumentsPanel affichageDocumentsPanel = new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), materiel.getLesdocuments());
+                DialogUtils.afficheDialog(null, affichageDocumentsPanel);
             }
         });
-        return ajouterdocument;
+        return afficherDocument;
     }
 
+  private JMenuItem getAjouterDocumentMenuItem() {
+        JMenuItem ajouterDocument = new JMenuItem("Ajouter documents");
+        ajouterDocument.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MaterielRoulant materiel = vehicules.get(jTable1.getSelectedRow());
+                AjoutDocumentsJPanell ajoutDocumentsJPanell = new AjoutDocumentsJPanell(materiel);
+                ajoutDocumentsJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
+                    @Override
+                    public void onButtonSavePressed() {
+                        dialog.dispose();
+                    }
+                });
+                dialog = DialogUtils.afficheDialog(null, ajoutDocumentsJPanell);
+            }
+        });
+        return ajouterDocument;
+    }
+
+  
     @Override
     public void update(Observable o, Object arg) {
-    setVehicules(vehicules);
+        setVehicules(vehicules);
     }
 }

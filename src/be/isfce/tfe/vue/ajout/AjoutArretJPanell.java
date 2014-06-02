@@ -7,6 +7,7 @@ package be.isfce.tfe.vue.ajout;
 import be.isfce.tfe.metier.Arret;
 import be.isfce.tfe.controleur.ArretControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.metier.Circuit;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,12 +17,16 @@ import javax.swing.JOptionPane;
 public class AjoutArretJPanell extends javax.swing.JPanel {
 
     private DialogUtils.DialogInterface dialogInterface;
-
+    private Circuit circuit;
     /**
      * Creates new form EncodageArretJPanel
      */
     public AjoutArretJPanell() {
         initComponents();
+    }
+    public AjoutArretJPanell(Circuit circuit) {
+        initComponents();
+        this.circuit = circuit;
     }
 
     /**

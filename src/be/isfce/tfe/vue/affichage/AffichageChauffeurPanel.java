@@ -5,6 +5,7 @@
 package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.ChauffeurControleur;
+import be.isfce.tfe.controleur.CircuitControleur;
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.TrajetsControleur;
 import be.isfce.tfe.controleur.ValidationException;
@@ -187,7 +188,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         menuItems.add(getEncoderHeureMenuItem());
         menuItems.add(getAfficherDocumentMenuItem());
         menuItems.add(getAjouterDocumentMenuItem());
-        menuItems.add(getAfficherChauffeurArchiverMenuItem());
+        menuItems.add(getAfficherFeuilleDeRouteMenuItem());
 
         return menuItems;
     }
@@ -226,17 +227,19 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         return afficherDocument;
     }
 
-    private JMenuItem getAfficherChauffeurArchiverMenuItem() {
-        JMenuItem afficherChauffeurArchives = new JMenuItem("Chauffeurs Archives");
-        afficherChauffeurArchives.addActionListener(new ActionListener() {
+    private JMenuItem getAfficherFeuilleDeRouteMenuItem() {
+        JMenuItem afficherFeuilleDeRoute = new JMenuItem("Afficher feuille de route");
+       afficherFeuilleDeRoute.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
-                //TODO afficher chauffeur archiver
+               
+                AffichageTrajetsPanell affichageFeuilleDeRoutePanel = new AffichageTrajetsPanell (new TrajetsControleur(), chauffeur.getLesheures());
+                DialogUtils.afficheDialog(null, affichageFeuilleDeRoutePanel);
             }
         });
-        return afficherChauffeurArchives;
+        return afficherFeuilleDeRoute;
     }
 
     private JMenuItem getAjouterDocumentMenuItem() {

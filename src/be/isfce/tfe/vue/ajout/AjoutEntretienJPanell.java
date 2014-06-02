@@ -7,6 +7,7 @@ package be.isfce.tfe.vue.ajout;
 import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Entretien;
+import be.isfce.tfe.metier.MaterielRoulant;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,12 +17,18 @@ import javax.swing.JOptionPane;
 public class AjoutEntretienJPanell extends javax.swing.JPanel {
 
     private DialogUtils.DialogInterface dialogInterface;
+    private MaterielRoulant materielRoulant;
 
     /**
      * Creates new form EncodageEntretienJPanell
      */
     public AjoutEntretienJPanell() {
         initComponents();
+    }
+
+    public AjoutEntretienJPanell(MaterielRoulant materielRoulant) {
+        initComponents();
+        this.materielRoulant = materielRoulant;
     }
 
     /**
@@ -78,8 +85,13 @@ public class AjoutEntretienJPanell extends javax.swing.JPanel {
         Entretien entretien = ajoutEntretienJPanell1.getEntretienFromFields();
 
         try {
+            if (materielRoulant != null) {
+                entretien.setIdmaterielroulant(materielRoulant.getId());
+            }
             new EntretienControleur().controleEtAjoute(entretien);
-            dialogInterface.onButtonSavePressed();
+            if (dialogInterface != null) {
+                dialogInterface.onButtonSavePressed();
+            }
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
@@ -89,7 +101,6 @@ public class AjoutEntretienJPanell extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_ajouterActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private be.isfce.tfe.vue.encodage.EncodageEntretienJPanell ajoutEntretienJPanell1;
     private javax.swing.JToggleButton ajouter;
