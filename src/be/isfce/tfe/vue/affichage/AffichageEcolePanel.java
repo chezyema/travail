@@ -30,7 +30,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageEcolePanel extends AffichagePanel {
 
     List<Ecole> ecoles;
-    
+
     private Dialog dialog;
     String[] columnsNames = {"Nom ecole", "Adresse ecole", "Code postal", "Ville", " Telephone", "email", "Nom du directeur"};
 
@@ -109,15 +109,15 @@ public class AffichageEcolePanel extends AffichagePanel {
                         return null;
                 }
             }
-            
-             @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 Ecole ecole = ecoles.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         ecole.setNomecole((String) aValue);
-                         break;
+
+                    case 0:
+                        ecole.setNomecole((String) aValue);
+                        break;
                     case 1:
                         ecole.setAdresseecole((String) aValue);
                         break;
@@ -126,7 +126,7 @@ public class AffichageEcolePanel extends AffichagePanel {
                         break;
                     case 3:
                         //TODO
-                        ecole.setVil((String)aValue);
+                        ecole.setVil((String) aValue);
                         break;
                     case 4:
                         ecole.setTelecole((String) aValue);
@@ -137,7 +137,7 @@ public class AffichageEcolePanel extends AffichagePanel {
                     case 6:
                         ecole.setNomdirecteur((String) aValue);
                         break;
-                  
+
                 }
                 try {
                     abstractControleur.controleEtModifie(ecole);
@@ -161,20 +161,17 @@ public class AffichageEcolePanel extends AffichagePanel {
     }
 
     @Override
-    
-    
-      protected List<JMenuItem> getMenuItems() {
+
+    protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherEleveMenuItem());
         menuItems.add(getAfficherCircuitMenuItem());
         menuItems.add(getAjouterElevesMenuItem());
-       
-        
-        
+
         return menuItems;
     }
-    
-    private JMenuItem getAfficherEleveMenuItem(){
+
+    private JMenuItem getAfficherEleveMenuItem() {
         JMenuItem afficherEleve = new JMenuItem("Afficher Eléves");
         afficherEleve.addActionListener(new ActionListener() {
             @Override
@@ -188,8 +185,8 @@ public class AffichageEcolePanel extends AffichagePanel {
         });
         return afficherEleve;
     }
-     
-    private JMenuItem getAfficherCircuitMenuItem(){
+
+    private JMenuItem getAfficherCircuitMenuItem() {
         JMenuItem afficherCircuit = new JMenuItem("Afficher Circuits");
         afficherCircuit.addActionListener(new ActionListener() {
             @Override
@@ -203,21 +200,21 @@ public class AffichageEcolePanel extends AffichagePanel {
         });
         return afficherCircuit;
     }
-    
-       private JMenuItem getAjouterElevesMenuItem(){
-        JMenuItem ajouterEleves = new JMenuItem("Ajouter Eleves");
+
+    private JMenuItem getAjouterElevesMenuItem() {
+        JMenuItem ajouterEleves = new JMenuItem("Ajouter élève");
         ajouterEleves.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Ecole etablissement = ecoles.get(jTable1.getSelectedRow());
                 AjoutEleveJPanel ajoutEleveJPanell = new AjoutEleveJPanel(etablissement);
-                ajoutEleveJPanell .setDialogInterface(new DialogUtils.DialogInterface() {
+                ajoutEleveJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
                     @Override
                     public void onButtonSavePressed() {
                         dialog.dispose();
                     }
                 });
-                dialog = DialogUtils.afficheDialog(null,ajoutEleveJPanell );
+                dialog = DialogUtils.afficheDialog(null, ajoutEleveJPanell);
             }
         });
         return ajouterEleves;
@@ -225,7 +222,7 @@ public class AffichageEcolePanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-     setEcole(ecoles);
+        setEcole(ecoles);
     }
 
 }

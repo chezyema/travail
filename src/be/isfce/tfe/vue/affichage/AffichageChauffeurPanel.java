@@ -5,16 +5,14 @@
 package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.ChauffeurControleur;
-import be.isfce.tfe.controleur.CircuitControleur;
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.TrajetsControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.metier.Chauffeur;
-import be.isfce.tfe.metier.Trajet;
 import be.isfce.tfe.vue.ajout.AjoutDocumentsJPanell;
 import be.isfce.tfe.vue.ajout.AjoutTrajetsJPanel;
 import be.isfce.tfe.vue.ajout.DialogUtils;
-import be.isfce.tfe.vue.encodage.EncodageTrajetsJPanel;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,9 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
@@ -204,6 +199,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                     @Override
                     public void onButtonSavePressed() {
                         dialog.dispose();
+                        reset();
                     }
                 });
                 dialog = DialogUtils.afficheDialog(null, encodageTrajetsJPanel);
@@ -229,13 +225,13 @@ public class AffichageChauffeurPanel extends AffichagePanel {
 
     private JMenuItem getAfficherFeuilleDeRouteMenuItem() {
         JMenuItem afficherFeuilleDeRoute = new JMenuItem("Afficher feuille de route");
-       afficherFeuilleDeRoute.addActionListener(new ActionListener() {
+        afficherFeuilleDeRoute.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
-               
-                AffichageTrajetsPanell affichageFeuilleDeRoutePanel = new AffichageTrajetsPanell (new TrajetsControleur(), chauffeur.getLesheures());
+
+                AffichageTrajetsPanell affichageFeuilleDeRoutePanel = new AffichageTrajetsPanell(new TrajetsControleur(), chauffeur.getLesheures());
                 DialogUtils.afficheDialog(null, affichageFeuilleDeRoutePanel);
             }
         });
@@ -254,6 +250,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                     @Override
                     public void onButtonSavePressed() {
                         dialog.dispose();
+                        reset();
                     }
                 });
                 dialog = DialogUtils.afficheDialog(null, ajoutDocumentsJPanell);
@@ -264,6 +261,12 @@ public class AffichageChauffeurPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("UPDATE");
+        reset();
+    }
+
+    private void reset() {
+        chauffeurs = ChauffeurDao.getTousLesChauffeurs();
         setChauffeurs(chauffeurs);
     }
 }

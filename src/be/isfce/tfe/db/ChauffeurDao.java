@@ -188,12 +188,13 @@ public class ChauffeurDao {
     public static boolean deleteChauffeur(Chauffeur chauffeur) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update chauffeur set supprime = 1 where chauffeur.idchauffeur = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update chauffeur set supprimechauffeur = 1 where chauffeur.idchauffeur = ?");
             preparedStatement.setString(1, chauffeur.getId());
             preparedStatement.execute();
 
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

@@ -16,16 +16,17 @@ import javax.swing.JOptionPane;
  */
 public class AjoutUtilisationCarteJPanell extends javax.swing.JPanel {
 
-     private DialogUtils.DialogInterface dialogInterface;
-     private MaterielRoulant materiels;
+    private DialogUtils.DialogInterface dialogInterface;
+    private MaterielRoulant materiels;
+
     /**
      * Creates new form EncodageUtilisationCarteJPanell
      */
     public AjoutUtilisationCarteJPanell() {
         initComponents();
     }
-    
-     public AjoutUtilisationCarteJPanell(MaterielRoulant materiel) {
+
+    public AjoutUtilisationCarteJPanell(MaterielRoulant materiel) {
         initComponents();
         this.materiels = materiel;
     }
@@ -82,7 +83,7 @@ public class AjoutUtilisationCarteJPanell extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         UtilisationCarte carte = ajoutUtilisationCarteJPanell1.getUtilisationFromFields();
         try {
-         if (materiels != null) {
+            if (materiels != null) {
                 carte.setIdvehicule(materiels.getId());
             }
             new UtilisationCarteControleur().controleEtAjoute(carte);

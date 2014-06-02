@@ -66,6 +66,7 @@ public class EleveControleur extends AbstractControleur<Eleve> {
             setChanged();
             notifyObservers();
         }
+        
     }
 
     @Override

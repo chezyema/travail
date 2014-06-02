@@ -50,16 +50,10 @@ public class Circuit {
     public void setIdecole(int idecole) {
         this.idecole = idecole;
     }
-    
-    
-    
-    
 
     public void setLesArrets(List<Arret> LesArrets) {
         this.lesarrets = LesArrets;
     }
-
-   
 
     public void setLesEleves(List<Eleve> LesEleves) {
         this.leseleves = LesEleves;
@@ -85,8 +79,6 @@ public class Circuit {
         return kmfin;
     }
 
- 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -107,13 +99,9 @@ public class Circuit {
         this.kmfin = KmFin;
     }
 
-   
-
     public List<Arret> getLesarrets() {
         return lesarrets;
     }
-
-
 
     public List<Eleve> getLeseleves() {
         return leseleves;
@@ -139,7 +127,6 @@ public class Circuit {
         return idchauffeur;
     }
 
-  
     public Chauffeur getChauffeurs() {
         return chauffeurs;
     }
@@ -147,8 +134,6 @@ public class Circuit {
     public void setIdchauffeur(String idchauffeur) {
         this.idchauffeur = idchauffeur;
     }
-
-   
 
     public void setChauffeurs(Chauffeur chauffeurs) {
         this.chauffeurs = chauffeurs;
@@ -159,18 +144,4 @@ public class Circuit {
         return "Circuit{" + "id=" + id + ", nomcircuit=" + nomcircuit + ", tempsprevu=" + tempsprevu + ", kmdepart=" + kmdepart + ", kmfin=" + kmfin + ", materielroulant=" + materielroulant + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + ", ecole=" + ecole + ", idecole=" + idecole + ", chauffeurs=" + chauffeurs + ", lesarrets=" + lesarrets + ", leseleves=" + leseleves + ", lestrajets=" + lestrajets + '}';
     }
 
-  
-   
-
-    
-
-
-
-    
-   
-
-   
-  
-
-  
 }

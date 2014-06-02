@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +33,22 @@ public class CircuitDao {
             preparedStatement.setString(3, circuit.getTempsPrevu());
             preparedStatement.setInt(4, circuit.getKmDepart());
             preparedStatement.setInt(5, circuit.getKmFin());
-            preparedStatement.setInt(6, circuit.getIdecole());
-            preparedStatement.setString(7, circuit.getIdmaterielroulant());
-            preparedStatement.setString(8, circuit.getIdchauffeur());
+            if (circuit.getIdecole() != 0) {
+                preparedStatement.setInt(6, circuit.getIdecole());
+            } else {
+                preparedStatement.setNull(6, Types.INTEGER);
+            }
+            if (circuit.getIdmaterielroulant() != null && !circuit.getIdmaterielroulant().isEmpty()) {
+                preparedStatement.setString(7, circuit.getIdmaterielroulant());
+            } else {
+                preparedStatement.setNull(7, Types.VARCHAR);
+            }
+
+            if (circuit.getIdchauffeur() != null && !circuit.getIdchauffeur().isEmpty()) {
+                preparedStatement.setString(8, circuit.getIdchauffeur());
+            } else {
+                preparedStatement.setNull(8, Types.VARCHAR);
+            }
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -84,15 +98,16 @@ public class CircuitDao {
         }
 
     }
-       public static boolean updateCircuit(Circuit circuit) {
-       try {
+
+    public static boolean updateCircuit(Circuit circuit) {
+        try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update circuit set nomcircuit = ?,tempsprevu = ?,kmdepart = ?,kmfin = ? where circuit.idcircuit = ?");
             preparedStatement.setString(1, circuit.getNomCircuit());
             preparedStatement.setString(2, circuit.getTempsPrevu());
             preparedStatement.setInt(3, circuit.getKmDepart());
             preparedStatement.setInt(4, circuit.getKmFin());
             preparedStatement.setInt(5, circuit.getId());
-            
+
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {

@@ -28,10 +28,12 @@ public class UtilisationCarteDao {
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
-      public static List<UtilisationCarte> getTousLesUtilisationCarte() {
+
+    public static List<UtilisationCarte> getTousLesUtilisationCarte() {
         return getTousLesUtilisationCarte(false);
     }
 
@@ -42,7 +44,7 @@ public class UtilisationCarteDao {
     public static List<UtilisationCarte> getTousLesUtilisationCarte(boolean utilisationSupprimes) {
 
         try {
-            String supprimesutilisationcarte =  utilisationSupprimes ? "1" : "0";
+            String supprimesutilisationcarte = utilisationSupprimes ? "1" : "0";
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from utilisationcarte where supprimeutilisationcarte = " + supprimesutilisationcarte);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -62,14 +64,14 @@ public class UtilisationCarteDao {
             return null;
         }
     }
-    
-       public static boolean updateUtilisationCarte(UtilisationCarte utilisation) {
-       try {
+
+    public static boolean updateUtilisationCarte(UtilisationCarte utilisation) {
+        try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update utilisationcarte set dateutilisation = ? where utilisationcarte.idutilisation = ?");
-         
+
             preparedStatement.setDate(1, new Date(utilisation.getDateUtilisation().getTime()));
             preparedStatement.setInt(2, utilisation.getIdutilisationcarte());
-           
+
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
@@ -77,7 +79,7 @@ public class UtilisationCarteDao {
         }
     }
 
-    public static boolean deleteUtilisationCarte( UtilisationCarte idutilisation) {
+    public static boolean deleteUtilisationCarte(UtilisationCarte idutilisation) {
         try {
 
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update utilisationcarte set supprimeutilisationcarte = 1 where utilisationcarte.idutilisation = ?");

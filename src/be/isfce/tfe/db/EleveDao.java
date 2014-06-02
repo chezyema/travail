@@ -22,7 +22,7 @@ public class EleveDao {
     public static boolean addEleve(Eleve eleve) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into eleve (ideleve,nomeleve,prenomeleve,datedenaissance,adresseeleve,codepostal,ville,nomresponsable,telresponsable,emailresponsable) VALUES (? , ?, ?,?,?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into eleve (ideleve,nomeleve,prenomeleve,datedenaissance,adresseeleve,codepostal,ville,nomresponsable,telresponsable,emailresponsable,idecole) VALUES (? , ?, ?,?,?,?,?,?,?,?,?)");
             preparedStatement.setString(1, eleve.getId());
             preparedStatement.setString(2, eleve.getNomEleve());
             preparedStatement.setString(3, eleve.getPrenomEleve());
@@ -33,14 +33,17 @@ public class EleveDao {
             preparedStatement.setString(8, eleve.getNomResponsable());
             preparedStatement.setString(9, eleve.getTelResponsable());
             preparedStatement.setString(10, eleve.getEmailResponsable());
+            preparedStatement.setInt(11, eleve.getIdecole());
 
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
-       public static List<Eleve> getTousLesEleves() {
+
+    public static List<Eleve> getTousLesEleves() {
         return getTousLesEleves(false);
     }
 
@@ -48,11 +51,10 @@ public class EleveDao {
         return getTousLesEleves(true);
     }
 
-
     public static List<Eleve> getTousLesEleves(boolean elevesSupprimes) {
 
         try {
-             String supprimes = elevesSupprimes ? "1" : "0";
+            String supprimes = elevesSupprimes ? "1" : "0";
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from eleve where supprimeeleve = " + supprimes);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Eleve> allEleve = new ArrayList<Eleve>();
@@ -78,9 +80,9 @@ public class EleveDao {
             return null;
         }
     }
-    
-   public static boolean updateEleve(Eleve eleve) {
-       try {
+
+    public static boolean updateEleve(Eleve eleve) {
+        try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update eleve set nomeleve = ?,prenomeleve = ?,datedenaissance = ?,adresseeleve = ?,codepostal = ?,ville = ?,nomresponsable = ?,telresponsable = ?,emailresponsable = ? where eleve.ideleve = ?");
             preparedStatement.setString(1, eleve.getNomEleve());
             preparedStatement.setString(2, eleve.getPrenomEleve());
@@ -91,16 +93,16 @@ public class EleveDao {
             preparedStatement.setString(7, eleve.getNomResponsable());
             preparedStatement.setString(8, eleve.getTelResponsable());
             preparedStatement.setString(9, eleve.getEmailResponsable());
-            preparedStatement.setString(10,eleve.getId());
+            preparedStatement.setString(10, eleve.getId());
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
             return false;
         }
     }
-   
-    public static boolean deleteEleve(Eleve eleve){
-            try {
+
+    public static boolean deleteEleve(Eleve eleve) {
+        try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update eleve set supprimeeleve = 1 where eleve.ideleve = ?");
             preparedStatement.setString(1, eleve.getId());
             preparedStatement.execute();
@@ -111,4 +113,3 @@ public class EleveDao {
         }
     }
 }
-
