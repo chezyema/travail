@@ -6,6 +6,8 @@ package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.TrajetsControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.CircuitDao;
+import be.isfce.tfe.db.TrajetDao;
 import be.isfce.tfe.metier.Trajet;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +23,7 @@ public class AffichageTrajetsPanell extends AffichagePanel {
 
     List<Trajet> trajets;
 
-    String[] columnsNames = {"heure de debut", "Heure de fin", "Date de travail"};
+    String[] columnsNames = {"heure de debut", "Heure de fin", "Date de travail","kmdepart","kmfin"};
 
     public AffichageTrajetsPanell(TrajetsControleur trajetControleur) {
         super(trajetControleur);
@@ -90,7 +92,10 @@ public class AffichageTrajetsPanell extends AffichagePanel {
                         return heure.getHeureDeFin();
                     case 2:
                         return heure.getDateTravail();
-
+                    case 3:
+                           return heure.getKmdepart();
+                      case 4:
+                           return heure.getKmfin();
                     default:
                         return null;
                 }
@@ -109,6 +114,12 @@ public class AffichageTrajetsPanell extends AffichagePanel {
                         break;
                     case 2:
                         trajet.setDateTravail(new Date());
+                        break;
+                    case 3:
+                        trajet.setKmdepart((Integer)aValue);
+                        break;
+                    case 4:
+                        trajet.setKmfin((Integer)aValue);
                         break;
                     
                 }
@@ -135,6 +146,15 @@ public class AffichageTrajetsPanell extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("UPDATE");
+        reset();
+    }
+
+    private void reset() {
+       
+         {
+            trajets = TrajetDao.getTousLesTrajets();
+        }
         setTrajet(trajets);
     }
 

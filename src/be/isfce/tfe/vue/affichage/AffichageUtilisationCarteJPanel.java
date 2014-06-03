@@ -6,6 +6,10 @@ package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.CarteCarburantDao;
+import be.isfce.tfe.db.CircuitDao;
+import be.isfce.tfe.db.UtilisationCarteDao;
+import be.isfce.tfe.metier.CarteCarburant;
 import be.isfce.tfe.metier.UtilisationCarte;
 import java.util.Date;
 import java.util.List;
@@ -20,8 +24,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
     List<UtilisationCarte> utilisations;
-
-    String[] columnsNames = {"Date utilisation"};
+    String[] columnsNames = {"Numéro Carte", "Date utilisation","litre de carburant"};
 
     public AffichageUtilisationCarteJPanel(UtilisationCarteControleur utilisationControleur) {
         super(utilisationControleur);
@@ -48,9 +51,9 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
         int selectedRow = jTable1.getSelectedRow();
         try {
             abstractControleur.controleEtSupprime(utilisations.get(selectedRow));
-            JOptionPane.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Suppression éxecutée", "Information", JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Suppression échouée", "Erreur", JOptionPane.ERROR_MESSAGE);
 
         }
     }
@@ -58,7 +61,6 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
     @Override
     public AbstractTableModel getTableModel() {
         return new AbstractTableModel() {
-
             @Override
             public String getColumnName(int col) {
                 return columnsNames[col];
@@ -76,7 +78,7 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return true;
+                return columnIndex != 0;
             }
 
             @Override
@@ -85,22 +87,32 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
                 switch (columnIndex) {
 
                     case 0:
+                        CarteCarburant carteCarburant = CarteCarburantDao.getCarteCarburant(utilisation.getIdcartecarburant());
+                        return carteCarburant == null ? "" : carteCarburant.getNumcarte();
+                    case 1:
                         return utilisation.getDateUtilisation();
+                    case 2:
+                        return utilisation.getLitrecarburant();
 
                     default:
                         return null;
                 }
             }
-            
-             @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 UtilisationCarte utilisation = utilisations.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         utilisation.setDateutilisation(new Date());
-                         break;
-                 
+
+                    case 0:
+                        break;
+
+                    case 1:
+                        utilisation.setDateutilisation(new Date());
+                        break;
+                    case 2 :
+                        utilisation.setLitrecarburant((Integer) aValue);
+
                 }
                 try {
                     abstractControleur.controleEtModifie(utilisation);
@@ -125,7 +137,12 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-        setUtilisationCarte(utilisations);
+        System.out.println("UPDATE");
+        reset();
     }
 
+    private void reset() {
+        utilisations = UtilisationCarteDao.getTousLesUtilisationCarte();
+        setUtilisationCarte(utilisations);
+    }
 }

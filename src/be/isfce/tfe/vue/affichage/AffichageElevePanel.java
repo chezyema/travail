@@ -6,6 +6,7 @@ package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.EleveDao;
 import be.isfce.tfe.metier.Eleve;
 import java.util.Date;
 import java.util.List;
@@ -168,7 +169,16 @@ public class AffichageElevePanel extends AffichagePanel {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+ public void update(Observable o, Object arg) {
+        System.out.println("UPDATE");
+        reset();
+    }
+
+    private void reset() {
+       
+         {
+            eleves = EleveDao.getTousLesEleves();
+        }
         setEleve(eleves);
     }
 

@@ -6,8 +6,10 @@ package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.ArretControleur;
 import be.isfce.tfe.controleur.CircuitControleur;
+import be.isfce.tfe.controleur.EcoleControlleur;
 import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.EcoleDao;
 import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.Ecole;
@@ -34,7 +36,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
 
     List<Circuit> circuits;
 
-    String[] columnsNames = {"Nom circuit", "Temps prevu", "Kilometre de depart", "kilometre de fin"};
+    String[] columnsNames = {"Nom circuit", "Temps prevu"};
 
     public void setCircuit(List<Circuit> circuits) {
         this.circuits = circuits;
@@ -97,10 +99,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
                         return trajet.getNomCircuit();
                     case 1:
                         return trajet.getTempsPrevu();
-                    case 2:
-                        return trajet.getKmDepart();
-                    case 3:
-                        return trajet.getKmFin();
+                    
 
                     default:
                         return null;
@@ -118,14 +117,8 @@ public class AffichageCircuitPanel extends AffichagePanel {
                     case 1:
                         circuit.setTempsPrevu((String) aValue);
                         break;
-                    case 2:
-                        circuit.setKmDepart((Integer) aValue);
-                        break;
-                    case 3:
-                        circuit.setKmFin((Integer) aValue);
-
-                        break;
-
+                 
+                       
                 }
                 try {
                     abstractControleur.controleEtModifie(circuit);
@@ -210,6 +203,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
                     Circuit circuit = circuits.get(jTable1.getSelectedRow());
                     circuit.setIdecole(ecole.getId());
                     group.clearSelection();
+                    reset();
                     try {
                         System.out.println("TEST");
                         abstractControleur.controleEtModifie(circuit);
@@ -227,8 +221,16 @@ public class AffichageCircuitPanel extends AffichagePanel {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        setCircuit(circuits);
+   public void update(Observable o, Object arg) {
+        System.out.println("UPDATE");
+        reset();
     }
 
+    private void reset() {
+       
+         {
+            circuits = CircuitDao.getTousLesCircuits();
+        }
+        setCircuit(circuits);
+    }
 }

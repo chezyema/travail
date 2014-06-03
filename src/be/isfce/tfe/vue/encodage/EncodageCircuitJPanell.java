@@ -28,8 +28,7 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
         circuit.setId(0);
         circuit.setNomCircuit(String.valueOf(nomcircuitTextField.getText()));
         circuit.setTempsPrevu(tempsprevuTextField.getText());
-        circuit.setKmDepart(Integer.valueOf(kmdedepartTextField.getText()));
-        circuit.setKmFin(Integer.valueOf(kmdefinTextField.getText()));
+       
         return circuit;
     }
 
@@ -44,20 +43,12 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
 
         nomoducircuit = new javax.swing.JLabel();
         tempsprevu = new javax.swing.JLabel();
-        kmdedepart = new javax.swing.JLabel();
         nomcircuitTextField = new javax.swing.JTextField();
         tempsprevuTextField = new javax.swing.JTextField();
-        kmdedepartTextField = new javax.swing.JTextField();
-        kmdefin = new javax.swing.JLabel();
-        kmdefinTextField = new javax.swing.JTextField();
 
         nomoducircuit.setText("Nom du circuit :");
 
         tempsprevu.setText("Temps prévu :");
-
-        kmdedepart.setText("Km de départ :");
-
-        kmdefin.setText("Km de fin :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,18 +57,12 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomoducircuit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tempsprevu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                    .addComponent(kmdedepart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(kmdefin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(38, 38, 38)))
+                    .addComponent(nomoducircuit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addComponent(tempsprevu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nomcircuitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tempsprevuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kmdedepartTextField)
-                    .addComponent(kmdefinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tempsprevuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,24 +76,12 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tempsprevuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tempsprevu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kmdedepart)
-                    .addComponent(kmdedepartTextField))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kmdefin)
-                    .addComponent(kmdefinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel kmdedepart;
-    private javax.swing.JTextField kmdedepartTextField;
-    private javax.swing.JLabel kmdefin;
-    private javax.swing.JTextField kmdefinTextField;
     private javax.swing.JTextField nomcircuitTextField;
     private javax.swing.JLabel nomoducircuit;
     private javax.swing.JLabel tempsprevu;

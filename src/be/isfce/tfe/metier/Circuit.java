@@ -15,8 +15,7 @@ public class Circuit {
     private int id;
     private String nomcircuit;
     private String tempsprevu;
-    private int kmdepart;
-    private int kmfin;
+   
     private MaterielRoulant materielroulant;
     private String idmaterielroulant;
     private String idchauffeur;
@@ -71,13 +70,7 @@ public class Circuit {
         return tempsprevu;
     }
 
-    public int getKmDepart() {
-        return kmdepart;
-    }
-
-    public int getKmFin() {
-        return kmfin;
-    }
+  
 
     public void setId(int id) {
         this.id = id;
@@ -91,13 +84,9 @@ public class Circuit {
         this.tempsprevu = TempsPrevu;
     }
 
-    public void setKmDepart(int KmDepart) {
-        this.kmdepart = KmDepart;
-    }
+   
 
-    public void setKmFin(int KmFin) {
-        this.kmfin = KmFin;
-    }
+   
 
     public List<Arret> getLesarrets() {
         return lesarrets;
@@ -141,7 +130,9 @@ public class Circuit {
 
     @Override
     public String toString() {
-        return "Circuit{" + "id=" + id + ", nomcircuit=" + nomcircuit + ", tempsprevu=" + tempsprevu + ", kmdepart=" + kmdepart + ", kmfin=" + kmfin + ", materielroulant=" + materielroulant + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + ", ecole=" + ecole + ", idecole=" + idecole + ", chauffeurs=" + chauffeurs + ", lesarrets=" + lesarrets + ", leseleves=" + leseleves + ", lestrajets=" + lestrajets + '}';
+        return "Circuit{" + "id=" + id + ", nomcircuit=" + nomcircuit + ", tempsprevu=" + tempsprevu + ", materielroulant=" + materielroulant + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + ", ecole=" + ecole + ", idecole=" + idecole + ", chauffeurs=" + chauffeurs + ", lesarrets=" + lesarrets + ", leseleves=" + leseleves + ", lestrajets=" + lestrajets + '}';
     }
+
+   
 
 }

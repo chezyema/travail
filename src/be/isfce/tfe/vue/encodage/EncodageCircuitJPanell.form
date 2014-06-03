@@ -19,20 +19,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="nomoducircuit" alignment="1" max="32767" attributes="0"/>
+                  <Component id="nomoducircuit" alignment="1" pref="89" max="32767" attributes="0"/>
                   <Component id="tempsprevu" alignment="1" pref="0" max="32767" attributes="0"/>
-                  <Component id="kmdedepart" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="kmdefin" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="nomcircuitTextField" alignment="0" min="-2" pref="249" max="-2" attributes="0"/>
                   <Component id="tempsprevuTextField" alignment="0" min="-2" pref="248" max="-2" attributes="0"/>
-                  <Component id="kmdedepartTextField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="kmdefinTextField" alignment="0" min="-2" pref="248" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -51,17 +44,7 @@
                   <Component id="tempsprevuTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tempsprevu" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="kmdedepart" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="kmdedepartTextField" alignment="3" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="kmdefin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="kmdefinTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -77,23 +60,9 @@
         <Property name="text" type="java.lang.String" value="Temps pr&#xe9;vu :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="kmdedepart">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Km de d&#xe9;part :"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="nomcircuitTextField">
     </Component>
     <Component class="javax.swing.JTextField" name="tempsprevuTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="kmdedepartTextField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="kmdefin">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Km de fin :"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="kmdefinTextField">
     </Component>
   </SubComponents>
 </Form>

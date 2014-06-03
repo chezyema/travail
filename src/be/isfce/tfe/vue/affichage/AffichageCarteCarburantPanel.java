@@ -8,6 +8,7 @@ import be.isfce.tfe.controleur.CarteCarburantControleur;
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
 import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.CarteCarburantDao;
 import be.isfce.tfe.metier.CarteCarburant;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
@@ -54,6 +55,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                     ex.getMessage(),
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
+            
         }
     }
 
@@ -161,6 +163,15 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
     @Override
     public void update(Observable o, Object arg) {
-       setCarteCarburant(cartecarburant);
+        System.out.println("UPDATE");
+        reset();
+    }
+
+    private void reset() {
+       
+         {
+            cartecarburant = CarteCarburantDao.getTousLesCartesCarburant();
+        }
+        setCarteCarburant(cartecarburant);
     }
 }

@@ -95,9 +95,7 @@ public class ArretDao {
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
                 circuit.setTempsPrevu(resultSet.getString("tempsprevu"));
-                circuit.setKmDepart(resultSet.getInt("kmdepart"));
-                circuit.setKmFin(resultSet.getInt("kmfin"));
-
+                
                 allCircuit.add(circuit);
             }
             //System.out.println(allCircuit);

@@ -14,6 +14,7 @@ public class UtilisationCarte {
     
     private  int idutilisationcarte;
     private Date dateutilisation;
+    private int litrecarburant;
     private MaterielRoulant lesvehicules;
     private CarteCarburant lescartes;
     private String idvehicule;
@@ -44,6 +45,15 @@ public class UtilisationCarte {
         this.dateutilisation = dateutilisation;
     }
 
+    public int getLitrecarburant() {
+        return litrecarburant;
+    }
+
+    public void setLitrecarburant(int litrecarburant) {
+        this.litrecarburant = litrecarburant;
+    }
+
+    
     public MaterielRoulant getLesvehicules() {
         return lesvehicules;
     }
@@ -78,17 +88,9 @@ public class UtilisationCarte {
 
     @Override
     public String toString() {
-        return "UtilisationCarte{" + "idutilisationcarte=" + idutilisationcarte + ", dateutilisation=" + dateutilisation + ", lesvehicules=" + lesvehicules + ", lescartes=" + lescartes + ", idvehicule=" + idvehicule + ", idcartecarburant=" + idcartecarburant + '}';
+        return "UtilisationCarte{" + "idutilisationcarte=" + idutilisationcarte + ", dateutilisation=" + dateutilisation + ", litrecarburant=" + litrecarburant + ", lesvehicules=" + lesvehicules + ", lescartes=" + lescartes + ", idvehicule=" + idvehicule + ", idcartecarburant=" + idcartecarburant + '}';
     }
-    
-    
-    
-
-    
-
+  
    
-   
-   
-    
-    
+        
 }

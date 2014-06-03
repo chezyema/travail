@@ -143,7 +143,7 @@ public class MaterielRoulantDao {
                 UtilisationCarte heure = new UtilisationCarte();
                 heure.setIdutilisationcarte(resultSet.getInt("idutilisation"));
                 heure.setDateutilisation(resultSet.getDate("dateutilisation"));
-
+                heure.setIdcartecarburant(resultSet.getInt("idcarte"));
                 allUtilisationCarte.add(heure);
             }
             // System.out.println(allUtilisationCarte);
@@ -191,8 +191,7 @@ public class MaterielRoulantDao {
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
                 circuit.setTempsPrevu(resultSet.getString("tempsprevu"));
-                circuit.setKmDepart(resultSet.getInt("kmdepart"));
-                circuit.setKmFin(resultSet.getInt("kmfin"));
+               
                 circuit.setIdmaterielroulant(resultSet.getString("id"));
                 allCircuit.add(circuit);
             }
@@ -258,8 +257,10 @@ public class MaterielRoulantDao {
             Entretien dernierEntretien = getDernierEntretien(vehicule);
             if (dernierEntretien != null) {
                 //TODO Ajouter une limite a 25000
-                if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() > 20000) {
-                    entretienAEffectuer++;
+                if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() < 25000) {
+                    if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() > 20000) {
+                        entretienAEffectuer++;
+                    }
                 }
             }
         }

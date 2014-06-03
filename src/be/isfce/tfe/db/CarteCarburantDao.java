@@ -24,7 +24,7 @@ public class CarteCarburantDao {
             preparedStatement.setInt(1, cartecarburant.getId());
             preparedStatement.setInt(2, cartecarburant.getKmUtilisation());
             preparedStatement.setInt(3, cartecarburant.getLitreCarburant());
-            preparedStatement.setString(4,cartecarburant.getNumcarte());
+            preparedStatement.setString(4, cartecarburant.getNumcarte());
 
             preparedStatement.executeUpdate();
             return true;
@@ -35,6 +35,17 @@ public class CarteCarburantDao {
 
     public static List<CarteCarburant> getTousLesCartesCarburant() {
         return getTousLesCartesCarburant(false);
+    }
+
+    public static CarteCarburant getCarteCarburant(int idCarte) {
+        System.out.println("CARTE : " + idCarte);
+        List<CarteCarburant> cartes = getTousLesCartesCarburant();
+        for (CarteCarburant carte : cartes) {
+            if (carte.getId() == idCarte) {
+                return carte;
+            }
+        }
+        return null;
     }
 
     public static List<CarteCarburant> getTousLesCartesCarburantarchives() {
@@ -91,6 +102,7 @@ public class CarteCarburantDao {
                 UtilisationCarte heure = new UtilisationCarte();
                 heure.setIdutilisationcarte(resultSet.getInt("idutilisation"));
                 heure.setDateutilisation(resultSet.getDate("dateutilisation"));
+                heure.setLitrecarburant(resultSet.getInt("litrecarburant"));
 
                 allUtilisationCarte.add(heure);
             }

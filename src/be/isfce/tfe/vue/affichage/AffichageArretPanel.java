@@ -6,6 +6,7 @@ package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.ArretControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.ArretDao;
 import be.isfce.tfe.metier.Arret;
 import java.util.List;
 import java.util.Observable;
@@ -116,9 +117,17 @@ public class AffichageArretPanel extends AffichagePanel {
         }
     }
 
-    @Override
+  @Override
     public void update(Observable o, Object arg) {
-        setArret(arrets);
+        System.out.println("UPDATE");
+        reset();
+    }
 
+    private void reset() {
+       
+         {
+            arrets = ArretDao.getTousLesArrets();
+        }
+        setArret(arrets);
     }
 }

@@ -15,9 +15,14 @@ import java.util.Calendar;
 public class TrajetsControleur extends AbstractControleur<Trajet> {
 
     @Override
-    public void controleEtAjoute(Trajet heuredetravail) throws ValidationException {
-        //TODO Faire la Validation
-        TrajetDao.addTrajets(heuredetravail);
+    public void controleEtAjoute(Trajet trajet) throws ValidationException {
+          if (trajet.getKmdepart() == 0) {
+            throw new ValidationException("Le kilometrage n'est pas valide");
+        }
+        if (trajet.getKmfin() == 0) {
+            throw new ValidationException("Le kilometrage n'est pas valide");
+        }
+        TrajetDao.addTrajets(trajet);
     }
 
     @Override

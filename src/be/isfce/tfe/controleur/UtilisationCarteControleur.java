@@ -22,6 +22,9 @@ public class UtilisationCarteControleur extends AbstractControleur<UtilisationCa
         if (carte.getDateUtilisation() == null || carte.getDateUtilisation().after(joura.getTime())) {
             throw new ValidationException("Le date n'est pas valide");
         }
+        if (carte.getLitrecarburant() == 0) {
+            throw new ValidationException("Les litres de carburant ne sont pas valide");
+        }
         if (UtilisationCarteDao.addUtilisationCarte(carte)) {
             setChanged();
             notifyObservers();

@@ -22,9 +22,13 @@ public class UtilisationCarteDao {
     public static boolean addUtilisationCarte(UtilisationCarte carte) {
         try {
             System.out.println(carte.toString());
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into utilisationcarte (idutilisation,dateutilisation) values (? , ?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into utilisationcarte (idutilisation,dateutilisation,litrecarburant,id,idcarte) values (? , ?, ?, ?,?)");
             preparedStatement.setInt(1, carte.getIdutilisationcarte());
             preparedStatement.setDate(2, new Date(carte.getDateUtilisation().getTime()));
+            preparedStatement.setInt(3,carte.getLitrecarburant());
+            preparedStatement.setString(4, carte.getIdvehicule());
+            preparedStatement.setInt(5, carte.getIdcartecarburant());
+
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -53,6 +57,7 @@ public class UtilisationCarteDao {
                 UtilisationCarte heure = new UtilisationCarte();
                 heure.setIdutilisationcarte(resultSet.getInt("idutilisation"));
                 heure.setDateutilisation(resultSet.getDate("dateutilisation"));
+                heure.setLitrecarburant(resultSet.getInt("litrecarburant"));
                 heure.setIdvehicule(resultSet.getString("id"));
                 heure.setIdcartecarburant(resultSet.getInt("idcarte"));
 
@@ -67,10 +72,12 @@ public class UtilisationCarteDao {
 
     public static boolean updateUtilisationCarte(UtilisationCarte utilisation) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update utilisationcarte set dateutilisation = ? where utilisationcarte.idutilisation = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update utilisationcarte set dateutilisation = ?,set litrecarburant = ? where utilisationcarte.idutilisation = ?");
 
             preparedStatement.setDate(1, new Date(utilisation.getDateUtilisation().getTime()));
-            preparedStatement.setInt(2, utilisation.getIdutilisationcarte());
+            preparedStatement.setInt(2, utilisation.getLitrecarburant());
+            preparedStatement.setInt(3, utilisation.getIdutilisationcarte());
+            
 
             preparedStatement.execute();
             return true;

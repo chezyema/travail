@@ -8,6 +8,7 @@ import be.isfce.tfe.controleur.CircuitControleur;
 import be.isfce.tfe.controleur.EcoleControlleur;
 import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.EcoleDao;
 import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.Ecole;
 import be.isfce.tfe.vue.ajout.AjoutEcoleJPanel;
@@ -212,6 +213,7 @@ public class AffichageEcolePanel extends AffichagePanel {
                     @Override
                     public void onButtonSavePressed() {
                         dialog.dispose();
+                        reset();
                     }
                 });
                 dialog = DialogUtils.afficheDialog(null, ajoutEleveJPanell);
@@ -221,7 +223,16 @@ public class AffichageEcolePanel extends AffichagePanel {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+   public void update(Observable o, Object arg) {
+        System.out.println("UPDATE");
+        reset();
+    }
+
+    private void reset() {
+       
+         {
+            ecoles = EcoleDao.getTousLesEcoles();
+        }
         setEcole(ecoles);
     }
 

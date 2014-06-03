@@ -140,9 +140,7 @@ public class EcoleDao {
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
                 circuit.setTempsPrevu(resultSet.getString("tempsprevu"));
-                circuit.setKmDepart(resultSet.getInt("kmdepart"));
-                circuit.setKmFin(resultSet.getInt("kmfin"));
-
+               
                 allCircuit.add(circuit);
             }
             return allCircuit;

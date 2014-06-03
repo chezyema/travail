@@ -20,6 +20,8 @@ public class Trajet {
     private String heurededebut;
     private String heuredefin;
     private Date dateTravail;
+    private int kmdepart;
+    private int kmfin;
     private String idchauffeur;
     private String idmaterielroulant;
     private int idcircuit;
@@ -76,9 +78,28 @@ public class Trajet {
         this.idmaterielroulant = idmaterielroulant;
     }
 
+    public int getKmdepart() {
+        return kmdepart;
+    }
+
+    public int getKmfin() {
+        return kmfin;
+    }
+
+    public void setKmdepart(int kmdepart) {
+        this.kmdepart = kmdepart;
+    }
+
+    public void setKmfin(int kmfin) {
+        this.kmfin = kmfin;
+    }
+
     @Override
     public String toString() {
-        return "Trajets{" + "idtrajets=" + idtrajets + ", heurededebut=" + heurededebut + ", heuredefin=" + heuredefin + ", dateTravail=" + dateTravail + ", idchauffeur=" + idchauffeur + ", idmaterielroulant=" + idmaterielroulant + ", idcircuit=" + idcircuit + '}';
+        return "Trajet{" + "idtrajets=" + idtrajets + ", heurededebut=" + heurededebut + ", heuredefin=" + heuredefin + ", dateTravail=" + dateTravail + ", kmdepart=" + kmdepart + ", kmfin=" + kmfin + ", idchauffeur=" + idchauffeur + ", idmaterielroulant=" + idmaterielroulant + ", idcircuit=" + idcircuit + '}';
     }
+    
+
+   
 
 }

@@ -6,6 +6,7 @@ package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.EntretienDao;
 import be.isfce.tfe.metier.Entretien;
 import java.util.Date;
 import java.util.List;
@@ -135,8 +136,16 @@ public class AffichageEntretienPanel extends AffichagePanel {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-       setEntretien(entretiens);
+   public void update(Observable o, Object arg) {
+        System.out.println("UPDATE");
+        reset();
     }
 
+    private void reset() {
+       
+         {
+            entretiens = EntretienDao.getTousLesEntretiens();
+        }
+        setEntretien(entretiens);
+    }
 }

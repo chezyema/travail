@@ -1,10 +1,9 @@
-
-phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 3.4.10.1
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mer 28 Mai 2014 à 13:41
+-- Généré le : Mar 03 Juin 2014 à 22:59
 -- Version du serveur: 5.5.20
 -- Version de PHP: 5.3.10
 
@@ -32,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `arrets` (
   `adressearrets` varchar(40) NOT NULL,
   `supprimearrets` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idarrets`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Contenu de la table `arrets`
@@ -58,7 +57,10 @@ INSERT INTO `arrets` (`idarrets`, `adressearrets`, `supprimearrets`) VALUES
 (17, 'rue de forest 65 1190 Bruxelles', 0),
 (18, 'av van volxem 765 1190 bruxelles', 0),
 (19, 'rue de la grenouile 32 1200 bruxelles', 0),
-(20, 'rue sicile 34 1200 bruxelles', 0);
+(20, 'rue sicile 34 1200 bruxelles', 0),
+(21, 'rue de Lessines', 0),
+(22, 'rue gatti gamond 12', 0),
+(23, 'rue douvre 12 1000bxl', 0);
 
 -- --------------------------------------------------------
 
@@ -74,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `cartecarburant` (
   `supprimecartecarburant` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idcarte`),
   KEY `numcarte` (`numcarte`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Contenu de la table `cartecarburant`
@@ -100,7 +102,8 @@ INSERT INTO `cartecarburant` (`idcarte`, `kmutilisation`, `litrecarburant`, `num
 (17, 21000, 210, '101', 0),
 (18, 22345, 127, '104', 0),
 (19, 765432, 231, '103', 0),
-(20, 150000, 125, '100', 0);
+(20, 150000, 125, '100', 0),
+(21, 125000, 123, '105', 0);
 
 -- --------------------------------------------------------
 
@@ -129,16 +132,17 @@ CREATE TABLE IF NOT EXISTS `chauffeur` (
 --
 
 INSERT INTO `chauffeur` (`idchauffeur`, `nom`, `prenom`, `datenaissance`, `adresse`, `codepostal`, `ville`, `numtelephone`, `email`, `numcartesis`, `numpermis`, `supprimechauffeur`) VALUES
-('69122554632', 'abdeslami', 'abselam', '1969-12-25', 'rue blaes 38', 1000, 'bruxelles', '0475432312', 'abselam@hotmail.com', '0', '0', 0),
-('73092749087', 'guertit', 'fabienne', '1987-09-27', 'rue edmond bonehill  12', 1210, 'bruxelles', '025234321', 'fabienn@hotmail.com', '0', '0', 0),
-('78102345678', 'vanden borre', 'anthony', '1978-10-23', 'rue saint guidon', 1070, 'bruxelles', '0476543212', 'anthony@yahoo.fr', '0', '0', 0),
-('79102345678', 'van oudenhove', 'didier', '1979-10-23', 'rue blueth 45', 1040, 'bruxelles', '0496553212', 'didier@yahoo.fr', '0', '0', 0),
-('82031345612', 'fathi', 'mezut', '1982-03-13', 'rue josaphat 54', 1030, 'bruxelles', '0483423145', 'fathi@yahoo.fr', '0', '0', 0),
-('85112130960', 'zaoui', 'sofiane', '1985-11-21', 'rue stevens  25', 1190, 'bruxelles', '0483498251', 'zaoui@hotmail.com', '0', '0', 0),
-('86112130960', 'zahri', 'yassine', '1986-11-21', 'rue de lessines 20', 1080, 'bruxelles', '484982513', 'chezyema@hotmail.com', '0', '0', 0),
-('88061434567', 'lepierre', 'sophie', '1988-06-14', 'rue walem 122', 1083, 'bruxelles', '0498654534', 'sophie@skynet.be', '0', '0', 0),
-('89080667854', 'alexander', 'vanof', '1989-08-06', 'rue claire 34', 1060, 'bruxelles', '0488675432', 'vanof@hotmail.com', '0', '0', 0),
-('90050545678', 'amjik', 'faysal', '1990-05-05', 'rue des quatres vents 112', 1080, 'bruxelles', '0486754534', 'amjik@yahou.fr', '0', '0', 0);
+('123456789013', 'oqisnoqisnd', 'Yacine', '2014-05-31', 'roqinsd', 1000, 'oiqnsd', '048888888', 'serroukh@gmail.com', '89', '89', 1),
+('69122554632', 'abdeslami', 'abselam', '1969-12-25', 'rue blaes 38', 1000, 'bruxelles', '0475432312', 'abselam@hotmail.com', '987651', '0', 1),
+('73092749087', 'guertit', 'fabienne', '1987-09-27', 'rue edmond bonehill  12', 1210, 'bruxelles', '025234321', 'fabienn@hotmail.com', '654321', '0', 0),
+('78102345678', 'vanden borre', 'anthony', '1978-10-23', 'rue saint guidon', 1070, 'bruxelles', '0476543212', 'anthony@yahoo.fr', '765432', '0', 0),
+('79102345678', 'van oudenhove', 'didier', '1979-10-23', 'rue blueth 45', 1040, 'bruxelles', '0496553212', 'didier@yahoo.fr', '876543', '0', 0),
+('82031345612', 'fathi', 'mezut', '1982-03-13', 'rue josaphat 54', 1030, 'bruxelles', '0483423145', 'fathi@yahoo.fr', '987654', '0', 0),
+('85112130960', 'zaoui', 'sofiane', '1985-11-21', 'rue stevens  25', 1190, 'bruxelles', '0483498251', 'zaoui@hotmail.com', '342178', '0', 0),
+('86112130960', 'zahri', 'yassine', '1986-11-21', 'rue de lessines 20', 1080, 'bruxelles', '484982513', 'chezyema@hotmail.com', '987654', '0', 0),
+('88061434567', 'lepierre', 'sophie', '1988-06-14', 'rue walem 122', 1083, 'bruxelles', '0498654534', 'sophie@skynet.be', '567890', '0', 0),
+('89080667854', 'alexander', 'vanof', '1989-08-06', 'rue claire 34', 1060, 'bruxelles', '0488675432', 'vanof@hotmail.com', '123456', '0', 1),
+('90050545678', 'amjik', 'faysal', '1990-05-05', 'rue des quatres vents 112', 1080, 'bruxelles', '0486754534', 'amjik@yahou.fr', '456789', '0', 0);
 
 -- --------------------------------------------------------
 
@@ -150,25 +154,27 @@ CREATE TABLE IF NOT EXISTS `circuit` (
   `idcircuit` int(11) NOT NULL AUTO_INCREMENT,
   `nomcircuit` varchar(30) NOT NULL,
   `tempsprevu` varchar(20) NOT NULL,
-  `kmdepart` int(11) NOT NULL,
-  `kmfin` int(11) NOT NULL,
   `idecole` int(11) DEFAULT NULL,
-  `id` varchar(30) NOT NULL,
-  `idchauffeur` varchar(15) NOT NULL,
+  `id` varchar(30) DEFAULT NULL,
+  `idchauffeur` varchar(15) DEFAULT NULL,
   `supprimecircuits` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idcircuit`),
   KEY `FK_circuit_idecole` (`idecole`),
   KEY `FK_circuit_id` (`id`),
   KEY `FK_circuit_idchauffeur` (`idchauffeur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `circuit`
 --
 
-INSERT INTO `circuit` (`idcircuit`, `nomcircuit`, `tempsprevu`, `kmdepart`, `kmfin`, `idecole`, `id`, `idchauffeur`, `supprimecircuits`) VALUES
-(1, 'elephant', '2H00', 123001, 123123, 1, 'WWW090008UIYT546T', '69122554632', 0),
-(2, 'les canards', '2h30', 128000, 128124, 2, 'WWW456FF4564456T6', '73092749087', 0);
+INSERT INTO `circuit` (`idcircuit`, `nomcircuit`, `tempsprevu`, `idecole`, `id`, `idchauffeur`, `supprimecircuits`) VALUES
+(1, 'elephant', '2H00', 1, 'WWW090008UIYT546T', '69122554632', 0),
+(2, 'les canards', '2h30', 2, 'WWW456FF4564456T6', '73092749087', 1),
+(3, 'le palmier', '1H30', 5, 'WWW0987YTR456ED45', '73092749087', 0),
+(4, 'les strouwfs', '2H00', 3, 'WWW456FF4564456T6', '78102345678', 0),
+(5, 'AZE', '1H45', NULL, NULL, NULL, 0),
+(6, 'iqsnodniq', '2H30', 1, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -182,6 +188,16 @@ CREATE TABLE IF NOT EXISTS `contient` (
   PRIMARY KEY (`idcircuit`,`idarrets`),
   KEY `FK_contient_idarrets` (`idarrets`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `contient`
+--
+
+INSERT INTO `contient` (`idcircuit`, `idarrets`) VALUES
+(1, 21),
+(4, 21),
+(1, 22),
+(1, 23);
 
 -- --------------------------------------------------------
 
@@ -199,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `documentsadministratifs` (
   PRIMARY KEY (`iddocument`),
   KEY `FK_documentsAdministratifs_id` (`id`),
   KEY `FK_documentsAdministratifs_idchauffeur` (`idchauffeur`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Contenu de la table `documentsadministratifs`
@@ -210,7 +226,21 @@ INSERT INTO `documentsadministratifs` (`iddocument`, `libelle`, `datevaliditer`,
 (2, 'carte chauffeur', '2015-05-09', NULL, '69122554632', 0),
 (3, 'cap', '2014-05-15', NULL, '69122554632', 0),
 (4, 'assurance', '2015-05-07', 'WWW090008UIYT546T', NULL, 0),
-(5, 'contrôle technique', '2014-09-18', 'WWW090008UIYT546T', NULL, 0);
+(5, 'contrôle technique', '2014-09-18', 'WWW090008UIYT546T', NULL, 0),
+(6, 'fffhhfgh', '2014-06-10', NULL, '123456789013', 0),
+(7, 'ASSURANCE', '2014-06-22', NULL, NULL, 0),
+(8, 'CAP', '2014-06-29', NULL, '73092749087', 0),
+(9, 'CAP', '2014-06-29', NULL, NULL, 0),
+(10, 'CAP', '2014-06-13', NULL, '73092749087', 0),
+(11, 'CAP', '2014-06-13', NULL, NULL, 0),
+(12, 'selection medicale', '2014-06-19', NULL, '123456789013', 0),
+(13, 'selection medicale', '2014-06-19', NULL, NULL, 0),
+(14, 'cap', '2014-08-14', NULL, '90050545678', 0),
+(15, 'cap', '2014-08-14', NULL, NULL, 0),
+(16, 'freins', '2014-06-29', NULL, NULL, 0),
+(17, 'ASSURANCE', '2014-06-04', NULL, NULL, 0),
+(18, 'CONTROLE TECHNIQUE', '2014-06-08', NULL, NULL, 0),
+(19, 'ASSURANCE', '2014-06-14', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -229,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `ecole` (
   `nomdirecteur` varchar(30) DEFAULT NULL,
   `supprimeecole` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idecole`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `ecole`
@@ -239,7 +269,9 @@ INSERT INTO `ecole` (`idecole`, `nomecole`, `adresseecole`, `cdpostal`, `vil`, `
 (1, 'la flutte enchante', 'bld mettewie 45', 1080, 'bruxelles', '025234231', 'laplume@hotmail.com', 'nathalie', 0),
 (2, 'école europeen', 'chaussée de waterloo 1150', 1180, 'bruxelles', '022123456', 'ecoleeuropeen@hotmail.com', 'kriesh de wolf', 0),
 (3, 'la plume', 'rue du midi 67', 1000, 'bruxelles', '024536758', 'laplume@hotmail.com', 'wissal ahmed', 0),
-(4, 'Ecole 12', 'rue de veeweyde 76', 1070, 'bruxelles', '023432564', 'ecole12@gmail.com', 'edward stevens', 0);
+(4, 'Ecole 12', 'rue de veeweyde 76', 1070, 'bruxelles', '023432564', 'ecole12@gmail.com', 'edward stevens', 0),
+(5, 'ecole Imelda', 'chaussée de ninove 123', 1080, 'Bruxelles', '023425674', 'Imelda@hotmail.com', 'laurent depast', 0),
+(6, 'TYUI', 'TYUI', 1000, 'YUIO', '028765432', 'yacine@gmail.com', 'RTYUI', 0);
 
 -- --------------------------------------------------------
 
@@ -258,8 +290,8 @@ CREATE TABLE IF NOT EXISTS `eleve` (
   `nomresponsable` varchar(30) NOT NULL,
   `telresponsable` varchar(11) NOT NULL,
   `emailresponsable` varchar(30) DEFAULT NULL,
-  `idcircuit` int(11) NOT NULL,
-  `idecole` int(11) NOT NULL,
+  `idcircuit` int(11) DEFAULT NULL,
+  `idecole` int(11) DEFAULT NULL,
   `supprimeecole` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ideleve`),
   KEY `FK_eleve_idcircuit` (`idcircuit`),
@@ -272,7 +304,8 @@ CREATE TABLE IF NOT EXISTS `eleve` (
 
 INSERT INTO `eleve` (`ideleve`, `nomeleve`, `prenomeleve`, `datedenaissance`, `adresseeleve`, `codepostal`, `ville`, `nomresponsable`, `telresponsable`, `emailresponsable`, `idcircuit`, `idecole`, `supprimeecole`) VALUES
 ('10030467854', 'clovis', 'bernard', '2010-03-04', 'rue du menin 32', 1081, 'bruxelles', 'clovis serge', '0472345212', 'clovis@yahoo.fr', 1, 1, 0),
-('11112378654', 'boubkar', 'moussa', '2011-11-23', 'rue de flandre 32', 1080, 'bruxelles', 'boubkar brahim', '0487765098', 'boubkar@hotmail.com', 1, 1, 0);
+('11112378654', 'boubkar', 'moussa', '2011-11-23', 'rue de flandre 32', 1080, 'bruxelles', 'boubkar brahim', '0487765098', 'boubkar@hotmail.com', 1, 1, 0),
+('99120354312', 'arear', ' miloud', '1999-12-03', 'rue mutsaard 1é', 1120, 'bruxelles', 'arear claude', '0476564321', 'arear@hotmail.com', 3, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -290,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `entretien` (
   PRIMARY KEY (`identretien`),
   KEY `dateentretien` (`dateentretien`),
   KEY `FK_entretien_id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Contenu de la table `entretien`
@@ -300,7 +333,15 @@ INSERT INTO `entretien` (`identretien`, `description`, `kmentretienfait`, `datee
 (1, 'changement de freins', 90000, '2012-07-12', 'WWW090008UIYT546T', 0),
 (2, 'vidange huile', 95000, '2013-05-09', 'WWW090008UIYT546T', 0),
 (3, 'changement bulles de pression', 100000, '2014-02-05', 'WWW090008UIYT546T', 0),
-(4, 'remplacement essuie-glace', 110000, '2013-11-05', 'WWW090008UIYT546T', 0);
+(4, 'remplacement essuie-glace', 110000, '2013-11-05', 'WWW090008UIYT546T', 0),
+(14, 'AZE', 123, '2014-06-01', 'WWW090008UIYT546T', 0),
+(15, 'TYU', 7890, '2014-06-01', 'WWW456FF4564456T6', 0),
+(16, 'changement liquide de freins', 98000, '2014-06-02', 'WWW5677GHJ45678T98', 0),
+(17, 'vidange huile', 123000, '2014-06-02', 'WWWSS123456789014', 0),
+(18, 'changement de freins', 122000, '2014-06-02', 'WWW0987YTR456ED45', 0),
+(19, 'changement essuie glace', 122000, '2014-05-25', 'WWW0987YTR456ED45', 0),
+(20, 'nettoyage', 128000, '2014-06-02', 'WWW9807FFG4356789', 0),
+(21, 'changement radiateur', 127890, '2014-06-03', 'WWW090008UIYT546T', 0);
 
 -- --------------------------------------------------------
 
@@ -327,7 +368,7 @@ CREATE TABLE IF NOT EXISTS `materielroulant` (
 --
 
 INSERT INTO `materielroulant` (`id`, `marque`, `type`, `anneedeconstruction`, `carburant`, `numimmatr`, `nbdeplaces`, `kmactuel`, `validiterexctincteur`, `supprimematerielroulant`) VALUES
-('WWW090008UIYT546T', 'TEMSA', 'minibus', '2011-09-14', 'diesel', '1GFR567', 24, 67000, '2016-04-20', 0),
+('WWW090008UIYT546T', 'TEMSA', 'minibuS', '2011-09-14', 'dieseL', '1GFR567', 24, 67000, '2016-04-20', 0),
 ('WWW0987YTR456ED45', 'TEMSA', 'minibus', '2006-05-11', 'diesel', '1OPI765', 30, 92000, '2014-06-19', 0),
 ('WWW456FF4564456T6', 'volvo', 'bus', '2012-05-18', 'diesel', '1BBE234', 56, 50000, '2017-02-14', 0),
 ('WWW5677GHJ45678T98', 'mercedes', 'minibus', '2008-02-04', 'diesel', '1RET654', 20, 65000, '2015-05-22', 0),
@@ -347,6 +388,8 @@ CREATE TABLE IF NOT EXISTS `trajets` (
   `heurededebut` varchar(25) DEFAULT NULL,
   `heuredefin` varchar(25) DEFAULT NULL,
   `datetravail` date DEFAULT NULL,
+  `kmdepart` int(11) NOT NULL,
+  `kmfin` int(11) NOT NULL,
   `idchauffeur` varchar(15) NOT NULL,
   `idcircuit` int(11) NOT NULL,
   `id` varchar(30) NOT NULL,
@@ -356,15 +399,18 @@ CREATE TABLE IF NOT EXISTS `trajets` (
   KEY `FK_trajets_idchauffeur` (`idchauffeur`),
   KEY `FK_trajets_idcircuit` (`idcircuit`),
   KEY `FK_trajets_id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `trajets`
 --
 
-INSERT INTO `trajets` (`idtrajets`, `heurededebut`, `heuredefin`, `datetravail`, `idchauffeur`, `idcircuit`, `id`, `supprimetrajets`) VALUES
-(1, '14H45', '17H00', '2014-05-08', '69122554632', 1, 'WWW090008UIYT546T', 0),
-(2, '06H40', '8H45', '2014-03-06', '73092749087', 2, 'WWW456FF4564456T6', 0);
+INSERT INTO `trajets` (`idtrajets`, `heurededebut`, `heuredefin`, `datetravail`, `kmdepart`, `kmfin`, `idchauffeur`, `idcircuit`, `id`, `supprimetrajets`) VALUES
+(1, '14H45', '17H00', '2014-05-08', 122000, 123000, '69122554632', 1, 'WWW090008UIYT546T', 0),
+(2, '06H40', '8H45', '2014-03-06', 321000, 321232, '73092749087', 2, 'WWW456FF4564456T6', 0),
+(3, '14H16', '16H00', '2014-06-01', 88000, 88132, '123456789013', 3, 'WWW456FF4564456T6', 0),
+(4, '05H40', '07H40', '2014-06-05', 232000, 232432, '78102345678', 1, 'WWW0987YTR456ED45', 0),
+(5, '07H30', '09H10', '2014-06-13', 123000, 123321, '73092749087', 4, 'WWW456FF4564456T6', 0);
 
 -- --------------------------------------------------------
 
@@ -375,6 +421,7 @@ INSERT INTO `trajets` (`idtrajets`, `heurededebut`, `heuredefin`, `datetravail`,
 CREATE TABLE IF NOT EXISTS `utilisationcarte` (
   `idutilisation` int(11) NOT NULL AUTO_INCREMENT,
   `dateutilisation` date DEFAULT NULL,
+  `litrecarburant` int(11) NOT NULL,
   `id` varchar(30) NOT NULL,
   `idcarte` int(11) DEFAULT NULL,
   `supprimeutilisationcarte` tinyint(1) NOT NULL DEFAULT '0',
@@ -382,15 +429,19 @@ CREATE TABLE IF NOT EXISTS `utilisationcarte` (
   KEY `dateutilisation` (`dateutilisation`),
   KEY `FK_utilisationCarte_id` (`id`),
   KEY `FK_utilisationCarte_idcarte` (`idcarte`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `utilisationcarte`
 --
 
-INSERT INTO `utilisationcarte` (`idutilisation`, `dateutilisation`, `id`, `idcarte`, `supprimeutilisationcarte`) VALUES
-(1, '2014-05-15', 'WWW090008UIYT546T', 1, 0),
-(2, '2014-05-23', 'WWW090008UIYT546T', 1, 0);
+INSERT INTO `utilisationcarte` (`idutilisation`, `dateutilisation`, `litrecarburant`, `id`, `idcarte`, `supprimeutilisationcarte`) VALUES
+(1, '2014-05-15', 0, 'WWW090008UIYT546T', 1, 0),
+(2, '2014-05-23', 0, 'WWW090008UIYT546T', 1, 0),
+(3, '2014-06-11', 0, 'WWW0987YTR456ED45', 4, 0),
+(4, '2014-03-12', 0, 'WWW8765RTYU43ZE87', 3, 0),
+(5, '2014-06-02', 0, 'WWWSS123456789014', 1, 0),
+(6, '2014-06-04', 123, 'WWW87645RET234ZER5', 3, 0);
 
 --
 -- Contraintes pour les tables exportées

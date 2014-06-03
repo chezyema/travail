@@ -9,6 +9,8 @@ import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
 import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.CircuitDao;
+import be.isfce.tfe.db.MaterielRoulantDao;
 import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.vue.ajout.AjoutDocumentsJPanell;
 import be.isfce.tfe.vue.ajout.AjoutEntretienJPanell;
@@ -221,6 +223,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     @Override
                     public void onButtonSavePressed() {
                         dialog.dispose();
+                        reset();
                     }
                 });
                 dialog = DialogUtils.afficheDialog(null, ajoutEntretienJPanell);
@@ -257,6 +260,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     @Override
                     public void onButtonSavePressed() {
                         dialog.dispose();
+                        reset();
                     }
                 });
                 dialog = DialogUtils.afficheDialog(null, ajoutDocumentsJPanell);
@@ -277,6 +281,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     @Override
                     public void onButtonSavePressed() {
                         dialog.dispose();
+                        reset();
                     }
                 });
                 dialog = DialogUtils.afficheDialog(null, ajoutUtilisationJPanell);
@@ -287,7 +292,16 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
 
   
     @Override
-    public void update(Observable o, Object arg) {
+   public void update(Observable o, Object arg) {
+        System.out.println("UPDATE");
+        reset();
+    }
+
+    private void reset() {
+       
+         {
+            vehicules = MaterielRoulantDao.getTousLesVehicules();
+        }
         setVehicules(vehicules);
     }
 }
