@@ -17,6 +17,7 @@ import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -98,7 +99,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
                     case 0:
                         return trajet.getNomCircuit();
                     case 1:
-                        return trajet.getTempsPrevu();
+                        return trajet.getTempsprevu();
                     
 
                     default:
@@ -115,7 +116,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
                         circuit.setNomCircuit((String) aValue);
                         break;
                     case 1:
-                        circuit.setTempsPrevu((String) aValue);
+                        circuit.setTempsprevu(new Date());
                         break;
                  
                        

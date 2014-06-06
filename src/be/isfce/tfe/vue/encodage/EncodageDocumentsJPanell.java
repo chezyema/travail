@@ -52,7 +52,7 @@ public class EncodageDocumentsJPanell extends javax.swing.JPanel {
 
         libelledocument.setText("Libelle :");
 
-        datedevaliditer.setText("Date de validiter :");
+        datedevaliditer.setText("Date de fin de validité :");
 
         libelleTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,8 +71,8 @@ public class EncodageDocumentsJPanell extends javax.swing.JPanel {
                     .addComponent(datedevaliditer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(libelleTextField)
-                    .addComponent(datedocument, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(libelleTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(datedocument, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

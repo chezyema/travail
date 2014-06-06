@@ -24,7 +24,7 @@ public class CircuitControleur extends AbstractControleur<Circuit> {
             throw new ValidationException("le nom n'est pas valide");
         }
     
-        if (circuit.getTempsPrevu() == null) {
+        if (circuit.getTempsprevu() == null) {
             throw new ValidationException("Le temps prévu n'est pas valide");
         }
         if (CircuitDao.addCircuit(circuit)) {

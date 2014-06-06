@@ -190,7 +190,7 @@ public class MaterielRoulantDao {
                 Circuit circuit = new Circuit();
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
-                circuit.setTempsPrevu(resultSet.getString("tempsprevu"));
+                circuit.setTempsprevu(resultSet.getDate("tempsprevu"));
                
                 circuit.setIdmaterielroulant(resultSet.getString("id"));
                 allCircuit.add(circuit);

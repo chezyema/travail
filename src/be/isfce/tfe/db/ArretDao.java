@@ -94,7 +94,7 @@ public class ArretDao {
                 Circuit circuit = new Circuit();
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
-                circuit.setTempsPrevu(resultSet.getString("tempsprevu"));
+                circuit.setTempsprevu(resultSet.getDate("tempsprevu"));
                 
                 allCircuit.add(circuit);
             }

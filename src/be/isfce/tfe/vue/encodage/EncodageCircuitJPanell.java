@@ -8,6 +8,7 @@ import be.isfce.tfe.vue.ajout.*;
 import be.isfce.tfe.controleur.CircuitControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Circuit;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,7 +28,9 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
         Circuit circuit = new Circuit();
         circuit.setId(0);
         circuit.setNomCircuit(String.valueOf(nomcircuitTextField.getText()));
-        circuit.setTempsPrevu(tempsprevuTextField.getText());
+         Date heure = (Date) heureSpinner.getValue();
+         Date minute = (Date) minuteSpinner.getValue();
+        
        
         return circuit;
     }
@@ -44,7 +47,8 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
         nomoducircuit = new javax.swing.JLabel();
         tempsprevu = new javax.swing.JLabel();
         nomcircuitTextField = new javax.swing.JTextField();
-        tempsprevuTextField = new javax.swing.JTextField();
+        heureSpinner = new javax.swing.JSpinner();
+        minuteSpinner = new javax.swing.JSpinner();
 
         nomoducircuit.setText("Nom du circuit :");
 
@@ -62,7 +66,10 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nomcircuitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tempsprevuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(heureSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(minuteSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -74,17 +81,19 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
                     .addComponent(nomoducircuit, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tempsprevuTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tempsprevu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27))
+                    .addComponent(tempsprevu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(heureSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minuteSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner heureSpinner;
+    private javax.swing.JSpinner minuteSpinner;
     private javax.swing.JTextField nomcircuitTextField;
     private javax.swing.JLabel nomoducircuit;
     private javax.swing.JLabel tempsprevu;
-    private javax.swing.JTextField tempsprevuTextField;
     // End of variables declaration//GEN-END:variables
 }

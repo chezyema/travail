@@ -26,11 +26,12 @@ public class CircuitDao {
     public static boolean addCircuit(Circuit circuit) {
 
         try {
+            Date dateSql = new Date(circuit.getTempsprevu().getTime());
             System.out.println(circuit.toString());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into circuit (idcircuit,nomcircuit,tempsprevu,idecole,id,idchauffeur) values (  ?, ?, ?,?,?,? )");
             preparedStatement.setInt(1, circuit.getId());
             preparedStatement.setString(2, circuit.getNomCircuit());
-            preparedStatement.setString(3, circuit.getTempsPrevu());
+            preparedStatement.setDate(3, dateSql);
            
             if (circuit.getIdecole() != 0) {
                 preparedStatement.setInt(6, circuit.getIdecole());
@@ -77,7 +78,7 @@ public class CircuitDao {
                 Circuit circuit = new Circuit();
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
-                circuit.setTempsPrevu(resultSet.getString("tempsprevu"));
+                circuit.setTempsprevu(resultSet.getDate("tempsprevu"));
                 circuit.setIdecole(resultSet.getInt("idecole"));
                 circuit.setIdmaterielroulant(resultSet.getString("id"));
                 circuit.setIdchauffeur(resultSet.getString("idchauffeur"));
@@ -101,7 +102,7 @@ public class CircuitDao {
             System.out.println(circuit.getIdecole());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update circuit set nomcircuit = ?,tempsprevu = ?, idecole = ?, id = ?, idchauffeur = ? where circuit.idcircuit = ?");
             preparedStatement.setString(1, circuit.getNomCircuit());
-            preparedStatement.setString(2, circuit.getTempsPrevu());
+            preparedStatement.setDate(2,  new Date(circuit.getTempsprevu().getTime()));
            
             if (circuit.getIdecole() != 0) {
                 System.out.println("ID ECOLE SET");

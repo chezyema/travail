@@ -80,7 +80,7 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
 
         anneedeconstructionjllabel.setText("Annee de construction:");
 
-        datevaliterextincteur.setText("Date validiter exctincteur:");
+        datevaliterextincteur.setText("Date validité exctincteur:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,7 +105,7 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
                     .addComponent(plaqueTextField)
                     .addComponent(carburantTextField)
                     .addComponent(nbdeplaceTextField)
-                    .addComponent(kilometrageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                    .addComponent(kilometrageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                     .addComponent(identifiantTextField)
                     .addComponent(anneeconstruction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(validiterexctincteur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

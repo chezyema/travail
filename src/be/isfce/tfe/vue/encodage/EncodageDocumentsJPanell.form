@@ -48,8 +48,8 @@
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="libelleTextField" max="32767" attributes="0"/>
-                  <Component id="datedocument" max="32767" attributes="0"/>
+                  <Component id="libelleTextField" pref="69" max="32767" attributes="0"/>
+                  <Component id="datedocument" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -81,7 +81,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="datedevaliditer">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Date de validiter :"/>
+        <Property name="text" type="java.lang.String" value="Date de fin de validit&#xe9; :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="libelleTextField">

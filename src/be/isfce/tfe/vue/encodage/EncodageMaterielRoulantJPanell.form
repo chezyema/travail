@@ -36,7 +36,7 @@
                   <Component id="plaqueTextField" alignment="0" max="32767" attributes="0"/>
                   <Component id="carburantTextField" alignment="0" max="32767" attributes="0"/>
                   <Component id="nbdeplaceTextField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="kilometrageTextField" alignment="0" pref="209" max="32767" attributes="0"/>
+                  <Component id="kilometrageTextField" alignment="0" pref="213" max="32767" attributes="0"/>
                   <Component id="identifiantTextField" alignment="0" max="32767" attributes="0"/>
                   <Component id="anneeconstruction" max="32767" attributes="0"/>
                   <Component id="validiterexctincteur" alignment="0" max="32767" attributes="0"/>
@@ -161,7 +161,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="datevaliterextincteur">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Date validiter exctincteur:"/>
+        <Property name="text" type="java.lang.String" value="Date validit&#xe9; exctincteur:"/>
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="validiterexctincteur">
