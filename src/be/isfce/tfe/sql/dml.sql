@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Mer 11 Juin 2014 à 21:36
+-- Généré le : Mer 11 Juin 2014 à 22:10
 -- Version du serveur: 5.5.20
 -- Version de PHP: 5.3.10
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `arrets` (
   `idarrets` int(11) NOT NULL AUTO_INCREMENT,
   `adressearrets` varchar(40) NOT NULL,
+  `supprimearrets` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idarrets`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `cartecarburant` (
   `numcarte` varchar(25) DEFAULT NULL,
   `kmutilisation` int(11) DEFAULT NULL,
   `litrecarburant` int(11) NOT NULL,
+  `supprimecartecarburant` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idcarte`),
   KEY `numcarte` (`numcarte`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -65,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `chauffeur` (
   `email` varchar(30) DEFAULT NULL,
   `numcartesis` varchar(11) NOT NULL,
   `numpermis` varchar(11) DEFAULT NULL,
+  `supprimechauffeur` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idchauffeur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -81,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `circuit` (
   `idecole` int(11) NOT NULL,
   `id` varchar(30) NOT NULL,
   `idchauffeur` varchar(15) NOT NULL,
+  `supprimecircuits` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idcircuit`),
   KEY `FK_circuit_idecole` (`idecole`),
   KEY `FK_circuit_id` (`id`),
@@ -113,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `documentsadministratifs` (
   `id` varchar(30) NOT NULL,
   `idchauffeur` varchar(15) NOT NULL,
   `idtype` int(11) DEFAULT NULL,
+  `supprimedocument` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`iddocument`),
   KEY `FK_documentsAdministratifs_id` (`id`),
   KEY `FK_documentsAdministratifs_idchauffeur` (`idchauffeur`),
@@ -134,6 +139,7 @@ CREATE TABLE IF NOT EXISTS `ecole` (
   `telecole` varchar(11) NOT NULL,
   `emailecole` varchar(30) DEFAULT NULL,
   `nomdirecteur` varchar(30) DEFAULT NULL,
+  `supprimeecole` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idecole`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -156,6 +162,7 @@ CREATE TABLE IF NOT EXISTS `eleve` (
   `emailresponsable` varchar(30) DEFAULT NULL,
   `idcircuit` int(11) NOT NULL,
   `idecole` int(11) NOT NULL,
+  `supprimeeleve` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ideleve`),
   KEY `FK_eleve_idcircuit` (`idcircuit`),
   KEY `FK_eleve_idecole` (`idecole`)
@@ -173,6 +180,7 @@ CREATE TABLE IF NOT EXISTS `entretien` (
   `kmentretienfait` int(11) NOT NULL,
   `dateentretien` date NOT NULL,
   `id` varchar(30) NOT NULL,
+  `supprimeentretien` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`identretien`),
   KEY `dateentretien` (`dateentretien`),
   KEY `FK_entretien_id` (`id`)
@@ -194,6 +202,7 @@ CREATE TABLE IF NOT EXISTS `materielroulant` (
   `nbdeplaces` int(11) NOT NULL,
   `kmactuel` int(11) NOT NULL,
   `validiterexctincteur` date DEFAULT NULL,
+  `supprimematerielroulant` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -213,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `trajets` (
   `idchauffeur` varchar(15) NOT NULL,
   `idcircuit` int(11) NOT NULL,
   `id` varchar(30) NOT NULL,
+  `supprimetrajets` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idtrajets`),
   KEY `datetravail` (`datetravail`),
   KEY `FK_trajets_idchauffeur` (`idchauffeur`),
@@ -229,6 +239,7 @@ CREATE TABLE IF NOT EXISTS `trajets` (
 CREATE TABLE IF NOT EXISTS `type` (
   `idtype` int(11) NOT NULL,
   `libelledocument` varchar(30) DEFAULT NULL,
+  `supprimetype` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idtype`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -243,6 +254,7 @@ CREATE TABLE IF NOT EXISTS `utilisationcarte` (
   `dateutilisation` date DEFAULT NULL,
   `id` varchar(30) NOT NULL,
   `idcarte` int(11) DEFAULT NULL,
+  `supprimeutilisationcarte` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idutilisation`),
   KEY `dateutilisation` (`dateutilisation`),
   KEY `FK_utilisationCarte_id` (`id`),
@@ -257,8 +269,8 @@ CREATE TABLE IF NOT EXISTS `utilisationcarte` (
 -- Contraintes pour la table `circuit`
 --
 ALTER TABLE `circuit`
-  ADD CONSTRAINT `FK_circuit_idchauffeur` FOREIGN KEY (`idchauffeur`) REFERENCES `chauffeur` (`idchauffeur`),
   ADD CONSTRAINT `FK_circuit_id` FOREIGN KEY (`id`) REFERENCES `materielroulant` (`id`),
+  ADD CONSTRAINT `FK_circuit_idchauffeur` FOREIGN KEY (`idchauffeur`) REFERENCES `chauffeur` (`idchauffeur`),
   ADD CONSTRAINT `FK_circuit_idecole` FOREIGN KEY (`idecole`) REFERENCES `ecole` (`idecole`);
 
 --
@@ -272,16 +284,16 @@ ALTER TABLE `contient`
 -- Contraintes pour la table `documentsadministratifs`
 --
 ALTER TABLE `documentsadministratifs`
-  ADD CONSTRAINT `FK_documentsAdministratifs_idtype` FOREIGN KEY (`idtype`) REFERENCES `type` (`idtype`),
   ADD CONSTRAINT `FK_documentsAdministratifs_id` FOREIGN KEY (`id`) REFERENCES `materielroulant` (`id`),
-  ADD CONSTRAINT `FK_documentsAdministratifs_idchauffeur` FOREIGN KEY (`idchauffeur`) REFERENCES `chauffeur` (`idchauffeur`);
+  ADD CONSTRAINT `FK_documentsAdministratifs_idchauffeur` FOREIGN KEY (`idchauffeur`) REFERENCES `chauffeur` (`idchauffeur`),
+  ADD CONSTRAINT `FK_documentsAdministratifs_idtype` FOREIGN KEY (`idtype`) REFERENCES `type` (`idtype`);
 
 --
 -- Contraintes pour la table `eleve`
 --
 ALTER TABLE `eleve`
-  ADD CONSTRAINT `FK_eleve_idecole` FOREIGN KEY (`idecole`) REFERENCES `ecole` (`idecole`),
-  ADD CONSTRAINT `FK_eleve_idcircuit` FOREIGN KEY (`idcircuit`) REFERENCES `circuit` (`idcircuit`);
+  ADD CONSTRAINT `FK_eleve_idcircuit` FOREIGN KEY (`idcircuit`) REFERENCES `circuit` (`idcircuit`),
+  ADD CONSTRAINT `FK_eleve_idecole` FOREIGN KEY (`idecole`) REFERENCES `ecole` (`idecole`);
 
 --
 -- Contraintes pour la table `entretien`
@@ -301,8 +313,8 @@ ALTER TABLE `trajets`
 -- Contraintes pour la table `utilisationcarte`
 --
 ALTER TABLE `utilisationcarte`
-  ADD CONSTRAINT `FK_utilisationCarte_idcarte` FOREIGN KEY (`idcarte`) REFERENCES `cartecarburant` (`idcarte`),
-  ADD CONSTRAINT `FK_utilisationCarte_id` FOREIGN KEY (`id`) REFERENCES `materielroulant` (`id`);
+  ADD CONSTRAINT `FK_utilisationCarte_id` FOREIGN KEY (`id`) REFERENCES `materielroulant` (`id`),
+  ADD CONSTRAINT `FK_utilisationCarte_idcarte` FOREIGN KEY (`idcarte`) REFERENCES `cartecarburant` (`idcarte`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

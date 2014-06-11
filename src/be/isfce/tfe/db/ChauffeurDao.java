@@ -152,6 +152,7 @@ public class ChauffeurDao {
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));
+                documents.setIdtype(resultSet.getInt("idtype"));
 
                 allDocuments.add(documents);
             }
