@@ -139,7 +139,7 @@ public class EcoleDao {
                 Circuit circuit = new Circuit();
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
-                circuit.setTempsprevu(resultSet.getDate("tempsprevu"));
+                circuit.setTempsprevu(resultSet.getTimestamp("tempsprevu"));
                
                 allCircuit.add(circuit);
             }

@@ -11,6 +11,7 @@ import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.metier.Trajet;
 import be.isfce.tfe.vue.ajout.DialogUtils;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -41,8 +42,8 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
         heuredetravail.setDateTravail(datetrajets.getDate());
         heuredetravail.setKmdepart(Integer.valueOf(kmdedepartTextField.getText()));
         heuredetravail.setKmfin(Integer.valueOf(kmdefinTextField.getText()));
-        heuredetravail.setHeureDeDebut(String.format("%02dH%02d", heureDebut, minuteDebut));
-        heuredetravail.setHeureDeFin(String.format("%02dH%02d", heureFin, minuteFin));
+        heuredetravail.setHeurededebut(Timestamp.UTC("%02dH%02d", heureDebut, minuteDebut));
+        heuredetravail.setHeuredefin(Timestamp.valueOf(TOOL_TIP_TEXT_KEY);
         heuredetravail.setIdmaterielroulant(tousLesVehicules.get(vehiculeComboBox.getSelectedIndex()).getId());
         heuredetravail.setIdcircuit(tousLesCircuits.get(circuitComboBox.getSelectedIndex()).getId());
         return heuredetravail;

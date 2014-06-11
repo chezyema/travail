@@ -16,6 +16,7 @@ import be.isfce.tfe.metier.Ecole;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -116,7 +117,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
                         circuit.setNomCircuit((String) aValue);
                         break;
                     case 1:
-                        circuit.setTempsprevu(new Date());
+                        circuit.setTempsprevu ((Timestamp) aValue);
                         break;
                  
                        

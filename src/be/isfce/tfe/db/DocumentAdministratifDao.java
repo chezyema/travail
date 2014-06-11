@@ -7,6 +7,7 @@ package be.isfce.tfe.db;
 import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.DocumentAdministratif;
+import be.isfce.tfe.metier.TypeDocument;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,13 +25,14 @@ public class DocumentAdministratifDao {
     public static boolean addDocumentsAdministratifs(DocumentAdministratif documents) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into documentsadministratifs (iddocument,libelle,datevaliditer,id,idchauffeur) VALUES(? , ?, ?,?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into documentsadministratifs (iddocument,libelle,datevaliditer,id,idchauffeur,idtype) VALUES(? , ?, ?,?,?,?)");
 
             preparedStatement.setInt(1, documents.getId());
             preparedStatement.setString(2, documents.getLibelle());
             preparedStatement.setDate(3, new Date(documents.getDateValiditer().getTime()));
             preparedStatement.setString(4, documents.getIdmaterielroulant());
             preparedStatement.setString(5, documents.getIdchauffeur());
+            preparedStatement.setInt(6,documents.getIdtype());
             //ajouter les clés étrangére
 
             preparedStatement.executeUpdate();
@@ -64,6 +66,7 @@ public class DocumentAdministratifDao {
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));
+                documents.setIdtype(resultSet.getInt("idtype"));
 
                 allDocuments.add(documents);
             }
@@ -75,6 +78,8 @@ public class DocumentAdministratifDao {
         }
 
     }
+    
+  
 
     public static boolean updateDocuments(DocumentAdministratif document) {
         try {

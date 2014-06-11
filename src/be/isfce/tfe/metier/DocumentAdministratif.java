@@ -14,11 +14,7 @@ import java.util.Date;
  */
 public class DocumentAdministratif {
 
-    @Override
-    public String toString() {
-        return "DocumentsAdministratifs{" + "id=" + id + ", libelle=" + libelle + ", DateValiditer=" + DateValiditer + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + ", chauffeur=" + chauffeur + ", vehicule=" + vehicule + '}';
-    }
-
+  
     public void setIdmaterielroulant(String idmaterielroulant) {
         this.idmaterielroulant = idmaterielroulant;
     }
@@ -34,6 +30,8 @@ public class DocumentAdministratif {
     private String idchauffeur;
     private Chauffeur chauffeur;
     private MaterielRoulant vehicule;
+    private TypeDocument type;
+    private int idtype;
 
     public String getIdmaterielroulant() {
         return idmaterielroulant;
@@ -86,5 +84,27 @@ public class DocumentAdministratif {
     public void setDocument(MaterielRoulant vehicule) {
         this.vehicule = vehicule;
     }
+
+    public TypeDocument getType() {
+        return type;
+    }
+
+    public int getIdtype() {
+        return idtype;
+    }
+
+    public void setType(TypeDocument type) {
+        this.type = type;
+    }
+
+    public void setIdtype(int idtype) {
+        this.idtype = idtype;
+    }
+
+    @Override
+    public String toString() {
+        return "DocumentAdministratif{" + "id=" + id + ", libelle=" + libelle + ", DateValiditer=" + DateValiditer + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + ", chauffeur=" + chauffeur + ", vehicule=" + vehicule + ", type=" + type + ", idtype=" + idtype + '}';
+    }
+    
 
 }

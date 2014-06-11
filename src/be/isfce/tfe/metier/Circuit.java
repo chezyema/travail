@@ -4,6 +4,7 @@
  */
 package be.isfce.tfe.metier;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Circuit {
 
     private int id;
     private String nomcircuit;
-    private Date tempsprevu;
+    private Timestamp tempsprevu;
    
     private MaterielRoulant materielroulant;
     private String idmaterielroulant;
@@ -67,9 +68,15 @@ public class Circuit {
         return nomcircuit;
     }
 
-    public Date getTempsprevu() {
+    public void setTempsprevu(Timestamp tempsprevu) {
+        this.tempsprevu = tempsprevu;
+    }
+
+    public Timestamp getTempsprevu() {
         return tempsprevu;
     }
+
+   
 
    
 
@@ -83,9 +90,7 @@ public class Circuit {
         this.nomcircuit = NomCircuit;
     }
 
-    public void setTempsprevu(Date tempsprevu) {
-        this.tempsprevu = tempsprevu;
-    }
+  
 
    
 
@@ -138,6 +143,7 @@ public class Circuit {
         return "Circuit{" + "id=" + id + ", nomcircuit=" + nomcircuit + ", tempsprevu=" + tempsprevu + ", materielroulant=" + materielroulant + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + ", ecole=" + ecole + ", idecole=" + idecole + ", chauffeurs=" + chauffeurs + ", lesarrets=" + lesarrets + ", leseleves=" + leseleves + ", lestrajets=" + lestrajets + '}';
     }
 
+  
   
    
 

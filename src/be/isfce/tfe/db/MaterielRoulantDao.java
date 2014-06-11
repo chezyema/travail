@@ -170,6 +170,7 @@ public class MaterielRoulantDao {
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));
+                documents.setIdtype(resultSet.getInt("idtype"));
 
                 allDocuments.add(documents);
             }
@@ -190,7 +191,7 @@ public class MaterielRoulantDao {
                 Circuit circuit = new Circuit();
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
-                circuit.setTempsprevu(resultSet.getDate("tempsprevu"));
+                circuit.setTempsprevu(resultSet.getTimestamp("tempsprevu"));
                
                 circuit.setIdmaterielroulant(resultSet.getString("id"));
                 allCircuit.add(circuit);
@@ -211,8 +212,8 @@ public class MaterielRoulantDao {
             while (resultSet.next()) {
                 Trajet heure = new Trajet();
                 heure.setIdtrajets(resultSet.getInt("idtrajets"));
-                heure.setHeureDeDebut(resultSet.getString("heurededebut"));
-                heure.setHeureDeFin(resultSet.getString("heuredefin"));
+                heure.setHeurededebut(resultSet.getTimestamp("heurededebut"));
+                heure.setHeuredefin(resultSet.getTimestamp("heuredefin"));
                 heure.setDateTravail(resultSet.getDate("datetravail"));
                 heure.setIdmaterielroulant(resultSet.getString("id"));
                 allTrajets.add(heure);

@@ -124,7 +124,7 @@ public class ChauffeurDao {
                 Circuit circuit = new Circuit();
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
-                circuit.setTempsprevu(resultSet.getDate("tempsprevu"));
+                circuit.setTempsprevu(resultSet.getTimestamp("tempsprevu"));
                
 
                 allCircuit.add(circuit);
@@ -171,8 +171,8 @@ public class ChauffeurDao {
             while (resultSet.next()) {
                 Trajet heure = new Trajet();
                 heure.setIdtrajets(resultSet.getInt("idtrajets"));
-                heure.setHeureDeDebut(resultSet.getString("heurededebut"));
-                heure.setHeureDeFin(resultSet.getString("heuredefin"));
+                heure.setHeurededebut(resultSet.getTimestamp("heurededebut"));
+                heure.setHeuredefin(resultSet.getTimestamp("heuredefin"));
                 heure.setDateTravail(resultSet.getDate("datetravail"));
 
                 allHeureDeTravail.add(heure);

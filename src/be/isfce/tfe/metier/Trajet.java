@@ -4,6 +4,7 @@
  */
 package be.isfce.tfe.metier;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -17,8 +18,10 @@ public class Trajet {
     }
 
     private int idtrajets;
-    private String heurededebut;
-    private String heuredefin;
+   
+    
+    private Timestamp heurededebut;
+    private Timestamp heuredefin;
     private Date dateTravail;
     private int kmdepart;
     private int kmfin;
@@ -54,21 +57,26 @@ public class Trajet {
         return dateTravail;
     }
 
-    public void setHeureDeDebut(String HeureDeDebut) {
-        this.heurededebut = HeureDeDebut;
-    }
-
-    public void setHeureDeFin(String HeureDeFin) {
-        this.heuredefin = HeureDeFin;
-    }
-
-    public String getHeureDeDebut() {
+    public Timestamp getHeurededebut() {
         return heurededebut;
     }
 
-    public String getHeureDeFin() {
+    public Timestamp getHeuredefin() {
         return heuredefin;
     }
+
+    public void setHeurededebut(Timestamp heurededebut) {
+        this.heurededebut = heurededebut;
+    }
+
+    public void setHeuredefin(Timestamp heuredefin) {
+        this.heuredefin = heuredefin;
+    }
+
+
+  
+
+   
 
     public String getIdmaterielroulant() {
         return idmaterielroulant;

@@ -24,8 +24,8 @@ public class TrajetDao {
             System.out.println(horaire.toString());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into trajets (idtrajets,heurededebut,heuredefin,datetravail,kmdepart,kmfin,idchauffeur,idcircuit,id) values( ?, ?, ?,?,?,?,?,?,?)");
             preparedStatement.setInt(1, horaire.getIdtrajets());
-            preparedStatement.setString(2, horaire.getHeureDeDebut());
-            preparedStatement.setString(3, horaire.getHeureDeFin());
+            preparedStatement.setTimestamp(2, horaire.getHeurededebut());
+            preparedStatement.setTimestamp(3, horaire.getHeuredefin());
             preparedStatement.setDate(4, new Date(horaire.getDateTravail().getTime()));
             preparedStatement.setInt(5,horaire.getKmdepart());
             preparedStatement.setInt(6,horaire.getKmfin() );
@@ -57,8 +57,8 @@ public class TrajetDao {
             while (resultSet.next()) {
                 Trajet heure = new Trajet();
                 heure.setIdtrajets(resultSet.getInt("idtrajets"));
-                heure.setHeureDeDebut(resultSet.getString("heurededebut"));
-                heure.setHeureDeFin(resultSet.getString("heuredefin"));
+                heure.setHeurededebut(resultSet.getTimestamp("heurededebut"));
+                heure.setHeuredefin(resultSet.getTimestamp("heuredefin"));
                 heure.setDateTravail(resultSet.getDate("datetravail"));
                 heure.setKmdepart(resultSet.getInt("kmdepart"));
                 heure.setKmdepart(resultSet.getInt("kmdepart"));
@@ -78,8 +78,8 @@ public class TrajetDao {
        public static boolean updateChauffeur(Trajet trajet) {
        try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update trajets set heurededebut = ?,heuredefin = ?,datetravail = ?,kmdepart = ?,kmfin = ? where trajets.idtrajets = ?");
-            preparedStatement.setString(1, trajet.getHeureDeDebut());
-            preparedStatement.setString(2, trajet.getHeureDeFin());
+            preparedStatement.setTimestamp(1, trajet.getHeurededebut());
+            preparedStatement.setTimestamp(2, trajet.getHeuredefin());
             preparedStatement.setDate(3, new Date(trajet.getDateTravail().getTime()));
             preparedStatement.setInt(4,trajet.getKmdepart());
             preparedStatement.setInt(5,trajet.getKmfin());

@@ -9,6 +9,7 @@ import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.TrajetDao;
 import be.isfce.tfe.metier.Trajet;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
@@ -87,9 +88,9 @@ public class AffichageTrajetsPanell extends AffichagePanel {
                 switch (columnIndex) {
 
                     case 0:
-                        return heure.getHeureDeDebut();
+                        return heure.getHeurededebut();
                     case 1:
-                        return heure.getHeureDeFin();
+                        return heure.getHeuredefin();
                     case 2:
                         return heure.getDateTravail();
                     case 3:
@@ -107,10 +108,10 @@ public class AffichageTrajetsPanell extends AffichagePanel {
                 switch (columnIndex) {
                     
                      case 0:
-                         trajet.setHeureDeDebut((String) aValue);
+                         trajet.setHeurededebut((Timestamp) aValue);
                          break;
                     case 1:
-                        trajet.setHeureDeFin((String) aValue);
+                        trajet.setHeuredefin((Timestamp) aValue);
                         break;
                     case 2:
                         trajet.setDateTravail(new Date());
