@@ -23,8 +23,7 @@ public class EncodageCarteCarburantJPanell extends javax.swing.JPanel {
         CarteCarburant cartecarburant = new CarteCarburant();
         cartecarburant.setId(0);
         cartecarburant.setNumcarte(String.valueOf(numcarteTextField.getText()));
-        cartecarburant.setKmUtilisation(Integer.valueOf(kmutilisationTextField.getText()));
-        cartecarburant.setLitreCarburant(Integer.valueOf(litrecarburantTextField.getText()));
+     
         return cartecarburant;
     }
 
@@ -37,16 +36,8 @@ public class EncodageCarteCarburantJPanell extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kmutilisation = new javax.swing.JLabel();
-        litrecarburant = new javax.swing.JLabel();
-        kmutilisationTextField = new javax.swing.JTextField();
-        litrecarburantTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         numcarteTextField = new javax.swing.JTextField();
-
-        kmutilisation.setText("Km Utilisation :");
-
-        litrecarburant.setText("Litre de carburant:");
 
         jLabel1.setText("Numéro de carte:");
 
@@ -56,15 +47,9 @@ public class EncodageCarteCarburantJPanell extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(litrecarburant, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addComponent(kmutilisation, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(litrecarburantTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addComponent(kmutilisationTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addComponent(numcarteTextField))
+                .addComponent(numcarteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -74,25 +59,13 @@ public class EncodageCarteCarburantJPanell extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(numcarteTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kmutilisation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(kmutilisationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(litrecarburant, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(litrecarburantTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(73, 73, 73))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel kmutilisation;
-    private javax.swing.JTextField kmutilisationTextField;
-    private javax.swing.JLabel litrecarburant;
-    private javax.swing.JTextField litrecarburantTextField;
     private javax.swing.JTextField numcarteTextField;
     // End of variables declaration//GEN-END:variables
 }

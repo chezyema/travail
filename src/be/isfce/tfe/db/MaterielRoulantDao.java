@@ -143,6 +143,8 @@ public class MaterielRoulantDao {
                 UtilisationCarte heure = new UtilisationCarte();
                 heure.setIdutilisationcarte(resultSet.getInt("idutilisation"));
                 heure.setDateutilisation(resultSet.getDate("dateutilisation"));
+                heure.setLitrecarburant(resultSet.getInt("litrecarburant"));
+                heure.setKmutilisation(resultSet.getInt("kmutilisation"));
                 heure.setIdcartecarburant(resultSet.getInt("idcarte"));
                 allUtilisationCarte.add(heure);
             }
@@ -166,7 +168,7 @@ public class MaterielRoulantDao {
             while (resultSet.next()) {
                 DocumentAdministratif documents = new DocumentAdministratif();
                 documents.setId(resultSet.getInt("iddocument"));
-                documents.setLibelle(resultSet.getString("libelle"));
+                
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));

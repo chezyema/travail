@@ -137,18 +137,51 @@ public class ChauffeurDao {
         }
 
     }
+    /*
+    public static List<DocumentAdministratif> getTousLesDocumentsPourChauffeur(boolean documentSupprimes) {
+        try {
+            String supprimes = documentSupprimes ? "1" : "0";
+           
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select d.datevaliditer,t.libelledocument from documentsadministratifs  d join type t on documentsadministratifs.idtype = type.idtype where supprimedocument = " + supprimes);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<DocumentAdministratif> allDocuments = new ArrayList<DocumentAdministratif>();
+            while (resultSet.next()) {
+                DocumentAdministratif documents = new DocumentAdministratif();
+                documents.setId(resultSet.getInt("iddocument"));
+                documents.setDateValiditer(resultSet.getDate("datevaliditer"));
+                documents.setIdmaterielroulant(resultSet.getString("id"));
+                documents.setIdchauffeur(resultSet.getString("idchauffeur"));
+                documents.setIdtype(resultSet.getInt("idtype"));
+
+                allDocuments.add(documents);
+            }
+            System.out.println(allDocuments);
+            return allDocuments;
+
+        } catch (Exception e) {
+            return null;
+        }
+    
+    */
+    
+    
+    
+    
+    
+    
 
     public static List<DocumentAdministratif> selectListeDocumentsPourChauffeur(String chauffeurIdb) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from documentsadministratifs join chauffeur on  documentsadministratifs.idchauffeur = chauffeur.idchauffeur  where chauffeur.idchauffeur = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select t.libelledocument,a.datevaliditer from documentsadministratifs a  inner join chauffeur c on documentsadministratifs.idchauffeur = chauffeur.idchauffeur inner join type t on documentsadministratifs.idtype = type.idtype where chauffeur.idchauffeur = ?");
             preparedStatement.setString(1, chauffeurIdb);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<DocumentAdministratif> allDocuments = new ArrayList<DocumentAdministratif>();
             while (resultSet.next()) {
                 DocumentAdministratif documents = new DocumentAdministratif();
                 documents.setId(resultSet.getInt("iddocument"));
-                documents.setLibelle(resultSet.getString("libelle"));
+             
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));

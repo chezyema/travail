@@ -22,12 +22,13 @@ public class UtilisationCarteDao {
     public static boolean addUtilisationCarte(UtilisationCarte carte) {
         try {
             System.out.println(carte.toString());
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into utilisationcarte (idutilisation,dateutilisation,litrecarburant,id,idcarte) values (? , ?, ?, ?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into utilisationcarte (idutilisation,dateutilisation,litrecarburant,kmutilisation,id,idcarte) values (? , ?, ?, ?,?,?)");
             preparedStatement.setInt(1, carte.getIdutilisationcarte());
             preparedStatement.setDate(2, new Date(carte.getDateUtilisation().getTime()));
             preparedStatement.setInt(3,carte.getLitrecarburant());
-            preparedStatement.setString(4, carte.getIdvehicule());
-            preparedStatement.setInt(5, carte.getIdcartecarburant());
+            preparedStatement.setInt(4,carte.getKmutilisation());
+            preparedStatement.setString(5, carte.getIdvehicule());
+            preparedStatement.setInt(6, carte.getIdcartecarburant());
 
             preparedStatement.executeUpdate();
             return true;
@@ -58,6 +59,7 @@ public class UtilisationCarteDao {
                 heure.setIdutilisationcarte(resultSet.getInt("idutilisation"));
                 heure.setDateutilisation(resultSet.getDate("dateutilisation"));
                 heure.setLitrecarburant(resultSet.getInt("litrecarburant"));
+                heure.setKmutilisation(resultSet.getInt("kmutilisation"));
                 heure.setIdvehicule(resultSet.getString("id"));
                 heure.setIdcartecarburant(resultSet.getInt("idcarte"));
 
@@ -72,11 +74,12 @@ public class UtilisationCarteDao {
 
     public static boolean updateUtilisationCarte(UtilisationCarte utilisation) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update utilisationcarte set dateutilisation = ?,set litrecarburant = ? where utilisationcarte.idutilisation = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update utilisationcarte set dateutilisation = ?,set litrecarburant = ? ,set kmutilisation = ? where utilisationcarte.idutilisation = ?");
 
             preparedStatement.setDate(1, new Date(utilisation.getDateUtilisation().getTime()));
             preparedStatement.setInt(2, utilisation.getLitrecarburant());
-            preparedStatement.setInt(3, utilisation.getIdutilisationcarte());
+            preparedStatement.setInt(3,utilisation.getKmutilisation());
+            preparedStatement.setInt(4, utilisation.getIdutilisationcarte());
             
 
             preparedStatement.execute();

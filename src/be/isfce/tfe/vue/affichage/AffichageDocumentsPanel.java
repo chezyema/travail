@@ -19,6 +19,7 @@ import javax.swing.table.AbstractTableModel;
  * @author yema
  */
 public class AffichageDocumentsPanel extends AffichagePanel {
+    
 
     List<DocumentAdministratif> documents;
 
@@ -82,9 +83,10 @@ public class AffichageDocumentsPanel extends AffichagePanel {
                 switch (columnIndex) {
 
                     case 0:
-                        return doc.getLibelle();
+                        return doc.getIdtype();
                     case 1:
                         return doc.getDateValiditer();
+                   
 
                     default:
                         return null;
@@ -95,13 +97,13 @@ public class AffichageDocumentsPanel extends AffichagePanel {
                 DocumentAdministratif document = documents.get(rowIndex);
                 switch (columnIndex) {
                     
-                     case 0:
-                         document.setLibelle((String) aValue);
-                         break;
-                    case 1:
+                    
+                    case 0:
                         document.setDateValiditer(new Date());
                         //Todo encore à faire
                         break;
+                   case 1:
+                        document.setIdtype((Integer) aValue);
                     
                    
                    

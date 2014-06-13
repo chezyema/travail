@@ -61,7 +61,7 @@ public class TrajetDao {
                 heure.setHeuredefin(resultSet.getTimestamp("heuredefin"));
                 heure.setDateTravail(resultSet.getDate("datetravail"));
                 heure.setKmdepart(resultSet.getInt("kmdepart"));
-                heure.setKmdepart(resultSet.getInt("kmdepart"));
+                heure.setKmfin(resultSet.getInt("kmfin"));
                 heure.setIdchauffeur(resultSet.getString("idchauffeur"));
                 heure.setIdcircuit(resultSet.getInt("idcircuit"));
                 heure.setIdmaterielroulant(resultSet.getString("id"));

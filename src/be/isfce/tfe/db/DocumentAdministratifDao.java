@@ -25,14 +25,14 @@ public class DocumentAdministratifDao {
     public static boolean addDocumentsAdministratifs(DocumentAdministratif documents) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into documentsadministratifs (iddocument,libelle,datevaliditer,id,idchauffeur,idtype) VALUES(? , ?, ?,?,?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into documentsadministratifs (iddocument,datevaliditer,id,idchauffeur,idtype) VALUES(? , ?, ?,?,?)");
 
             preparedStatement.setInt(1, documents.getId());
-            preparedStatement.setString(2, documents.getLibelle());
-            preparedStatement.setDate(3, new Date(documents.getDateValiditer().getTime()));
-            preparedStatement.setString(4, documents.getIdmaterielroulant());
-            preparedStatement.setString(5, documents.getIdchauffeur());
-            preparedStatement.setInt(6,documents.getIdtype());
+           
+            preparedStatement.setDate(2, new Date(documents.getDateValiditer().getTime()));
+            preparedStatement.setString(3, documents.getIdmaterielroulant());
+            preparedStatement.setString(4, documents.getIdchauffeur());
+            preparedStatement.setInt(5,documents.getIdtype());
             //ajouter les clés étrangére
 
             preparedStatement.executeUpdate();
@@ -52,9 +52,14 @@ public class DocumentAdministratifDao {
         return getTousLesDocuments(true);
     }
 
-    public static List<DocumentAdministratif> getTousLesDocuments(boolean documentSupprimes) {
+    
+
+    
+    
+     public static List<DocumentAdministratif> getTousLesDocuments(boolean documentSupprimes) {
         try {
             String supprimes = documentSupprimes ? "1" : "0";
+
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from documentsadministratifs where supprimedocument = " + supprimes);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -62,7 +67,7 @@ public class DocumentAdministratifDao {
             while (resultSet.next()) {
                 DocumentAdministratif documents = new DocumentAdministratif();
                 documents.setId(resultSet.getInt("iddocument"));
-                documents.setLibelle(resultSet.getString("libelle"));
+              
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));
@@ -78,13 +83,12 @@ public class DocumentAdministratifDao {
         }
 
     }
-    
   
 
     public static boolean updateDocuments(DocumentAdministratif document) {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update documentsadministratifs set libelle = ?,datevaliditer = ? where documentsadministratifs.iddocument = ?");
-            preparedStatement.setString(1, document.getLibelle());
+            
             preparedStatement.setDate(2, new Date(document.getDateValiditer().getTime()));
             preparedStatement.setInt(3, document.getId());
 

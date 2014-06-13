@@ -21,9 +21,7 @@ public class DocumentsAdministratifsControleur extends AbstractControleur<Docume
         if (documents == null) {
             throw new ValidationException("Le document est invalide");
         }
-        if (documents.getLibelle() == null || !StringValidation.VerifString(documents.getLibelle())) {
-            throw new ValidationException("le  libelle n'est pas valide");
-        }
+      
         Calendar joura = Calendar.getInstance();
         joura.add(Calendar.DAY_OF_MONTH, +1);
         if (documents.getDateValiditer() == null || documents.getDateValiditer().before(joura.getTime())) {

@@ -13,6 +13,7 @@ import be.isfce.tfe.metier.Trajet;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -42,8 +43,8 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
         heuredetravail.setDateTravail(datetrajets.getDate());
         heuredetravail.setKmdepart(Integer.valueOf(kmdedepartTextField.getText()));
         heuredetravail.setKmfin(Integer.valueOf(kmdefinTextField.getText()));
-        heuredetravail.setHeurededebut(Timestamp.UTC("%02dH%02d", heureDebut, minuteDebut));
-        heuredetravail.setHeuredefin(Timestamp.valueOf(TOOL_TIP_TEXT_KEY);
+        heuredetravail.setHeurededebut(new Timestamp(TimeUnit.HOURS.toMillis(heureDebut) + TimeUnit.MINUTES.toMillis(minuteDebut)));
+        heuredetravail.setHeuredefin(new Timestamp(TimeUnit.HOURS.toMillis(heureFin) + TimeUnit.MINUTES.toMillis(minuteFin)));
         heuredetravail.setIdmaterielroulant(tousLesVehicules.get(vehiculeComboBox.getSelectedIndex()).getId());
         heuredetravail.setIdcircuit(tousLesCircuits.get(circuitComboBox.getSelectedIndex()).getId());
         return heuredetravail;
@@ -186,7 +187,6 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox circuitComboBox;
     private com.toedter.calendar.JDateChooser datetrajets;

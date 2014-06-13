@@ -28,7 +28,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
     List<CarteCarburant> cartecarburant;
 
-    String[] columnsNames = {"Numéro de Carte", "kilometre utilisation", "Litre de carburant"};
+    String[] columnsNames = {"Numéro de Carte"};
 
     public void setCarteCarburant(List<CarteCarburant> cartecarburant) {
         this.cartecarburant = cartecarburant;
@@ -89,10 +89,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                 switch (columnIndex) {
                     case 0:
                         return carte.getNumcarte();
-                    case 1:
-                        return carte.getKmUtilisation();
-                    case 2:
-                        return carte.getLitreCarburant();
+                  
                     default:
                         return null;
                 }
@@ -105,12 +102,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                      case 0:
                          carte.setNumcarte((String) aValue);
                          break;
-                    case 1:
-                        carte.setKmUtilisation((Integer) aValue);
-                        break;
-                    case 2:
-                        carte.setLitreCarburant((Integer) aValue);
-                        break;
+                   
                   
                 }
                 try {

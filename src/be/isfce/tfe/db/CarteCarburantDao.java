@@ -20,11 +20,10 @@ public class CarteCarburantDao {
 
     public static boolean addCarteCarburant(CarteCarburant cartecarburant) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into cartecarburant (idcarte,kmutilisation,litrecarburant,numcarte) values (? , ?, ?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into cartecarburant (idcarte,numcarte) values (? , ?)");
             preparedStatement.setInt(1, cartecarburant.getId());
-            preparedStatement.setInt(2, cartecarburant.getKmUtilisation());
-            preparedStatement.setInt(3, cartecarburant.getLitreCarburant());
-            preparedStatement.setString(4, cartecarburant.getNumcarte());
+           
+            preparedStatement.setString(2, cartecarburant.getNumcarte());
 
             preparedStatement.executeUpdate();
             return true;
@@ -62,8 +61,8 @@ public class CarteCarburantDao {
             while (resultSet.next()) {
                 CarteCarburant cartecarburant = new CarteCarburant();
                 cartecarburant.setId(resultSet.getInt("idcarte"));
-                cartecarburant.setKmUtilisation(resultSet.getInt("kmutilisation"));
-                cartecarburant.setLitreCarburant(resultSet.getInt("litrecarburant"));
+              
+                
                 cartecarburant.setNumcarte(resultSet.getString("numcarte"));
                 cartecarburant.setLesUtilisations(selectListeUtilisationCartePourCarteCarburant(cartecarburant.getId()));
                 allCarteCarburant.add(cartecarburant);
@@ -79,9 +78,9 @@ public class CarteCarburantDao {
 
     public static boolean updateCarteCarburant(CarteCarburant carte) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update cartecarburant set kmutilisation = ?,litrecarburant = ? where circuit.idcarte = ?");
-            preparedStatement.setInt(1, carte.getKmUtilisation());
-            preparedStatement.setInt(2, carte.getLitreCarburant());
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update cartecarburant set numcarte = ? where circuit.idcarte = ?");
+            preparedStatement.setString(1, carte.getNumcarte());
+            
             preparedStatement.setInt(3, carte.getId());
 
             preparedStatement.execute();
@@ -103,6 +102,7 @@ public class CarteCarburantDao {
                 heure.setIdutilisationcarte(resultSet.getInt("idutilisation"));
                 heure.setDateutilisation(resultSet.getDate("dateutilisation"));
                 heure.setLitrecarburant(resultSet.getInt("litrecarburant"));
+                heure.setKmutilisation(resultSet.getInt("kmutilisation"));
 
                 allUtilisationCarte.add(heure);
             }

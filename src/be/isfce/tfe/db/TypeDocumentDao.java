@@ -17,15 +17,15 @@ import java.util.List;
  * @author yema
  */
 public class TypeDocumentDao {
-    
+
     public static boolean addTypeDocument(TypeDocument type) {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into type (idtype,libelledocument) values (  ?,?)");
             preparedStatement.setInt(1, type.getIdtype());
             preparedStatement.setString(2, type.getLibelledocument());
-           
+
             preparedStatement.executeUpdate();
-            
+
             return true;
         } catch (Exception e) {
 
@@ -54,7 +54,7 @@ public class TypeDocumentDao {
                 typedocument.setLibelledocument(resultSet.getString("libelledocument"));
                 typedocument.setLesdocumentsadministratifs(selectListeDocumentPourTypeDocument(typedocument.getIdtype()));
                 alltype.add(typedocument);
-             
+
             }
             System.out.println(alltype);
             return alltype;
@@ -64,9 +64,9 @@ public class TypeDocumentDao {
             return null;
         }
     }
-    
-        public static List<DocumentAdministratif> selectListeDocumentPourTypeDocument(int typeId) {
-       try {
+
+    public static List<DocumentAdministratif> selectListeDocumentPourTypeDocument(int typeId) {
+        try {
 
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from  documentsadministratifs join  type  on documentsadministratifs.idtype = type.idtype where type.idtype = ?");
             preparedStatement.setInt(1, typeId);
@@ -75,7 +75,7 @@ public class TypeDocumentDao {
             while (resultSet.next()) {
                 DocumentAdministratif documents = new DocumentAdministratif();
                 documents.setId(resultSet.getInt("iddocument"));
-                documents.setLibelle(resultSet.getString("libelle"));
+                
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));
@@ -91,10 +91,6 @@ public class TypeDocumentDao {
         }
     }
 
-    
-    
-  
-
     public static boolean updateTypeDocument(TypeDocument type) {
         //TODO implémenter la méthode
         try {
@@ -109,7 +105,7 @@ public class TypeDocumentDao {
         }
     }
 
-     public static boolean deleteType(TypeDocument types) {
+    public static boolean deleteType(TypeDocument types) {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update type set supprimetype = 1 where type.idtype = ?");
             preparedStatement.setInt(1, types.getIdtype());

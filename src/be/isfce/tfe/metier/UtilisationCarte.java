@@ -15,6 +15,7 @@ public class UtilisationCarte {
     private  int idutilisationcarte;
     private Date dateutilisation;
     private int litrecarburant;
+    private int kmutilisation;
     private MaterielRoulant lesvehicules;
     private CarteCarburant lescartes;
     private String idvehicule;
@@ -30,6 +31,14 @@ public class UtilisationCarte {
     }
 
     public UtilisationCarte() {
+    }
+
+    public int getKmutilisation() {
+        return kmutilisation;
+    }
+
+    public void setKmutilisation(int kmutilisation) {
+        this.kmutilisation = kmutilisation;
     }
 
 
@@ -88,9 +97,10 @@ public class UtilisationCarte {
 
     @Override
     public String toString() {
-        return "UtilisationCarte{" + "idutilisationcarte=" + idutilisationcarte + ", dateutilisation=" + dateutilisation + ", litrecarburant=" + litrecarburant + ", lesvehicules=" + lesvehicules + ", lescartes=" + lescartes + ", idvehicule=" + idvehicule + ", idcartecarburant=" + idcartecarburant + '}';
+        return "UtilisationCarte{" + "idutilisationcarte=" + idutilisationcarte + ", dateutilisation=" + dateutilisation + ", litrecarburant=" + litrecarburant + ", kmutilisation=" + kmutilisation + ", lesvehicules=" + lesvehicules + ", lescartes=" + lescartes + ", idvehicule=" + idvehicule + ", idcartecarburant=" + idcartecarburant + '}';
     }
-  
+
+   
    
         
 }

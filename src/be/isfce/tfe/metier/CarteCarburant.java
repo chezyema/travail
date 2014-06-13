@@ -15,8 +15,8 @@ public class CarteCarburant {
 
     private int id;
     private String numcarte;
-    private int kmutilisation;
-    private int litrecarburant;
+   
+  
     
     private List<UtilisationCarte> lesutilisations;
 
@@ -40,25 +40,13 @@ public class CarteCarburant {
         this.id = id;
     }
 
-    public void setKmUtilisation(int KmUtilisation) {
-        this.kmutilisation = KmUtilisation;
-    }
-
-    public void setLitreCarburant(int LitreCarburant) {
-        this.litrecarburant = LitreCarburant;
-    }
+   
 
     public int getId() {
         return id;
     }
 
-    public int getKmUtilisation() {
-        return kmutilisation;
-    }
-
-    public int getLitreCarburant() {
-        return litrecarburant;
-    }
+  
 
     public void setLesUtilisations(List<UtilisationCarte> LesUtilisations) {
         this.lesutilisations = LesUtilisations;
@@ -66,8 +54,9 @@ public class CarteCarburant {
 
     @Override
     public String toString() {
-        return "CarteCarburant{" + "id=" + id + ", numcarte=" + numcarte + ", kmutilisation=" + kmutilisation + ", litrecarburant=" + litrecarburant + ", lesutilisations=" + lesutilisations + '}';
+        return "CarteCarburant{" + "id=" + id + ", numcarte=" + numcarte + ", lesutilisations=" + lesutilisations + '}';
     }
-    
+
+   
     
 }

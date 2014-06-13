@@ -24,7 +24,7 @@ public class DocumentAdministratif {
     }
 
     private int id;
-    private String libelle;
+    
     private Date DateValiditer;
     private String idmaterielroulant;
     private String idchauffeur;
@@ -45,9 +45,7 @@ public class DocumentAdministratif {
         this.id = id;
     }
 
-    public void setLibelle(String Libelle) {
-        this.libelle = Libelle;
-    }
+    
 
     public void setDateValiditer(Date DateValiditer) {
         this.DateValiditer = DateValiditer;
@@ -57,9 +55,7 @@ public class DocumentAdministratif {
         return id;
     }
 
-    public String getLibelle() {
-        return libelle;
-    }
+   
 
     public Date getDateValiditer() {
         return DateValiditer;
@@ -103,8 +99,9 @@ public class DocumentAdministratif {
 
     @Override
     public String toString() {
-        return "DocumentAdministratif{" + "id=" + id + ", libelle=" + libelle + ", DateValiditer=" + DateValiditer + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + ", chauffeur=" + chauffeur + ", vehicule=" + vehicule + ", type=" + type + ", idtype=" + idtype + '}';
+        return "DocumentAdministratif{" + "id=" + id + ", DateValiditer=" + DateValiditer + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + ", chauffeur=" + chauffeur + ", vehicule=" + vehicule + ", type=" + type + ", idtype=" + idtype + '}';
     }
-    
+
+ 
 
 }

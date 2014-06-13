@@ -24,7 +24,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
     List<UtilisationCarte> utilisations;
-    String[] columnsNames = {"Numéro Carte", "Date utilisation","litre de carburant"};
+    String[] columnsNames = {"Numéro Carte", "Date utilisation","litre de carburant","kilométre utilisation"};
 
     public AffichageUtilisationCarteJPanel(UtilisationCarteControleur utilisationControleur) {
         super(utilisationControleur);
@@ -93,6 +93,8 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
                         return utilisation.getDateUtilisation();
                     case 2:
                         return utilisation.getLitrecarburant();
+                    case 3 :
+                        return utilisation.getKmutilisation();
 
                     default:
                         return null;
@@ -109,9 +111,11 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
                     case 1:
                         utilisation.setDateutilisation(new Date());
-                        break;
+                       
                     case 2 :
                         utilisation.setLitrecarburant((Integer) aValue);
+                    case 3 :
+                        utilisation.setKmutilisation((Integer) aValue);
 
                 }
                 try {

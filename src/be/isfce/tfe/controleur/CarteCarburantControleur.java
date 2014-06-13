@@ -20,13 +20,9 @@ public class CarteCarburantControleur extends AbstractControleur<CarteCarburant>
             throw new ValidationException("La carte est invalide");
         }
 
-        if (cartecarburant.getKmUtilisation() == 0) {
-            throw new ValidationException("Le kilométrage n'est pas valide");
-        }
+      
 
-        if (cartecarburant.getLitreCarburant() == 0) {
-            throw new ValidationException("Les litres de carburant ne sont pas valide");
-        }
+       
         if (CarteCarburantDao.addCarteCarburant(cartecarburant)) {
             setChanged();
             notifyObservers();
