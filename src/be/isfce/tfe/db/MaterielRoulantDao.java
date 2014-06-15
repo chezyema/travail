@@ -257,29 +257,6 @@ public class MaterielRoulantDao {
         return entretienAEffectuer;
     }
 
-    public static int getNbEntretiensABientotEffectuer() {
-        List<MaterielRoulant> tousLesVehicules = getTousLesVehicules();
-        int entretienAEffectuer = 0;
-        for (MaterielRoulant vehicule : tousLesVehicules) {
-            Entretien dernierEntretien = getDernierEntretien(vehicule);
-            if (dernierEntretien != null) {
-                //TODO Ajouter une limite a 25000
-                if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() < 25000) {
-                    if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() > 20000) {
-                        entretienAEffectuer++;
-                    }
-                }
-            } else {
-                if (vehicule.getKmactuel() < 25000) {
-                    if (vehicule.getKmactuel() > 20000) {
-                        entretienAEffectuer++;
-                    }
-                }
-            }
-        }
-        return entretienAEffectuer;
-    }
-
     public static int getNbEntretiensEnOrdre() {
         List<MaterielRoulant> tousLesVehicules = getTousLesVehicules();
         int entretienAEffectuer = 0;

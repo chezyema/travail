@@ -174,14 +174,13 @@ public class ChauffeurDao {
     public static List<DocumentAdministratif> selectListeDocumentsPourChauffeur(String chauffeurIdb) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select t.libelledocument,a.datevaliditer from documentsadministratifs a  inner join chauffeur c on documentsadministratifs.idchauffeur = chauffeur.idchauffeur inner join type t on documentsadministratifs.idtype = type.idtype where chauffeur.idchauffeur = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from documentsadministratifs inner join chauffeur on documentsadministratifs.idchauffeur = chauffeur.idchauffeur inner join type on documentsadministratifs.idtype = type.idtype where chauffeur.idchauffeur = ?");
             preparedStatement.setString(1, chauffeurIdb);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<DocumentAdministratif> allDocuments = new ArrayList<DocumentAdministratif>();
             while (resultSet.next()) {
                 DocumentAdministratif documents = new DocumentAdministratif();
                 documents.setId(resultSet.getInt("iddocument"));
-             
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));
@@ -191,6 +190,7 @@ public class ChauffeurDao {
             }
             return allDocuments;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 

@@ -17,6 +17,7 @@ import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
     List<Circuit> circuits;
 
     String[] columnsNames = {"Nom circuit", "Temps prevu"};
-
+    private SimpleDateFormat simpleDateFormat; 
     public void setCircuit(List<Circuit> circuits) {
         this.circuits = circuits;
         displayData();
@@ -48,6 +49,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
     public AffichageCircuitPanel(CircuitControleur circuitControleur, List<Circuit> circuit) {
         super(circuitControleur);
         this.circuits = circuit;
+        simpleDateFormat = new SimpleDateFormat("HH:mm");
         displayData();
     }
 
@@ -100,7 +102,8 @@ public class AffichageCircuitPanel extends AffichagePanel {
                     case 0:
                         return trajet.getNomCircuit();
                     case 1:
-                        return trajet.getTempsprevu();
+                        
+                        return simpleDateFormat.format(trajet.getTempsprevu());
                     
 
                     default:
@@ -147,7 +150,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherArretMenuItem());
-        menuItems.add(getAfficherEleveMenuItem());
+        //   menuItems.add(getAfficherEleveMenuItem());
         menuItems.add(getAjouterEcoleMenuItem());
         //menuItems.add(getAjouterArretMenuItem());
 

@@ -8,7 +8,9 @@ import be.isfce.tfe.vue.ajout.*;
 import be.isfce.tfe.controleur.CircuitControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Circuit;
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,11 +29,9 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
     public Circuit getCircuitFromFields() {
         Circuit circuit = new Circuit();
         circuit.setId(0);
-        circuit.setNomCircuit(String.valueOf(nomcircuitTextField.getText()));
-         Date heure = (Date) heureSpinner.getValue();
-         Date minute = (Date) minuteSpinner.getValue();
-        
-       
+        circuit.setNomCircuit(nomcircuitTextField.getText());
+        Timestamp timestamp = new Timestamp(TimeUnit.HOURS.toMillis((Integer)heureSpinner.getValue()) + TimeUnit.MINUTES.toMillis((Integer)minuteSpinner.getValue()));
+        circuit.setTempsprevu(timestamp);
         return circuit;
     }
 
@@ -87,8 +87,6 @@ public class EncodageCircuitJPanell extends javax.swing.JPanel {
                 .addGap(29, 29, 29))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner heureSpinner;
     private javax.swing.JSpinner minuteSpinner;

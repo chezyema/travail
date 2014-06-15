@@ -7,7 +7,9 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.DocumentAdministratifDao;
+import be.isfce.tfe.db.TypeDocumentDao;
 import be.isfce.tfe.metier.DocumentAdministratif;
+import be.isfce.tfe.metier.TypeDocument;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
@@ -19,10 +21,8 @@ import javax.swing.table.AbstractTableModel;
  * @author yema
  */
 public class AffichageDocumentsPanel extends AffichagePanel {
-    
 
     List<DocumentAdministratif> documents;
-
     String[] columnsNames = {"Libelle", "Date validiter"};
 
     public void setDocuments(List<DocumentAdministratif> documents) {
@@ -56,7 +56,6 @@ public class AffichageDocumentsPanel extends AffichagePanel {
     @Override
     public AbstractTableModel getTableModel() {
         return new AbstractTableModel() {
-
             @Override
             public String getColumnName(int col) {
                 return columnsNames[col];
@@ -83,30 +82,31 @@ public class AffichageDocumentsPanel extends AffichagePanel {
                 switch (columnIndex) {
 
                     case 0:
-                        return doc.getIdtype();
+                        TypeDocument type = TypeDocumentDao.getTypeDocumentAdministratif(doc.getIdtype());
+                        return type != null ? type.getLibelledocument() : "";
                     case 1:
                         return doc.getDateValiditer();
-                   
 
                     default:
                         return null;
                 }
             }
-                @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 DocumentAdministratif document = documents.get(rowIndex);
                 switch (columnIndex) {
-                    
-                    
+
+
                     case 0:
                         document.setDateValiditer(new Date());
                         //Todo encore à faire
                         break;
-                   case 1:
+                    case 1:
                         document.setIdtype((Integer) aValue);
-                    
-                   
-                   
+
+
+
                 }
                 try {
                     abstractControleur.controleEtModifie(document);
@@ -130,18 +130,16 @@ public class AffichageDocumentsPanel extends AffichagePanel {
     }
 
     @Override
-   public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
         reset();
     }
 
     private void reset() {
-       
-         {
+
+        {
             documents = DocumentAdministratifDao.getTousLesDocuments();
         }
         setDocuments(documents);
     }
-
-
 }

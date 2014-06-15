@@ -41,7 +41,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void initAlerts() {
         nbEntretienAEffectuerUrgentLabel.setText("" + MaterielRoulantDao.getNbEntretiensAEffectuer());
         nbVehiculeEnOrdreLabel.setText("" + MaterielRoulantDao.getNbEntretiensEnOrdre());
-        nbEntretiensAEffectuerLabel.setText("" + MaterielRoulantDao.getNbEntretiensABientotEffectuer());
 
         nbDocumentARenouvelerLabel.setText("" + DocumentAdministratifDao.getNbDocumentsARenouveler());
         nbDocumentEnOrdreLabel.setText("" + DocumentAdministratifDao.getNbDocumentsEnOrdre());
@@ -64,9 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTabbedPane = new javax.swing.JTabbedPane();
         jPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        nbEntretiensAEffectuerLabel = new javax.swing.JLabel();
         nbEntretienAEffectuerUrgentLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         nbVehiculeEnOrdreLabel = new javax.swing.JLabel();
@@ -108,11 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Entretiens"));
 
-        jLabel1.setText("Entretiens à effectuer bientôt :");
-
         jLabel2.setText("Entretiens à effectuer d'urgence :");
-
-        nbEntretiensAEffectuerLabel.setText("0");
 
         nbEntretienAEffectuerUrgentLabel.setText("0");
 
@@ -128,13 +121,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nbEntretienAEffectuerUrgentLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nbEntretiensAEffectuerLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(nbEntretienAEffectuerUrgentLabel))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -147,17 +136,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nbEntretienAEffectuerUrgentLabel)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(nbEntretiensAEffectuerLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nbVehiculeEnOrdreLabel)
                     .addComponent(jLabel5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Documents"));
@@ -291,7 +275,6 @@ public class MainFrame extends javax.swing.JFrame {
     private be.isfce.tfe.vue.frame.tabs.CircuitTabPanel circuitTabPanel1;
     private be.isfce.tfe.vue.frame.tabs.EcoleTabPanel ecoleTabPanel1;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
@@ -307,7 +290,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel nbDocumentARenouvelerLabel;
     private javax.swing.JLabel nbDocumentEnOrdreLabel;
     private javax.swing.JLabel nbEntretienAEffectuerUrgentLabel;
-    private javax.swing.JLabel nbEntretiensAEffectuerLabel;
     private javax.swing.JLabel nbVehiculeEnOrdreLabel;
     private be.isfce.tfe.vue.frame.tabs.VehiculeTabPanel vehiculeTabPanel1;
     // End of variables declaration//GEN-END:variables

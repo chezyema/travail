@@ -26,28 +26,25 @@ public class CircuitDao {
     public static boolean addCircuit(Circuit circuit) {
 
         try {
-            Date dateSql = new Date(circuit.getTempsprevu().getTime());
             System.out.println(circuit.toString());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into circuit (idcircuit,nomcircuit,tempsprevu,idecole,id,idchauffeur) values (  ?, ?, ?,?,?,? )");
             preparedStatement.setInt(1, circuit.getId());
             preparedStatement.setString(2, circuit.getNomCircuit());
-            preparedStatement.setDate(3, dateSql);
-           
+            preparedStatement.setTimestamp(3, circuit.getTempsprevu());
             if (circuit.getIdecole() != 0) {
-                preparedStatement.setInt(6, circuit.getIdecole());
+                preparedStatement.setInt(4, circuit.getIdecole());
             } else {
-                preparedStatement.setNull(6, Types.INTEGER);
+                preparedStatement.setNull(4, Types.INTEGER);
             }
             if (circuit.getIdmaterielroulant() != null && !circuit.getIdmaterielroulant().isEmpty()) {
-                preparedStatement.setString(7, circuit.getIdmaterielroulant());
+                preparedStatement.setString(5, circuit.getIdmaterielroulant());
             } else {
-                preparedStatement.setNull(7, Types.VARCHAR);
+                preparedStatement.setNull(5, Types.VARCHAR);
             }
-
             if (circuit.getIdchauffeur() != null && !circuit.getIdchauffeur().isEmpty()) {
-                preparedStatement.setString(8, circuit.getIdchauffeur());
+                preparedStatement.setString(6, circuit.getIdchauffeur());
             } else {
-                preparedStatement.setNull(8, Types.VARCHAR);
+                preparedStatement.setNull(6, Types.VARCHAR);
             }
             preparedStatement.executeUpdate();
             return true;
@@ -102,8 +99,8 @@ public class CircuitDao {
             System.out.println(circuit.getIdecole());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update circuit set nomcircuit = ?,tempsprevu = ?, idecole = ?, id = ?, idchauffeur = ? where circuit.idcircuit = ?");
             preparedStatement.setString(1, circuit.getNomCircuit());
-            preparedStatement.setDate(2,  new Date(circuit.getTempsprevu().getTime()));
-           
+            preparedStatement.setDate(2, new Date(circuit.getTempsprevu().getTime()));
+
             if (circuit.getIdecole() != 0) {
                 System.out.println("ID ECOLE SET");
                 preparedStatement.setInt(5, circuit.getIdecole());
@@ -121,7 +118,7 @@ public class CircuitDao {
             } else {
                 preparedStatement.setNull(7, Types.VARCHAR);
             }
-            
+
             preparedStatement.setInt(8, circuit.getId());
             preparedStatement.execute();
             return true;

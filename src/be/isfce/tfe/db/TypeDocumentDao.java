@@ -65,6 +65,24 @@ public class TypeDocumentDao {
         }
     }
 
+    public static TypeDocument getTypeDocumentAdministratif(int idType) {
+        TypeDocument typedocument = null;
+        try {
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from type where idtype = ?");
+            preparedStatement.setInt(1, idType);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                typedocument = new TypeDocument();
+                typedocument.setIdtype(resultSet.getInt("idtype"));
+                typedocument.setLibelledocument(resultSet.getString("libelledocument"));
+                typedocument.setLesdocumentsadministratifs(selectListeDocumentPourTypeDocument(typedocument.getIdtype()));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return typedocument;
+    }
+
     public static List<DocumentAdministratif> selectListeDocumentPourTypeDocument(int typeId) {
         try {
 
@@ -75,7 +93,7 @@ public class TypeDocumentDao {
             while (resultSet.next()) {
                 DocumentAdministratif documents = new DocumentAdministratif();
                 documents.setId(resultSet.getInt("iddocument"));
-                
+
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));
