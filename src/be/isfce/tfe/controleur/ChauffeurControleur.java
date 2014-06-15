@@ -8,7 +8,9 @@ import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.validation.EmailValidation;
 import be.isfce.tfe.validation.StringValidation;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -48,7 +50,7 @@ public class ChauffeurControleur extends AbstractControleur<Chauffeur> {
         if (chauffeur.getNumTelephone() == null) {
             throw new ValidationException("Le numero de telephone n'est pas valide");
         }
-        if (chauffeur.getId() == null) {
+        if (chauffeur.getId() == null || !checkRegistreNational(chauffeur.getId(), chauffeur.getDateNaissance())) {
             throw new ValidationException("Le registre national n'est pas valide");
         }
         if (ChauffeurDao.addChauffeur(chauffeur)) {
@@ -56,6 +58,12 @@ public class ChauffeurControleur extends AbstractControleur<Chauffeur> {
             notifyObservers();
         }
 
+    }
+
+    public static boolean checkRegistreNational(String registreNational, Date dateDeNaissance) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd");
+        String format = simpleDateFormat.format(dateDeNaissance);
+        return registreNational.startsWith(format);
     }
 
     @Override

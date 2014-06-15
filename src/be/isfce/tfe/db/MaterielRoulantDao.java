@@ -168,7 +168,7 @@ public class MaterielRoulantDao {
             while (resultSet.next()) {
                 DocumentAdministratif documents = new DocumentAdministratif();
                 documents.setId(resultSet.getInt("iddocument"));
-                
+
                 documents.setDateValiditer(resultSet.getDate("datevaliditer"));
                 documents.setIdmaterielroulant(resultSet.getString("id"));
                 documents.setIdchauffeur(resultSet.getString("idchauffeur"));
@@ -194,7 +194,7 @@ public class MaterielRoulantDao {
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
                 circuit.setTempsprevu(resultSet.getTimestamp("tempsprevu"));
-               
+
                 circuit.setIdmaterielroulant(resultSet.getString("id"));
                 allCircuit.add(circuit);
             }
@@ -248,6 +248,10 @@ public class MaterielRoulantDao {
                 if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() > 25000) {
                     entretienAEffectuer++;
                 }
+            } else {
+                if (vehicule.getKmactuel() > 25000) {
+                    entretienAEffectuer++;
+                }
             }
         }
         return entretienAEffectuer;
@@ -265,6 +269,12 @@ public class MaterielRoulantDao {
                         entretienAEffectuer++;
                     }
                 }
+            } else {
+                if (vehicule.getKmactuel() < 25000) {
+                    if (vehicule.getKmactuel() > 20000) {
+                        entretienAEffectuer++;
+                    }
+                }
             }
         }
         return entretienAEffectuer;
@@ -279,6 +289,10 @@ public class MaterielRoulantDao {
                 if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() <= 20000) {
                     entretienAEffectuer++;
                 }
+            } else {
+                if (vehicule.getKmactuel()  <= 20000) {
+                    entretienAEffectuer++;
+                }
             }
         }
         return entretienAEffectuer;
@@ -289,7 +303,7 @@ public class MaterielRoulantDao {
         java.util.Date date = new Date(0);
         Entretien dernierEntretien = null;
         for (Entretien entretien : lesentretiens) {
-            if (entretien.getDateEntretien().before(date)) {
+            if (entretien.getDateEntretien().after(date)) {
                 date = entretien.getDateEntretien();
                 dernierEntretien = entretien;
             }

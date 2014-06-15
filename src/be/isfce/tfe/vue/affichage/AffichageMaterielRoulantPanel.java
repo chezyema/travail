@@ -37,6 +37,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
     String[] columnsNames = {"Numero de chassis", "Marque", "Type", "Annee de construction", "Carburant", "Plaque", "Nombre de place", "Kilometre actuel"};
 
     private Dialog dialog;
+
     public void setVehicules(List<MaterielRoulant> vehicules) {
         this.vehicules = vehicules;
         displayData();
@@ -138,10 +139,10 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                         vehicule.setNumImmatr((String) aValue);
                         break;
                     case 6:
-                        vehicule.setNbDePlaces((Integer) aValue);
+                        vehicule.setNbDePlaces(Integer.valueOf(aValue.toString()));
                         break;
                     case 7:
-                        vehicule.setKmactuel((Integer) aValue);
+                        vehicule.setKmactuel(Integer.valueOf(aValue.toString()));
                         break;
 
                 }
@@ -178,7 +179,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         menuItems.add(getUtilisationCarburantMenuItem());
         menuItems.add(getAjouterEntretienMenuItem());
         menuItems.add(getAjouterDocumentMenuItem());
-        menuItems.add(getAfficherDocumentMenuItem() );
+        menuItems.add(getAfficherDocumentMenuItem());
         menuItems.add(getAjouterUtilisationCarteMenuItem());
 
         return menuItems;
@@ -231,10 +232,8 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return ajouterEntretien;
     }
-    
-    
-    
-     private JMenuItem getAfficherDocumentMenuItem() {
+
+    private JMenuItem getAfficherDocumentMenuItem() {
         JMenuItem afficherDocument = new JMenuItem("Afficher documents");
         afficherDocument.addActionListener(new ActionListener() {
 
@@ -248,7 +247,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         return afficherDocument;
     }
 
-  private JMenuItem getAjouterDocumentMenuItem() {
+    private JMenuItem getAjouterDocumentMenuItem() {
         JMenuItem ajouterDocument = new JMenuItem("Ajouter documents");
         ajouterDocument.addActionListener(new ActionListener() {
 
@@ -268,14 +267,14 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return ajouterDocument;
     }
-  
-     private JMenuItem getAjouterUtilisationCarteMenuItem() {
+
+    private JMenuItem getAjouterUtilisationCarteMenuItem() {
         JMenuItem ajouterUtilisation = new JMenuItem("Ajouter Utilisation carte");
         ajouterUtilisation.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MaterielRoulant materiels = vehicules.get(jTable1.getSelectedRow());
-                AjoutUtilisationCarteJPanell ajoutUtilisationJPanell = new AjoutUtilisationCarteJPanell (materiels);
+                AjoutUtilisationCarteJPanell ajoutUtilisationJPanell = new AjoutUtilisationCarteJPanell(materiels);
                 ajoutUtilisationJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
 
                     @Override
@@ -290,16 +289,15 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         return ajouterUtilisation;
     }
 
-  
     @Override
-   public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
         reset();
     }
 
     private void reset() {
-       
-         {
+
+        {
             vehicules = MaterielRoulantDao.getTousLesVehicules();
         }
         setVehicules(vehicules);

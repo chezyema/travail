@@ -10,6 +10,7 @@ import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.TrajetDao;
 import be.isfce.tfe.metier.Trajet;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
@@ -24,10 +25,12 @@ public class AffichageTrajetsPanell extends AffichagePanel {
 
     List<Trajet> trajets;
 
-    String[] columnsNames = {"heure de debut", "Heure de fin", "Date de travail","kmdepart","kmfin"};
+    String[] columnsNames = {"heure de debut", "Heure de fin", "Date de travail", "kmdepart", "kmfin"};
+    private SimpleDateFormat simpleDateFormat;
 
     public AffichageTrajetsPanell(TrajetsControleur trajetControleur) {
         super(trajetControleur);
+        simpleDateFormat = new SimpleDateFormat("HH:mm");
         displayData();
     }
 
@@ -85,31 +88,31 @@ public class AffichageTrajetsPanell extends AffichagePanel {
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 Trajet heure = trajets.get(rowIndex);
-                switch (columnIndex) {
 
+                switch (columnIndex) {
                     case 0:
-                        return heure.getHeurededebut();
+                        return simpleDateFormat.format(heure.getHeurededebut());
                     case 1:
-                        return heure.getHeuredefin();
+                        return simpleDateFormat.format(heure.getHeuredefin());
                     case 2:
                         return heure.getDateTravail();
                     case 3:
-                           return heure.getKmdepart();
-                      case 4:
-                           return heure.getKmfin();
+                        return heure.getKmdepart();
+                    case 4:
+                        return heure.getKmfin();
                     default:
                         return null;
                 }
             }
-            
-             @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 Trajet trajet = trajets.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         trajet.setHeurededebut((Timestamp) aValue);
-                         break;
+
+                    case 0:
+                        trajet.setHeurededebut((Timestamp) aValue);
+                        break;
                     case 1:
                         trajet.setHeuredefin((Timestamp) aValue);
                         break;
@@ -117,12 +120,12 @@ public class AffichageTrajetsPanell extends AffichagePanel {
                         trajet.setDateTravail(new Date());
                         break;
                     case 3:
-                        trajet.setKmdepart((Integer)aValue);
+                        trajet.setKmdepart((Integer) aValue);
                         break;
                     case 4:
-                        trajet.setKmfin((Integer)aValue);
+                        trajet.setKmfin((Integer) aValue);
                         break;
-                    
+
                 }
                 try {
                     abstractControleur.controleEtModifie(trajet);
@@ -152,8 +155,8 @@ public class AffichageTrajetsPanell extends AffichagePanel {
     }
 
     private void reset() {
-       
-         {
+
+        {
             trajets = TrajetDao.getTousLesTrajets();
         }
         setTrajet(trajets);

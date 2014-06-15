@@ -21,7 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         initAlerts();
-        
+
         jTabbedPane.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -41,7 +41,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initAlerts() {
         nbEntretienAEffectuerUrgentLabel.setText("" + MaterielRoulantDao.getNbEntretiensAEffectuer());
         nbVehiculeEnOrdreLabel.setText("" + MaterielRoulantDao.getNbEntretiensEnOrdre());
-        nbEntretienAEffectuerUrgentLabel.setText("" + MaterielRoulantDao.getNbEntretiensABientotEffectuer());
+        nbEntretiensAEffectuerLabel.setText("" + MaterielRoulantDao.getNbEntretiensABientotEffectuer());
 
         nbDocumentARenouvelerLabel.setText("" + DocumentAdministratifDao.getNbDocumentsARenouveler());
         nbDocumentEnOrdreLabel.setText("" + DocumentAdministratifDao.getNbDocumentsEnOrdre());
@@ -75,6 +75,7 @@ public class MainFrame extends javax.swing.JFrame {
         nbDocumentEnOrdreLabel = new javax.swing.JLabel();
         nbDocumentARenouvelerLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         chauffeurTabPanel1 = new be.isfce.tfe.vue.frame.tabs.ChauffeurTabPanel();
         circuitTabPanel1 = new be.isfce.tfe.vue.frame.tabs.CircuitTabPanel();
         vehiculeTabPanel1 = new be.isfce.tfe.vue.frame.tabs.VehiculeTabPanel();
@@ -104,7 +105,6 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 500));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Entretiens"));
 
@@ -200,13 +200,20 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jCalendar1.setBorder(javax.swing.BorderFactory.createTitledBorder("Calendrier"));
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -218,7 +225,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(352, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                .addGap(4, 4, 4))
         );
 
         jTabbedPane.addTab("Messages", jPanel);
@@ -281,6 +290,7 @@ public class MainFrame extends javax.swing.JFrame {
     private be.isfce.tfe.vue.frame.tabs.ChauffeurTabPanel chauffeurTabPanel1;
     private be.isfce.tfe.vue.frame.tabs.CircuitTabPanel circuitTabPanel1;
     private be.isfce.tfe.vue.frame.tabs.EcoleTabPanel ecoleTabPanel1;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

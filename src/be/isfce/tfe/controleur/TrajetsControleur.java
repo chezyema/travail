@@ -6,7 +6,6 @@ package be.isfce.tfe.controleur;
 
 import be.isfce.tfe.db.TrajetDao;
 import be.isfce.tfe.metier.Trajet;
-import java.util.Calendar;
 
 /**
  *
@@ -16,7 +15,7 @@ public class TrajetsControleur extends AbstractControleur<Trajet> {
 
     @Override
     public void controleEtAjoute(Trajet trajet) throws ValidationException {
-          if (trajet.getKmdepart() == 0) {
+        if (trajet.getKmdepart() == 0) {
             throw new ValidationException("Le kilometrage n'est pas valide");
         }
         if (trajet.getKmfin() == 0) {

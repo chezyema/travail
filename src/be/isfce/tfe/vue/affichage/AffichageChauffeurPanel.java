@@ -188,6 +188,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         menuItems.add(getAfficherDocumentMenuItem());
         menuItems.add(getAjouterDocumentMenuItem());
         menuItems.add(getAfficherFeuilleDeRouteMenuItem());
+        menuItems.add(getAfficherTrajetsMensuelsMenuItem());
 
         return menuItems;
     }
@@ -236,6 +237,21 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                 Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
 
                 AffichageTrajetsPanell affichageFeuilleDeRoutePanel = new AffichageTrajetsPanell(new TrajetsControleur(), chauffeur.getLesheures());
+                DialogUtils.afficheDialog(null, affichageFeuilleDeRoutePanel);
+            }
+        });
+        return afficherFeuilleDeRoute;
+    }
+
+    private JMenuItem getAfficherTrajetsMensuelsMenuItem() {
+        JMenuItem afficherFeuilleDeRoute = new JMenuItem("Afficher feuille de route mensuelle");
+        afficherFeuilleDeRoute.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Chauffeur chauffeur = chauffeurs.get(jTable1.getSelectedRow());
+
+                AffichageHeureTravailMensuel affichageFeuilleDeRoutePanel = new AffichageHeureTravailMensuel(chauffeur);
                 DialogUtils.afficheDialog(null, affichageFeuilleDeRoutePanel);
             }
         });
