@@ -123,7 +123,7 @@ public class AffichageEcolePanel extends AffichagePanel {
                         ecole.setAdresseecole((String) aValue);
                         break;
                     case 2:
-                        ecole.setCdpostal((Integer) aValue);
+                        ecole.setCdpostal(Integer.valueOf((String) aValue));
                         break;
                     case 3:
                         //TODO

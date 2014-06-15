@@ -147,7 +147,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                         chauffeur.setAdresse((String) aValue);
                         break;
                     case 5:
-                        chauffeur.setCodepostale((Integer) aValue);
+                        chauffeur.setCodepostale(Integer.valueOf((String) aValue));
                         break;
                     case 6:
                         chauffeur.setVille((String) aValue);

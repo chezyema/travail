@@ -107,7 +107,7 @@ public class AffichageEntretienPanel extends AffichagePanel {
                          entretien.setDescription((String) aValue);
                          break;
                     case 1:
-                        entretien.setKmEntretienFait((Integer) aValue);
+                        entretien.setKmEntretienFait(Integer.valueOf((String) aValue));
                         break;
                     case 2:
                         entretien.setDateEntretien(new Date());

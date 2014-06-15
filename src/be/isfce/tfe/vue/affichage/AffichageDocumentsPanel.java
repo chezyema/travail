@@ -103,7 +103,7 @@ public class AffichageDocumentsPanel extends AffichagePanel {
                         //Todo encore à faire
                         break;
                     case 1:
-                        document.setIdtype((Integer) aValue);
+                        document.setIdtype(Integer.valueOf((String) aValue));
 
 
 

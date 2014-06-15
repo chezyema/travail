@@ -113,9 +113,9 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
                         utilisation.setDateutilisation(new Date());
                        
                     case 2 :
-                        utilisation.setLitrecarburant((Integer) aValue);
+                        utilisation.setLitrecarburant(Integer.valueOf((String) aValue));
                     case 3 :
-                        utilisation.setKmutilisation((Integer) aValue);
+                        utilisation.setKmutilisation(Integer.valueOf((String) aValue));
 
                 }
                 try {

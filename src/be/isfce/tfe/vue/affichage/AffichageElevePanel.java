@@ -132,7 +132,7 @@ public class AffichageElevePanel extends AffichagePanel {
                         eleve.setAdresseEleve((String) aValue);
                         break;
                     case 5:
-                        eleve.setCdpostal((Integer) aValue);
+                        eleve.setCdpostal(Integer.valueOf((String) aValue));
                         break;
                     case 6:
                         eleve.setVil((String) aValue);

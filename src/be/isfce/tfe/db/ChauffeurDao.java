@@ -125,7 +125,6 @@ public class ChauffeurDao {
                 circuit.setId(resultSet.getInt("idcircuit"));
                 circuit.setNomCircuit(resultSet.getString("nomcircuit"));
                 circuit.setTempsprevu(resultSet.getTimestamp("tempsprevu"));
-               
 
                 allCircuit.add(circuit);
             }
@@ -138,38 +137,32 @@ public class ChauffeurDao {
 
     }
     /*
-    public static List<DocumentAdministratif> getTousLesDocumentsPourChauffeur(boolean documentSupprimes) {
-        try {
-            String supprimes = documentSupprimes ? "1" : "0";
+     public static List<DocumentAdministratif> getTousLesDocumentsPourChauffeur(boolean documentSupprimes) {
+     try {
+     String supprimes = documentSupprimes ? "1" : "0";
            
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select d.datevaliditer,t.libelledocument from documentsadministratifs  d join type t on documentsadministratifs.idtype = type.idtype where supprimedocument = " + supprimes);
+     PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select d.datevaliditer,t.libelledocument from documentsadministratifs  d join type t on documentsadministratifs.idtype = type.idtype where supprimedocument = " + supprimes);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<DocumentAdministratif> allDocuments = new ArrayList<DocumentAdministratif>();
-            while (resultSet.next()) {
-                DocumentAdministratif documents = new DocumentAdministratif();
-                documents.setId(resultSet.getInt("iddocument"));
-                documents.setDateValiditer(resultSet.getDate("datevaliditer"));
-                documents.setIdmaterielroulant(resultSet.getString("id"));
-                documents.setIdchauffeur(resultSet.getString("idchauffeur"));
-                documents.setIdtype(resultSet.getInt("idtype"));
+     ResultSet resultSet = preparedStatement.executeQuery();
+     List<DocumentAdministratif> allDocuments = new ArrayList<DocumentAdministratif>();
+     while (resultSet.next()) {
+     DocumentAdministratif documents = new DocumentAdministratif();
+     documents.setId(resultSet.getInt("iddocument"));
+     documents.setDateValiditer(resultSet.getDate("datevaliditer"));
+     documents.setIdmaterielroulant(resultSet.getString("id"));
+     documents.setIdchauffeur(resultSet.getString("idchauffeur"));
+     documents.setIdtype(resultSet.getInt("idtype"));
 
-                allDocuments.add(documents);
-            }
-            System.out.println(allDocuments);
-            return allDocuments;
+     allDocuments.add(documents);
+     }
+     System.out.println(allDocuments);
+     return allDocuments;
 
-        } catch (Exception e) {
-            return null;
-        }
+     } catch (Exception e) {
+     return null;
+     }
     
-    */
-    
-    
-    
-    
-    
-    
+     */
 
     public static List<DocumentAdministratif> selectListeDocumentsPourChauffeur(String chauffeurIdb) {
 
@@ -208,6 +201,8 @@ public class ChauffeurDao {
                 heure.setHeurededebut(resultSet.getTimestamp("heurededebut"));
                 heure.setHeuredefin(resultSet.getTimestamp("heuredefin"));
                 heure.setDateTravail(resultSet.getDate("datetravail"));
+                heure.setKmdepart(resultSet.getInt("kmdepart"));
+                heure.setKmfin(resultSet.getInt("kmfin"));
 
                 allHeureDeTravail.add(heure);
             }

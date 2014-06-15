@@ -120,10 +120,10 @@ public class AffichageTrajetsPanell extends AffichagePanel {
                         trajet.setDateTravail(new Date());
                         break;
                     case 3:
-                        trajet.setKmdepart((Integer) aValue);
+                        trajet.setKmdepart(Integer.valueOf((String) aValue));
                         break;
                     case 4:
-                        trajet.setKmfin((Integer) aValue);
+                        trajet.setKmfin(Integer.valueOf((String) aValue));
                         break;
 
                 }
