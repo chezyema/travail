@@ -73,6 +73,7 @@ public class MainFrame extends javax.swing.JFrame {
         nbDocumentARenouvelerLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jCalendar1 = new com.toedter.calendar.JCalendar();
+        jLabel1 = new javax.swing.JLabel();
         chauffeurTabPanel1 = new be.isfce.tfe.vue.frame.tabs.ChauffeurTabPanel();
         circuitTabPanel1 = new be.isfce.tfe.vue.frame.tabs.CircuitTabPanel();
         vehiculeTabPanel1 = new be.isfce.tfe.vue.frame.tabs.VehiculeTabPanel();
@@ -103,6 +104,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel.setForeground(new java.awt.Color(153, 153, 255));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Entretiens"));
 
         jLabel2.setText("Entretiens à effectuer d'urgence :");
@@ -122,7 +126,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
                         .addComponent(nbEntretienAEffectuerUrgentLabel))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -163,7 +167,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nbDocumentARenouvelerLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nbDocumentEnOrdreLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -186,6 +190,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         jCalendar1.setBorder(javax.swing.BorderFactory.createTitledBorder("Calendrier"));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\yema\\Desktop\\bus1.gif")); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(500, 400));
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
@@ -194,12 +201,18 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE))
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)))
                 .addContainerGap())
         );
         jPanelLayout.setVerticalGroup(
@@ -209,16 +222,32 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                        .addGap(4, 4, 4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
 
-        jTabbedPane.addTab("Messages", jPanel);
+        jTabbedPane.addTab("Acceuil", jPanel);
+
+        chauffeurTabPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jTabbedPane.addTab("Chauffeurs", chauffeurTabPanel1);
+
+        circuitTabPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jTabbedPane.addTab("Circuits", circuitTabPanel1);
+
+        vehiculeTabPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jTabbedPane.addTab("Véhicules", vehiculeTabPanel1);
+
+        ecoleTabPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jTabbedPane.addTab("Etablissements", ecoleTabPanel1);
+
+        carteCarburantTabPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jTabbedPane.addTab("Carte Carburant", carteCarburantTabPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,7 +258,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -275,6 +304,7 @@ public class MainFrame extends javax.swing.JFrame {
     private be.isfce.tfe.vue.frame.tabs.CircuitTabPanel circuitTabPanel1;
     private be.isfce.tfe.vue.frame.tabs.EcoleTabPanel ecoleTabPanel1;
     private com.toedter.calendar.JCalendar jCalendar1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
