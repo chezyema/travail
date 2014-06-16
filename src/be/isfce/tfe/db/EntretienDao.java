@@ -49,7 +49,7 @@ public class EntretienDao {
     public static List<Entretien> getTousLesEntretiens(boolean entretienSupprimes) {
         try {
             String supprimesentretiens = entretienSupprimes ? "1" : "0";
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from entretien where supprimeentretiens = " + supprimesentretiens);
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from entretien where supprimeentretien = " + supprimesentretiens);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Entretien> allEntretien = new ArrayList<Entretien>();
             while (resultSet.next()) {
@@ -66,6 +66,34 @@ public class EntretienDao {
             return allEntretien;
 
         } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public static List<Entretien> getTousLesEntretiens(java.util.Date date) {
+        try {
+            Date dateSql = new Date(date.getTime());
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from entretien where dateentretien = ?");
+            preparedStatement.setDate(1, dateSql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Entretien> allEntretien = new ArrayList<Entretien>();
+            while (resultSet.next()) {
+                Entretien entretien = new Entretien();
+                entretien.setId(resultSet.getInt("identretien"));
+                entretien.setDescription(resultSet.getString("description"));
+                entretien.setKmEntretienFait(resultSet.getInt("kmentretienfait"));
+                entretien.setDateEntretien(resultSet.getDate("dateentretien"));
+                entretien.setIdmaterielroulant(resultSet.getString("id"));
+
+                allEntretien.add(entretien);
+            }
+            System.out.println(allEntretien);
+            return allEntretien;
+
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
