@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author serro_000
+ * @author yema
  */
 public class DialogUtils {
 

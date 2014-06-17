@@ -9,7 +9,7 @@ import java.util.Observable;
 
 /**
  *
- * @author yacsrk
+ * @author yema
  * @param <T>
  */
 public abstract class AbstractControleur<T> extends Observable{

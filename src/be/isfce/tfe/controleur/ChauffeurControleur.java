@@ -24,7 +24,7 @@ public class ChauffeurControleur extends AbstractControleur<Chauffeur> {
         if (chauffeur == null) {
             throw new ValidationException("Le chauffeur est invalide");
         }
-        if (chauffeur.getAdresse() == null || !StringValidation.VerifString(chauffeur.getAdresse())) {
+        if (chauffeur.getAdresse() == null ) {
             throw new ValidationException("L'adresse n'est pas valide");
         }
         if (chauffeur.getCodepostale() == 0) {
