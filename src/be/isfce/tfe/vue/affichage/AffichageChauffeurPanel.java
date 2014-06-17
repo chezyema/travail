@@ -56,10 +56,14 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         this.afficheArchive = afficheArchive;
     }
 
+    /**
+     * Supprime le chauffeur sélectionné.
+     */
     public void supprimeChauffeursSelectionnes() {
+        //Récupère l'indice du chauffeur selectionné
         int selectedRow = jTable1.getSelectedRow();
         try {
-
+            //Supprime le chauffeur.
             abstractControleur.controleEtSupprime(chauffeurs.get(selectedRow));
             JOptionPane.showMessageDialog(this, "Suppression exécutée", "Information", JOptionPane.INFORMATION_MESSAGE);
         } catch (ValidationException ex) {
@@ -72,6 +76,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
 
     @Override
     public AbstractTableModel getTableModel() {
+        //Retourne le TableModel qui permet de créer la JTable dans la classe mère.
         return new AbstractTableModel() {
 
             @Override
@@ -94,13 +99,19 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                 return true;
             }
 
+            /**
+             * Retourne la valeur correspondant à un case de la JTable.
+             *
+             * @param rowIndex index de la ligne de la case
+             * @param columnIndex index de la colonne de la case
+             * @return
+             */
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 Chauffeur chauffeur = chauffeurs.get(rowIndex);
                 switch (columnIndex) {
                     case 0:
                         return chauffeur.getId();
-
                     case 1:
                         return chauffeur.getNomChauffeur();
                     case 2:
@@ -125,6 +136,13 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                 }
             }
 
+            /**
+             * Change la valeur de la case de la JTable
+             *
+             * @param aValue nouvelle valeur
+             * @param rowIndex
+             * @param columnIndex
+             */
             @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 Chauffeur chauffeur = chauffeurs.get(rowIndex);
@@ -181,6 +199,11 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         }
     }
 
+    /**
+     * Ajoute des entrées dans le Popup Menu
+     *
+     * @return
+     */
     @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
@@ -192,6 +215,8 @@ public class AffichageChauffeurPanel extends AffichagePanel {
 
         return menuItems;
     }
+
+    //Crée un menu item et son ActionListener.
 
     private JMenuItem getEncoderHeureMenuItem() {
         JMenuItem encoderHeure = new JMenuItem("Encoder heure de travail");
@@ -278,13 +303,13 @@ public class AffichageChauffeurPanel extends AffichagePanel {
         });
         return ajouterDocument;
     }
-
+    
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
         reset();
     }
-
+    //Reset la vue. Recharche tous les chauffeurs de la BD.
     private void reset() {
         if (afficheArchive) {
             chauffeurs = ChauffeurDao.getTousLesChauffeursarchives();

@@ -24,7 +24,7 @@ public class EcoleTabPanel extends javax.swing.JPanel {
      */
     public EcoleTabPanel() {
         initComponents();
-        affichageEcolePanel  = new AffichageEcolePanel(new EcoleControlleur(), EcoleDao.getTousLesEcoles());
+        affichageEcolePanel = new AffichageEcolePanel(new EcoleControlleur(), EcoleDao.getTousLesEcoles());
         jPanel1.add(affichageEcolePanel, BorderLayout.CENTER);
     }
 
@@ -73,6 +73,9 @@ public class EcoleTabPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void refresh() {
+        affichageEcolePanel.setEcole(EcoleDao.getTousLesEcoles());
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         AjoutEcoleJPanel ajoutecolePanell = new AjoutEcoleJPanel();
         ajoutecolePanell.setDialogInterface(new DialogUtils.DialogInterface() {

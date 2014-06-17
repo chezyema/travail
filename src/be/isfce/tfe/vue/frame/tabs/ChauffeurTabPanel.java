@@ -85,13 +85,16 @@ public class ChauffeurTabPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Crée un Panel d'ajout de chauffeur
         AjoutChauffeurJPanell ajoutChauffeurJPanell = new AjoutChauffeurJPanell();
+        //On le lie à un DialogInterface pour savoir quand la Dialog disparait.
         ajoutChauffeurJPanell.setDialogInterface(new DialogUtils.DialogInterface() {
 
             @Override
             public void onButtonSavePressed() {
                 if (jDialog != null) {
                     jDialog.dispose();
+                    //Quand le boutton enregistrer est cliqué, on recharche les chauffeurs
                     affichageChauffeurPanel.setChauffeurs(ChauffeurDao.getTousLesChauffeurs());
                 }
             }
@@ -100,7 +103,8 @@ public class ChauffeurTabPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
-        // TODO add your handling code here:
+        // Permet de filtrer les chauffeur archivé
+        // Si le checkbox est selectionnée, on affiche les archives
         boolean selected = jCheckBox1.isSelected();
         if (selected) {
             affichageChauffeurPanel.setChauffeurs(ChauffeurDao.getTousLesChauffeursarchives());

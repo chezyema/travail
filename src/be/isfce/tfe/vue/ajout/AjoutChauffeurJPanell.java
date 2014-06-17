@@ -69,14 +69,16 @@ public class AjoutChauffeurJPanell extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    //Permet de savoir quand la dialog à été fermée.
     public void setDialogInterface(DialogUtils.DialogInterface dialogInterface) {
         this.dialogInterface = dialogInterface;
     }
-
+    //Quand le bouton enregistrer est cliqué.
     private void enregistrerChauffeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enregistrerChauffeurActionPerformed
+        //Récupère le chauffeur depuis les champs d'entrée.
         Chauffeur chauffeur = ajoutChauffeurJPanell1.getChauffeurFromFields();
         try {
+            //L'ajoute dans la base de donnée.
             new ChauffeurControleur().controleEtAjoute(chauffeur);
             dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {

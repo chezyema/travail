@@ -56,10 +56,6 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel4 = new javax.swing.JPanel();
         jTabbedPane = new javax.swing.JTabbedPane();
         jPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -80,29 +76,13 @@ public class MainFrame extends javax.swing.JFrame {
         ecoleTabPanel1 = new be.isfce.tfe.vue.frame.tabs.EcoleTabPanel();
         carteCarburantTabPanel1 = new be.isfce.tfe.vue.frame.tabs.CarteCarburantTabPanel();
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPaneStateChanged(evt);
+            }
+        });
 
         jPanel.setBackground(new java.awt.Color(255, 255, 255));
         jPanel.setForeground(new java.awt.Color(153, 153, 255));
@@ -190,7 +170,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jCalendar1.setBorder(javax.swing.BorderFactory.createTitledBorder("Calendrier"));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\yema\\Desktop\\bus1.gif")); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(500, 400));
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
@@ -264,6 +243,12 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
+        if (jTabbedPane.getSelectedIndex() == 4) {
+            ecoleTabPanel1.refresh();
+        }
+    }//GEN-LAST:event_jTabbedPaneStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -310,13 +295,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel nbDocumentARenouvelerLabel;
     private javax.swing.JLabel nbDocumentEnOrdreLabel;
     private javax.swing.JLabel nbEntretienAEffectuerUrgentLabel;

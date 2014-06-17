@@ -15,6 +15,13 @@ import javax.swing.JPanel;
  */
 public class DialogUtils {
 
+    /**
+     * Affiche une dialog centrée dans le parent
+     *
+     * @param owner Parent sur lequel il faut la centrer
+     * @param jpanel Panel qui va composé la dialog.
+     * @return
+     */
     public static JDialog afficheDialog(Window owner, JPanel jpanel) {
         JDialog jDialog = new JDialog(owner);
         jDialog.add(jpanel);
