@@ -17,63 +17,89 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="idChauffeur" min="-2" pref="110" max="-2" attributes="0"/>
+                                          <Component id="prenomChauffeur" min="-2" pref="94" max="-2" attributes="0"/>
+                                          <Component id="nomChauffeur" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                                          <Component id="dateChauffeur" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="52" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="AdresseChauffeur" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="codepostale" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="ville" min="-2" pref="110" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="numChauffeur" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="idChauffeur" min="-2" pref="110" max="-2" attributes="0"/>
-                                  <Component id="prenomChauffeur" min="-2" pref="94" max="-2" attributes="0"/>
-                                  <Component id="nomChauffeur" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
-                                  <Component id="dateChauffeur" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="AdresseChauffeur" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="emailChauffeur" min="-2" pref="110" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="sexeLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="codepostale" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="ville" min="-2" pref="110" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="numcartesisTextField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="numpermisTextField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="villeTextField" alignment="0" max="32767" attributes="0"/>
-                  <Component id="adresseTextField" alignment="0" pref="163" max="32767" attributes="0"/>
-                  <Component id="dateChooser" alignment="0" max="32767" attributes="0"/>
-                  <Component id="prenomTextField" alignment="0" pref="163" max="32767" attributes="0"/>
-                  <Component id="nomchauffeurTextField" alignment="0" pref="163" max="32767" attributes="0"/>
-                  <Component id="registreNationalTextField" alignment="0" pref="163" max="32767" attributes="0"/>
-                  <Component id="emailTextField" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="codepostaleTextField" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="hommeRadioButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="femmeRadioButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
-                  <Component id="numTextField" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="numTextField" max="32767" attributes="0"/>
+                          <Component id="emailTextField" max="32767" attributes="0"/>
+                          <Component id="numcartesisTextField" max="32767" attributes="0"/>
+                          <Component id="numpermisTextField" max="32767" attributes="0"/>
+                          <Component id="villeTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="adresseTextField" alignment="0" pref="168" max="32767" attributes="0"/>
+                          <Component id="dateChooser" alignment="0" max="32767" attributes="0"/>
+                          <Component id="prenomTextField" alignment="0" pref="168" max="32767" attributes="0"/>
+                          <Component id="nomchauffeurTextField" alignment="0" pref="168" max="32767" attributes="0"/>
+                          <Component id="registreNationalTextField" alignment="0" pref="168" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="codepostaleTextField" min="-2" pref="104" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="64" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="numChauffeur" pref="133" max="32767" attributes="0"/>
-              <EmptySpace pref="232" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
-                  <Component id="emailChauffeur" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,42 +126,50 @@
                   <Component id="dateChauffeur" min="-2" max="-2" attributes="0"/>
                   <Component id="dateChooser" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="AdresseChauffeur" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="adresseTextField" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="hommeRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="femmeRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="sexeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="AdresseChauffeur" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="adresseTextField" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="codepostale" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="codepostaleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ville" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="villeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="numChauffeur" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                  <Component id="numTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="emailChauffeur" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="numChauffeur" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="numTextField" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="numcartesisTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="emailChauffeur" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="emailTextField" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="numpermisTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="numpermisTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="numcartesisTextField" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -220,6 +254,21 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="numpermisTextField">
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="hommeRadioButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="homme"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="femmeRadioButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="femme"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="sexeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="sexe:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -109,6 +109,7 @@ public class EcoleDao {
                 eleve.setNomEleve(resultSet.getString("nomeleve"));
                 eleve.setPrenomEleve(resultSet.getString("prenomeleve"));
                 eleve.setDatedenaissance(resultSet.getDate("datedenaissance"));
+                eleve.setSexe(resultSet.getString("sexeeleve"));
                 eleve.setAdresseEleve(resultSet.getString("adresseeleve"));
                 eleve.setCdpostal(resultSet.getInt("codepostal"));
                 eleve.setVil(resultSet.getString("ville"));

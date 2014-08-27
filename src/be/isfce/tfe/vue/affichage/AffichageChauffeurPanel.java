@@ -32,7 +32,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
 
     private List<Chauffeur> chauffeurs;
     private boolean afficheArchive;
-    private String[] columnsNames = {"Registre national", "Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Email", "numcartesis", "numpermis"};
+    private String[] columnsNames = {"Registre national", "Nom", "Prénom", "Date de Naissance","sexe", "Adresse", "Code Postal", "Ville", "Email", "numcartesis", "numpermis"};
 
     private Dialog dialog = null;
 
@@ -119,16 +119,18 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                     case 3:
                         return chauffeur.getDateNaissance();
                     case 4:
-                        return chauffeur.getAdresse();
+                        return chauffeur.getSexe();
                     case 5:
-                        return chauffeur.getCodepostale();
+                        return chauffeur.getAdresse();
                     case 6:
-                        return chauffeur.getVille();
+                        return chauffeur.getCodepostale();
                     case 7:
-                        return chauffeur.getEmail();
+                        return chauffeur.getVille();
                     case 8:
-                        return chauffeur.getNumcartesis();
+                        return chauffeur.getEmail();
                     case 9:
+                        return chauffeur.getNumcartesis();
+                    case 10:
                         return chauffeur.getNumpermis();
 
                     default:
@@ -161,22 +163,25 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                         //TODO
                         chauffeur.setDateNaissance(new Date());
                         break;
-                    case 4:
+                    case 4 :
+                        chauffeur.setSexe((String) aValue);
+                        
+                    case 5:
                         chauffeur.setAdresse((String) aValue);
                         break;
-                    case 5:
+                    case 6:
                         chauffeur.setCodepostale(Integer.valueOf((String) aValue));
                         break;
-                    case 6:
+                    case 7:
                         chauffeur.setVille((String) aValue);
                         break;
-                    case 7:
+                    case 8:
                         chauffeur.setEmail((String) aValue);
                         break;
-                    case 8:
+                    case 9:
                         chauffeur.setNumcartesis((String) aValue);
                         break;
-                    case 9:
+                    case 10:
                         chauffeur.setNumpermis((String) aValue);
                         break;
                 }

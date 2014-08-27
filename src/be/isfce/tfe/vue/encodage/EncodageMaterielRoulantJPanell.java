@@ -7,8 +7,11 @@ package be.isfce.tfe.vue.encodage;
 import be.isfce.tfe.vue.ajout.*;
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.TypeMaterielDao;
 import be.isfce.tfe.metier.MaterielRoulant;
+import be.isfce.tfe.metier.TypeMaterielRoulant;
 import be.isfce.tfe.validation.ValidationPlaque;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,11 +20,17 @@ import javax.swing.JOptionPane;
  */
 public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AjoutMateielRoulantJPanell
-     */
+     List<TypeMaterielRoulant> types;
+
+  
+       
+    
+
+     
     public EncodageMaterielRoulantJPanell() {
-        initComponents();
+          initComponents();
+          types = TypeMaterielDao.getTousLesTypesMateriel();
+          initComboboxType();
     }
 
     /**
@@ -35,13 +44,11 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
 
         idvehicule = new javax.swing.JLabel();
         marquevehicule = new javax.swing.JLabel();
-        typevehicule = new javax.swing.JLabel();
         numimmatr = new javax.swing.JLabel();
         carburant = new javax.swing.JLabel();
         nbplaces = new javax.swing.JLabel();
         identifiantTextField = new javax.swing.JTextField();
         marqueTextField = new javax.swing.JTextField();
-        typeTextField = new javax.swing.JTextField();
         plaqueTextField = new javax.swing.JTextField();
         carburantTextField = new javax.swing.JTextField();
         nbdeplaceTextField = new javax.swing.JTextField();
@@ -51,12 +58,12 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
         datevaliterextincteur = new javax.swing.JLabel();
         validiterexctincteur = new com.toedter.calendar.JDateChooser();
         anneeconstruction = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        typematerielComboBox = new javax.swing.JComboBox();
 
         idvehicule.setText("Numero de chassis:");
 
         marquevehicule.setText("Marque:");
-
-        typevehicule.setText("Type:");
 
         numimmatr.setText("Plaque immatriculation:");
 
@@ -82,6 +89,19 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
 
         datevaliterextincteur.setText("Date validité exctincteur:");
 
+        jLabel1.setText("type:");
+
+        typematerielComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                typematerielComboBoxItemStateChanged(evt);
+            }
+        });
+        typematerielComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typematerielComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,26 +109,44 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(datevaliterextincteur)
-                    .addComponent(kilometrage, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nbplaces)
-                    .addComponent(carburant)
-                    .addComponent(numimmatr)
-                    .addComponent(anneedeconstructionjllabel)
-                    .addComponent(typevehicule)
-                    .addComponent(marquevehicule)
-                    .addComponent(idvehicule))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(marqueTextField)
-                    .addComponent(typeTextField)
-                    .addComponent(plaqueTextField)
-                    .addComponent(carburantTextField)
-                    .addComponent(nbdeplaceTextField)
-                    .addComponent(kilometrageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                    .addComponent(identifiantTextField)
-                    .addComponent(anneeconstruction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(validiterexctincteur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(marquevehicule)
+                            .addComponent(idvehicule))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(marqueTextField)
+                            .addComponent(identifiantTextField)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(anneedeconstructionjllabel)
+                        .addGap(27, 27, 27)
+                        .addComponent(anneeconstruction, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(datevaliterextincteur)
+                        .addGap(18, 18, 18)
+                        .addComponent(validiterexctincteur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(kilometrage, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(kilometrageTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nbplaces)
+                        .addGap(45, 45, 45)
+                        .addComponent(nbdeplaceTextField))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(carburant)
+                        .addGap(86, 86, 86)
+                        .addComponent(carburantTextField))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numimmatr)
+                            .addComponent(jLabel1))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(plaqueTextField)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(typematerielComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -122,35 +160,42 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(marquevehicule)
                     .addComponent(marqueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typevehicule)
-                    .addComponent(typeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(anneedeconstructionjllabel)
                     .addComponent(anneeconstruction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numimmatr)
-                    .addComponent(plaqueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carburant)
-                    .addComponent(carburantTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nbplaces)
-                    .addComponent(nbdeplaceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kilometrage)
-                    .addComponent(kilometrageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(datevaliterextincteur)
-                    .addComponent(validiterexctincteur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(typematerielComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(numimmatr, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(plaqueTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(carburant)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(carburantTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nbplaces, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nbdeplaceTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(kilometrage, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(kilometrageTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(datevaliterextincteur, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(validiterexctincteur, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -162,14 +207,23 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_plaqueTextFieldActionPerformed
 
+    private void typematerielComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typematerielComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_typematerielComboBoxActionPerformed
+
+    private void typematerielComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_typematerielComboBoxItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_typematerielComboBoxItemStateChanged
+
     public MaterielRoulant getMaterielRoulantFromFields() {
         MaterielRoulant materielroulant = new MaterielRoulant();
         materielroulant.setId(identifiantTextField.getText());
 
         materielroulant.setMarque(marqueTextField.getText());
+        
+        materielroulant.setIdtypemateriel( types.get(typematerielComboBox.getSelectedIndex()).getIdtypemateriel());
 
-        materielroulant.setType(typeTextField.getText());
-
+      
         materielroulant.setAnneedeconstruction(anneeconstruction.getDate());
 
         String plaque = plaqueTextField.getText();
@@ -203,6 +257,7 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
     private javax.swing.JLabel datevaliterextincteur;
     private javax.swing.JTextField identifiantTextField;
     private javax.swing.JLabel idvehicule;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel kilometrage;
     private javax.swing.JTextField kilometrageTextField;
     private javax.swing.JTextField marqueTextField;
@@ -211,8 +266,14 @@ public class EncodageMaterielRoulantJPanell extends javax.swing.JPanel {
     private javax.swing.JLabel nbplaces;
     private javax.swing.JLabel numimmatr;
     private javax.swing.JTextField plaqueTextField;
-    private javax.swing.JTextField typeTextField;
-    private javax.swing.JLabel typevehicule;
+    private javax.swing.JComboBox typematerielComboBox;
     private com.toedter.calendar.JDateChooser validiterexctincteur;
     // End of variables declaration//GEN-END:variables
+private void initComboboxType() {
+        for (TypeMaterielRoulant typemateriel : types) {
+            typematerielComboBox.addItem(typemateriel.getTypemateriel());
+        }
+    }
+
 }
+

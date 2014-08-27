@@ -22,18 +22,19 @@ public class EleveDao {
     public static boolean addEleve(Eleve eleve) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into eleve (ideleve,nomeleve,prenomeleve,datedenaissance,adresseeleve,codepostal,ville,nomresponsable,telresponsable,emailresponsable,idecole) VALUES (? , ?, ?,?,?,?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into eleve (ideleve,nomeleve,prenomeleve,datedenaissance,sexeeleve,adresseeleve,codepostal,ville,nomresponsable,telresponsable,emailresponsable,idecole) VALUES (? , ?,?, ?,?,?,?,?,?,?,?,?)");
             preparedStatement.setString(1, eleve.getId());
             preparedStatement.setString(2, eleve.getNomEleve());
             preparedStatement.setString(3, eleve.getPrenomEleve());
             preparedStatement.setDate(4, new Date(eleve.getDatedenaissance().getTime()));
-            preparedStatement.setString(5, eleve.getAdresseEleve());
-            preparedStatement.setInt(6, eleve.getCdpostal());
-            preparedStatement.setString(7, eleve.getVil());
-            preparedStatement.setString(8, eleve.getNomResponsable());
-            preparedStatement.setString(9, eleve.getTelResponsable());
-            preparedStatement.setString(10, eleve.getEmailResponsable());
-            preparedStatement.setInt(11, eleve.getIdecole());
+            preparedStatement.setString(5,eleve.getSexe());
+            preparedStatement.setString(6, eleve.getAdresseEleve());
+            preparedStatement.setInt(7, eleve.getCdpostal());
+            preparedStatement.setString(8, eleve.getVil());
+            preparedStatement.setString(9, eleve.getNomResponsable());
+            preparedStatement.setString(10, eleve.getTelResponsable());
+            preparedStatement.setString(11, eleve.getEmailResponsable());
+            preparedStatement.setInt(12, eleve.getIdecole());
 
             preparedStatement.executeUpdate();
             return true;
@@ -64,6 +65,7 @@ public class EleveDao {
                 eleve.setNomEleve(resultSet.getString("nomeleve"));
                 eleve.setPrenomEleve(resultSet.getString("prenomeleve"));
                 eleve.setDatedenaissance(resultSet.getDate("datedenaissance"));
+                eleve.setSexe(resultSet.getString("sexeeleve"));
                 eleve.setAdresseEleve(resultSet.getString("adresseeleve"));
                 eleve.setCdpostal(resultSet.getInt("codepostal"));
                 eleve.setVil(resultSet.getString("ville"));
@@ -87,13 +89,14 @@ public class EleveDao {
             preparedStatement.setString(1, eleve.getNomEleve());
             preparedStatement.setString(2, eleve.getPrenomEleve());
             preparedStatement.setDate(3, new Date(eleve.getDatedenaissance().getTime()));
-            preparedStatement.setString(4, eleve.getAdresseEleve());
-            preparedStatement.setInt(5, eleve.getCdpostal());
-            preparedStatement.setString(6, eleve.getVil());
-            preparedStatement.setString(7, eleve.getNomResponsable());
-            preparedStatement.setString(8, eleve.getTelResponsable());
-            preparedStatement.setString(9, eleve.getEmailResponsable());
-            preparedStatement.setString(10, eleve.getId());
+            preparedStatement.setString(4,eleve.getSexe());
+            preparedStatement.setString(5, eleve.getAdresseEleve());
+            preparedStatement.setInt(6, eleve.getCdpostal());
+            preparedStatement.setString(7, eleve.getVil());
+            preparedStatement.setString(8, eleve.getNomResponsable());
+            preparedStatement.setString(9, eleve.getTelResponsable());
+            preparedStatement.setString(10, eleve.getEmailResponsable());
+            preparedStatement.setString(11, eleve.getId());
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {

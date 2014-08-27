@@ -26,19 +26,20 @@ public class ChauffeurDao {
         try {
             Date dateSql = new Date(chauffeur.getDateNaissance().getTime());
 
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into chauffeur (idchauffeur,nom,prenom,datenaissance,adresse,codepostal,ville,numtelephone,email,numcartesis,numpermis) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into chauffeur (idchauffeur,nom,prenom,datenaissance,sexe,adresse,codepostal,ville,numtelephone,email,numcartesis,numpermis) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             preparedStatement.setString(1, chauffeur.getId());
 
             preparedStatement.setString(2, chauffeur.getNomChauffeur());
             preparedStatement.setString(3, chauffeur.getPrenomChauffeur());
             preparedStatement.setDate(4, dateSql);
-            preparedStatement.setString(5, chauffeur.getAdresse());
-            preparedStatement.setInt(6, chauffeur.getCodepostale());
-            preparedStatement.setString(7, chauffeur.getVille());
-            preparedStatement.setString(8, chauffeur.getNumTelephone());
-            preparedStatement.setString(9, chauffeur.getEmail());
-            preparedStatement.setString(10, chauffeur.getNumcartesis());
-            preparedStatement.setString(11, chauffeur.getNumpermis());
+            preparedStatement.setString(5,chauffeur.getSexe());
+            preparedStatement.setString(6, chauffeur.getAdresse());
+            preparedStatement.setInt(7, chauffeur.getCodepostale());
+            preparedStatement.setString(8, chauffeur.getVille());
+            preparedStatement.setString(9, chauffeur.getNumTelephone());
+            preparedStatement.setString(10, chauffeur.getEmail());
+            preparedStatement.setString(11, chauffeur.getNumcartesis());
+            preparedStatement.setString(12, chauffeur.getNumpermis());
 
             preparedStatement.executeUpdate();
 
@@ -69,6 +70,7 @@ public class ChauffeurDao {
                 chauffeur.setNomChauffeur(resultSet.getString("nom"));
                 chauffeur.setPrenomChauffeur(resultSet.getString("prenom"));
                 chauffeur.setDateNaissance(resultSet.getDate("datenaissance"));
+                chauffeur.setSexe(resultSet.getString("sexe"));
                 chauffeur.setAdresse(resultSet.getString("adresse"));
                 chauffeur.setCodepostale(resultSet.getInt("codepostal"));
                 chauffeur.setVille(resultSet.getString("ville"));
@@ -97,14 +99,15 @@ public class ChauffeurDao {
             preparedStatement.setString(1, chauffeur.getNomChauffeur());
             preparedStatement.setString(2, chauffeur.getPrenomChauffeur());
             preparedStatement.setDate(3, new Date(chauffeur.getDateNaissance().getTime()));
-            preparedStatement.setString(4, chauffeur.getAdresse());
-            preparedStatement.setInt(5, chauffeur.getCodepostale());
-            preparedStatement.setString(6, chauffeur.getVille());
-            preparedStatement.setString(7, chauffeur.getNumTelephone());
-            preparedStatement.setString(8, chauffeur.getEmail());
-            preparedStatement.setString(9, chauffeur.getNumcartesis());
-            preparedStatement.setString(10, chauffeur.getNumpermis());
-            preparedStatement.setString(11, chauffeur.getId());
+            preparedStatement.setString(4,chauffeur.getSexe());
+            preparedStatement.setString(5, chauffeur.getAdresse());
+            preparedStatement.setInt(6, chauffeur.getCodepostale());
+            preparedStatement.setString(7, chauffeur.getVille());
+            preparedStatement.setString(8, chauffeur.getNumTelephone());
+            preparedStatement.setString(9, chauffeur.getEmail());
+            preparedStatement.setString(10, chauffeur.getNumcartesis());
+            preparedStatement.setString(11, chauffeur.getNumpermis());
+            preparedStatement.setString(12, chauffeur.getId());
             preparedStatement.execute();
 
             return true;

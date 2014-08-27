@@ -4,6 +4,7 @@
  */
 package be.isfce.tfe.vue.affichage;
 
+import be.isfce.tfe.controleur.AmendesControleur;
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
@@ -11,7 +12,9 @@ import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.MaterielRoulantDao;
+import be.isfce.tfe.db.TypeMaterielDao;
 import be.isfce.tfe.metier.MaterielRoulant;
+import be.isfce.tfe.metier.TypeMaterielRoulant;
 import be.isfce.tfe.vue.ajout.AjoutDocumentsJPanell;
 import be.isfce.tfe.vue.ajout.AjoutEntretienJPanell;
 import be.isfce.tfe.vue.ajout.AjoutUtilisationCarteJPanell;
@@ -92,12 +95,16 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
             public Object getValueAt(int rowIndex, int columnIndex) {
                 MaterielRoulant vehicule = vehicules.get(rowIndex);
                 switch (columnIndex) {
+                    
                     case 0:
                         return vehicule.getId();
                     case 1:
                         return vehicule.getMarque();
-                    case 2:
-                        return vehicule.getType();
+                      case 2:
+                        TypeMaterielRoulant type = TypeMaterielDao.getTypeMateriel(vehicule.getIdtypemateriel());
+                          //System.out.println(""+type);
+                        return type != null ? type.getTypemateriel() : "";   
+                    
                     case 3:
                         return vehicule.getAnneedeconstruction();
                     case 4:
@@ -125,9 +132,11 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     case 1:
                         vehicule.setMarque((String) aValue);
                         break;
-                    case 2:
-                        vehicule.setType((String) aValue);
-                        break;
+                        
+                  case 2:
+                        vehicule.setIdtypemateriel(Integer.valueOf((String) aValue));
+                      break;
+
                     case 3:
                         //TODO
                         vehicule.setAnneedeconstruction(new Date());
@@ -144,7 +153,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     case 7:
                         vehicule.setKmactuel(Integer.valueOf(aValue.toString()));
                         break;
-
+                   
                 }
                 try {
                     abstractControleur.controleEtModifie(vehicule);
@@ -181,6 +190,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         menuItems.add(getAjouterDocumentMenuItem());
         menuItems.add(getAfficherDocumentMenuItem());
         menuItems.add(getAjouterUtilisationCarteMenuItem());
+        menuItems.add(getAfficherAmendesMenuItem());
 
         return menuItems;
     }
@@ -197,6 +207,20 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return entretien;
     }
+    
+     private JMenuItem getAfficherAmendesMenuItem() {
+        JMenuItem amende = new JMenuItem("Les Amendes");
+        amende.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MaterielRoulant materiel = vehicules.get(jTable1.getSelectedRow());
+                AffichageAmendePanel affichageAmendePanel = new AffichageAmendePanel(new AmendesControleur(), materiel.getLesamendes());
+                DialogUtils.afficheDialog(null, affichageAmendePanel);
+            }
+        });
+        return amende;
+    }
+
 
     private JMenuItem getUtilisationCarburantMenuItem() {
         JMenuItem utilisation = new JMenuItem("Utilisation Carte Carburant");

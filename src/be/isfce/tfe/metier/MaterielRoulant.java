@@ -16,19 +16,22 @@ public class MaterielRoulant {
 
     private String id;
     private String marque;
-    private String type;
+    private TypeMaterielRoulant typemateriel;
+    private int idtypemateriel;
     private String carburant;
     private String numImmatr;
     private int nbdeplaces;
     private int kmactuel;
     private Date anneedeconstruction;
     private Date dateexctincteur;
+    
     private List<Entretien> lesentretiens;
     private List<Chauffeur> Leschauffeurs;
     private List<DocumentAdministratif> lesdocuments;
     private List<Circuit> lescircuits;
     private List<UtilisationCarte> lesmemos;
     private List<Trajet> lestrajets;
+    private List<Amendes> lesamendes;
     
     
     public int getKmactuel() {
@@ -47,9 +50,21 @@ public class MaterielRoulant {
         this.marque = Marque;
     }
 
-    public void setType(String Type) {
-        this.type = Type;
+    public int getIdtypemateriel() {
+        return idtypemateriel;
     }
+
+    public List<Amendes> getLesamendes() {
+        return lesamendes;
+    }
+    
+    
+
+    public void setIdtypemateriel(int idtypemateriel) {
+        this.idtypemateriel = idtypemateriel;
+    }
+
+    
 
     public void setCarburant(String Carburant) {
         this.carburant = Carburant;
@@ -79,6 +94,11 @@ public class MaterielRoulant {
     public void setDateexctincteur(Date dateexctincteur) {
         this.dateexctincteur = dateexctincteur;
     }
+
+    public void setLesamendes(List<Amendes> lesamendes) {
+        this.lesamendes = lesamendes;
+    }
+    
     
     
 
@@ -90,9 +110,7 @@ public class MaterielRoulant {
         return marque;
     }
 
-    public String getType() {
-        return type;
-    }
+    
 
     public String getCarburant() {
         return carburant;
@@ -160,10 +178,30 @@ public class MaterielRoulant {
         this.lestrajets = lestrajets;
     }
 
+    public TypeMaterielRoulant getTypemateriel() {
+        return typemateriel;
+    }
+
+    public void setTypemateriel(TypeMaterielRoulant typemateriel) {
+        this.typemateriel = typemateriel;
+    }
+
     @Override
     public String toString() {
-        return "MaterielRoulant{" + "id=" + id + ", marque=" + marque + ", type=" + type + ", carburant=" + carburant + ", numImmatr=" + numImmatr + ", nbdeplaces=" + nbdeplaces + ", kmactuel=" + kmactuel + ", anneedeconstruction=" + anneedeconstruction + ", dateexctincteur=" + dateexctincteur + ", lesentretiens=" + lesentretiens + ", Leschauffeurs=" + Leschauffeurs + ", lesdocuments=" + lesdocuments + ", lescircuits=" + lescircuits + ", lesmemos=" + lesmemos + ", lestrajets=" + lestrajets + '}';
+        return "MaterielRoulant{" + "id=" + id + ", marque=" + marque + ", typemateriel=" + typemateriel + ", idtypemateriel=" + idtypemateriel + ", carburant=" + carburant + ", numImmatr=" + numImmatr + ", nbdeplaces=" + nbdeplaces + ", kmactuel=" + kmactuel + ", anneedeconstruction=" + anneedeconstruction + ", dateexctincteur=" + dateexctincteur + ", lesentretiens=" + lesentretiens + ", Leschauffeurs=" + Leschauffeurs + ", lesdocuments=" + lesdocuments + ", lescircuits=" + lescircuits + ", lesmemos=" + lesmemos + ", lestrajets=" + lestrajets + ", lesamendes=" + lesamendes + '}';
     }
+
+  
+    
+
+    
+
+   
+
+
+   
+
+  
      
     
    

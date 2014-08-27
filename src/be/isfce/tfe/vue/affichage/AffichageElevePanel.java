@@ -22,7 +22,7 @@ public class AffichageElevePanel extends AffichagePanel {
 
     List<Eleve> eleves;
 
-    String[] columnsNames = {"Registre national", "Nom", "Prénom", "Date de Naissance", "Adresse", "Code Postal", "Ville", "Nom du responsable", "telephone du responsable", "Email du responsable"};
+    String[] columnsNames = {"Registre national", "Nom", "Prénom", "Date de Naissance","sexe", "Adresse", "Code Postal", "Ville", "Nom du responsable", "telephone du responsable", "Email du responsable"};
 
     public AffichageElevePanel(EleveControleur eleveControleur) {
         super(eleveControleur);
@@ -94,16 +94,18 @@ public class AffichageElevePanel extends AffichagePanel {
                     case 3:
                         return eleve.getDatedenaissance();
                     case 4:
-                        return eleve.getAdresseEleve();
+                        return eleve.getSexe();
                     case 5:
-                        return eleve.getCdpostal();
+                        return eleve.getAdresseEleve();
                     case 6:
-                        return eleve.getVil();
+                        return eleve.getCdpostal();
                     case 7:
-                        return eleve.getNomResponsable();
+                        return eleve.getVil();
                     case 8:
-                        return eleve.getTelResponsable();
+                        return eleve.getNomResponsable();
                     case 9:
+                        return eleve.getTelResponsable();
+                    case 10:
                         return eleve.getEmailResponsable();
                     default:
                         return null;
@@ -129,21 +131,23 @@ public class AffichageElevePanel extends AffichagePanel {
                         eleve.setDatedenaissance(new Date());
                         break;
                     case 4:
+                        eleve.setSexe((String) aValue);
+                    case 5:
                         eleve.setAdresseEleve((String) aValue);
                         break;
-                    case 5:
+                    case 6:
                         eleve.setCdpostal(Integer.valueOf((String) aValue));
                         break;
-                    case 6:
+                    case 7:
                         eleve.setVil((String) aValue);
                         break;
-                    case 7:
+                    case 8:
                         eleve.setNomResponsable((String) aValue);
                         break;
-                    case 8:
+                    case 9:
                         eleve.setTelResponsable((String) aValue);
                         break;
-                    case 9:
+                    case 10:
                         eleve.setEmailResponsable((String) aValue);
                         break;
                 }

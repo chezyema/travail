@@ -42,7 +42,7 @@ public class EntretienDao {
         return getTousLesEntretiens(false);
     }
 
-    public static List<Entretien> getTousLesCircuitssarchives() {
+    public static List<Entretien> getTousLesEntretienssarchives() {
         return getTousLesEntretiens(true);
     }
 

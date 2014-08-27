@@ -19,6 +19,7 @@ public class Eleve {
     private String prenomeleve;
     private String adresseeleve;
     private Date datedenaissance;
+    private String sexe;
     private int cdpostal;
     private String vil;
     private String nomresponsable;
@@ -42,6 +43,11 @@ public class Eleve {
     public Date getDatedenaissance() {
         return datedenaissance;
     }
+
+    public String getSexe() {
+        return sexe;
+    }
+    
     
     public void setId(String id) {
         this.id = id;
@@ -54,6 +60,12 @@ public class Eleve {
     public void setPrenomEleve(String PrenomEleve) {
         this.prenomeleve = PrenomEleve;
     }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+    
+    
 
     public void setAdresseEleve(String AdresseEleve) {
         this.adresseeleve = AdresseEleve;
@@ -131,11 +143,13 @@ public class Eleve {
         return empreinter;
 
     }
-    
-      @Override
+
+    @Override
     public String toString() {
-        return "Eleve{" + "id=" + id + ", nomeleve=" + nomeleve + ", prenomeleve=" + prenomeleve + ", adresseeleve=" + adresseeleve + ", datedenaissance=" + datedenaissance + ", cdpostal=" + cdpostal + ", vil=" + vil + ", nomresponsable=" + nomresponsable + ", telresponsable=" + telresponsable + ", idcircuit=" + idcircuit + ", idecole=" + idecole + ", emailresponsable=" + emailresponsable + ", coordonnee=" + coordonnee + ", empreinter=" + empreinter + '}';
+        return "Eleve{" + "id=" + id + ", nomeleve=" + nomeleve + ", prenomeleve=" + prenomeleve + ", adresseeleve=" + adresseeleve + ", datedenaissance=" + datedenaissance + ", sexe=" + sexe + ", cdpostal=" + cdpostal + ", vil=" + vil + ", nomresponsable=" + nomresponsable + ", telresponsable=" + telresponsable + ", idcircuit=" + idcircuit + ", idecole=" + idecole + ", emailresponsable=" + emailresponsable + ", coordonnee=" + coordonnee + ", empreinter=" + empreinter + '}';
     }
+    
+    
 
     public void setDatedenaissance(Date datedenaissance) {
         this.datedenaissance = datedenaissance;

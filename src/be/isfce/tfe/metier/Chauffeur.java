@@ -78,6 +78,11 @@ public class Chauffeur {
         return email;
     }
 
+    public String getSexe() {
+        return sexe;
+    }
+    
+
     public void setId(String id) {
         this.id = id;
     }
@@ -122,10 +127,16 @@ public class Chauffeur {
         this.numpermis = numpermis;
     }
 
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+    
+
     private String id;
     private String nomchauffeur;
     private String prenomchauffeur;
     private Date datedenaissance;
+    private String sexe;
     private String adresse;
     private int codepostale;
     private String ville;
@@ -156,7 +167,8 @@ public class Chauffeur {
 
     @Override
     public String toString() {
-        return "Chauffeur{" + "id=" + id + ", nomchauffeur=" + nomchauffeur + ", prenomchauffeur=" + prenomchauffeur + ", datedenaissance=" + datedenaissance + ", adresse=" + adresse + ", codepostale=" + codepostale + ", ville=" + ville + ", numtelephone=" + numtelephone + ", email=" + email + ", numcartesis=" + numcartesis + ", numpermis=" + numpermis + ", lescircuits=" + lescircuits + ", lesheures=" + lesheures + ", lesvehicules=" + lesvehicules + ", lesdocuments=" + lesdocuments + '}';
+        return "Chauffeur{" + "id=" + id + ", nomchauffeur=" + nomchauffeur + ", prenomchauffeur=" + prenomchauffeur + ", datedenaissance=" + datedenaissance + ", sexe=" + sexe + ", adresse=" + adresse + ", codepostale=" + codepostale + ", ville=" + ville + ", numtelephone=" + numtelephone + ", email=" + email + ", numcartesis=" + numcartesis + ", numpermis=" + numpermis + ", lescircuits=" + lescircuits + ", lesheures=" + lesheures + ", lesvehicules=" + lesvehicules + ", lesdocuments=" + lesdocuments + '}';
     }
 
+   
 }
