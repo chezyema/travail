@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
+import java.util.TimeZone;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -31,6 +32,7 @@ public class AffichageTrajetsPanell extends AffichagePanel {
     public AffichageTrajetsPanell(TrajetsControleur trajetControleur) {
         super(trajetControleur);
         simpleDateFormat = new SimpleDateFormat("HH:mm");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         displayData();
     }
 

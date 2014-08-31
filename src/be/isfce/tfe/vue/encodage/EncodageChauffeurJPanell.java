@@ -8,6 +8,7 @@ import be.isfce.tfe.vue.ajout.*;
 import be.isfce.tfe.controleur.ChauffeurControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Chauffeur;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,10 @@ public class EncodageChauffeurJPanell extends javax.swing.JPanel {
      */
     public EncodageChauffeurJPanell() {
         initComponents();
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(hommeRadioButton);
+        group.add(femmeRadioButton);
     }
 
     /**
@@ -86,6 +91,7 @@ public class EncodageChauffeurJPanell extends javax.swing.JPanel {
 
         jLabel2.setText("Numero de Permis :");
 
+        hommeRadioButton.setSelected(true);
         hommeRadioButton.setText("homme");
 
         femmeRadioButton.setText("femme");

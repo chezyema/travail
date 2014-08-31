@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -37,6 +38,7 @@ public class TrajetDao {
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 
@@ -104,6 +106,80 @@ public class TrajetDao {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+    
+    public static List<Trajet> getTrajetsPourVehicules(String materielRoulantId, java.util.Date date, long debutTimeStamp, long finTimeStamp){
+    
+        List<Trajet> allTrajets = new ArrayList<Trajet>();
+        try {
+            Date dateDebut = new Date(date.getTime());
+
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("SELECT * FROM trajets WHERE id =  ? AND datetravail = ? AND (heurededebut BETWEEN ?  AND ? OR heuredefin BETWEEN ?  AND ?)");
+            preparedStatement.setString(1, materielRoulantId);
+            preparedStatement.setDate(2, dateDebut);
+            preparedStatement.setTimestamp(3, new Timestamp(debutTimeStamp));
+            preparedStatement.setTimestamp(4, new Timestamp(finTimeStamp));
+            preparedStatement.setTimestamp(5, new Timestamp(debutTimeStamp));
+            preparedStatement.setTimestamp(6, new Timestamp(finTimeStamp));
+            
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Trajet heure = new Trajet();
+                heure.setIdtrajets(resultSet.getInt("idtrajets"));
+                heure.setHeurededebut(resultSet.getTimestamp("heurededebut"));
+                heure.setHeuredefin(resultSet.getTimestamp("heuredefin"));
+                heure.setDateTravail(resultSet.getDate("datetravail"));
+                heure.setKmdepart(resultSet.getInt("kmdepart"));
+                heure.setKmfin(resultSet.getInt("kmfin"));
+                heure.setIdchauffeur(resultSet.getString("idchauffeur"));
+                heure.setIdcircuit(resultSet.getInt("idcircuit"));
+                heure.setIdmaterielroulant(resultSet.getString("id"));
+                allTrajets.add(heure);
+                System.out.println(heure);
+            }
+            return allTrajets;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return allTrajets;
+        }
+    }
+
+    public static List<Trajet> getTrajets(String chauffeurId, java.util.Date date, long debutTimeStamp, long finTimeStamp) {
+
+        List<Trajet> allTrajets = new ArrayList<Trajet>();
+        try {
+            Date dateDebut = new Date(date.getTime());
+
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("SELECT * FROM trajets WHERE idchauffeur =  ? AND datetravail = ? AND (heurededebut BETWEEN ?  AND ? OR heuredefin BETWEEN ?  AND ?)");
+            preparedStatement.setString(1, chauffeurId);
+            preparedStatement.setDate(2, dateDebut);
+            preparedStatement.setTimestamp(3, new Timestamp(debutTimeStamp));
+            preparedStatement.setTimestamp(4, new Timestamp(finTimeStamp));
+            preparedStatement.setTimestamp(5, new Timestamp(debutTimeStamp));
+            preparedStatement.setTimestamp(6, new Timestamp(finTimeStamp));
+            
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Trajet heure = new Trajet();
+                heure.setIdtrajets(resultSet.getInt("idtrajets"));
+                heure.setHeurededebut(resultSet.getTimestamp("heurededebut"));
+                heure.setHeuredefin(resultSet.getTimestamp("heuredefin"));
+                heure.setDateTravail(resultSet.getDate("datetravail"));
+                heure.setKmdepart(resultSet.getInt("kmdepart"));
+                heure.setKmfin(resultSet.getInt("kmfin"));
+                heure.setIdchauffeur(resultSet.getString("idchauffeur"));
+                heure.setIdcircuit(resultSet.getInt("idcircuit"));
+                heure.setIdmaterielroulant(resultSet.getString("id"));
+                allTrajets.add(heure);
+                System.out.println(heure);
+            }
+            return allTrajets;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return allTrajets;
         }
     }
 

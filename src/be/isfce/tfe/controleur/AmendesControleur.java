@@ -31,7 +31,7 @@ public class AmendesControleur extends AbstractControleur<Amendes> {
         if (amende.getDatepv() == null ) {
             throw new ValidationException("Le date n'est pas valide");
         }
-        if (amende.getMontantpv() == 0) {
+        if (amende.getMontantpv() <= 0) {
             throw new ValidationException("Le montant est null");
         }
         if(AmendesDao.addAmendes(amende)) {

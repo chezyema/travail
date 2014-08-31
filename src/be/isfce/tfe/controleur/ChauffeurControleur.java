@@ -53,7 +53,9 @@ public class ChauffeurControleur extends AbstractControleur<Chauffeur> {
         if (chauffeur.getId() == null || !checkRegistreNational(chauffeur.getId(), chauffeur.getDateNaissance())) {
             throw new ValidationException("Le registre national n'est pas valide");
         }
-        if(chauffeur.getId().charAt(8) % 2 == 0 && chauffeur.getSexe().equals("homme")){
+        System.out.println(chauffeur.getId().substring(6,9));
+        System.out.println(chauffeur.getSexe());
+        if(Integer.valueOf(chauffeur.getId().substring(6,9)) % 2 == 0 && chauffeur.getSexe().equalsIgnoreCase("homme")){
             throw new ValidationException("Le registre national n'est pas valide (sexe erroné)");    
         }
         if (ChauffeurDao.addChauffeur(chauffeur)) {

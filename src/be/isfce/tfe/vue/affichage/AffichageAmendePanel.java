@@ -23,7 +23,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class AffichageAmendePanel extends AffichagePanel {
 
-    List<Amendes> amende;
+    List<Amendes> amendes;
 
     String[] columnsNames = {"numero de pv", "date du pv", "montant du pv"};
 
@@ -33,13 +33,13 @@ public class AffichageAmendePanel extends AffichagePanel {
     }
 
     public void setAmendes(List<Amendes> amendes) {
-        this.amende = amendes;
+        this.amendes = amendes;
         displayData();
     }
 
     public AffichageAmendePanel(AmendesControleur amendeControleur, List<Amendes> amende) {
         this(amendeControleur);
-        this.amende = amende;
+        this.amendes = amende;
         displayData();
     }
 
@@ -52,7 +52,7 @@ public class AffichageAmendePanel extends AffichagePanel {
     public void supprimeAmendesSelectionnes() throws ValidationException {
         int selectedRow = jTable1.getSelectedRow();
         try {
-            abstractControleur.controleEtSupprime(amende.get(selectedRow));
+            abstractControleur.controleEtSupprime(amendes.get(selectedRow));
             JOptionPane.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -71,7 +71,7 @@ public class AffichageAmendePanel extends AffichagePanel {
 
             @Override
             public int getRowCount() {
-                return amende.size();
+                return amendes.size();
             }
 
             @Override
@@ -86,7 +86,7 @@ public class AffichageAmendePanel extends AffichagePanel {
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
-                Amendes amendes = amende.get(rowIndex);
+                Amendes amendes = AffichageAmendePanel.this.amendes.get(rowIndex);
                 switch (columnIndex) {
 
                     case 0:
@@ -103,7 +103,7 @@ public class AffichageAmendePanel extends AffichagePanel {
             
              @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-                Amendes amendes = amende.get(rowIndex);
+                Amendes amendes = AffichageAmendePanel.this.amendes.get(rowIndex);
                 switch (columnIndex) {
                     
                      case 0:
@@ -118,7 +118,7 @@ public class AffichageAmendePanel extends AffichagePanel {
                         break;
                 }
                 try {
-                    abstractControleur.controleEtModifie(amende);
+                    abstractControleur.controleEtModifie(AffichageAmendePanel.this.amendes);
                 } catch (ValidationException ex) {
                     //TODO JOptionPane
                 }
@@ -129,7 +129,7 @@ public class AffichageAmendePanel extends AffichagePanel {
     @Override
     protected void supprimeElement(int index) {
         try {
-            abstractControleur.controleEtSupprime(amende.get(index));
+            abstractControleur.controleEtSupprime(amendes.get(index));
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),
@@ -147,8 +147,8 @@ public class AffichageAmendePanel extends AffichagePanel {
     private void reset() {
        
          {
-            amende = AmendesDao.getTousLesAmendes();
+            amendes = AmendesDao.getTousLesAmendes();
         }
-        setAmendes(amende);
+        setAmendes(amendes);
     }
 }

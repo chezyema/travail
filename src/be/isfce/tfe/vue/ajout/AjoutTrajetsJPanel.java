@@ -91,7 +91,7 @@ public class AjoutTrajetsJPanel extends javax.swing.JPanel {
             new TrajetsControleur().controleEtAjoute(trajet);
             dialogInterface.onButtonSavePressed();
         } catch (ValidationException ex) {
-//            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_enregistrerheuredetravailActionPerformed
 

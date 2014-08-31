@@ -79,7 +79,7 @@ public class MaterielRoulantDao {
                 vehicule.setLesEntretiens(selectListeEntretienPourMaterielRoulant(vehicule.getId()));
                 vehicule.setLesdocuments(selectListeDocumentsPourMaterielRoulant(vehicule.getId()));
                 vehicule.setLesMemos(selectListeUtilisationCartePourMaterielRoulant(vehicule.getId()));
-
+                vehicule.setLesamendes(selectListeAmendesPourMaterielRoulant(vehicule.getId()));
                 allMaterielRoulant.add(vehicule);
 
             }
@@ -139,7 +139,7 @@ public class MaterielRoulantDao {
      public static List<Amendes> selectListeAmendesPourMaterielRoulant(String materielRoulantId) {
         try {
 
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes join materielroulant on amendes.idamendes = materielroulant.id where materielroulant.id = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes join materielroulant on amendes.id = materielroulant.id where materielroulant.id = ?");
             preparedStatement.setString(1, materielRoulantId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Amendes> allAmendes = new ArrayList<Amendes>();
@@ -157,6 +157,7 @@ public class MaterielRoulantDao {
             return allAmendes;
 
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
