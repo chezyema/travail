@@ -1,52 +1,53 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package be.isfce.tfe.vue.affichage;
 
-import be.isfce.tfe.controleur.EntretienControleur;
-import be.isfce.tfe.db.EntretienDao;
+import be.isfce.tfe.controleur.AmendesControleur;
+import be.isfce.tfe.db.AmendesDao;
 import java.awt.BorderLayout;
 import java.util.Date;
 
 /**
  *
- * @author Yema
+ * @author yema
  */
-public class AfficherEtRechercherEntretienPanel extends javax.swing.JPanel {
+public class AfficherEtRechercherAmendePanel extends javax.swing.JPanel {
 
-    
-    public AfficherEtRechercherEntretienPanel() {
+  
+  public AfficherEtRechercherAmendePanel() {
         initComponents();
-        affichageEntretienPanel = new AffichageEntretienPanel(new EntretienControleur());
-        affichageEntretienPanel.setEntretien(EntretienDao.getTousLesEntretiens());
-        jPanel1.add(affichageEntretienPanel, BorderLayout.CENTER);
+        affichageAmendePanel = new AffichageAmendePanel(new AmendesControleur());
+        affichageAmendePanel.setAmendes(AmendesDao.getTousLesAmendes());
+        jPanel1.add(affichageAmendePanel, BorderLayout.CENTER);
     }
-
+ private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {                                             
+        
+        Date date = jDateChooser1.getDate();
+        if (date != null) {
+            affichageAmendePanel.setAmendes(AmendesDao.getTousLesAmendesParDate(date));
+        }
+    }                                            
    
-    @SuppressWarnings("unchecked")
+
+    private AffichageAmendePanel affichageAmendePanel;
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
 
-        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser1PropertyChange(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 363, Short.MAX_VALUE)
+            .addGap(0, 362, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
+            .addGap(0, 52, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -54,32 +55,25 @@ public class AfficherEtRechercherEntretienPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
-       
-        Date date = jDateChooser1.getDate();
-        if (date != null) {
-            affichageEntretienPanel.setEntretien(EntretienDao.getTousLesEntretiens(date));
-        }
-    }//GEN-LAST:event_jDateChooser1PropertyChange
-
-    private AffichageEntretienPanel affichageEntretienPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JPanel jPanel1;

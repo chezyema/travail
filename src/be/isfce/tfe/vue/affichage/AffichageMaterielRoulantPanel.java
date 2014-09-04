@@ -15,6 +15,7 @@ import be.isfce.tfe.db.MaterielRoulantDao;
 import be.isfce.tfe.db.TypeMaterielDao;
 import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.metier.TypeMaterielRoulant;
+import be.isfce.tfe.vue.ajout.AjoutAmendesJPanel;
 import be.isfce.tfe.vue.ajout.AjoutDocumentsJPanell;
 import be.isfce.tfe.vue.ajout.AjoutEntretienJPanell;
 import be.isfce.tfe.vue.ajout.AjoutUtilisationCarteJPanell;
@@ -191,6 +192,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         menuItems.add(getAfficherDocumentMenuItem());
         menuItems.add(getAjouterUtilisationCarteMenuItem());
         menuItems.add(getAfficherAmendesMenuItem());
+        menuItems.add(getAjouterAmendeMenuItem());
 
         return menuItems;
     }
@@ -256,6 +258,28 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return ajouterEntretien;
     }
+    
+    private JMenuItem getAjouterAmendeMenuItem() {
+        JMenuItem ajouterAmende = new JMenuItem("Ajouter Amende");
+        ajouterAmende.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MaterielRoulant materielRoulant = vehicules.get(jTable1.getSelectedRow());
+                AjoutAmendesJPanel ajoutAmendesJPanel = new AjoutAmendesJPanel(materielRoulant);
+                ajoutAmendesJPanel.setDialogInterface(new DialogUtils.DialogInterface() {
+
+                    @Override
+                    public void onButtonSavePressed() {
+                        dialog.dispose();
+                        reset();
+                    }
+                });
+                dialog = DialogUtils.afficheDialog(null, ajoutAmendesJPanel);
+            }
+        });
+        return ajouterAmende;
+    }
+
 
     private JMenuItem getAfficherDocumentMenuItem() {
         JMenuItem afficherDocument = new JMenuItem("Afficher documents");

@@ -19,6 +19,7 @@ public class AmendesControleur extends AbstractControleur<Amendes> {
 
 
     
+    @Override
     public void controleEtAjoute(Amendes amende) throws ValidationException {
 
         if (amende == null) {
@@ -41,6 +42,7 @@ public class AmendesControleur extends AbstractControleur<Amendes> {
     }
 
     
+    @Override
     public void controleEtSupprime(Amendes object) throws ValidationException {
         if(AmendesDao.deleteAmendes(object)) {
             setChanged();
@@ -49,6 +51,7 @@ public class AmendesControleur extends AbstractControleur<Amendes> {
     }
 
   
+    @Override
     public void controleEtModifie(Amendes object) throws ValidationException {
         if(AmendesDao.updateAmendes(object)) {
             setChanged();
