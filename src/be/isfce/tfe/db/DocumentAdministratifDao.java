@@ -109,25 +109,26 @@ public class DocumentAdministratifDao {
         }
     }
 
-    public static int getNbDocumentsEnOrdre() {
+    public static List<DocumentAdministratif>  getDocumentsEnOrdre() {
         List<DocumentAdministratif> tousLesDocuments = DocumentAdministratifDao.getTousLesDocuments();
-        int documentEnOrdre = 0;
+        List<DocumentAdministratif> documentsEnOrdre = new ArrayList<DocumentAdministratif>();
         for (DocumentAdministratif doc : tousLesDocuments) {
             if (Calendar.getInstance().getTimeInMillis() - doc.getDateValiditer().getTime() < 0) {
-                documentEnOrdre++;
+                documentsEnOrdre.add(doc);
             }
         }
-        return documentEnOrdre;
+        return documentsEnOrdre;
     }
 
-    public static int getNbDocumentsARenouveler() {
+    public static List<DocumentAdministratif> getDocumentsARenouveler() {
         List<DocumentAdministratif> tousLesDocuments = DocumentAdministratifDao.getTousLesDocuments();
-        int documentARenouvelerUrgent = 0;
+        List<DocumentAdministratif> documentsARenouveler = new ArrayList<DocumentAdministratif>();
+        
         for (DocumentAdministratif doc : tousLesDocuments) {
             if (Calendar.getInstance().getTimeInMillis() - doc.getDateValiditer().getTime() >= 0) {
-                documentARenouvelerUrgent++;
+                documentsARenouveler.add(doc);
             }
         }
-        return documentARenouvelerUrgent;
+        return documentsARenouveler;
     }
 }

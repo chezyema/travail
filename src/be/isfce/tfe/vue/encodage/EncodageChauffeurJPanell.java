@@ -77,6 +77,12 @@ public class EncodageChauffeurJPanell extends javax.swing.JPanel {
 
         emailChauffeur.setText("Email:");
 
+        registreNationalTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                registreNationalTextFieldFocusLost(evt);
+            }
+        });
+
         emailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailTextFieldActionPerformed(evt);
@@ -273,6 +279,21 @@ public class EncodageChauffeurJPanell extends javax.swing.JPanel {
     private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_emailTextFieldActionPerformed
+
+    private void registreNationalTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_registreNationalTextFieldFocusLost
+        // TODO add your handling code here:
+        String text = registreNationalTextField.getText();
+        if (text.length() == 11) {
+            String substring = text.substring(6, 9);
+            try {
+                Integer value = Integer.valueOf(substring);
+                femmeRadioButton.setSelected(value % 2 == 0);
+            } catch (NumberFormatException e) {
+            }
+
+        }
+    }//GEN-LAST:event_registreNationalTextFieldFocusLost
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AdresseChauffeur;
     private javax.swing.JTextField adresseTextField;
