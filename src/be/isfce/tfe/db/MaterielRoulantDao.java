@@ -34,7 +34,7 @@ public class MaterielRoulantDao {
             preparedStatement.setString(1, vehicule.getId());
 
             preparedStatement.setString(2, vehicule.getMarque());
-            preparedStatement.setInt(3,vehicule.getIdtypemateriel());
+            preparedStatement.setInt(3, vehicule.getIdtypemateriel());
             preparedStatement.setDate(4, dateSql);
             preparedStatement.setString(5, vehicule.getCarburant());
             preparedStatement.setString(6, vehicule.getNumImmatr());
@@ -75,7 +75,7 @@ public class MaterielRoulantDao {
                 vehicule.setNbDePlaces(resultSet.getInt("nbdeplaces"));
                 vehicule.setKmactuel(resultSet.getInt("kmactuel"));
                 vehicule.setDateexctincteur(resultSet.getDate("validiterexctincteur"));
-              
+
                 vehicule.setLesEntretiens(selectListeEntretienPourMaterielRoulant(vehicule.getId()));
                 vehicule.setLesdocuments(selectListeDocumentsPourMaterielRoulant(vehicule.getId()));
                 vehicule.setLesMemos(selectListeUtilisationCartePourMaterielRoulant(vehicule.getId()));
@@ -94,7 +94,7 @@ public class MaterielRoulantDao {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update materielroulant set marque = ?,type = ?,anneedeconstruction = ?,carburant = ?,numimmatr = ?,nbdeplaces = ?,kmactuel = ?,validiterexctincteur = ? where materielroulant.id = ?");
             preparedStatement.setString(1, vehicule.getMarque());
-            preparedStatement.setInt(2,vehicule.getIdtypemateriel());
+            preparedStatement.setInt(2, vehicule.getIdtypemateriel());
             preparedStatement.setDate(3, new Date(vehicule.getAnneedeconstruction().getTime()));
             preparedStatement.setString(4, vehicule.getCarburant());
             preparedStatement.setString(5, vehicule.getNumImmatr());
@@ -134,9 +134,8 @@ public class MaterielRoulantDao {
         }
 
     }
-    
-    
-     public static List<Amendes> selectListeAmendesPourMaterielRoulant(String materielRoulantId) {
+
+    public static List<Amendes> selectListeAmendesPourMaterielRoulant(String materielRoulantId) {
         try {
 
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes join materielroulant on amendes.id = materielroulant.id where materielroulant.id = ?");
@@ -153,7 +152,7 @@ public class MaterielRoulantDao {
 
                 allAmendes.add(amende);
             }
-        
+
             return allAmendes;
 
         } catch (Exception e) {
@@ -162,7 +161,6 @@ public class MaterielRoulantDao {
         }
 
     }
-
 
     public static List<UtilisationCarte> selectListeUtilisationCartePourMaterielRoulant(String materielRoulantIdb) {
 
@@ -288,23 +286,42 @@ public class MaterielRoulantDao {
         }
         return entretienAEffectuer;
     }
-
-    public static int getNbEntretiensEnOrdre() {
+    public static List<MaterielRoulant> getVehiculeAEntretenir() {
         List<MaterielRoulant> tousLesVehicules = getTousLesVehicules();
-        int entretienAEffectuer = 0;
+        List<MaterielRoulant> vehiculePasEnOrdre = new ArrayList<MaterielRoulant>();
+        for (MaterielRoulant vehicule : tousLesVehicules) {
+            Entretien dernierEntretien = getDernierEntretien(vehicule);
+            if (dernierEntretien != null) {
+                if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() > 25000) {
+                    vehiculePasEnOrdre.add(vehicule);
+                }
+            } else {
+                if (vehicule.getKmactuel() > 25000) {
+                    vehiculePasEnOrdre.add(vehicule);
+                }
+            }
+        }
+        return vehiculePasEnOrdre;
+    }
+
+
+    public static List<MaterielRoulant> getVehiculeEnOrdre() {
+        List<MaterielRoulant> tousLesVehicules = getTousLesVehicules();
+        List<MaterielRoulant> vehiculeEnOrdre = new ArrayList<MaterielRoulant>();
+
         for (MaterielRoulant vehicule : tousLesVehicules) {
             Entretien dernierEntretien = getDernierEntretien(vehicule);
             if (dernierEntretien != null) {
                 if (vehicule.getKmactuel() - dernierEntretien.getKmEntretienFait() <= 20000) {
-                    entretienAEffectuer++;
+                    vehiculeEnOrdre.add(vehicule);
                 }
             } else {
-                if (vehicule.getKmactuel()  <= 20000) {
-                    entretienAEffectuer++;
+                if (vehicule.getKmactuel() <= 20000) {
+                    vehiculeEnOrdre.add(vehicule);
                 }
             }
         }
-        return entretienAEffectuer;
+        return vehiculeEnOrdre;
     }
 
     private static Entretien getDernierEntretien(MaterielRoulant materielRoulant) {

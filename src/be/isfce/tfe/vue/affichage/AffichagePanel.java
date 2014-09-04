@@ -17,6 +17,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -42,7 +44,7 @@ public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Ob
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                supprimeElement(jTable1.getSelectedRow());                
+                supprimeElement(jTable1.getSelectedRow());
             }
 
         });
@@ -69,6 +71,8 @@ public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Ob
 
     protected void displayData() {
         jTable1.setModel(getTableModel());
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable1.getModel());
+        jTable1.setRowSorter(sorter);
     }
 
     public abstract AbstractTableModel getTableModel();
@@ -81,7 +85,6 @@ public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Ob
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         return menuItems;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -4,8 +4,13 @@
  */
 package be.isfce.tfe.vue.frame;
 
+import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
+import be.isfce.tfe.controleur.MaterielRoulantControleur;
 import be.isfce.tfe.db.DocumentAdministratifDao;
 import be.isfce.tfe.db.MaterielRoulantDao;
+import be.isfce.tfe.vue.affichage.AffichageDocumentsPanel;
+import be.isfce.tfe.vue.affichage.AffichageMaterielRoulantPanel;
+import be.isfce.tfe.vue.ajout.DialogUtils;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -40,10 +45,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void initAlerts() {
         nbEntretienAEffectuerUrgentLabel.setText("" + MaterielRoulantDao.getNbEntretiensAEffectuer());
-        nbVehiculeEnOrdreLabel.setText("" + MaterielRoulantDao.getNbEntretiensEnOrdre());
+        nbVehiculeEnOrdreLabel.setText("" + MaterielRoulantDao.getVehiculeEnOrdre().size());
 
-        nbDocumentARenouvelerLabel.setText("" + DocumentAdministratifDao.getNbDocumentsARenouveler());
-        nbDocumentEnOrdreLabel.setText("" + DocumentAdministratifDao.getNbDocumentsEnOrdre());
+        nbDocumentARenouvelerLabel.setText("" + DocumentAdministratifDao.getDocumentsARenouveler().size());
+        nbDocumentEnOrdreLabel.setText("" + DocumentAdministratifDao.getDocumentsEnOrdre().size());
 
     }
 
@@ -63,11 +68,15 @@ public class MainFrame extends javax.swing.JFrame {
         nbEntretienAEffectuerUrgentLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         nbVehiculeEnOrdreLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         nbDocumentEnOrdreLabel = new javax.swing.JLabel();
         nbDocumentARenouvelerLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel1 = new javax.swing.JLabel();
         chauffeurTabPanel1 = new be.isfce.tfe.vue.frame.tabs.ChauffeurTabPanel();
@@ -97,6 +106,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         nbVehiculeEnOrdreLabel.setText("0");
 
+        jButton1.setText("Voir les véhicules à entretenir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Voir les véhicules en ordre");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -111,7 +134,12 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nbVehiculeEnOrdreLabel)))
+                        .addComponent(nbVehiculeEnOrdreLabel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -125,7 +153,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nbVehiculeEnOrdreLabel)
                     .addComponent(jLabel5))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Documents"));
@@ -137,6 +168,20 @@ public class MainFrame extends javax.swing.JFrame {
         nbDocumentARenouvelerLabel.setText("0");
 
         jLabel7.setText("Documents en ordre :");
+
+        jButton3.setText("Voir les documents à renouveler");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Voir les documents en ordre");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -152,6 +197,12 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(nbDocumentARenouvelerLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nbDocumentEnOrdreLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(17, 17, 17))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,12 +216,14 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(nbDocumentEnOrdreLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)))
         );
 
         jCalendar1.setBorder(javax.swing.BorderFactory.createTitledBorder("Calendrier"));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\yema\\Desktop\\bus1.gif")); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(500, 400));
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
@@ -249,6 +302,26 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTabbedPaneStateChanged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DialogUtils.afficheDialog(this, new AffichageMaterielRoulantPanel(new MaterielRoulantControleur(), MaterielRoulantDao.getVehiculeAEntretenir()));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        DialogUtils.afficheDialog(this, new AffichageMaterielRoulantPanel(new MaterielRoulantControleur(), MaterielRoulantDao.getVehiculeEnOrdre()));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        DialogUtils.afficheDialog(this, new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), DocumentAdministratifDao.getDocumentsEnOrdre()));
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        DialogUtils.afficheDialog(this, new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), DocumentAdministratifDao.getDocumentsARenouveler()));
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,6 +361,10 @@ public class MainFrame extends javax.swing.JFrame {
     private be.isfce.tfe.vue.frame.tabs.ChauffeurTabPanel chauffeurTabPanel1;
     private be.isfce.tfe.vue.frame.tabs.CircuitTabPanel circuitTabPanel1;
     private be.isfce.tfe.vue.frame.tabs.EcoleTabPanel ecoleTabPanel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
