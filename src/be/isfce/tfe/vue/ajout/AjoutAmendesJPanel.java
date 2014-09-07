@@ -7,7 +7,7 @@ package be.isfce.tfe.vue.ajout;
 import be.isfce.tfe.controleur.AmendesControleur;
 import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.ValidationException;
-import be.isfce.tfe.metier.Amendes;
+import be.isfce.tfe.metier.Amende;
 import be.isfce.tfe.metier.Entretien;
 import be.isfce.tfe.metier.MaterielRoulant;
 import javax.swing.JOptionPane;
@@ -86,7 +86,7 @@ public class AjoutAmendesJPanel extends javax.swing.JPanel {
 
     private void ajouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajouterActionPerformed
         // TODO add your handling code here:
-        Amendes amende = encodageAmendesJPanell1.getAmendesFromFields();
+        Amende amende = encodageAmendesJPanell1.getAmendesFromFields();
 
         try {
             if (materielRoulant != null) {

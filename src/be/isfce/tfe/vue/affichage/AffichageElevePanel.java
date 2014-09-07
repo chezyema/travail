@@ -35,7 +35,7 @@ public class AffichageElevePanel extends AffichagePanel {
     }
 
     public AffichageElevePanel(EleveControleur eleveControleur, List<Eleve> eleves) {
-        this(eleveControleur);
+        super(eleveControleur);
         this.eleves = eleves;
         displayData();
     }

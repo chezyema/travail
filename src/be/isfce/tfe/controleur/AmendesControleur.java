@@ -6,7 +6,7 @@ package be.isfce.tfe.controleur;
 
 import be.isfce.tfe.db.AmendesDao;
 import be.isfce.tfe.db.EntretienDao;
-import be.isfce.tfe.metier.Amendes;
+import be.isfce.tfe.metier.Amende;
 import be.isfce.tfe.metier.Entretien;
 import be.isfce.tfe.validation.StringValidation;
 import java.util.Calendar;
@@ -15,12 +15,12 @@ import java.util.Calendar;
  *
  * @author yema
  */
-public class AmendesControleur extends AbstractControleur<Amendes> {
+public class AmendesControleur extends AbstractControleur<Amende> {
 
 
     
     @Override
-    public void controleEtAjoute(Amendes amende) throws ValidationException {
+    public void controleEtAjoute(Amende amende) throws ValidationException {
 
         if (amende == null) {
             throw new ValidationException("L'amende est invalide");
@@ -43,7 +43,7 @@ public class AmendesControleur extends AbstractControleur<Amendes> {
 
     
     @Override
-    public void controleEtSupprime(Amendes object) throws ValidationException {
+    public void controleEtSupprime(Amende object) throws ValidationException {
         if(AmendesDao.deleteAmendes(object)) {
             setChanged();
             notifyObservers();
@@ -52,7 +52,7 @@ public class AmendesControleur extends AbstractControleur<Amendes> {
 
   
     @Override
-    public void controleEtModifie(Amendes object) throws ValidationException {
+    public void controleEtModifie(Amende object) throws ValidationException {
         if(AmendesDao.updateAmendes(object)) {
             setChanged();
             notifyObservers();

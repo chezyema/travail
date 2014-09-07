@@ -4,7 +4,7 @@
  */
 package be.isfce.tfe.vue.encodage;
 
-import be.isfce.tfe.metier.Amendes;
+import be.isfce.tfe.metier.Amende;
 import be.isfce.tfe.metier.Entretien;
 
 /**
@@ -20,8 +20,8 @@ public class EncodageAmendesJPanell extends javax.swing.JPanel {
         initComponents();
     }
     
-     public Amendes getAmendesFromFields() {
-        Amendes amende = new Amendes();
+     public Amende getAmendesFromFields() {
+        Amende amende = new Amende();
         amende.setIdamendes(0);
         amende.setNumeropv(numpvTextField.getText());
         try {

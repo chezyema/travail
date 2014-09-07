@@ -9,7 +9,7 @@ import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.AmendesDao;
 import be.isfce.tfe.db.EntretienDao;
-import be.isfce.tfe.metier.Amendes;
+import be.isfce.tfe.metier.Amende;
 import be.isfce.tfe.metier.Entretien;
 import java.util.Date;
 import java.util.List;
@@ -23,21 +23,20 @@ import javax.swing.table.AbstractTableModel;
  */
 public class AffichageAmendePanel extends AffichagePanel {
 
-    List<Amendes> amendes;
-
+    List<Amende> amendes;
     String[] columnsNames = {"numero de pv", "date du pv", "montant du pv"};
 
     public AffichageAmendePanel(AmendesControleur amendeControleur) {
         super(amendeControleur);
-        displayData();
+        //displayData();
     }
 
-    public void setAmendes(List<Amendes> amendes) {
+    public void setAmendes(List<Amende> amendes) {
         this.amendes = amendes;
         displayData();
     }
 
-    public AffichageAmendePanel(AmendesControleur amendeControleur, List<Amendes> amende) {
+    public AffichageAmendePanel(AmendesControleur amendeControleur, List<Amende> amende) {
         this(amendeControleur);
         this.amendes = amende;
         displayData();
@@ -63,7 +62,6 @@ public class AffichageAmendePanel extends AffichagePanel {
     @Override
     public AbstractTableModel getTableModel() {
         return new AbstractTableModel() {
-
             @Override
             public String getColumnName(int col) {
                 return columnsNames[col];
@@ -86,39 +84,39 @@ public class AffichageAmendePanel extends AffichagePanel {
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
-                Amendes amendes = AffichageAmendePanel.this.amendes.get(rowIndex);
+                Amende amende = amendes.get(rowIndex);
                 switch (columnIndex) {
 
                     case 0:
-                        return amendes.getNumeropv();
+                        return amende.getNumeropv();
                     case 1:
-                        return amendes.getDatepv();
+                        return amende.getDatepv();
                     case 2:
-                        return amendes.getMontantpv();
+                        return amende.getMontantpv();
 
                     default:
                         return null;
                 }
             }
-            
-             @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-                Amendes amendes = AffichageAmendePanel.this.amendes.get(rowIndex);
+                Amende amende = amendes.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         amendes.setNumeropv((String) aValue);
-                         break;
-                   
-                    case 1:
-                        amendes.setDatepv(new Date());
+
+                    case 0:
+                        amende.setNumeropv((String) aValue);
                         break;
-                   case 2:
-                        amendes.setMontantpv(Integer.valueOf((String) aValue));
+
+                    case 1:
+                        amende.setDatepv(new Date());
+                        break;
+                    case 2:
+                        amende.setMontantpv(Integer.valueOf((String) aValue));
                         break;
                 }
                 try {
-                    abstractControleur.controleEtModifie(AffichageAmendePanel.this.amendes);
+                    abstractControleur.controleEtModifie(amende);
                 } catch (ValidationException ex) {
                     //TODO JOptionPane
                 }
@@ -139,16 +137,13 @@ public class AffichageAmendePanel extends AffichagePanel {
     }
 
     @Override
-   public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
         reset();
     }
 
     private void reset() {
-       
-         {
-            amendes = AmendesDao.getTousLesAmendes();
-        }
+        amendes = AmendesDao.getTousLesAmendes();
         setAmendes(amendes);
     }
 }

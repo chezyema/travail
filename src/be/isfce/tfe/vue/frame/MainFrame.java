@@ -224,6 +224,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         jCalendar1.setBorder(javax.swing.BorderFactory.createTitledBorder("Calendrier"));
 
+        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/be/isfce/tfe/vue/frame/bus1.gif"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(500, 400));
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);

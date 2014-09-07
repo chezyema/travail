@@ -173,15 +173,13 @@ public class AffichageEcolePanel extends AffichagePanel {
     }
 
     private JMenuItem getAfficherEleveMenuItem() {
-        JMenuItem afficherEleve = new JMenuItem("Afficher Eléves");
+        JMenuItem afficherEleve = new JMenuItem("Afficher élèves");
         afficherEleve.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO On verra plus tard
                 Ecole ecole = ecoles.get(jTable1.getSelectedRow());
                 AffichageElevePanel affichageElevePanel = new AffichageElevePanel(new EleveControleur(), ecole.getLeseleves());
                 DialogUtils.afficheDialog(null, affichageElevePanel);
-                //TODO Ajouter dans la DB
             }
         });
         return afficherEleve;

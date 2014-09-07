@@ -33,7 +33,7 @@ public class AffichageTrajetsPanell extends AffichagePanel {
         super(trajetControleur);
         simpleDateFormat = new SimpleDateFormat("HH:mm");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-        displayData();
+        //displayData();
     }
 
     public void setTrajet(List<Trajet> trajet) {
@@ -42,7 +42,9 @@ public class AffichageTrajetsPanell extends AffichagePanel {
     }
 
     public AffichageTrajetsPanell(TrajetsControleur trajetControleur, List<Trajet> trajet) {
-        this(trajetControleur);
+        super(trajetControleur);
+        simpleDateFormat = new SimpleDateFormat("HH:mm");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         this.trajets = trajet;
         displayData();
     }

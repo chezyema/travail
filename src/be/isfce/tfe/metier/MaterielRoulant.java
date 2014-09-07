@@ -31,7 +31,7 @@ public class MaterielRoulant {
     private List<Circuit> lescircuits;
     private List<UtilisationCarte> lesmemos;
     private List<Trajet> lestrajets;
-    private List<Amendes> lesamendes;
+    private List<Amende> lesamendes;
     
     
     public int getKmactuel() {
@@ -54,7 +54,7 @@ public class MaterielRoulant {
         return idtypemateriel;
     }
 
-    public List<Amendes> getLesamendes() {
+    public List<Amende> getLesamendes() {
         return lesamendes;
     }
     
@@ -95,7 +95,7 @@ public class MaterielRoulant {
         this.dateexctincteur = dateexctincteur;
     }
 
-    public void setLesamendes(List<Amendes> lesamendes) {
+    public void setLesamendes(List<Amende> lesamendes) {
         this.lesamendes = lesamendes;
     }
     

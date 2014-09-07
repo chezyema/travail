@@ -4,7 +4,7 @@
  */
 package be.isfce.tfe.db;
 
-import be.isfce.tfe.metier.Amendes;
+import be.isfce.tfe.metier.Amende;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author yema
  */
 public class AmendesDao {
-    public static boolean addAmendes(Amendes amende) {
+    public static boolean addAmendes(Amende amende) {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into amendes (idamende,numeropv,datepv,montantpv,id) values (? , ?, ?,?,?)");
             preparedStatement.setInt(1, amende.getIdamendes());
@@ -35,22 +35,22 @@ public class AmendesDao {
 
     }
 
-    public static List<Amendes> getTousLesAmendes() {
+    public static List<Amende> getTousLesAmendes() {
         return getTousLesAmendes(false);
     }
 
-    public static List<Amendes> getTousLesAmendessarchives() {
+    public static List<Amende> getTousLesAmendessarchives() {
         return getTousLesAmendes(true);
     }
 
-    public static List<Amendes> getTousLesAmendes(boolean amendesSupprimes) {
+    public static List<Amende> getTousLesAmendes(boolean amendesSupprimes) {
         try {
             String supprimesamendes = amendesSupprimes ? "1" : "0";
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes where supprimeamendes = " + supprimesamendes);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Amendes> allAmendes = new ArrayList<Amendes>();
+            List<Amende> allAmendes = new ArrayList<Amende>();
             while (resultSet.next()) {
-                Amendes amende = new Amendes();
+                Amende amende = new Amende();
                 amende.setIdamendes(resultSet.getInt("idamende"));
                 amende.setNumeropv(resultSet.getString("numeropv"));
                 amende.setDatepv(resultSet.getDate("datepv"));
@@ -59,6 +59,7 @@ public class AmendesDao {
 
                 allAmendes.add(amende);
             }
+            System.out.println("============================");
             System.out.println(allAmendes);
             return allAmendes;
 
@@ -69,15 +70,15 @@ public class AmendesDao {
 
     }
 
-    public static List<Amendes> getTousLesAmendesParDate(java.util.Date date) {
+    public static List<Amende> getTousLesAmendesParDate(java.util.Date date) {
         try {
             Date dateSql = new Date(date.getTime());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes where datepv = ?");
             preparedStatement.setDate(1, dateSql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Amendes> allAmendes = new ArrayList<Amendes>();
+            List<Amende> allAmendes = new ArrayList<Amende>();
             while (resultSet.next()) {
-                Amendes amende = new Amendes();
+                Amende amende = new Amende();
                 amende.setIdamendes(resultSet.getInt("idamende"));
                 amende.setNumeropv(resultSet.getString("numeropv"));
                 amende.setDatepv(resultSet.getDate("datepv"));
@@ -95,13 +96,13 @@ public class AmendesDao {
 
     }
     
-      public static List<Amendes> getTousLesAmendesParNumeroPv(java.util.Date date) {
+      public static List<Amende> getTousLesAmendesParNumeroPv(java.util.Date date) {
         try {
-            Amendes amende = new Amendes();
+            Amende amende = new Amende();
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes where numeropv = ?");
             preparedStatement.setString(1,amende.getNumeropv());
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Amendes> allAmendes = new ArrayList<Amendes>();
+            List<Amende> allAmendes = new ArrayList<Amende>();
             while (resultSet.next()) {
              
                 amende.setIdamendes(resultSet.getInt("idamende"));
@@ -126,7 +127,7 @@ public class AmendesDao {
     
     
 
-    public static boolean updateAmendes(Amendes amende) {
+    public static boolean updateAmendes(Amende amende) {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update amendes set numeropv = ?,datepv = ?,montantpv = ? where amendes.idamende = ?");
             preparedStatement.setString(1, amende.getNumeropv());
@@ -141,7 +142,7 @@ public class AmendesDao {
         }
     }
 
-    public static boolean deleteAmendes(Amendes amende) {
+    public static boolean deleteAmendes(Amende amende) {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update amendes set supprimeamendes = 1 where amendes.idamende = ?");
             preparedStatement.setInt(1, amende.getIdamendes());

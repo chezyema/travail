@@ -4,7 +4,7 @@
  */
 package be.isfce.tfe.db;
 
-import be.isfce.tfe.metier.Amendes;
+import be.isfce.tfe.metier.Amende;
 import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.DocumentAdministratif;
 import be.isfce.tfe.metier.Entretien;
@@ -135,15 +135,15 @@ public class MaterielRoulantDao {
 
     }
 
-    public static List<Amendes> selectListeAmendesPourMaterielRoulant(String materielRoulantId) {
+    public static List<Amende> selectListeAmendesPourMaterielRoulant(String materielRoulantId) {
         try {
 
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes join materielroulant on amendes.id = materielroulant.id where materielroulant.id = ?");
             preparedStatement.setString(1, materielRoulantId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Amendes> allAmendes = new ArrayList<Amendes>();
+            List<Amende> allAmendes = new ArrayList<Amende>();
             while (resultSet.next()) {
-                Amendes amende = new Amendes();
+                Amende amende = new Amende();
                 amende.setIdamendes(resultSet.getInt("idamende"));
                 amende.setNumeropv(resultSet.getString("numeropv"));
                 amende.setDatepv(resultSet.getDate("datepv"));
