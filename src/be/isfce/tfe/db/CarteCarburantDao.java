@@ -22,7 +22,7 @@ public class CarteCarburantDao {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into cartecarburant (idcarte,numcarte) values (? , ?)");
             preparedStatement.setInt(1, cartecarburant.getId());
-           
+
             preparedStatement.setString(2, cartecarburant.getNumcarte());
 
             preparedStatement.executeUpdate();
@@ -61,8 +61,7 @@ public class CarteCarburantDao {
             while (resultSet.next()) {
                 CarteCarburant cartecarburant = new CarteCarburant();
                 cartecarburant.setId(resultSet.getInt("idcarte"));
-              
-                
+
                 cartecarburant.setNumcarte(resultSet.getString("numcarte"));
                 cartecarburant.setLesUtilisations(selectListeUtilisationCartePourCarteCarburant(cartecarburant.getId()));
                 allCarteCarburant.add(cartecarburant);
@@ -80,7 +79,7 @@ public class CarteCarburantDao {
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update cartecarburant set numcarte = ? where circuit.idcarte = ?");
             preparedStatement.setString(1, carte.getNumcarte());
-            
+
             preparedStatement.setInt(3, carte.getId());
 
             preparedStatement.execute();
@@ -93,7 +92,7 @@ public class CarteCarburantDao {
     public static List<UtilisationCarte> selectListeUtilisationCartePourCarteCarburant(int carteCarburantId) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from carburant_utilisation join utilisationcarte on carburant_utilisation.idutilisation = utilisationcarte.idutilisation where idcarte = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from utilisationcarte join cartecarburant on utilisationcarte.idcarte = cartecarburant.idcarte where utilisationcarte.idcarte = ?");
             preparedStatement.setInt(1, carteCarburantId);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<UtilisationCarte> allUtilisationCarte = new ArrayList<UtilisationCarte>();
@@ -109,6 +108,7 @@ public class CarteCarburantDao {
             return allUtilisationCarte;
 
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 

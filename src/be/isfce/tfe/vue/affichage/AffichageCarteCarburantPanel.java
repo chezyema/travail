@@ -10,10 +10,12 @@ import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.CarteCarburantDao;
 import be.isfce.tfe.metier.CarteCarburant;
+import be.isfce.tfe.metier.UtilisationCarte;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JMenuItem;
@@ -28,7 +30,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
 
     List<CarteCarburant> cartecarburant;
 
-    String[] columnsNames = {"Numéro de Carte"};
+    String[] columnsNames = {"Numéro de Carte", "Nombre d'utilisations", "Carburant (Litre)", "Dernière utilisation"};
 
     public void setCarteCarburant(List<CarteCarburant> cartecarburant) {
         this.cartecarburant = cartecarburant;
@@ -55,7 +57,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                     ex.getMessage(),
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
-            
+
         }
     }
 
@@ -89,29 +91,55 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
                 switch (columnIndex) {
                     case 0:
                         return carte.getNumcarte();
-                  
+                    case 1:
+                        return carte.getLesutilisations().size();
+                    case 2:
+                        return calculLitre(carte);
+                    case 3:
+                        return getDerniereUtilisation(carte);
                     default:
                         return null;
                 }
             }
-             @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 CarteCarburant carte = cartecarburant.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         carte.setNumcarte((String) aValue);
-                         break;
-                   
-                  
+
+                    case 0:
+                        carte.setNumcarte((String) aValue);
+                        break;
+
                 }
                 try {
                     abstractControleur.controleEtModifie(carte);
                 } catch (ValidationException ex) {
-                 // TODO message
+                    // TODO message
                 }
             }
+
         };
+    }
+
+    private Object getDerniereUtilisation(CarteCarburant carte) {
+        List<UtilisationCarte> lesutilisations = carte.getLesutilisations();
+        Date derniereUtilisation = new Date(0);
+        for (UtilisationCarte utilisationCarte : lesutilisations) {
+            if (derniereUtilisation.before(utilisationCarte.getDateUtilisation())) {
+                derniereUtilisation = utilisationCarte.getDateUtilisation();
+            }
+        }
+        return derniereUtilisation.equals(new Date(0)) ? null : derniereUtilisation;
+    }
+
+    private int calculLitre(CarteCarburant carte) {
+        List<UtilisationCarte> lesutilisations = carte.getLesutilisations();
+        int litres = 0;
+        for (UtilisationCarte utilisationCarte : lesutilisations) {
+            litres += utilisationCarte.getLitrecarburant();
+        }
+        return litres;
     }
 
     @Override
@@ -133,25 +161,25 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
     @Override
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
-      //  menuItems.add(getAfficherVehiculeUtilisationMenuItem());
+        menuItems.add(getAfficherVehiculeUtilisationMenuItem());
 
         return menuItems;
     }
 
-   /* private JMenuItem getAfficherVehiculeUtilisationMenuItem() {
+    private JMenuItem getAfficherVehiculeUtilisationMenuItem() {
         JMenuItem afficherCarte = new JMenuItem("Afficher Utilisation véhicule");
         afficherCarte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-             CarteCarburant carte = cartecarburant.get(jTable1.getSelectedRow());
-                AffichageUtilisationCarteJPanel affichageVehiculePanel = new  AffichageUtilisationCarteJPanel( new UtilisationCarteControleur(), carte.getLesutilisations());
+                CarteCarburant carte = cartecarburant.get(jTable1.getSelectedRow());
+                AffichageUtilisationCarteJPanel affichageVehiculePanel = new AffichageUtilisationCarteJPanel(new UtilisationCarteControleur(), carte.getLesutilisations());
                 DialogUtils.afficheDialog(null, affichageVehiculePanel);
             }
 
         });
         return afficherCarte;
-    }*/
+    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -160,8 +188,8 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
     }
 
     private void reset() {
-       
-         {
+
+        {
             cartecarburant = CarteCarburantDao.getTousLesCartesCarburant();
         }
         setCarteCarburant(cartecarburant);
