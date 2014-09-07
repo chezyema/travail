@@ -3,16 +3,16 @@
  * and open the template in the editor.
  */
 package be.isfce.tfe.metier;
-import java.util.Date;
 
+import java.util.Date;
 
 /**
  *
  * @author yema
  */
 public class UtilisationCarte {
-    
-    private  int idutilisationcarte;
+
+    private int idutilisationcarte;
     private Date dateutilisation;
     private int litrecarburant;
     private int kmutilisation;
@@ -20,8 +20,7 @@ public class UtilisationCarte {
     private CarteCarburant lescartes;
     private String idvehicule;
     private int idcartecarburant;
-    
-    
+
     public int getIdutilisationcarte() {
         return idutilisationcarte;
     }
@@ -40,7 +39,6 @@ public class UtilisationCarte {
     public void setKmutilisation(int kmutilisation) {
         this.kmutilisation = kmutilisation;
     }
-
 
     public Date getDateUtilisation() {
         return dateutilisation;
@@ -62,7 +60,6 @@ public class UtilisationCarte {
         this.litrecarburant = litrecarburant;
     }
 
-    
     public MaterielRoulant getLesvehicules() {
         return lesvehicules;
     }
@@ -100,7 +97,4 @@ public class UtilisationCarte {
         return "UtilisationCarte{" + "idutilisationcarte=" + idutilisationcarte + ", dateutilisation=" + dateutilisation + ", litrecarburant=" + litrecarburant + ", kmutilisation=" + kmutilisation + ", lesvehicules=" + lesvehicules + ", lescartes=" + lescartes + ", idvehicule=" + idvehicule + ", idcartecarburant=" + idcartecarburant + '}';
     }
 
-   
-   
-        
 }

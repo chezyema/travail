@@ -24,7 +24,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
     List<UtilisationCarte> utilisations;
-    String[] columnsNames = {"Numéro Carte", "Date utilisation","litre de carburant","kilométre utilisation"};
+    String[] columnsNames = {"Date utilisation", "litre de carburant", "kilométre utilisation"};
 
     public AffichageUtilisationCarteJPanel(UtilisationCarteControleur utilisationControleur) {
         super(utilisationControleur);
@@ -37,7 +37,7 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
     }
 
     public AffichageUtilisationCarteJPanel(UtilisationCarteControleur utilisationControleur, List<UtilisationCarte> utilisation) {
-        this(utilisationControleur);
+        super(utilisationControleur);
         this.utilisations = utilisation;
         displayData();
     }
@@ -87,13 +87,10 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
                 switch (columnIndex) {
 
                     case 0:
-                        CarteCarburant carteCarburant = CarteCarburantDao.getCarteCarburant(utilisation.getIdcartecarburant());
-                        return carteCarburant == null ? "" : carteCarburant.getNumcarte();
-                    case 1:
                         return utilisation.getDateUtilisation();
-                    case 2:
+                    case 1:
                         return utilisation.getLitrecarburant();
-                    case 3 :
+                    case 2:
                         return utilisation.getKmutilisation();
 
                     default:
@@ -107,14 +104,11 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
                 switch (columnIndex) {
 
                     case 0:
-                        break;
+                        utilisation.setDateutilisation(new Date());
 
                     case 1:
-                        utilisation.setDateutilisation(new Date());
-                       
-                    case 2 :
                         utilisation.setLitrecarburant(Integer.valueOf((String) aValue));
-                    case 3 :
+                    case 2:
                         utilisation.setKmutilisation(Integer.valueOf((String) aValue));
 
                 }
