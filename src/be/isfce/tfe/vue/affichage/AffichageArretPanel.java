@@ -31,7 +31,7 @@ public class AffichageArretPanel extends AffichagePanel {
 
     List<Arret> arrets;
 
-    String[] columnsNames = {"Adresse des Arret"};
+    String[] columnsNames = {"Numéro d'ordre","Adresse des Arret","code postal","ville"};
 
     public void setArret(List<Arret> arret) {
         this.arrets = arret;
@@ -122,7 +122,14 @@ public class AffichageArretPanel extends AffichagePanel {
             switch (columnIndex) {
 
                 case 0:
+                    return arret.getNumeroOrdre();
+
+                case 1:
                     return arret.getAdresse();
+                case 2:
+                    return arret.getCodepostale();
+                case 3:
+                    return arret.getVille();
 
                 default:
                     return null;
@@ -133,8 +140,20 @@ public class AffichageArretPanel extends AffichagePanel {
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
             Arret arret = arrets.get(rowIndex);
             switch (columnIndex) {
+                
                 case 0:
+                    arret.setNumeroOrdre((Integer)aValue);
+                    break;
+
+                case 1:
                     arret.setAdresse((String) aValue);
+                    break;
+                case 2:
+                    arret.setCodepostale((Integer)aValue);
+                    break;
+                case 3:
+                    arret.setVille((String)aValue);
+                    break;
             }
             try {
                 abstractControleur.controleEtModifie(arret);
@@ -150,6 +169,8 @@ public class AffichageArretPanel extends AffichagePanel {
                 toIndex--;
             }
             arrets.add(toIndex , arret);
+            arret.setNumeroOrdre(toIndex);
+            ArretDao.updateArret(arret);
             fireTableDataChanged();
         }
     }

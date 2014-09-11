@@ -41,12 +41,14 @@ public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Ob
         final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem deleteItem = new JMenuItem("Supprimer");
         deleteItem.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
-                supprimeElement(jTable1.getSelectedRow());
+                int row = jTable1.getSelectedRow();
+                System.out.println("" + row);
+                if (row >= 0) {
+                    supprimeElement(row);
+                }
             }
-
         });
         popupMenu.add(deleteItem);
         List<JMenuItem> menuItems = getMenuItems();
@@ -54,7 +56,6 @@ public abstract class AffichagePanel<T> extends javax.swing.JPanel implements Ob
             popupMenu.add(menuItem);
         }
         jTable1.addMouseListener(new MouseAdapter() {
-
             public void mouseReleased(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     int row = jTable1.rowAtPoint(e.getPoint());

@@ -20,9 +20,11 @@ public class ArretDao {
 
     public static boolean addArret(Arret arret) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into arrets (idarrets,adressearrets) values ( ?, ?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into arrets (idarrets,adressearrets,codepostal,ville) values (?,?, ?, ?)");
             preparedStatement.setInt(1, arret.getId());
             preparedStatement.setString(2, arret.getAdresse());
+            preparedStatement.setInt(3,arret.getCodepostale());
+            preparedStatement.setString(4,arret.getVille());
             preparedStatement.executeUpdate();
             int dernierIdGenere = getDernierIdGenere();
             arret.setId(dernierIdGenere);
@@ -56,7 +58,11 @@ public class ArretDao {
                 Arret arret = new Arret();
                 arret.setId(resultSet.getInt("idarrets"));
                 arret.setAdresse(resultSet.getString("adressearrets"));
+                arret.setCodepostale(resultSet.getInt("codepostal"));
+                arret.setVille(resultSet.getString("ville"));
                 arret.setLesCircuits(selectListeCircuitPourArret(arret.getId()));
+                arret.setNumeroOrdre(resultSet.getInt("numeroordre"));
+                
                 System.out.println(arret);
                 allArret.add(arret);
             }
@@ -72,13 +78,17 @@ public class ArretDao {
     public static boolean updateArret(Arret arret) {
         //TODO implémenter la méthode
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update arret set adressearrets = ? where arret.idarrets = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update arrets set adressearrets = ?,codepostal = ?,ville = ?, numeroordre = ? where arrets.idarrets = ?");
             preparedStatement.setString(1, arret.getAdresse());
-            preparedStatement.setInt(2, arret.getId());
+            preparedStatement.setInt(2, arret.getCodepostale());
+            preparedStatement.setString(3, arret.getVille());
+            preparedStatement.setInt(4, arret.getNumeroOrdre());
+            preparedStatement.setInt(5, arret.getId());
 
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

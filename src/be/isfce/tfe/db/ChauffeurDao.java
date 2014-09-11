@@ -8,6 +8,7 @@ import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.DocumentAdministratif;
 import be.isfce.tfe.metier.Trajet;
+import be.isfce.tfe.metier.UtilisationCarte;
 import java.sql.PreparedStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -214,6 +215,32 @@ public class ChauffeurDao {
         } catch (Exception e) {
             return null;
         }
+    }
+    
+     public static List<UtilisationCarte> selectListeUtilisationCartePourChauffeur(String chauffeurId) {
+
+        try {
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from utilisationcarte where id = ?");
+            preparedStatement.setString(1, chauffeurId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<UtilisationCarte> allUtilisationCarte = new ArrayList<UtilisationCarte>();
+            while (resultSet.next()) {
+                UtilisationCarte heure = new UtilisationCarte();
+                heure.setIdutilisationcarte(resultSet.getInt("idutilisation"));
+                heure.setDateutilisation(resultSet.getDate("dateutilisation"));
+                heure.setLitrecarburant(resultSet.getInt("litrecarburant"));
+                heure.setKmutilisation(resultSet.getInt("kmutilisation"));
+                heure.setIdcartecarburant(resultSet.getInt("idcarte"));
+                heure.setIdchauffeur(resultSet.getString("idchauffeur"));
+                allUtilisationCarte.add(heure);
+            }
+            // System.out.println(allUtilisationCarte);
+            return allUtilisationCarte;
+
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     public static boolean deleteChauffeur(Chauffeur chauffeur) {

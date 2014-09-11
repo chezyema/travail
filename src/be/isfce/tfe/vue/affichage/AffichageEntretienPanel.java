@@ -35,7 +35,7 @@ public class AffichageEntretienPanel extends AffichagePanel {
     }
 
     public AffichageEntretienPanel(EntretienControleur entretienControleur, List<Entretien> entretien) {
-        this(entretienControleur);
+        super(entretienControleur);
         this.entretiens = entretien;
         displayData();
     }

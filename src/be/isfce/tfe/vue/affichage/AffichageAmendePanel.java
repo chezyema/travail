@@ -37,7 +37,7 @@ public class AffichageAmendePanel extends AffichagePanel {
     }
 
     public AffichageAmendePanel(AmendesControleur amendeControleur, List<Amende> amende) {
-        this(amendeControleur);
+        super(amendeControleur);
         this.amendes = amende;
         displayData();
     }

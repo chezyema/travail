@@ -20,6 +20,7 @@ public class UtilisationCarte {
     private CarteCarburant lescartes;
     private String idvehicule;
     private int idcartecarburant;
+    private String idchauffeur;
 
     public int getIdutilisationcarte() {
         return idutilisationcarte;
@@ -84,6 +85,16 @@ public class UtilisationCarte {
         return idcartecarburant;
     }
 
+    public String getIdchauffeur() {
+        return idchauffeur;
+    }
+
+    public void setIdchauffeur(String idchauffeur) {
+        this.idchauffeur = idchauffeur;
+    }
+    
+    
+
     public void setIdvehicule(String idvehicule) {
         this.idvehicule = idvehicule;
     }
@@ -94,7 +105,9 @@ public class UtilisationCarte {
 
     @Override
     public String toString() {
-        return "UtilisationCarte{" + "idutilisationcarte=" + idutilisationcarte + ", dateutilisation=" + dateutilisation + ", litrecarburant=" + litrecarburant + ", kmutilisation=" + kmutilisation + ", lesvehicules=" + lesvehicules + ", lescartes=" + lescartes + ", idvehicule=" + idvehicule + ", idcartecarburant=" + idcartecarburant + '}';
+        return "UtilisationCarte{" + "idutilisationcarte=" + idutilisationcarte + ", dateutilisation=" + dateutilisation + ", litrecarburant=" + litrecarburant + ", kmutilisation=" + kmutilisation + ", lesvehicules=" + lesvehicules + ", lescartes=" + lescartes + ", idvehicule=" + idvehicule + ", idcartecarburant=" + idcartecarburant + ", idchauffeur=" + idchauffeur + '}';
     }
+
+  
 
 }

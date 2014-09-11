@@ -15,28 +15,24 @@ import java.util.Date;
  */
 public class AfficherEtRechercherAmendePanel extends javax.swing.JPanel {
 
-  
-  public AfficherEtRechercherAmendePanel() {
+    public AfficherEtRechercherAmendePanel() {
         initComponents();
-        affichageAmendePanel = new AffichageAmendePanel(new AmendesControleur(),AmendesDao.getTousLesAmendes());
+        affichageAmendePanel = new AffichageAmendePanel(new AmendesControleur(), AmendesDao.getTousLesAmendes());
         jPanel1.add(affichageAmendePanel, BorderLayout.CENTER);
     }
- private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {                                             
-        
-        Date date = jDateChooser1.getDate();
-        if (date != null) {
-            affichageAmendePanel.setAmendes(AmendesDao.getTousLesAmendesParDate(date));
-        }
-    }                                            
-   
-
     private AffichageAmendePanel affichageAmendePanel;
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
+
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -63,6 +59,14 @@ public class AfficherEtRechercherAmendePanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        // TODO add your handling code here:
+        Date date = jDateChooser1.getDate();
+        if (date != null) {
+            affichageAmendePanel.setAmendes(AmendesDao.getTousLesAmendesParDate(date));
+        }
+    }//GEN-LAST:event_jDateChooser1PropertyChange
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JPanel jPanel1;

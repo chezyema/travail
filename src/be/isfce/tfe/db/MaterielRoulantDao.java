@@ -176,6 +176,7 @@ public class MaterielRoulantDao {
                 heure.setLitrecarburant(resultSet.getInt("litrecarburant"));
                 heure.setKmutilisation(resultSet.getInt("kmutilisation"));
                 heure.setIdcartecarburant(resultSet.getInt("idcarte"));
+                heure.setIdchauffeur(resultSet.getString("idchauffeur"));
                 allUtilisationCarte.add(heure);
             }
             // System.out.println(allUtilisationCarte);

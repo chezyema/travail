@@ -192,7 +192,7 @@ public class CircuitDao {
 
     public static List<Arret> selectListeArretsPourCircuit(int circuitIdb) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from contient join arrets on contient.idarrets = arrets.idarrets where idcircuit = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from contient join arrets on contient.idarrets = arrets.idarrets where idcircuit = ? order by numeroordre");
             preparedStatement.setInt(1, circuitIdb);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Arret> allArret = new ArrayList<Arret>();
@@ -200,6 +200,9 @@ public class CircuitDao {
                 Arret arret = new Arret();
                 arret.setId(resultSet.getInt("idarrets"));
                 arret.setAdresse(resultSet.getString("adressearrets"));
+                arret.setCodepostale(resultSet.getInt("codepostal"));
+                arret.setVille(resultSet.getString("ville"));
+                arret.setNumeroOrdre(resultSet.getInt("numeroordre"));
 
                 allArret.add(arret);
             }

@@ -165,7 +165,7 @@ public class AffichageChauffeurPanel extends AffichagePanel {
                         break;
                     case 4 :
                         chauffeur.setSexe((String) aValue);
-                        
+                        break;
                     case 5:
                         chauffeur.setAdresse((String) aValue);
                         break;

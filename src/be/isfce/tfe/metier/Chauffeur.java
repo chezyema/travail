@@ -148,6 +148,7 @@ public class Chauffeur {
     private List<Trajet> lesheures;
     private List<MaterielRoulant> lesvehicules;
     private List<DocumentAdministratif> lesdocuments;
+    private List<Chauffeur> lesUtilisations;
 
     public List<Circuit> getLescircuits() {
         return lescircuits;
@@ -165,10 +166,27 @@ public class Chauffeur {
         return lesheures;
     }
 
+    public List<Chauffeur> getLesUtilisations() {
+        return lesUtilisations;
+    }
+
+    public void setLesUtilisations(List<Chauffeur> lesUtilisations) {
+        this.lesUtilisations = lesUtilisations;
+    }
+
     @Override
     public String toString() {
-        return "Chauffeur{" + "id=" + id + ", nomchauffeur=" + nomchauffeur + ", prenomchauffeur=" + prenomchauffeur + ", datedenaissance=" + datedenaissance + ", sexe=" + sexe + ", adresse=" + adresse + ", codepostale=" + codepostale + ", ville=" + ville + ", numtelephone=" + numtelephone + ", email=" + email + ", numcartesis=" + numcartesis + ", numpermis=" + numpermis + ", lescircuits=" + lescircuits + ", lesheures=" + lesheures + ", lesvehicules=" + lesvehicules + ", lesdocuments=" + lesdocuments + '}';
+        return "Chauffeur{" + "id=" + id + ", nomchauffeur=" + nomchauffeur + ", prenomchauffeur=" + prenomchauffeur + ", datedenaissance=" + datedenaissance + ", sexe=" + sexe + ", adresse=" + adresse + ", codepostale=" + codepostale + ", ville=" + ville + ", numtelephone=" + numtelephone + ", email=" + email + ", numcartesis=" + numcartesis + ", numpermis=" + numpermis + ", lescircuits=" + lescircuits + ", lesheures=" + lesheures + ", lesvehicules=" + lesvehicules + ", lesdocuments=" + lesdocuments + ", lesUtilisations=" + lesUtilisations + '}';
     }
+
+   
+   
+
+  
+    
+    
+
+  
 
    
 }

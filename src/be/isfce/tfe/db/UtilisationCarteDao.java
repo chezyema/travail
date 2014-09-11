@@ -22,13 +22,15 @@ public class UtilisationCarteDao {
     public static boolean addUtilisationCarte(UtilisationCarte carte) {
         try {
             System.out.println(carte.toString());
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into utilisationcarte (idutilisation,dateutilisation,litrecarburant,kmutilisation,id,idcarte) values (? , ?, ?, ?,?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into utilisationcarte (idutilisation,dateutilisation,litrecarburant,kmutilisation,id,idcarte,idchauffeur) values (?,? , ?, ?, ?,?,?)");
             preparedStatement.setInt(1, carte.getIdutilisationcarte());
             preparedStatement.setDate(2, new Date(carte.getDateUtilisation().getTime()));
             preparedStatement.setInt(3,carte.getLitrecarburant());
             preparedStatement.setInt(4,carte.getKmutilisation());
             preparedStatement.setString(5, carte.getIdvehicule());
             preparedStatement.setInt(6, carte.getIdcartecarburant());
+            preparedStatement.setString(7, carte.getIdchauffeur());
+            
 
             preparedStatement.executeUpdate();
             return true;
@@ -62,6 +64,8 @@ public class UtilisationCarteDao {
                 heure.setKmutilisation(resultSet.getInt("kmutilisation"));
                 heure.setIdvehicule(resultSet.getString("id"));
                 heure.setIdcartecarburant(resultSet.getInt("idcarte"));
+                heure.setIdchauffeur(resultSet.getString("idchauffeur"));
+                
 
                 allUtilisationCarte.add(heure);
             }
