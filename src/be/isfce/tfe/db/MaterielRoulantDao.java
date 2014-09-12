@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -287,6 +288,7 @@ public class MaterielRoulantDao {
         }
         return entretienAEffectuer;
     }
+
     public static List<MaterielRoulant> getVehiculeAEntretenir() {
         List<MaterielRoulant> tousLesVehicules = getTousLesVehicules();
         List<MaterielRoulant> vehiculePasEnOrdre = new ArrayList<MaterielRoulant>();
@@ -304,7 +306,6 @@ public class MaterielRoulantDao {
         }
         return vehiculePasEnOrdre;
     }
-
 
     public static List<MaterielRoulant> getVehiculeEnOrdre() {
         List<MaterielRoulant> tousLesVehicules = getTousLesVehicules();
@@ -338,7 +339,7 @@ public class MaterielRoulantDao {
         return dernierEntretien;
     }
 
-    private static int getConsommationPourVehicule(MaterielRoulant vehicule, int mois, int annee) {
+    public static List<UtilisationCarte> getConsommationsPourVehicule(MaterielRoulant vehicule, int mois, int annee) {
         List<UtilisationCarte> tousLesUtilisationCarte = UtilisationCarteDao.getTousLesUtilisationCarte();
         List<UtilisationCarte> utilisations = new ArrayList<UtilisationCarte>();
         for (UtilisationCarte utilisationCarte : tousLesUtilisationCarte) {
@@ -346,10 +347,26 @@ public class MaterielRoulantDao {
                 utilisations.add(utilisationCarte);
             }
         }
-        //TODO Terminer la logique
-        for (UtilisationCarte utilisationCarte : utilisations) {
+        return utilisations;
+    }
+
+    public static double getConsommationPourVehicule(MaterielRoulant vehicule, int mois, int annee) {
+        System.out.println("mois " + mois);
+        System.out.println("annee " + annee);
+        
+        List<UtilisationCarte> utilisations = getConsommationsPourVehicule(vehicule, mois, annee);
+        if (utilisations.isEmpty()) {
+            return 0;
         }
 
-        return 0;
+        Collections.sort(utilisations);
+        double kmDebutKm = utilisations.get(0).getKmutilisation();
+        double kmFin = utilisations.get(utilisations.size() - 1).getKmutilisation();
+        double totalLitre = 0;
+        for (int i = 0; i < utilisations.size() - 1; i++) {
+           totalLitre += utilisations.get(i).getLitrecarburant();
+        }
+
+        return (totalLitre / (kmFin - kmDebutKm)) * 100;
     }
 }

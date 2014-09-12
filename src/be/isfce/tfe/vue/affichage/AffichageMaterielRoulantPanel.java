@@ -96,16 +96,16 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
             public Object getValueAt(int rowIndex, int columnIndex) {
                 MaterielRoulant vehicule = vehicules.get(rowIndex);
                 switch (columnIndex) {
-                    
+
                     case 0:
                         return vehicule.getId();
                     case 1:
                         return vehicule.getMarque();
-                      case 2:
+                    case 2:
                         TypeMaterielRoulant type = TypeMaterielDao.getTypeMateriel(vehicule.getIdtypemateriel());
-                          //System.out.println(""+type);
-                        return type != null ? type.getTypemateriel() : "";   
-                    
+                        //System.out.println(""+type);
+                        return type != null ? type.getTypemateriel() : "";
+
                     case 3:
                         return vehicule.getAnneedeconstruction();
                     case 4:
@@ -133,10 +133,10 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     case 1:
                         vehicule.setMarque((String) aValue);
                         break;
-                        
-                  case 2:
+
+                    case 2:
                         vehicule.setIdtypemateriel(Integer.valueOf((String) aValue));
-                      break;
+                        break;
 
                     case 3:
                         //TODO
@@ -154,7 +154,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     case 7:
                         vehicule.setKmactuel(Integer.valueOf(aValue.toString()));
                         break;
-                   
+
                 }
                 try {
                     abstractControleur.controleEtModifie(vehicule);
@@ -187,6 +187,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherEntretienMenuItem());
         menuItems.add(getUtilisationCarburantMenuItem());
+        menuItems.add(getAfficherUtlisationsMensuelles());
         menuItems.add(getAjouterEntretienMenuItem());
         menuItems.add(getAjouterDocumentMenuItem());
         menuItems.add(getAfficherDocumentMenuItem());
@@ -209,8 +210,21 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return entretien;
     }
-    
-     private JMenuItem getAfficherAmendesMenuItem() {
+
+    private JMenuItem getAfficherUtlisationsMensuelles() {
+        JMenuItem entretien = new JMenuItem("Utilisation Carte Carburant");
+        entretien.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MaterielRoulant materiel = vehicules.get(jTable1.getSelectedRow());
+                AfficherEtRechercherUtilisationCartePanel affichageEntretienPanel = new AfficherEtRechercherUtilisationCartePanel(materiel);
+                DialogUtils.afficheDialog(null, affichageEntretienPanel);
+            }
+        });
+        return entretien;
+    }
+
+    private JMenuItem getAfficherAmendesMenuItem() {
         JMenuItem amende = new JMenuItem("Les Amendes");
         amende.addActionListener(new ActionListener() {
             @Override
@@ -222,7 +236,6 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return amende;
     }
-
 
     private JMenuItem getUtilisationCarburantMenuItem() {
         JMenuItem utilisation = new JMenuItem("Utilisation Carte Carburant");
@@ -258,7 +271,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return ajouterEntretien;
     }
-    
+
     private JMenuItem getAjouterAmendeMenuItem() {
         JMenuItem ajouterAmende = new JMenuItem("Ajouter Amende");
         ajouterAmende.addActionListener(new ActionListener() {
@@ -279,7 +292,6 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         });
         return ajouterAmende;
     }
-
 
     private JMenuItem getAfficherDocumentMenuItem() {
         JMenuItem afficherDocument = new JMenuItem("Afficher documents");

@@ -28,7 +28,7 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
     public AffichageUtilisationCarteJPanel(UtilisationCarteControleur utilisationControleur) {
         super(utilisationControleur);
-        displayData();
+        //displayData();
     }
 
     public void setUtilisationCarte(List<UtilisationCarte> utilisationcarte) {

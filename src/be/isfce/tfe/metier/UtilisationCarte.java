@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author yema
  */
-public class UtilisationCarte {
+public class UtilisationCarte implements Comparable<UtilisationCarte>{
 
     private int idutilisationcarte;
     private Date dateutilisation;
@@ -108,6 +108,9 @@ public class UtilisationCarte {
         return "UtilisationCarte{" + "idutilisationcarte=" + idutilisationcarte + ", dateutilisation=" + dateutilisation + ", litrecarburant=" + litrecarburant + ", kmutilisation=" + kmutilisation + ", lesvehicules=" + lesvehicules + ", lescartes=" + lescartes + ", idvehicule=" + idvehicule + ", idcartecarburant=" + idcartecarburant + ", idchauffeur=" + idchauffeur + '}';
     }
 
-  
+    @Override
+    public int compareTo(UtilisationCarte o) {
+        return new Integer(kmutilisation).compareTo(o.kmutilisation);
+    }
 
 }
