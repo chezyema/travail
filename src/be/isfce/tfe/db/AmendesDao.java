@@ -20,12 +20,13 @@ import java.util.List;
 public class AmendesDao {
     public static boolean addAmendes(Amende amende) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into amendes (idamende,numeropv,datepv,montantpv,id) values (? , ?, ?,?,?)");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into amendes (idamende,numeropv,datepv,montantpv,id,idchauffeur) values (?,? , ?, ?,?,?)");
             preparedStatement.setInt(1, amende.getIdamendes());
             preparedStatement.setString(2, amende.getNumeropv());
             preparedStatement.setDate(3, new Date(amende.getDatepv().getTime()));
             preparedStatement.setInt(4, amende.getMontantpv());
             preparedStatement.setString(5, amende.getIdmaterielroulant());
+            preparedStatement.setString(6, amende.getIdchauffeur());
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -56,6 +57,7 @@ public class AmendesDao {
                 amende.setDatepv(resultSet.getDate("datepv"));
                 amende.setMontantpv(resultSet.getInt("montantpv"));
                 amende.setIdmaterielroulant(resultSet.getString("id"));
+                amende.setIdchauffeur(resultSet.getString("idchauffeur"));
 
                 allAmendes.add(amende);
             }
@@ -84,6 +86,7 @@ public class AmendesDao {
                 amende.setDatepv(resultSet.getDate("datepv"));
                 amende.setMontantpv(resultSet.getInt("montantpv"));
                 amende.setIdmaterielroulant(resultSet.getString("id"));
+                amende.setIdchauffeur(resultSet.getString("idchauffeur"));
                 allAmendes.add(amende);
             }
             System.out.println(allAmendes);
@@ -110,6 +113,8 @@ public class AmendesDao {
                 amende.setDatepv(resultSet.getDate("datepv"));
                 amende.setMontantpv(resultSet.getInt("montantpv"));
                 amende.setIdmaterielroulant(resultSet.getString("id"));
+                amende.setIdchauffeur(resultSet.getString("idchauffeur"));
+                
                 allAmendes.add(amende);
             }
             System.out.println(allAmendes);

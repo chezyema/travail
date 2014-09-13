@@ -78,6 +78,11 @@ public class Chauffeur {
         return email;
     }
 
+    public List<Amende> getLesamendes() {
+        return lesamendes;
+    }
+    
+
     public String getSexe() {
         return sexe;
     }
@@ -110,6 +115,12 @@ public class Chauffeur {
     public void setEmail(String Email) {
         this.email = Email;
     }
+
+    public void setLesamendes(List<Amende> lesamendes) {
+        this.lesamendes = lesamendes;
+    }
+    
+    
 
     public String getNumcartesis() {
         return numcartesis;
@@ -149,6 +160,7 @@ public class Chauffeur {
     private List<MaterielRoulant> lesvehicules;
     private List<DocumentAdministratif> lesdocuments;
     private List<Chauffeur> lesUtilisations;
+    private List<Amende> lesamendes;
 
     public List<Circuit> getLescircuits() {
         return lescircuits;
@@ -176,9 +188,10 @@ public class Chauffeur {
 
     @Override
     public String toString() {
-        return "Chauffeur{" + "id=" + id + ", nomchauffeur=" + nomchauffeur + ", prenomchauffeur=" + prenomchauffeur + ", datedenaissance=" + datedenaissance + ", sexe=" + sexe + ", adresse=" + adresse + ", codepostale=" + codepostale + ", ville=" + ville + ", numtelephone=" + numtelephone + ", email=" + email + ", numcartesis=" + numcartesis + ", numpermis=" + numpermis + ", lescircuits=" + lescircuits + ", lesheures=" + lesheures + ", lesvehicules=" + lesvehicules + ", lesdocuments=" + lesdocuments + ", lesUtilisations=" + lesUtilisations + '}';
+        return "Chauffeur{" + "id=" + id + ", nomchauffeur=" + nomchauffeur + ", prenomchauffeur=" + prenomchauffeur + ", datedenaissance=" + datedenaissance + ", sexe=" + sexe + ", adresse=" + adresse + ", codepostale=" + codepostale + ", ville=" + ville + ", numtelephone=" + numtelephone + ", email=" + email + ", numcartesis=" + numcartesis + ", numpermis=" + numpermis + ", lescircuits=" + lescircuits + ", lesheures=" + lesheures + ", lesvehicules=" + lesvehicules + ", lesdocuments=" + lesdocuments + ", lesUtilisations=" + lesUtilisations + ", lesamendes=" + lesamendes + '}';
     }
 
+ 
    
    
 

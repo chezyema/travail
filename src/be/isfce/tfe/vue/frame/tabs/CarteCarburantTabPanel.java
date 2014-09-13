@@ -31,6 +31,9 @@ public class CarteCarburantTabPanel extends javax.swing.JPanel {
         jPanel1.add(affichageCarteCarburantPanel, BorderLayout.CENTER);
     }
 
+    public void refresh(){
+        affichageCarteCarburantPanel.setCarteCarburant(CarteCarburantDao.getTousLesCartesCarburant());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

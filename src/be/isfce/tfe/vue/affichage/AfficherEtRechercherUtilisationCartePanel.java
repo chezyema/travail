@@ -84,7 +84,7 @@ public class AfficherEtRechercherUtilisationCartePanel extends javax.swing.JPane
 
         Date date = jDateChooser1.getDate();
         if (date != null) {
-            consommationLabel.setText(df.format(MaterielRoulantDao.getConsommationPourVehicule(materielRoulant, date.getMonth(), date.getYear())));
+            consommationLabel.setText(df.format(MaterielRoulantDao.getConsommationPourVehicule(materielRoulant, date.getMonth(), date.getYear()))+ " L/100km");
             affichageEntretienPanel.setUtilisationCarte(MaterielRoulantDao.getConsommationsPourVehicule(materielRoulant, date.getMonth(), date.getYear()));
         }
     }//GEN-LAST:event_jDateChooser1PropertyChange

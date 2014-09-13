@@ -4,6 +4,7 @@
  */
 package be.isfce.tfe.db;
 
+import be.isfce.tfe.metier.Amende;
 import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.DocumentAdministratif;
@@ -140,33 +141,34 @@ public class ChauffeurDao {
         }
 
     }
-    /*
-     public static List<DocumentAdministratif> getTousLesDocumentsPourChauffeur(boolean documentSupprimes) {
-     try {
-     String supprimes = documentSupprimes ? "1" : "0";
-           
-     PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select d.datevaliditer,t.libelledocument from documentsadministratifs  d join type t on documentsadministratifs.idtype = type.idtype where supprimedocument = " + supprimes);
+     public static List<Amende> selectListeAmendesPourChauffeur(String chauffeurId) {
+        try {
 
-     ResultSet resultSet = preparedStatement.executeQuery();
-     List<DocumentAdministratif> allDocuments = new ArrayList<DocumentAdministratif>();
-     while (resultSet.next()) {
-     DocumentAdministratif documents = new DocumentAdministratif();
-     documents.setId(resultSet.getInt("iddocument"));
-     documents.setDateValiditer(resultSet.getDate("datevaliditer"));
-     documents.setIdmaterielroulant(resultSet.getString("id"));
-     documents.setIdchauffeur(resultSet.getString("idchauffeur"));
-     documents.setIdtype(resultSet.getInt("idtype"));
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes join chauffeur on amendes.id = chauffeur.idchauffeur where chauffeur.idchauffeur = ?");
+            preparedStatement.setString(1, chauffeurId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Amende> allAmendes = new ArrayList<Amende>();
+            while (resultSet.next()) {
+                Amende amende = new Amende();
+                amende.setIdamendes(resultSet.getInt("idamende"));
+                amende.setNumeropv(resultSet.getString("numeropv"));
+                amende.setDatepv(resultSet.getDate("datepv"));
+                amende.setMontantpv(resultSet.getInt("montantpv"));
+                amende.setIdmaterielroulant(resultSet.getString("id"));
+                amende.setIdchauffeur(resultSet.getString("idchauffeur"));
 
-     allDocuments.add(documents);
-     }
-     System.out.println(allDocuments);
-     return allDocuments;
+                allAmendes.add(amende);
+            }
 
-     } catch (Exception e) {
-     return null;
-     }
-    
-     */
+            return allAmendes;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
 
     public static List<DocumentAdministratif> selectListeDocumentsPourChauffeur(String chauffeurIdb) {
 

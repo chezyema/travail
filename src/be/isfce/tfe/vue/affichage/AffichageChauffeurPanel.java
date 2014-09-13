@@ -213,10 +213,10 @@ public class AffichageChauffeurPanel extends AffichagePanel {
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getEncoderHeureMenuItem());
-        menuItems.add(getAfficherDocumentMenuItem());
-        menuItems.add(getAjouterDocumentMenuItem());
         menuItems.add(getAfficherFeuilleDeRouteMenuItem());
         menuItems.add(getAfficherTrajetsMensuelsMenuItem());
+        menuItems.add(getAfficherDocumentMenuItem());
+        menuItems.add(getAjouterDocumentMenuItem());
 
         return menuItems;
     }

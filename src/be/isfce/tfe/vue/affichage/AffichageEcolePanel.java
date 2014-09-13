@@ -166,8 +166,9 @@ public class AffichageEcolePanel extends AffichagePanel {
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherEleveMenuItem());
-        menuItems.add(getAfficherCircuitMenuItem());
         menuItems.add(getAjouterElevesMenuItem());
+        menuItems.add(getAfficherCircuitMenuItem());
+        
 
         return menuItems;
     }

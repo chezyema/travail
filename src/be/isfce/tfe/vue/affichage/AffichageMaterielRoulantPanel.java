@@ -186,14 +186,14 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherEntretienMenuItem());
-        menuItems.add(getUtilisationCarburantMenuItem());
-        menuItems.add(getAfficherUtlisationsMensuelles());
         menuItems.add(getAjouterEntretienMenuItem());
-        menuItems.add(getAjouterDocumentMenuItem());
         menuItems.add(getAfficherDocumentMenuItem());
-        menuItems.add(getAjouterUtilisationCarteMenuItem());
+        menuItems.add(getAjouterDocumentMenuItem());
         menuItems.add(getAfficherAmendesMenuItem());
         menuItems.add(getAjouterAmendeMenuItem());
+        menuItems.add(getAjouterUtilisationCarteMenuItem());
+        menuItems.add(getUtilisationCarburantMenuItem());
+        menuItems.add(getAfficherUtlisationsMensuelles());
 
         return menuItems;
     }
@@ -212,7 +212,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
     }
 
     private JMenuItem getAfficherUtlisationsMensuelles() {
-        JMenuItem entretien = new JMenuItem("Utilisation Carte Carburant");
+        JMenuItem entretien = new JMenuItem("Statistique Carte Carburant");
         entretien.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

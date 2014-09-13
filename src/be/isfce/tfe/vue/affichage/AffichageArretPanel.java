@@ -90,8 +90,8 @@ public class AffichageArretPanel extends AffichagePanel {
     }
 
     private void reset() {
-        arrets = ArretDao.getTousLesArrets();
-        setArret(arrets);
+        /*arrets = ArretDao.getTousLesArrets();
+        setArret(arrets);*/
     }
 
     public class MyTableModel extends javax.swing.table.AbstractTableModel implements Reorderable {
@@ -123,7 +123,6 @@ public class AffichageArretPanel extends AffichagePanel {
 
                 case 0:
                     return arret.getNumeroOrdre();
-
                 case 1:
                     return arret.getAdresse();
                 case 2:
@@ -149,7 +148,7 @@ public class AffichageArretPanel extends AffichagePanel {
                     arret.setAdresse((String) aValue);
                     break;
                 case 2:
-                    arret.setCodepostale((Integer)aValue);
+                    arret.setCodepostale(Integer.valueOf((String)aValue));
                     break;
                 case 3:
                     arret.setVille((String)aValue);
@@ -169,7 +168,9 @@ public class AffichageArretPanel extends AffichagePanel {
                 toIndex--;
             }
             arrets.add(toIndex , arret);
-            arret.setNumeroOrdre(toIndex);
+            for (int i = 0; i < arrets.size(); i++) {
+                arrets.get(i).setNumeroOrdre(i+1);
+            }
             ArretDao.updateArret(arret);
             fireTableDataChanged();
         }

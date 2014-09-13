@@ -150,6 +150,7 @@ public class MaterielRoulantDao {
                 amende.setDatepv(resultSet.getDate("datepv"));
                 amende.setMontantpv(resultSet.getInt("montantpv"));
                 amende.setIdmaterielroulant(resultSet.getString("id"));
+                amende.setIdchauffeur(resultSet.getString("idchauffeur"));
 
                 allAmendes.add(amende);
             }

@@ -16,6 +16,7 @@ public class Amende {
     private Date datepv;
     private int montantpv;
     private String idmaterielroulant;
+    private String idchauffeur;
 
     public int getIdamendes() {
         return idamendes;
@@ -36,6 +37,12 @@ public class Amende {
     public String getIdmaterielroulant() {
         return idmaterielroulant;
     }
+
+    public String getIdchauffeur() {
+        return idchauffeur;
+    }
+    
+    
     
 
     public void setIdamendes(int idamendes) {
@@ -58,11 +65,17 @@ public class Amende {
         this.idmaterielroulant = idmaterielroulant;
     }
 
+    public void setIdchauffeur(String idchauffeur) {
+        this.idchauffeur = idchauffeur;
+    }
+
     @Override
     public String toString() {
-        return "Amendes{" + "idamendes=" + idamendes + ", numeropv=" + numeropv + ", datepv=" + datepv + ", montantpv=" + montantpv + ", idmaterielroulant=" + idmaterielroulant + '}';
+        return "Amende{" + "idamendes=" + idamendes + ", numeropv=" + numeropv + ", datepv=" + datepv + ", montantpv=" + montantpv + ", idmaterielroulant=" + idmaterielroulant + ", idchauffeur=" + idchauffeur + '}';
     }
     
+    
+   
     
     
 }

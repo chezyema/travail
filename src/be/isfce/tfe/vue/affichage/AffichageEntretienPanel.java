@@ -26,7 +26,7 @@ public class AffichageEntretienPanel extends AffichagePanel {
 
     public AffichageEntretienPanel(EntretienControleur entretienControleur) {
         super(entretienControleur);
-        displayData();
+        //displayData();
     }
 
     public void setEntretien(List<Entretien> entretiens) {

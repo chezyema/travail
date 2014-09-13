@@ -24,7 +24,7 @@ CREATE TABLE chauffeur(
         datenaissance Date NOT NULL ,
         sexe          Varchar (8) ,
         adresse       Varchar (40) NOT NULL ,
-        codepostal    Int (4) ,
+        codepostal    Int ,
         ville         Varchar (30) NOT NULL ,
         numtelephone  Varchar (11) NOT NULL ,
         email         Varchar (30) ,
@@ -41,7 +41,7 @@ CREATE TABLE eleve(
         datedenaissance  Date ,
         sexe             Varchar (8) NOT NULL ,
         adresseeleve     Varchar (40) NOT NULL ,
-        codepostal       Int (4) ,
+        codepostal       Int ,
         ville            Varchar (30) ,
         nomresponsable   Varchar (30) NOT NULL ,
         telresponsable   Varchar (11) NOT NULL ,
@@ -155,11 +155,12 @@ CREATE TABLE typeMaterielRoulant(
 
 
 CREATE TABLE amendes(
-        idamendes int (11) Auto_increment  NOT NULL ,
-        numeroPv  Varchar (11) ,
-        datePv    Date ,
-        montantPv Integer ,
-        id        Varchar (30) NOT NULL ,
+        idamendes   int (11) Auto_increment  NOT NULL ,
+        numeroPv    Varchar (11) ,
+        datePv      Date ,
+        montantPv   Integer ,
+        id          Varchar (30) NOT NULL ,
+        idchauffeur Varchar (15) NOT NULL ,
         PRIMARY KEY (idamendes )
 )ENGINE=InnoDB;
 
@@ -185,5 +186,6 @@ ALTER TABLE trajets ADD CONSTRAINT FK_trajets_idchauffeur FOREIGN KEY (idchauffe
 ALTER TABLE trajets ADD CONSTRAINT FK_trajets_idcircuit FOREIGN KEY (idcircuit) REFERENCES circuit(idcircuit);
 ALTER TABLE trajets ADD CONSTRAINT FK_trajets_id FOREIGN KEY (id) REFERENCES materielRoulant(id);
 ALTER TABLE amendes ADD CONSTRAINT FK_amendes_id FOREIGN KEY (id) REFERENCES materielRoulant(id);
+ALTER TABLE amendes ADD CONSTRAINT FK_amendes_idchauffeur FOREIGN KEY (idchauffeur) REFERENCES chauffeur(idchauffeur);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_idcircuit FOREIGN KEY (idcircuit) REFERENCES circuit(idcircuit);
 ALTER TABLE contient ADD CONSTRAINT FK_contient_idarrets FOREIGN KEY (idarrets) REFERENCES arrets(idarrets);

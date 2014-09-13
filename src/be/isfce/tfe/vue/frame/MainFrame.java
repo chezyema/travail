@@ -36,6 +36,9 @@ public class MainFrame extends javax.swing.JFrame {
                     case 0:
                         initAlerts();
                         break;
+                    case 5:
+                        carteCarburantTabPanel1.refresh();
+                        break;
                     default:
                         break;
                 }
