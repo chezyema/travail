@@ -354,7 +354,7 @@ public class MaterielRoulantDao {
     public static double getConsommationPourVehicule(MaterielRoulant vehicule, int mois, int annee) {
         System.out.println("mois " + mois);
         System.out.println("annee " + annee);
-        
+
         List<UtilisationCarte> utilisations = getConsommationsPourVehicule(vehicule, mois, annee);
         if (utilisations.isEmpty()) {
             return 0;
@@ -365,9 +365,9 @@ public class MaterielRoulantDao {
         double kmFin = utilisations.get(utilisations.size() - 1).getKmutilisation();
         double totalLitre = 0;
         for (int i = 0; i < utilisations.size() - 1; i++) {
-           totalLitre += utilisations.get(i).getLitrecarburant();
+            totalLitre += utilisations.get(i).getLitrecarburant();
         }
-
+        System.out.println("" + ((totalLitre / (kmFin - kmDebutKm)) * 100));
         return (totalLitre / (kmFin - kmDebutKm)) * 100;
     }
 }

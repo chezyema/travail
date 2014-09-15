@@ -6,8 +6,10 @@ package be.isfce.tfe.vue.affichage;
 
 import be.isfce.tfe.controleur.DocumentsAdministratifsControleur;
 import be.isfce.tfe.controleur.ValidationException;
+import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.db.DocumentAdministratifDao;
 import be.isfce.tfe.db.TypeDocumentDao;
+import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.DocumentAdministratif;
 import be.isfce.tfe.metier.TypeDocument;
 import java.util.Date;
@@ -23,7 +25,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageDocumentsPanel extends AffichagePanel {
 
     List<DocumentAdministratif> documents;
-    String[] columnsNames = {"Libelle", "Date validiter"};
+    String[] columnsNames = {"Libelle", "Date validiter", "Propriétaire"};
 
     public void setDocuments(List<DocumentAdministratif> documents) {
         this.documents = documents;
@@ -86,6 +88,9 @@ public class AffichageDocumentsPanel extends AffichagePanel {
                         return type != null ? type.getLibelledocument() : "";
                     case 1:
                         return doc.getDateValiditer();
+                    case 2:
+                        Chauffeur chauffeur = ChauffeurDao.getChauffeur(doc.getIdchauffeur());
+                        return chauffeur != null ? (chauffeur.getNomChauffeur() + " " + chauffeur.getPrenomChauffeur()) : doc.getIdmaterielroulant();
 
                     default:
                         return null;
@@ -103,7 +108,7 @@ public class AffichageDocumentsPanel extends AffichagePanel {
                         break;
                     case 1:
                         document.setIdtype(Integer.valueOf((String) aValue));
-
+                        break;
                 }
                 try {
                     abstractControleur.controleEtModifie(document);
