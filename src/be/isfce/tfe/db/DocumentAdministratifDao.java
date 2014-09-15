@@ -52,7 +52,6 @@ public class DocumentAdministratifDao {
         return getTousLesDocuments(true);
     }
 
-
     public static List<DocumentAdministratif> getTousLesDocuments(boolean documentSupprimes) {
         try {
             String supprimes = documentSupprimes ? "1" : "0";
@@ -91,6 +90,7 @@ public class DocumentAdministratifDao {
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -98,18 +98,19 @@ public class DocumentAdministratifDao {
     public static boolean deleteDocumentsAdministratifs(DocumentAdministratif documents) {
 
         try {
-
+            System.out.println(documents.toString());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update documentsadministratifs set supprimedocument = 1 where documentsadministratifs.iddocument = ?");
             preparedStatement.setInt(1, documents.getId());
             preparedStatement.execute();
 
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
 
-    public static List<DocumentAdministratif>  getDocumentsEnOrdre() {
+    public static List<DocumentAdministratif> getDocumentsEnOrdre() {
         List<DocumentAdministratif> tousLesDocuments = DocumentAdministratifDao.getTousLesDocuments();
         List<DocumentAdministratif> documentsEnOrdre = new ArrayList<DocumentAdministratif>();
         for (DocumentAdministratif doc : tousLesDocuments) {
@@ -123,7 +124,7 @@ public class DocumentAdministratifDao {
     public static List<DocumentAdministratif> getDocumentsARenouveler() {
         List<DocumentAdministratif> tousLesDocuments = DocumentAdministratifDao.getTousLesDocuments();
         List<DocumentAdministratif> documentsARenouveler = new ArrayList<DocumentAdministratif>();
-        
+
         for (DocumentAdministratif doc : tousLesDocuments) {
             if (Calendar.getInstance().getTimeInMillis() - doc.getDateValiditer().getTime() >= 0) {
                 documentsARenouveler.add(doc);

@@ -135,7 +135,8 @@ public class AffichageAmendePanel extends AffichagePanel {
     @Override
     protected void supprimeElement(int index) {
         try {
-            abstractControleur.controleEtSupprime(amendes.get(index));
+            Amende amende = amendes.get(index);
+            abstractControleur.controleEtSupprime(amende);
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),

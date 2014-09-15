@@ -117,7 +117,10 @@ public class AffichageDocumentsPanel extends AffichagePanel {
     @Override
     protected void supprimeElement(int index) {
         try {
-            abstractControleur.controleEtSupprime(documents.get(index));
+            DocumentAdministratif document = documents.get(index);
+            abstractControleur.controleEtSupprime(document);
+            documents.remove(document);
+            jTable1.updateUI();
         } catch (ValidationException ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage(),

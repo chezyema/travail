@@ -184,7 +184,7 @@ public class ChauffeurDao {
     public static List<DocumentAdministratif> selectListeDocumentsPourChauffeur(String chauffeurIdb) {
 
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from documentsadministratifs inner join chauffeur on documentsadministratifs.idchauffeur = chauffeur.idchauffeur inner join type on documentsadministratifs.idtype = type.idtype where chauffeur.idchauffeur = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from documentsadministratifs inner join chauffeur on documentsadministratifs.idchauffeur = chauffeur.idchauffeur inner join type on documentsadministratifs.idtype = type.idtype where chauffeur.idchauffeur = ? and supprimedocument = 0");
             preparedStatement.setString(1, chauffeurIdb);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<DocumentAdministratif> allDocuments = new ArrayList<DocumentAdministratif>();
