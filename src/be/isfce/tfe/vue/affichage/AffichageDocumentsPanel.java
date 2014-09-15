@@ -97,15 +97,12 @@ public class AffichageDocumentsPanel extends AffichagePanel {
                 DocumentAdministratif document = documents.get(rowIndex);
                 switch (columnIndex) {
 
-
                     case 0:
                         document.setDateValiditer(new Date());
                         //Todo encore à faire
                         break;
                     case 1:
                         document.setIdtype(Integer.valueOf((String) aValue));
-
-
 
                 }
                 try {
@@ -132,14 +129,11 @@ public class AffichageDocumentsPanel extends AffichagePanel {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
-        reset();
+        //reset();
     }
 
     private void reset() {
-
-        {
-            documents = DocumentAdministratifDao.getTousLesDocuments();
-        }
+        documents = DocumentAdministratifDao.getTousLesDocuments();
         setDocuments(documents);
     }
 }

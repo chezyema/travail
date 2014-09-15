@@ -7,9 +7,11 @@ package be.isfce.tfe.vue.affichage;
 import be.isfce.tfe.controleur.UtilisationCarteControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.CarteCarburantDao;
+import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.UtilisationCarteDao;
 import be.isfce.tfe.metier.CarteCarburant;
+import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.UtilisationCarte;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +26,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
     List<UtilisationCarte> utilisations;
-    String[] columnsNames = {"Date utilisation", "litre de carburant", "kilométre utilisation"};
+    String[] columnsNames = {"Date utilisation", "litre de carburant", "kilométre utilisation", "Chaffeur", "Véhicule"};
 
     public AffichageUtilisationCarteJPanel(UtilisationCarteControleur utilisationControleur) {
         super(utilisationControleur);
@@ -92,7 +94,12 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
                         return utilisation.getLitrecarburant();
                     case 2:
                         return utilisation.getKmutilisation();
+                    case 3:
+                        Chauffeur chauffeur = ChauffeurDao.getChauffeur(utilisation.getIdchauffeur());
 
+                        return chauffeur != null ? chauffeur.getNomChauffeur() : "";
+                    case 4:
+                        return utilisation.getIdvehicule();
                     default:
                         return null;
                 }
@@ -105,12 +112,18 @@ public class AffichageUtilisationCarteJPanel extends AffichagePanel {
 
                     case 0:
                         utilisation.setDateutilisation(new Date());
-
+                        break;
                     case 1:
                         utilisation.setLitrecarburant(Integer.valueOf((String) aValue));
+                        break;
                     case 2:
                         utilisation.setKmutilisation(Integer.valueOf((String) aValue));
-
+                        break;
+                    case 3:
+                        utilisation.setIdchauffeur((String) aValue);
+                    case 4:
+                        utilisation.setIdvehicule((String) aValue);
+                        break;
                 }
                 try {
                     abstractControleur.controleEtModifie(utilisation);

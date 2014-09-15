@@ -34,7 +34,7 @@ public class ChauffeurDao {
             preparedStatement.setString(2, chauffeur.getNomChauffeur());
             preparedStatement.setString(3, chauffeur.getPrenomChauffeur());
             preparedStatement.setDate(4, dateSql);
-            preparedStatement.setString(5,chauffeur.getSexe());
+            preparedStatement.setString(5, chauffeur.getSexe());
             preparedStatement.setString(6, chauffeur.getAdresse());
             preparedStatement.setInt(7, chauffeur.getCodepostale());
             preparedStatement.setString(8, chauffeur.getVille());
@@ -57,6 +57,16 @@ public class ChauffeurDao {
 
     public static List<Chauffeur> getTousLesChauffeursarchives() {
         return getTousLesChauffeurs(true);
+    }
+
+    public static Chauffeur getChauffeur(String id) {
+        List<Chauffeur> tousLesChauffeurs = getTousLesChauffeurs();
+        for (Chauffeur chauffeur : tousLesChauffeurs) {
+            if (chauffeur.getId().equals(id)) {
+                return chauffeur;
+            }
+        }
+        return null;
     }
 
     private static List<Chauffeur> getTousLesChauffeurs(boolean chauffeursSupprimes) {
@@ -97,11 +107,11 @@ public class ChauffeurDao {
     public static boolean updateChauffeur(Chauffeur chauffeur) {
         //TODO implémenter la méthode
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update chauffeur set nom = ?,prenom = ?,datenaissance = ?,adresse = ?,codepostal = ?,ville = ?,numtelephone = ?,email = ?,numcartesis = ?, numpermis = ? where chauffeur.idchauffeur = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update chauffeur set nom = ?,prenom = ?,datenaissance = ?,sexe = ?,adresse = ?,codepostal = ?,ville = ?,numtelephone = ?,email = ?,numcartesis = ?, numpermis = ? where chauffeur.idchauffeur = ?");
             preparedStatement.setString(1, chauffeur.getNomChauffeur());
             preparedStatement.setString(2, chauffeur.getPrenomChauffeur());
             preparedStatement.setDate(3, new Date(chauffeur.getDateNaissance().getTime()));
-            preparedStatement.setString(4,chauffeur.getSexe());
+            preparedStatement.setString(4, chauffeur.getSexe());
             preparedStatement.setString(5, chauffeur.getAdresse());
             preparedStatement.setInt(6, chauffeur.getCodepostale());
             preparedStatement.setString(7, chauffeur.getVille());
@@ -114,6 +124,7 @@ public class ChauffeurDao {
 
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -141,7 +152,8 @@ public class ChauffeurDao {
         }
 
     }
-     public static List<Amende> selectListeAmendesPourChauffeur(String chauffeurId) {
+
+    public static List<Amende> selectListeAmendesPourChauffeur(String chauffeurId) {
         try {
 
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from amendes join chauffeur on amendes.id = chauffeur.idchauffeur where chauffeur.idchauffeur = ?");
@@ -168,7 +180,6 @@ public class ChauffeurDao {
         }
 
     }
-
 
     public static List<DocumentAdministratif> selectListeDocumentsPourChauffeur(String chauffeurIdb) {
 
@@ -218,8 +229,8 @@ public class ChauffeurDao {
             return null;
         }
     }
-    
-     public static List<UtilisationCarte> selectListeUtilisationCartePourChauffeur(String chauffeurId) {
+
+    public static List<UtilisationCarte> selectListeUtilisationCartePourChauffeur(String chauffeurId) {
 
         try {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("select * from utilisationcarte where id = ?");

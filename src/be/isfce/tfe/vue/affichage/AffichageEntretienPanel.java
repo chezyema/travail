@@ -22,7 +22,7 @@ public class AffichageEntretienPanel extends AffichagePanel {
 
     List<Entretien> entretiens;
 
-    String[] columnsNames = {"Description", "Kilometrage actuel", "Date entretien"};
+    String[] columnsNames = {"Description", "Kilometrage actuel", "Date entretien", "Véhicule"};
 
     public AffichageEntretienPanel(EntretienControleur entretienControleur) {
         super(entretienControleur);
@@ -92,27 +92,32 @@ public class AffichageEntretienPanel extends AffichagePanel {
                         return entretien.getKmEntretienFait();
                     case 2:
                         return entretien.getDateEntretien();
+                    case 3:
+                        return entretien.getIdmaterielroulant();
 
                     default:
                         return null;
                 }
             }
-            
-             @Override
+
+            @Override
             public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
                 Entretien entretien = entretiens.get(rowIndex);
                 switch (columnIndex) {
-                    
-                     case 0:
-                         entretien.setDescription((String) aValue);
-                         break;
+
+                    case 0:
+                        entretien.setDescription((String) aValue);
+                        break;
                     case 1:
                         entretien.setKmEntretienFait(Integer.valueOf((String) aValue));
                         break;
                     case 2:
                         entretien.setDateEntretien(new Date());
+
+                    case 3:
+                        entretien.setIdmaterielroulant((String) aValue);
                         break;
-                  
+
                 }
                 try {
                     abstractControleur.controleEtModifie(entretien);
@@ -136,14 +141,14 @@ public class AffichageEntretienPanel extends AffichagePanel {
     }
 
     @Override
-   public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
         reset();
     }
 
     private void reset() {
-       
-         {
+
+        {
             entretiens = EntretienDao.getTousLesEntretiens();
         }
         setEntretien(entretiens);

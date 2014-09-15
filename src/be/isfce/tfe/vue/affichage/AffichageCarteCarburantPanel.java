@@ -167,7 +167,7 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
     }
 
     private JMenuItem getAfficherVehiculeUtilisationMenuItem() {
-        JMenuItem afficherCarte = new JMenuItem("Afficher Utilisation véhicule");
+        JMenuItem afficherCarte = new JMenuItem("Afficher Utilisation Cartes");
         afficherCarte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -184,14 +184,11 @@ public class AffichageCarteCarburantPanel extends AffichagePanel {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
-        reset();
+        //reset();
     }
 
     private void reset() {
-
-        {
-            cartecarburant = CarteCarburantDao.getTousLesCartesCarburant();
-        }
+        cartecarburant = CarteCarburantDao.getTousLesCartesCarburant();
         setCarteCarburant(cartecarburant);
     }
 }

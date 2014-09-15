@@ -42,14 +42,9 @@
                                           <Component id="registrenational" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="ville" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cdpostale" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="adresse" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="ville" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cdpostale" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="adresse" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
@@ -259,6 +254,7 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="masculinRadioButton">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="masculin"/>
       </Properties>
       <Events>

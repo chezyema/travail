@@ -8,8 +8,10 @@ import be.isfce.tfe.controleur.AmendesControleur;
 import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.AmendesDao;
+import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.db.EntretienDao;
 import be.isfce.tfe.metier.Amende;
+import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.Entretien;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +26,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageAmendePanel extends AffichagePanel {
 
     List<Amende> amendes;
-    String[] columnsNames = {"numero de pv", "date du pv", "montant du pv"};
+    String[] columnsNames = {"Numéro de PV", "Date du PV", "Montant du PV", "Chauffeur"};
 
     public AffichageAmendePanel(AmendesControleur amendeControleur) {
         super(amendeControleur);
@@ -93,6 +95,9 @@ public class AffichageAmendePanel extends AffichagePanel {
                         return amende.getDatepv();
                     case 2:
                         return amende.getMontantpv();
+                    case 3:
+                        Chauffeur chauffeur = ChauffeurDao.getChauffeur(amende.getIdchauffeur());
+                        return chauffeur != null ? chauffeur.getNomChauffeur() : "";
 
                     default:
                         return null;
@@ -113,6 +118,9 @@ public class AffichageAmendePanel extends AffichagePanel {
                         break;
                     case 2:
                         amende.setMontantpv(Integer.valueOf((String) aValue));
+                        break;
+                    case 3:
+                        amende.setIdchauffeur((String) aValue);
                         break;
                 }
                 try {
@@ -139,11 +147,11 @@ public class AffichageAmendePanel extends AffichagePanel {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
-        reset();
+        //reset();
     }
 
     private void reset() {
-        amendes = AmendesDao.getTousLesAmendes();
-        setAmendes(amendes);
+        //amendes = AmendesDao.getTousLesAmendes();
+        //setAmendes(amendes);
     }
 }

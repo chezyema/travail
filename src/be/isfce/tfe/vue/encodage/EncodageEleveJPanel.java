@@ -4,6 +4,7 @@ import be.isfce.tfe.vue.ajout.*;
 import be.isfce.tfe.controleur.EleveControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Eleve;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /*
@@ -21,6 +22,10 @@ public class EncodageEleveJPanel extends javax.swing.JPanel {
      */
     public EncodageEleveJPanel() {
         initComponents();
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(masculinRadioButton);
+        group.add(femininRadioButton);
     }
 
     /**
@@ -97,6 +102,7 @@ public class EncodageEleveJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("sexe:");
 
+        masculinRadioButton.setSelected(true);
         masculinRadioButton.setText("masculin");
         masculinRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,12 +135,9 @@ public class EncodageEleveJPanel extends javax.swing.JPanel {
                                             .addComponent(prenom)
                                             .addComponent(nom)
                                             .addComponent(registrenational)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ville)
-                                            .addComponent(cdpostale)
-                                            .addComponent(adresse))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(ville)
+                                    .addComponent(cdpostale)
+                                    .addComponent(adresse))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(27, 27, 27)
@@ -251,9 +254,12 @@ public class EncodageEleveJPanel extends javax.swing.JPanel {
         eleve.setNomEleve(nomeleveTextField.getText());
         eleve.setPrenomEleve(prenomeleveTextField.getText());
         eleve.setDatedenaissance(eleveDateChooser.getDate());
-        eleve.setSexe(masculinRadioButton.getActionCommand());
-        eleve.setSexe(femininRadioButton.getActionCommand());
-        
+        if (masculinRadioButton.isSelected()) {
+            eleve.setSexe("homme");
+        } else {
+            eleve.setSexe("femme");
+        }
+
         eleve.setAdresseEleve(adresseTextField.getText());
         try {
             eleve.setCdpostal(Integer.valueOf(cdpostalTextField.getText()));

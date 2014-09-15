@@ -102,8 +102,9 @@ public class CarteCarburantDao {
                 heure.setDateutilisation(resultSet.getDate("dateutilisation"));
                 heure.setLitrecarburant(resultSet.getInt("litrecarburant"));
                 heure.setKmutilisation(resultSet.getInt("kmutilisation"));
-               heure.setIdcartecarburant(resultSet.getInt("idcarte"));
-               heure.setIdchauffeur(resultSet.getString("idchauffeur"));
+                heure.setIdcartecarburant(resultSet.getInt("idcarte"));
+                heure.setIdchauffeur(resultSet.getString("idchauffeur"));
+                heure.setIdvehicule(resultSet.getString("id"));
 
                 allUtilisationCarte.add(heure);
             }
