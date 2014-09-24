@@ -29,6 +29,7 @@ public class AjoutEntretienJPanell extends javax.swing.JPanel {
     public AjoutEntretienJPanell(MaterielRoulant materielRoulant) {
         initComponents();
         this.materielRoulant = materielRoulant;
+        ajoutEntretienJPanell1.getKmactuelTextField().setText(String.valueOf(materielRoulant.getKmactuel()));
     }
 
     /**
@@ -87,6 +88,9 @@ public class AjoutEntretienJPanell extends javax.swing.JPanel {
         try {
             if (materielRoulant != null) {
                 entretien.setIdmaterielroulant(materielRoulant.getId());
+            }
+            if (materielRoulant.getKmactuel() < entretien.getKmEntretienFait()) {
+                throw new ValidationException("Le kilométrage de l'entretien est plus grand que le kilométrage actuel du véhicule !");
             }
             new EntretienControleur().controleEtAjoute(entretien);
             if (dialogInterface != null) {

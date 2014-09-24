@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -127,6 +128,19 @@ public class DocumentAdministratifDao {
 
         for (DocumentAdministratif doc : tousLesDocuments) {
             if (Calendar.getInstance().getTimeInMillis() - doc.getDateValiditer().getTime() >= 0) {
+                documentsARenouveler.add(doc);
+            }
+        }
+        return documentsARenouveler;
+    }
+
+    public static List<DocumentAdministratif> getDocumentsABientotRenouveler() {
+        List<DocumentAdministratif> tousLesDocuments = DocumentAdministratifDao.getTousLesDocuments();
+        List<DocumentAdministratif> documentsARenouveler = new ArrayList<DocumentAdministratif>();
+        long timeInMillis = Calendar.getInstance().getTimeInMillis();
+        timeInMillis -= TimeUnit.DAYS.toMillis(5);
+        for (DocumentAdministratif doc : tousLesDocuments) {
+            if (timeInMillis - doc.getDateValiditer().getTime() >= 0) {
                 documentsARenouveler.add(doc);
             }
         }

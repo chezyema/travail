@@ -9,6 +9,7 @@ import be.isfce.tfe.controleur.EntretienControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.metier.Entretien;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -93,6 +94,10 @@ public class EncodageEntretienJPanell extends javax.swing.JPanel {
         entretien.setDateEntretien(dateentretienfait.getDate());
 
         return entretien;
+    }
+
+    public JTextField getKmactuelTextField() {
+        return kmactuelTextField;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

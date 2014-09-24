@@ -86,6 +86,9 @@ public class AjoutUtilisationCarteJPanell extends javax.swing.JPanel {
             if (materiels != null) {
                 carte.setIdvehicule(materiels.getId());
             }
+            if (carte.getKmutilisation() > materiels.getKmactuel()) {
+                throw new ValidationException("Le kilométrage de l'utilisation est plus grand que le kilométrage actuel du véhicule !");
+            }
             new UtilisationCarteControleur().controleEtAjoute(carte);
             if (dialogInterface != null) {
                 dialogInterface.onButtonSavePressed();

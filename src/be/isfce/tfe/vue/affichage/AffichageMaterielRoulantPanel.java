@@ -20,6 +20,7 @@ import be.isfce.tfe.vue.ajout.AjoutDocumentsJPanell;
 import be.isfce.tfe.vue.ajout.AjoutEntretienJPanell;
 import be.isfce.tfe.vue.ajout.AjoutUtilisationCarteJPanell;
 import be.isfce.tfe.vue.ajout.DialogUtils;
+import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +30,9 @@ import java.util.List;
 import java.util.Observable;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -38,7 +41,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageMaterielRoulantPanel extends AffichagePanel {
 
     List<MaterielRoulant> vehicules;
-    String[] columnsNames = {"Numero de chassis", "Marque", "Type", "Annee de construction", "Carburant", "Plaque", "Nombre de place", "Kilometre actuel"};
+    String[] columnsNames = {"Numero de chassis", "Marque", "Type", "Annee de construction", "Carburant", "Plaque", "Nombre de place", "Kilometre actuel", "Prochain entretien"};
 
     private Dialog dialog;
 
@@ -65,7 +68,6 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
             JOptionPane.showMessageDialog(null, "Suppression éxecuter", "Information", JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
-
         }
     }
 
@@ -89,7 +91,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
 
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return true;
+                return columnIndex != 8;
             }
 
             @Override
@@ -116,6 +118,8 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                         return vehicule.getNbdeplaces();
                     case 7:
                         return vehicule.getKmactuel();
+                    case 8:
+                        return 25000 - (vehicule.getKmactuel() % 25000) + vehicule.getKmactuel();
 
                     default:
                         return null;
@@ -362,4 +366,5 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
         }
         setVehicules(vehicules);
     }
+
 }

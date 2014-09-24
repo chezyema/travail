@@ -53,6 +53,7 @@ public class MainFrame extends javax.swing.JFrame {
         nbDocumentARenouvelerLabel.setText("" + DocumentAdministratifDao.getDocumentsARenouveler().size());
         nbDocumentEnOrdreLabel.setText("" + DocumentAdministratifDao.getDocumentsEnOrdre().size());
 
+        nbDocumentABientotRenouvelerLabel.setText("" + DocumentAdministratifDao.getDocumentsABientotRenouveler().size());
     }
 
     /**
@@ -80,6 +81,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        nbDocumentABientotRenouvelerLabel = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel1 = new javax.swing.JLabel();
         chauffeurTabPanel1 = new be.isfce.tfe.vue.frame.tabs.ChauffeurTabPanel();
@@ -132,7 +136,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
                         .addComponent(nbEntretienAEffectuerUrgentLabel))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -156,7 +160,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nbVehiculeEnOrdreLabel)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)))
@@ -186,26 +190,44 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        nbDocumentABientotRenouvelerLabel.setText("0");
+
+        jLabel10.setText("Documents à bientôt renouveler :");
+
+        jButton5.setText("Voir les documents à renouveler bientôt");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nbDocumentARenouvelerLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nbDocumentEnOrdreLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(17, 17, 17))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nbDocumentARenouvelerLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nbDocumentEnOrdreLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nbDocumentABientotRenouvelerLabel)))
+                .addGap(17, 17, 17))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,10 +241,15 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(nbDocumentEnOrdreLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(nbDocumentABientotRenouvelerLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4)))
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)))
         );
 
         jCalendar1.setBorder(javax.swing.BorderFactory.createTitledBorder("Calendrier"));
@@ -239,7 +266,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE))
+                        .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -258,12 +285,12 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                        .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                         .addGap(4, 4, 4))
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -291,7 +318,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane)
+            .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,6 +353,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DialogUtils.afficheDialog(this, new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), DocumentAdministratifDao.getDocumentsARenouveler()));
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        DialogUtils.afficheDialog(this, new AffichageDocumentsPanel(new DocumentsAdministratifsControleur(), DocumentAdministratifDao.getDocumentsABientotRenouveler()));
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,8 +402,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
@@ -380,6 +414,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JLabel nbDocumentABientotRenouvelerLabel;
     private javax.swing.JLabel nbDocumentARenouvelerLabel;
     private javax.swing.JLabel nbDocumentEnOrdreLabel;
     private javax.swing.JLabel nbEntretienAEffectuerUrgentLabel;
