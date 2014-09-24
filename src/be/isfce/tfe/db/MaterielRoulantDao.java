@@ -93,7 +93,7 @@ public class MaterielRoulantDao {
 
     public static boolean updateMaterielRoulant(MaterielRoulant vehicule) {
         try {
-            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update materielroulant set marque = ?,type = ?,anneedeconstruction = ?,carburant = ?,numimmatr = ?,nbdeplaces = ?,kmactuel = ?,validiterexctincteur = ? where materielroulant.id = ?");
+            PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update materielroulant set marque = ?,idtypemateriel = ?,anneedeconstruction = ?,carburant = ?,numimmatr = ?,nbdeplaces = ?,kmactuel = ?,validiterexctincteur = ? where materielroulant.id = ?");
             preparedStatement.setString(1, vehicule.getMarque());
             preparedStatement.setInt(2, vehicule.getIdtypemateriel());
             preparedStatement.setDate(3, new Date(vehicule.getAnneedeconstruction().getTime()));
@@ -106,6 +106,7 @@ public class MaterielRoulantDao {
             preparedStatement.execute();
             return true;
         } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

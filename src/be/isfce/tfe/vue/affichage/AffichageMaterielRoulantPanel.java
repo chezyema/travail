@@ -164,6 +164,7 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     abstractControleur.controleEtModifie(vehicule);
                 } catch (ValidationException ex) {
                     //TODO JOptionPane
+                    ex.printStackTrace();
                 }
             }
         };

@@ -155,15 +155,6 @@ public class AffichageTrajetsPanell extends AffichagePanel {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("UPDATE");
-        reset();
-    }
-
-    private void reset() {
-
-        {
-            trajets = TrajetDao.getTousLesTrajets();
-        }
-        setTrajet(trajets);
     }
 
 }

@@ -25,7 +25,7 @@ import javax.swing.table.AbstractTableModel;
 public class AffichageDocumentsPanel extends AffichagePanel {
 
     List<DocumentAdministratif> documents;
-    String[] columnsNames = {"Libelle", "Date validiter", "Propriétaire"};
+    String[] columnsNames = {"Libelle", "Date validiter", "Appartenance"};
 
     public void setDocuments(List<DocumentAdministratif> documents) {
         this.documents = documents;

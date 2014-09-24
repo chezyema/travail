@@ -138,9 +138,9 @@ public class DocumentAdministratifDao {
         List<DocumentAdministratif> tousLesDocuments = DocumentAdministratifDao.getTousLesDocuments();
         List<DocumentAdministratif> documentsARenouveler = new ArrayList<DocumentAdministratif>();
         long timeInMillis = Calendar.getInstance().getTimeInMillis();
-        timeInMillis -= TimeUnit.DAYS.toMillis(5);
+        timeInMillis += TimeUnit.DAYS.toMillis(5);
         for (DocumentAdministratif doc : tousLesDocuments) {
-            if (timeInMillis - doc.getDateValiditer().getTime() >= 0) {
+            if (timeInMillis < doc.getDateValiditer().getTime() && doc.getDateValiditer().getTime() > Calendar.getInstance().getTimeInMillis()) {
                 documentsARenouveler.add(doc);
             }
         }
