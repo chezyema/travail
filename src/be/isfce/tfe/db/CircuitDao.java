@@ -99,7 +99,7 @@ public class CircuitDao {
             System.out.println(circuit.getIdecole());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update circuit set nomcircuit = ?,tempsprevu = ?, idecole = ?, id = ?, idchauffeur = ? where circuit.idcircuit = ?");
             preparedStatement.setString(1, circuit.getNomCircuit());
-            preparedStatement. setTimestamp(2, circuit.getTempsprevu());;
+            preparedStatement.setTimestamp(2, circuit.getTempsprevu());;
 
             if (circuit.getIdecole() != 0) {
                 System.out.println("ID ECOLE SET");
@@ -209,7 +209,6 @@ public class CircuitDao {
             // System.out.println(allArret);
             return allArret;
         } catch (Exception e) {
-
             e.printStackTrace();
             return null;
         }
@@ -226,6 +225,15 @@ public class CircuitDao {
             e.printStackTrace();
             return false;
         }
+    }
 
+    public static Circuit getCircuit(int idCircuit) {
+        List<Circuit> tousLesCircuits = getTousLesCircuits();
+        for (Circuit circuit : tousLesCircuits) {
+            if (circuit.getId() == idCircuit) {
+                return circuit;
+            }
+        }
+        return null;
     }
 }

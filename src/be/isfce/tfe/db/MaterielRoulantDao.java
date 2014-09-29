@@ -267,6 +267,10 @@ public class MaterielRoulantDao {
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update materielroulant set supprimematerielroulant = 1 where materielroulant.id= ?");
             preparedStatement.setString(1, vehicule.getId());
             preparedStatement.execute();
+            List<Entretien> lesentretiens = vehicule.getLesentretiens();
+            for (Entretien entretien : lesentretiens) {
+                EntretienDao.deleteEntretien(entretien);
+            }
             return true;
         } catch (Exception e) {
             return false;
@@ -370,5 +374,15 @@ public class MaterielRoulantDao {
         }
         System.out.println("" + ((totalLitre / (kmFin - kmDebutKm)) * 100));
         return (totalLitre / (kmFin - kmDebutKm)) * 100;
+    }
+
+    public static MaterielRoulant getMaterielRoulant(String id) {
+        List<MaterielRoulant> tousLesVehicules = getTousLesVehicules();
+        for (MaterielRoulant materielRoulant : tousLesVehicules) {
+            if (materielRoulant.getId().equals(id)) {
+                return materielRoulant;
+            }
+        }
+        return null;
     }
 }

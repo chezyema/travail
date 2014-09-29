@@ -5,8 +5,10 @@
 package be.isfce.tfe.vue.encodage;
 
 import be.isfce.tfe.db.CarteCarburantDao;
+import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.db.MaterielRoulantDao;
 import be.isfce.tfe.metier.CarteCarburant;
+import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.metier.UtilisationCarte;
 import java.util.List;
@@ -21,6 +23,7 @@ public class EncodageUtilisationCarteJPanell extends javax.swing.JPanel {
      * Creates new form AjoutUtilisationCarteJPanell
      */
     List<CarteCarburant> cartes;
+    List<Chauffeur> chauffeurs;
 
     public EncodageUtilisationCarteJPanell() {
         initComponents();
@@ -28,10 +31,13 @@ public class EncodageUtilisationCarteJPanell extends javax.swing.JPanel {
     }
 
     private void initCombo() {
-
         cartes = CarteCarburantDao.getTousLesCartesCarburant();
         for (CarteCarburant carte : cartes) {
             jComboBox1.addItem(carte.getNumcarte());
+        }
+        chauffeurs = ChauffeurDao.getTousLesChauffeurs();
+        for (Chauffeur chauffeur : chauffeurs) {
+            jComboBoxChauffeur.addItem(chauffeur.getNomChauffeur() + " " + chauffeur.getPrenomChauffeur());
         }
     }
 
@@ -42,6 +48,7 @@ public class EncodageUtilisationCarteJPanell extends javax.swing.JPanel {
         carte.setLitrecarburant(Integer.valueOf(litredieselTextField.getText()));
         carte.setKmutilisation(Integer.valueOf(kmutilisationTextField.getText()));
         carte.setIdcartecarburant(cartes.get(jComboBox1.getSelectedIndex()).getId());
+        carte.setIdchauffeur(chauffeurs.get(jComboBoxChauffeur.getSelectedIndex()).getId());
         return carte;
     }
 
@@ -62,6 +69,8 @@ public class EncodageUtilisationCarteJPanell extends javax.swing.JPanel {
         litredieselTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         kmutilisationTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBoxChauffeur = new javax.swing.JComboBox();
 
         jLabel1.setText("Date utilisation :");
 
@@ -76,6 +85,14 @@ public class EncodageUtilisationCarteJPanell extends javax.swing.JPanel {
         jLabel3.setText("Litre de carburant:");
 
         jLabel4.setText("kilométre utilisation:");
+
+        jLabel5.setText("Chauffeur");
+
+        jComboBoxChauffeur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxChauffeurActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,13 +116,17 @@ public class EncodageUtilisationCarteJPanell extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(dateutilisation, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)))
+                        .addComponent(dateutilisation, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBoxChauffeur, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dateutilisation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -121,20 +142,31 @@ public class EncodageUtilisationCarteJPanell extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBoxChauffeur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBoxChauffeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxChauffeurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxChauffeurActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser dateutilisation;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBoxChauffeur;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField kmutilisationTextField;
     private javax.swing.JTextField litredieselTextField;
     // End of variables declaration//GEN-END:variables

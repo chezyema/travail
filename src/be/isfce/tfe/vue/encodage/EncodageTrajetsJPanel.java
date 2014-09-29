@@ -105,6 +105,12 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
         minutefinSpinField.setMaximum(59);
         minutefinSpinField.setMinimum(0);
 
+        vehiculeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehiculeComboBoxActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Vehicule utilisé :");
 
         jLabel5.setText("Parcours effectué :");
@@ -199,6 +205,12 @@ public class EncodageTrajetsJPanel extends javax.swing.JPanel {
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void vehiculeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehiculeComboBoxActionPerformed
+        // TODO add your handling code here:
+        kmdedepartTextField.setText("" + tousLesVehicules.get(vehiculeComboBox.getSelectedIndex()).getKmactuel());
+    }//GEN-LAST:event_vehiculeComboBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox circuitComboBox;
     private com.toedter.calendar.JDateChooser datetrajets;

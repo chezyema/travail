@@ -220,6 +220,8 @@ public class ChauffeurDao {
                 heure.setDateTravail(resultSet.getDate("datetravail"));
                 heure.setKmdepart(resultSet.getInt("kmdepart"));
                 heure.setKmfin(resultSet.getInt("kmfin"));
+                heure.setIdmaterielroulant(resultSet.getString("id"));
+                heure.setIdcircuit(resultSet.getInt("idcircuit"));
 
                 allHeureDeTravail.add(heure);
             }

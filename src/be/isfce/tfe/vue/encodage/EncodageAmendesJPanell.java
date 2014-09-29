@@ -4,8 +4,13 @@
  */
 package be.isfce.tfe.vue.encodage;
 
+import be.isfce.tfe.db.CarteCarburantDao;
+import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.metier.Amende;
+import be.isfce.tfe.metier.CarteCarburant;
+import be.isfce.tfe.metier.Chauffeur;
 import be.isfce.tfe.metier.Entretien;
+import java.util.List;
 
 /**
  *
@@ -13,14 +18,24 @@ import be.isfce.tfe.metier.Entretien;
  */
 public class EncodageAmendesJPanell extends javax.swing.JPanel {
 
+    List<Chauffeur> chauffeurs;
+
     /**
      * Creates new form EncodageAmendesJPanell
      */
     public EncodageAmendesJPanell() {
         initComponents();
+        initCombo();
     }
-    
-     public Amende getAmendesFromFields() {
+
+    private void initCombo() {
+        chauffeurs = ChauffeurDao.getTousLesChauffeurs();
+        for (Chauffeur chauffeur : chauffeurs) {
+            jComboBoxChauffeur.addItem(chauffeur.getNomChauffeur() + " " + chauffeur.getPrenomChauffeur());
+        }
+    }
+
+    public Amende getAmendesFromFields() {
         Amende amende = new Amende();
         amende.setIdamendes(0);
         amende.setNumeropv(numpvTextField.getText());
@@ -30,10 +45,10 @@ public class EncodageAmendesJPanell extends javax.swing.JPanel {
             amende.setMontantpv(0);
         }
         amende.setDatepv(datepv.getDate());
-
-       return amende; 
+        amende.setIdchauffeur(chauffeurs.get(jComboBoxChauffeur.getSelectedIndex()).getId());
+        
+        return amende;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,12 +65,22 @@ public class EncodageAmendesJPanell extends javax.swing.JPanel {
         datepv = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         montantpvTextField = new javax.swing.JTextField();
+        jComboBoxChauffeur = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel1.setText("Numéro de PV :");
 
         jLabel2.setText("Date du PV:");
 
         jLabel3.setText("montant de l'amende:");
+
+        jComboBoxChauffeur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxChauffeurActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Chauffeur");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -64,16 +89,17 @@ public class EncodageAmendesJPanell extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(numpvTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datepv, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(montantpvTextField))
-                .addGap(34, 34, 34))
+                    .addComponent(jComboBoxChauffeur, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(montantpvTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                    .addComponent(datepv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(numpvTextField))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,22 +108,33 @@ public class EncodageAmendesJPanell extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(numpvTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(datepv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(montantpvTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBoxChauffeur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBoxChauffeurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxChauffeurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxChauffeurActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser datepv;
+    private javax.swing.JComboBox jComboBoxChauffeur;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField montantpvTextField;
     private javax.swing.JTextField numpvTextField;
     // End of variables declaration//GEN-END:variables

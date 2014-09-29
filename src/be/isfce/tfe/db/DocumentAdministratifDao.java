@@ -140,7 +140,7 @@ public class DocumentAdministratifDao {
         long timeInMillis = Calendar.getInstance().getTimeInMillis();
         timeInMillis += TimeUnit.DAYS.toMillis(5);
         for (DocumentAdministratif doc : tousLesDocuments) {
-            if (timeInMillis < doc.getDateValiditer().getTime() && doc.getDateValiditer().getTime() > Calendar.getInstance().getTimeInMillis()) {
+            if (doc.getDateValiditer().getTime() < timeInMillis && doc.getDateValiditer().getTime() > Calendar.getInstance().getTimeInMillis()) {
                 documentsARenouveler.add(doc);
             }
         }

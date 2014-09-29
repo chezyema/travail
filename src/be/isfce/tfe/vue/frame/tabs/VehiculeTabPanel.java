@@ -9,6 +9,8 @@ import be.isfce.tfe.controleur.ChauffeurControleur;
 import be.isfce.tfe.controleur.MaterielRoulantControleur;
 import be.isfce.tfe.db.ChauffeurDao;
 import be.isfce.tfe.db.MaterielRoulantDao;
+import be.isfce.tfe.metier.Chauffeur;
+import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.vue.affichage.AffichageChauffeurPanel;
 import be.isfce.tfe.vue.affichage.AffichageMaterielRoulantPanel;
 import be.isfce.tfe.vue.affichage.AfficherEtRechercherAmendePanel;
@@ -16,6 +18,8 @@ import be.isfce.tfe.vue.affichage.AfficherEtRechercherEntretienPanel;
 import be.isfce.tfe.vue.ajout.AjoutMaterielRoulantJPanell;
 import be.isfce.tfe.vue.ajout.DialogUtils;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDialog;
 
 /**
@@ -46,6 +50,8 @@ public class VehiculeTabPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jButton1.setText("Ajouter un véhicule");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,28 +76,48 @@ public class VehiculeTabPanel extends javax.swing.JPanel {
             }
         });
 
+        jTextField1.setToolTipText("");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
+        jLabel1.setText("Recherche");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 20, Short.MAX_VALUE)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -123,9 +149,26 @@ public class VehiculeTabPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-         DialogUtils.afficheDialog(null, new AfficherEtRechercherAmendePanel());
-        
+        DialogUtils.afficheDialog(null, new AfficherEtRechercherAmendePanel());
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        List<MaterielRoulant> tousLesVehicules = MaterielRoulantDao.getTousLesVehicules();
+        List<MaterielRoulant> vehiculesTrouvés = new ArrayList<MaterielRoulant>();
+        String idAChercher = jTextField1.getText();
+        if (idAChercher.isEmpty()) {
+            affichageVehiculePanel.setVehicules(tousLesVehicules);
+        } else {
+            for (MaterielRoulant vehicule : tousLesVehicules) {
+                if (vehicule.getId().toLowerCase().contains(idAChercher.toLowerCase())) {
+                    vehiculesTrouvés.add(vehicule);
+                }
+            }
+            affichageVehiculePanel.setVehicules(vehiculesTrouvés);
+        }
+    }//GEN-LAST:event_jTextField1KeyReleased
 
     private JDialog jDialog;
     private final AffichageMaterielRoulantPanel affichageVehiculePanel;
@@ -133,6 +176,8 @@ public class VehiculeTabPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

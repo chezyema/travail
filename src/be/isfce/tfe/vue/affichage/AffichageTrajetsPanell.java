@@ -8,6 +8,7 @@ import be.isfce.tfe.controleur.TrajetsControleur;
 import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.TrajetDao;
+import be.isfce.tfe.metier.Circuit;
 import be.isfce.tfe.metier.Trajet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -26,7 +27,7 @@ public class AffichageTrajetsPanell extends AffichagePanel {
 
     List<Trajet> trajets;
 
-    String[] columnsNames = {"heure de debut", "Heure de fin", "Date de travail", "kmdepart", "kmfin"};
+    String[] columnsNames = {"heure de debut", "Heure de fin", "Date de travail", "kmdepart", "kmfin", "Véhicule Utilisé", "Circuit"};
     private SimpleDateFormat simpleDateFormat;
 
     public AffichageTrajetsPanell(TrajetsControleur trajetControleur) {
@@ -86,7 +87,7 @@ public class AffichageTrajetsPanell extends AffichagePanel {
 
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return true;
+                return columnIndex < 5;
             }
 
             @Override
@@ -104,6 +105,11 @@ public class AffichageTrajetsPanell extends AffichagePanel {
                         return heure.getKmdepart();
                     case 4:
                         return heure.getKmfin();
+                    case 5:
+                        return heure.getIdmaterielroulant();
+                    case 6:
+                        Circuit circuit = CircuitDao.getCircuit(heure.getIdcircuit());
+                        return circuit == null ? "" : circuit.getNomCircuit();
                     default:
                         return null;
                 }
