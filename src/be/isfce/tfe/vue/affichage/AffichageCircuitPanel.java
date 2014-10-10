@@ -66,7 +66,6 @@ public class AffichageCircuitPanel extends AffichagePanel {
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Suppression échoué", "Erreur", JOptionPane.ERROR_MESSAGE);
-
         }
     }
 
@@ -150,9 +149,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
     protected List<JMenuItem> getMenuItems() {
         List<JMenuItem> menuItems = new ArrayList<JMenuItem>();
         menuItems.add(getAfficherArretMenuItem());
-        //   menuItems.add(getAfficherEleveMenuItem());
         menuItems.add(getAjouterEcoleMenuItem());
-        //menuItems.add(getAjouterArretMenuItem());
 
         return menuItems;
     }
@@ -210,9 +207,7 @@ public class AffichageCircuitPanel extends AffichagePanel {
                     group.clearSelection();
                     reset();
                     try {
-                        System.out.println("TEST");
                         abstractControleur.controleEtModifie(circuit);
-                        System.out.println("OK");
                     } catch (ValidationException ex) {
                         //TODO JOptionPane
                         ex.printStackTrace();

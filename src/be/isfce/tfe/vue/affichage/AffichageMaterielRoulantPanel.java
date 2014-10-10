@@ -13,6 +13,7 @@ import be.isfce.tfe.controleur.ValidationException;
 import be.isfce.tfe.db.CircuitDao;
 import be.isfce.tfe.db.MaterielRoulantDao;
 import be.isfce.tfe.db.TypeMaterielDao;
+import be.isfce.tfe.metier.Entretien;
 import be.isfce.tfe.metier.MaterielRoulant;
 import be.isfce.tfe.metier.TypeMaterielRoulant;
 import be.isfce.tfe.vue.ajout.AjoutAmendesJPanel;
@@ -119,7 +120,12 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     case 7:
                         return vehicule.getKmactuel();
                     case 8:
-                        return 25000 - (vehicule.getKmactuel() % 25000) + vehicule.getKmactuel();
+                        Entretien entretien = getDernierEntretien(vehicule);
+                        int km = 25000;
+                        if (entretien != null) {
+                            km += entretien.getKmEntretienFait();
+                        }
+                        return km;
 
                     default:
                         return null;
@@ -166,6 +172,21 @@ public class AffichageMaterielRoulantPanel extends AffichagePanel {
                     //TODO JOptionPane
                     ex.printStackTrace();
                 }
+            }
+
+            private Entretien getDernierEntretien(MaterielRoulant vehicule) {
+                List<Entretien> lesentretiens = vehicule.getLesentretiens();
+                //System.out.println("ENTRETIENS :" + lesentretiens);
+                Entretien dernierEntretien = null;
+                for (Entretien entretien : lesentretiens) {
+                    if (dernierEntretien == null) {
+                        dernierEntretien = entretien;
+                    }
+                    if (entretien.getDateEntretien().after(dernierEntretien.getDateEntretien())) {
+                        dernierEntretien = entretien;
+                    }
+                }
+                return dernierEntretien;
             }
         };
     }

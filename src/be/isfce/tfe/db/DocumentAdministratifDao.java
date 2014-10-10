@@ -26,10 +26,10 @@ public class DocumentAdministratifDao {
     public static boolean addDocumentsAdministratifs(DocumentAdministratif documents) {
 
         try {
+            remplaceAncienDocument(documents.getIdtype(), documents.getIdmaterielroulant(), documents.getIdchauffeur());
             PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("Insert into documentsadministratifs (iddocument,datevaliditer,id,idchauffeur,idtype) VALUES(? , ?, ?,?,?)");
 
             preparedStatement.setInt(1, documents.getId());
-
             preparedStatement.setDate(2, new Date(documents.getDateValiditer().getTime()));
             preparedStatement.setString(3, documents.getIdmaterielroulant());
             preparedStatement.setString(4, documents.getIdchauffeur());
@@ -43,6 +43,15 @@ public class DocumentAdministratifDao {
             return false;
         }
 
+    }
+
+    private static void remplaceAncienDocument(int idTypeDocument, String mr, String chauffeur) throws SQLException {
+        PreparedStatement preparedStatement = Connexion.getInstance().getConn().prepareStatement("update documentsadministratifs set supprimedocument = 1 where documentsadministratifs.idtype = ? and (id = ? or idchauffeur = ?)");
+        preparedStatement.setInt(1, idTypeDocument);
+        preparedStatement.setString(2, mr);
+        preparedStatement.setString(3, chauffeur);
+
+        preparedStatement.execute();
     }
 
     public static List<DocumentAdministratif> getTousLesDocuments() {

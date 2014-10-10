@@ -16,7 +16,7 @@ public class Circuit {
 
     private int id;
     private String nomcircuit;
-    private Timestamp tempsprevu;
+    private Timestamp tempsprevu; 
    
     private MaterielRoulant materielroulant;
     private String idmaterielroulant;
